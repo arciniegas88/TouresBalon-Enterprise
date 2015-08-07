@@ -19,9 +19,14 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Campaigns" target="1.5" />
+      <module name="Clients" target="1.5" />
       <module name="Microservices-Module" target="1.5" />
       <module name="Middleware-Module" target="1.5" />
+      <module name="Orders" target="1.5" />
       <module name="Presentation-Module" target="1.5" />
+      <module name="Productos" target="1.5" />
+      <module name="Products" target="1.5" />
       <module name="TouresBalon-Enterprise" target="1.5" />
     </bytecodeTargetLevel>
   </component>
