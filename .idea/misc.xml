@@ -53,6 +53,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/Microservices-Module/Productos/pom.xml" />
+        <option value="$PROJECT_DIR$/Presentation-Module/pom.xml" />
       </set>
     </option>
   </component>

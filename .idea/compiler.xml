@@ -26,10 +26,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="B2C" target="1.5" />
       <module name="Campaigns" target="1.5" />
       <module name="Clients" target="1.5" />
+      <module name="EIS-Module" target="1.5" />
       <module name="Microservices-Module" target="1.5" />
       <module name="Middleware-Module" target="1.5" />
+      <module name="OMS" target="1.5" />
       <module name="Orders" target="1.5" />
       <module name="Presentation-Module" target="1.5" />
       <module name="Product-Services" target="1.7" />

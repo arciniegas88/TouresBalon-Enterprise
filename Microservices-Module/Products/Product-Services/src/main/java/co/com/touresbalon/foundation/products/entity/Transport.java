@@ -5,18 +5,11 @@
  */
 package co.com.touresbalon.foundation.products.entity;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -31,17 +24,19 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Transport.findByName", query = "SELECT t FROM Transport t WHERE t.name = :name"),
     @NamedQuery(name = "Transport.findByCost", query = "SELECT t FROM Transport t WHERE t.cost = :cost")})
 public class Transport implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "cost")
     private Long cost;
-    @OneToMany(mappedBy = "transportType")
-    private List<Product> productList;
 
     public Transport() {
     }
@@ -72,15 +67,6 @@ public class Transport implements Serializable {
 
     public void setCost(Long cost) {
         this.cost = cost;
-    }
-
-    @XmlTransient
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
     }
 
     @Override

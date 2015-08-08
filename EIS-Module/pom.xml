@@ -7,13 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>co.com.touresbalon.foundation</groupId>
-    <artifactId>Presentation-Module</artifactId>
+    <artifactId>EIS-Module</artifactId>
     <packaging>pom</packaging>
-    <name>Presentation-Module</name>
-
-    <modules>
-        <module>B2C</module>
-        <module>OMS</module>
-    </modules>
-
+    <name>EIS-Module</name>
 </project>

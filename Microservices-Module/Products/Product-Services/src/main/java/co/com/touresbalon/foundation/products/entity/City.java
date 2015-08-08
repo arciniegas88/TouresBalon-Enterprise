@@ -6,7 +6,6 @@
 package co.com.touresbalon.foundation.products.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,9 +43,6 @@ public class City implements Serializable {
 
     @Column(name = "cost")
     private Long cost;
-
-    @OneToMany(mappedBy = "spectacleCity")
-    private List<Product> productList;
 
     @JoinColumn(name = "country", referencedColumnName = "Id")
     @ManyToOne
@@ -83,15 +77,6 @@ public class City implements Serializable {
 
     public void setCost(Long cost) {
         this.cost = cost;
-    }
-
-    @XmlTransient
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
     }
 
     public Country getCountry() {

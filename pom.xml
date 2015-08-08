@@ -10,5 +10,6 @@
     <module>Middleware-Module</module>
     <module>Microservices-Module</module>
     <module>Presentation-Module</module>
+    <module>EIS-Module</module>
   </modules>
 </project>

@@ -28,38 +28,49 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
-    @NamedQuery(name = "Product.findBySpectacle", query = "SELECT p FROM Product p WHERE p.spectacle = :spectacle"),
-    @NamedQuery(name = "Product.findBySpectacleDate", query = "SELECT p FROM Product p WHERE p.spectacleDate = :spectacleDate"),
-    @NamedQuery(name = "Product.findByArrivalDate", query = "SELECT p FROM Product p WHERE p.arrivalDate = :arrivalDate"),
-    @NamedQuery(name = "Product.findByDepartureDate", query = "SELECT p FROM Product p WHERE p.departureDate = :departureDate")})
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
 public class Product implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @Column(name = "Id")
     private Long id;
-    @Column(name = "spectacle")
-    private String spectacle;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "code")
+    private String code;
+
     @Column(name = "spectacle_date")
     @Temporal(TemporalType.DATE)
     private Date spectacleDate;
+
     @Column(name = "arrival_date")
     @Temporal(TemporalType.DATE)
     private Date arrivalDate;
+
     @Column(name = "departure_date")
     @Temporal(TemporalType.DATE)
     private Date departureDate;
+
     @JoinColumn(name = "transport_type", referencedColumnName = "Id")
     @ManyToOne
     private Transport transportType;
+
     @JoinColumn(name = "spectacle_type", referencedColumnName = "Id")
     @ManyToOne
     private Spectacle spectacleType;
+
     @JoinColumn(name = "lodging_type", referencedColumnName = "Id")
     @ManyToOne
     private Lodging lodgingType;
+
     @JoinColumn(name = "spectacle_city", referencedColumnName = "Id")
     @ManyToOne
     private City spectacleCity;
@@ -79,12 +90,12 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public String getSpectacle() {
-        return spectacle;
+    public String getName() {
+        return name;
     }
 
-    public void setSpectacle(String spectacle) {
-        this.spectacle = spectacle;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getSpectacleDate() {
@@ -141,6 +152,22 @@ public class Product implements Serializable {
 
     public void setSpectacleCity(City spectacleCity) {
         this.spectacleCity = spectacleCity;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
