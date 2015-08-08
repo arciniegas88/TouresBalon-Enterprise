@@ -10,4 +10,7 @@
     <artifactId>Products</artifactId>
     <packaging>pom</packaging>
     <name>Products</name>
+    <modules>
+        <module>Product-Services</module>
+    </modules>
 </project>

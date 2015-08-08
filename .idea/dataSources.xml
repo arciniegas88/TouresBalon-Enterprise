@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="964482125">
+    <data-source source="LOCAL" name="SQL Server - products@localhost" uuid="9b4c11d5-3269-4d1c-9710-715e44eda024">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://localhost:5433;databaseName=products</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://C:/desarrollo/sqljdbc_4.0.2206.100_enu/sqljdbc_4.0/enu/sqljdbc4.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>

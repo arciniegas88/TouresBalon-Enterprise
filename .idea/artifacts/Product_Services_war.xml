@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Product-Services:war">
+    <output-path>$PROJECT_DIR$/Microservices-Module/Products/Product-Services/target</output-path>
+    <root id="archive" name="Product-Services.war">
+      <element id="artifact" artifact-name="Product-Services:war exploded" />
+    </root>
+  </artifact>
+</component>
