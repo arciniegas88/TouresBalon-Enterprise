@@ -7,17 +7,7 @@ package co.com.touresbalon.foundation.products.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -74,6 +64,10 @@ public class Product implements Serializable {
     @JoinColumn(name = "spectacle_city", referencedColumnName = "Id")
     @ManyToOne
     private City spectacleCity;
+
+    @Lob
+    @Column( name = "image_ref" )
+    private byte[] imageRef;
 
     public Product() {
     }
@@ -168,6 +162,14 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public byte[] getImageRef() {
+        return imageRef;
+    }
+
+    public void setImageRef(byte[] imageRef) {
+        this.imageRef = imageRef;
     }
 
     @Override

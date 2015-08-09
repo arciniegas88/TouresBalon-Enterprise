@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -24,10 +25,15 @@ public class ProductResource {
     public ProductResource() {
     }
 
+    // [search all products] -------------------------------
+
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<Product> searchProducts() {
-        return boundary.searchProducts();
+    public List<Product> searchProductsByCriteria( @QueryParam("code") String code,
+                                                   @QueryParam("name") String name,
+                                                   @QueryParam("descritption") String descritption ) {
+        return boundary.searchProducts(code, name, descritption);
     }
+
 
 }
