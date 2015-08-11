@@ -13,7 +13,6 @@
 
     <modules>
         <module>Products</module>
-        <module>Campaigns</module>
         <module>Orders</module>
         <module>Clients</module>
     </modules>
