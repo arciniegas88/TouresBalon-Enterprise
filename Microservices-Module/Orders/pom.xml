@@ -10,4 +10,9 @@
     <artifactId>Orders</artifactId>
     <packaging>pom</packaging>
     <name>Orders</name>
+    <modules>
+
+        <module>Order-Services</module>
+    </modules>
+
 </project>

@@ -3,12 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Presentation-Module/B2C/B2C.iml" filepath="$PROJECT_DIR$/Presentation-Module/B2C/B2C.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Campaigns/Campaigns.iml" filepath="$PROJECT_DIR$/Microservices-Module/Campaigns/Campaigns.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Clients/Clients.iml" filepath="$PROJECT_DIR$/Microservices-Module/Clients/Clients.iml" />
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/EIS-Module.iml" filepath="$PROJECT_DIR$/EIS-Module/EIS-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" filepath="$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/Middleware-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/Middleware-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS.iml" filepath="$PROJECT_DIR$/Presentation-Module/OMS/OMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Orders/Order-Services/Order-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Orders/Order-Services/Order-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Orders/Orders.iml" filepath="$PROJECT_DIR$/Microservices-Module/Orders/Orders.iml" />
       <module fileurl="file://$PROJECT_DIR$/Presentation-Module/Presentation-Module.iml" filepath="$PROJECT_DIR$/Presentation-Module/Presentation-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services/Product-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Products/Product-Services/Product-Services.iml" />
