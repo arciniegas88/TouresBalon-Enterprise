@@ -31,11 +31,20 @@
         <processorPath useClasspath="true" />
         <module name="Order-Services" />
       </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Cross-Cutting-Artifacts" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
       <module name="Campaigns" target="1.5" />
       <module name="Clients" target="1.5" />
+      <module name="Cross-Cutting" target="1.5" />
+      <module name="Cross-Cutting-Artifacts" target="1.5" />
       <module name="EIS-Module" target="1.5" />
       <module name="Microservices-Module" target="1.5" />
       <module name="Middleware-Module" target="1.5" />

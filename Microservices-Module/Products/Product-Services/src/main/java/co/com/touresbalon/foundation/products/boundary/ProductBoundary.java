@@ -1,11 +1,14 @@
 package co.com.touresbalon.foundation.products.boundary;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import org.slf4j.Logger;
+
 import co.com.touresbalon.foundation.products.entity.Product;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -20,31 +23,63 @@ public class ProductBoundary {
 
     // [attributes] -------------------------------
 
+    @Inject
+    private Logger logger;
+
     @PersistenceContext
     private EntityManager em;
 
     public ProductBoundary() {
     }
 
+    // [method] -----------------------------
+
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Product> searchProducts( String code, String name ,String descritption ){
+    public Product getProductDetail(Long id) {
+        return em.find( Product.class,id);
+    }
+
+    // [method] -----------------------------
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Product> searchProducts( String code, String name, String descripttion ){
+
+        if( isEmpty( code ) && isEmpty( name ) && isEmpty( descripttion )) {
+            return em.createNamedQuery("Product.findAll", Product.class)
+                     .getResultList();
+        }else{
+            return em.createNamedQuery("Product.findAllByCriteria", Product.class)
+                     .setParameter("CODE", code)
+                     .setParameter("NAME", "%" + name + "%")
+                     .setParameter("DESCRIPTION", "%" + descripttion + "%")
+                     .getResultList();
+        }
+    }
+
+    // [method] -----------------------------
+
+    @Deprecated
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Product> searchProductsOld(String code, String name, String descritption) {
+
+        logger.info("--------------------------> inicio de la consulta: " );
 
         StringBuilder jpql = new StringBuilder();
-        jpql.append("SELECT p FROM Product p WHERE 1=1 ");
-        jpql.append( code != null ? "AND p.code = :CODE " : "" );
-        jpql.append( name != null ? "AND LOWER(p.name) LIKE TRIM(LOWER(:NAME)) " : "");
-        jpql.append( descritption != null ? "AND LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION)) " : "" );
 
-        Query query = em.createQuery(jpql.toString(),Product.class);
+        jpql.append("SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description, p.code, p.spectacleDate, p.arrivalDate, p.departureDate) ")
+                .append("FROM Product p WHERE 1=1 ")
+                .append(code != null ? "AND p.code = :CODE " : "")
+                .append(name != null ? "AND LOWER(p.name) LIKE TRIM(LOWER(:NAME)) " : "")
+                .append(descritption != null ? "AND LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION)) " : "");
 
-        if(!StringUtils.isEmpty( code ))
-            query.setParameter("CODE", code);
+        Query query = em.createQuery(jpql.toString(), Product.class);
 
-        if(!StringUtils.isEmpty( descritption ))
-            query.setParameter("DESCRIPTION","%"+ descritption+"%");
+        if (!isEmpty(code)) query.setParameter("CODE", code);
 
-        if(!StringUtils.isEmpty( name ))
-            query.setParameter("NAME", "%"+name+"%");
+        if (!isEmpty(descritption))
+            query.setParameter("DESCRIPTION", "%" + descritption + "%");
+
+        if (!isEmpty(name)) query.setParameter("NAME","%" + name + "%");
 
         return query.getResultList();
     }

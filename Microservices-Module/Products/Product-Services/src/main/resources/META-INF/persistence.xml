@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="products-pu" transaction-type="JTA">
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="products-pu" transaction-type="JTA">
 
-		<jta-data-source>jdbc/products</jta-data-source>
+        <jta-data-source>java:jboss/datasources/products</jta-data-source>
 
-		<class>co.com.touresbalon.foundation.products.entity.City</class>
-		<class>co.com.touresbalon.foundation.products.entity.Country</class>
-		<class>co.com.touresbalon.foundation.products.entity.Lodging</class>
-		<class>co.com.touresbalon.foundation.products.entity.Product</class>
-		<class>co.com.touresbalon.foundation.products.entity.Spectacle</class>
-		<class>co.com.touresbalon.foundation.products.entity.Transport</class>
+        <class>co.com.touresbalon.foundation.products.entity.City</class>
+        <class>co.com.touresbalon.foundation.products.entity.Country</class>
+        <class>co.com.touresbalon.foundation.products.entity.Lodging</class>
+        <class>co.com.touresbalon.foundation.products.entity.Product</class>
+        <class>co.com.touresbalon.foundation.products.entity.Spectacle</class>
+        <class>co.com.touresbalon.foundation.products.entity.Transport</class>
 
-		<shared-cache-mode>NONE</shared-cache-mode>
+        <shared-cache-mode>ALL</shared-cache-mode>
 
-		<properties>
-			<property name="eclipselink.cache.shared.default" value="false"/>
-		</properties>
+        <properties>
+            <property name="hibernate.show_sql" value ="true"/>
+            <property name="hibernate.format_sql" value ="true"/>
+            <property name="hibernate.cache.use_query_cache" value="true" />
+            <property name="hibernate.cache.region.factory_class" value="org.jboss.as.jpa.hibernate4.infinispan.InfinispanRegionFactory"/>
+            <property name="hibernate.cache.infinispan.cachemanager" value="java:jboss/infinispan/container/hibernate"/>
+            <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+        </properties>
 
-	</persistence-unit>
+    </persistence-unit>
 
 </persistence>

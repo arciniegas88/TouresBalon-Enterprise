@@ -1,15 +1,12 @@
 package co.com.touresbalon.foundation.products.rest;
 
 import co.com.touresbalon.foundation.products.boundary.ProductBoundary;
-import co.com.touresbalon.foundation.products.entity.Product;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import co.com.touresbalon.foundation.products.entity.Product;
 
 /**
  * Created by garciniegas on 07/08/2015.
@@ -18,22 +15,30 @@ import java.util.List;
 @Path("/products")
 public class ProductResource {
 
-    // -------------------------------
+    // [attributes] -------------------------------
     @Inject
     private ProductBoundary boundary;
 
     public ProductResource() {
     }
 
+    // [return product detail] -------------------------------
+
+    @GET
+    @Path("/{id}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Product searchProduct( @PathParam("id") Long id ) {
+        return boundary.getProductDetail(id);
+    }
+
     // [search all products] -------------------------------
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<Product> searchProductsByCriteria( @QueryParam("code") String code,
-                                                   @QueryParam("name") String name,
-                                                   @QueryParam("descritption") String descritption ) {
-        return boundary.searchProducts(code, name, descritption);
+    public List<Product> searchProducts( @QueryParam("code") String code,
+                                         @QueryParam("name") String name,
+                                         @QueryParam("description") String description ) {
+        return boundary.searchProducts(code, name, description);
     }
-
 
 }

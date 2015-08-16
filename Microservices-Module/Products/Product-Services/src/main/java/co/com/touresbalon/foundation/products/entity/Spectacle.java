@@ -23,10 +23,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "spectacle")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Spectacle.findAll", query = "SELECT s FROM Spectacle s"),
-    @NamedQuery(name = "Spectacle.findById", query = "SELECT s FROM Spectacle s WHERE s.id = :id"),
-    @NamedQuery(name = "Spectacle.findByName", query = "SELECT s FROM Spectacle s WHERE s.name = :name"),
-    @NamedQuery(name = "Spectacle.findByCost", query = "SELECT s FROM Spectacle s WHERE s.cost = :cost")})
+        @NamedQuery(name = "Spectacle.findAll", query = "SELECT s FROM Spectacle s"),
+        @NamedQuery(name = "Spectacle.findById", query = "SELECT s FROM Spectacle s WHERE s.id = :id"),
+        @NamedQuery(name = "Spectacle.findByName", query = "SELECT s FROM Spectacle s WHERE s.name = :name"),
+        @NamedQuery(name = "Spectacle.findByCost", query = "SELECT s FROM Spectacle s WHERE s.cost = :cost")})
 public class Spectacle implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -93,5 +93,5 @@ public class Spectacle implements Serializable {
     public String toString() {
         return "co.com.cache.foundation.pruebassql.Spectacle[ id=" + id + " ]";
     }
-    
+
 }

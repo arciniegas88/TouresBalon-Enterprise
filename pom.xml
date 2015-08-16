@@ -7,6 +7,7 @@
   <packaging>pom</packaging>
   <name>TouresBalon-Enterprise</name>
   <modules>
+    <module>Cross-Cutting</module>
     <module>Middleware-Module</module>
     <module>Microservices-Module</module>
     <module>Presentation-Module</module>

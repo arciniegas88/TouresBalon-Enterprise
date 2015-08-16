@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "lodging")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Lodging.findAll", query = "SELECT l FROM Lodging l"),
-    @NamedQuery(name = "Lodging.findById", query = "SELECT l FROM Lodging l WHERE l.id = :id"),
-    @NamedQuery(name = "Lodging.findByName", query = "SELECT l FROM Lodging l WHERE l.name = :name"),
-    @NamedQuery(name = "Lodging.findByCost", query = "SELECT l FROM Lodging l WHERE l.cost = :cost")})
+        @NamedQuery(name = "Lodging.findAll", query = "SELECT l FROM Lodging l"),
+        @NamedQuery(name = "Lodging.findById", query = "SELECT l FROM Lodging l WHERE l.id = :id"),
+        @NamedQuery(name = "Lodging.findByName", query = "SELECT l FROM Lodging l WHERE l.name = :name"),
+        @NamedQuery(name = "Lodging.findByCost", query = "SELECT l FROM Lodging l WHERE l.cost = :cost")})
 public class Lodging implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -94,5 +94,5 @@ public class Lodging implements Serializable {
     public String toString() {
         return "co.com.cache.foundation.pruebassql.Lodging[ id=" + id + " ]";
     }
-    
+
 }

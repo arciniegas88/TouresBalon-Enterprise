@@ -14,11 +14,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author garciniegas
  */
+
 @Entity
+@Cacheable
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
+        @NamedQuery(name = "Product.findAll",
+                query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
+                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate) FROM Product p " ,
+                hints = { @QueryHint(name = "org.hibernate.cacheable",value = "true") }),
+        @NamedQuery(name = "Product.findAllByCriteria",
+                query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
+                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate) FROM Product p WHERE " +
+                        "TRIM(p.code) = TRIM(:CODE) OR LOWER(p.name) LIKE TRIM(LOWER(:NAME)) OR " +
+                        "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION))",
+                hints = { @QueryHint(name = "org.hibernate.cacheable",value = "true") })
+})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,6 +82,16 @@ public class Product implements Serializable {
     private byte[] imageRef;
 
     public Product() {
+    }
+
+    public Product(Long id, String name, String description, String code, Date spectacleDate, Date arrivalDate, Date departureDate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.code = code;
+        this.spectacleDate = spectacleDate;
+        this.arrivalDate = arrivalDate;
+        this.departureDate = departureDate;
     }
 
     public Product(Long id) {
@@ -196,5 +218,5 @@ public class Product implements Serializable {
     public String toString() {
         return "co.com.cache.foundation.pruebassql.Product[ id=" + id + " ]";
     }
-    
+
 }

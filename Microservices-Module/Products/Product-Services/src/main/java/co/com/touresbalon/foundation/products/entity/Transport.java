@@ -19,10 +19,10 @@ import java.util.List;
 @Table(name = "transport")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Transport.findAll", query = "SELECT t FROM Transport t"),
-    @NamedQuery(name = "Transport.findById", query = "SELECT t FROM Transport t WHERE t.id = :id"),
-    @NamedQuery(name = "Transport.findByName", query = "SELECT t FROM Transport t WHERE t.name = :name"),
-    @NamedQuery(name = "Transport.findByCost", query = "SELECT t FROM Transport t WHERE t.cost = :cost")})
+        @NamedQuery(name = "Transport.findAll", query = "SELECT t FROM Transport t"),
+        @NamedQuery(name = "Transport.findById", query = "SELECT t FROM Transport t WHERE t.id = :id"),
+        @NamedQuery(name = "Transport.findByName", query = "SELECT t FROM Transport t WHERE t.name = :name"),
+        @NamedQuery(name = "Transport.findByCost", query = "SELECT t FROM Transport t WHERE t.cost = :cost")})
 public class Transport implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -93,5 +93,5 @@ public class Transport implements Serializable {
     public String toString() {
         return "co.com.cache.foundation.pruebassql.Transport[ id=" + id + " ]";
     }
-    
+
 }

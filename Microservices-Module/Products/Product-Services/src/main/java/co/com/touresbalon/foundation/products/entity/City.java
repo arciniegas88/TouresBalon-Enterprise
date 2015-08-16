@@ -26,10 +26,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "city")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
-    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
-    @NamedQuery(name = "City.findByName", query = "SELECT c FROM City c WHERE c.name = :name"),
-    @NamedQuery(name = "City.findByCost", query = "SELECT c FROM City c WHERE c.cost = :cost")})
+        @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
+        @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
+        @NamedQuery(name = "City.findByName", query = "SELECT c FROM City c WHERE c.name = :name"),
+        @NamedQuery(name = "City.findByCost", query = "SELECT c FROM City c WHERE c.cost = :cost")})
 public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -111,5 +111,5 @@ public class City implements Serializable {
     public String toString() {
         return "co.com.cache.foundation.pruebassql.City[ id=" + id + " ]";
     }
-    
+
 }
