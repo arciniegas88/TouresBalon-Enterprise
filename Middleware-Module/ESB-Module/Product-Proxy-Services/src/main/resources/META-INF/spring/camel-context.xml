@@ -12,5 +12,11 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
 
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:8282/restendpoint?restletMethod=GET"/>
+            <camel:log message="------- CamelHttpQuery ----------: ${in.headers.CamelHttpQuery}"/>
+            <camel:to uri="restlet:http://localhost:7001/Product-Services/web-api/products?restletMethod=GET"/>
+        </camel:route>
+
     </camelContext>
 </beans>
