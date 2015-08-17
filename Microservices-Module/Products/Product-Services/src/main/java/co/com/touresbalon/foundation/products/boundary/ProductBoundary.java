@@ -15,6 +15,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 /**
+ * ProductBoundary -
  * Created by garciniegas on 07/08/2015.
  */
 
