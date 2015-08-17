@@ -12,11 +12,19 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <import resource="service-infrastructure.xml"/>
+    <!-- ================================================================= -->
+    <!-- ESB SERVICE INFRAESTRUCTURE                                       -->
+    <!-- Service environment configuration                                 -->
+    <!-- ================================================================= -->
 
-    <!-- Injecting the properties file in Spring Container -->
+    <import resource="service-infrastructure.xml"/>
     <osgix:cm-properties id="esbProps" persistent-id="esbadmin"/>
     <ctx:property-placeholder properties-ref="esbProps"/>
+
+    <!-- ================================================================= -->
+    <!-- ESB PROXY SERVICES                                                -->
+    <!-- List of proxy services and camel-fuse routes                      -->
+    <!-- ================================================================= -->
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <propertyPlaceholder id="esb" location="ref:esbProps"/>
