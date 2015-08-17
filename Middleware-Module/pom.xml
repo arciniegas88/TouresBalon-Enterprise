@@ -10,4 +10,10 @@
     <artifactId>Middleware-Module</artifactId>
     <packaging>pom</packaging>
     <name>Middleware-Module</name>
+
+    <modules>
+        <module>ESB-Module</module>
+        <module>BPEL-Module</module>
+    </modules>
+
 </project>
