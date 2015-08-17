@@ -44,5 +44,12 @@
             </camel:recipientList>
         </camel:route>
 
+        <!-- search products -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/products?restletMethod=GET"/>
+            <camel:log message="------- CamelHttpQuery ----------: ${in.headers.CamelHttpQuery}"/>
+            <camel:to uri="restlet:http://{{products.ms.physical}}/Product-Services/web-api/products?restletMethod=GET"/>
+        </camel:route>
+
     </camelContext>
 </beans>
