@@ -43,17 +43,19 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Product> searchProducts( String code, String name, String descripttion ){
+    public List<Product> searchProducts( String code, String name, String descripttion,int pageIndex,int pageSize){
 
         if( isEmpty( code ) && isEmpty( name ) && isEmpty( descripttion )) {
             return em.createNamedQuery("Product.findAll", Product.class)
-                     .getResultList();
+                    .getResultList();
         }else{
             return em.createNamedQuery("Product.findAllByCriteria", Product.class)
-                     .setParameter("CODE", code)
-                     .setParameter("NAME", "%" + name + "%")
-                     .setParameter("DESCRIPTION", "%" + descripttion + "%")
-                     .getResultList();
+                    .setParameter("CODE", code)
+                    .setParameter("NAME", "%" + name + "%")
+                    .setParameter("DESCRIPTION", "%" + descripttion + "%")
+                    .setMaxResults(pageSize)
+                    .setFirstResult(pageIndex)
+                    .getResultList();
         }
     }
 

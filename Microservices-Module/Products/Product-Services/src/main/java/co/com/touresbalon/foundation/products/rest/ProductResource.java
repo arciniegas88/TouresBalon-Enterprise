@@ -37,8 +37,11 @@ public class ProductResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<Product> searchProducts( @QueryParam("code") String code,
                                          @QueryParam("name") String name,
-                                         @QueryParam("description") String description ) {
-        return boundary.searchProducts(code, name, description);
+                                         @QueryParam("description") String description,
+                                         @QueryParam("pageIndex") int pageIndex,
+                                         @QueryParam("pageSize") int pageSize) {
+        return boundary.searchProducts(code, name, description,pageIndex,pageSize);
     }
+
 
 }
