@@ -14,7 +14,7 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * Created by gustavo on 17/08/15.
+ * Created by Jenny Rodriguez on 17/08/15.
  */
 
 @Stateless

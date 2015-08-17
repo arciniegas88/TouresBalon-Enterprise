@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
- * Created by gustavo on 17/08/15.
+ * Created by Jenny Rodriguez on 17/08/15.
  */
 @Path("/campaigns")
 public class CampaignResource {

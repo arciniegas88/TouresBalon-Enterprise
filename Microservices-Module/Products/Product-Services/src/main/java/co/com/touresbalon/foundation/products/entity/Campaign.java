@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by gustavo on 17/08/15.
+ * Created by Jenny Rodriguez on 17/08/15.
  */
 @Entity
 @Table(name = "campaign")
