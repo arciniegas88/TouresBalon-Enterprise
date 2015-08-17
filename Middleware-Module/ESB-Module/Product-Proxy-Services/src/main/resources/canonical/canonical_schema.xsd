@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://enterprisebank.co/model/canonical/1.0.0"
+	xmlns:tns="http://enterprisebank.co/model/canonical/1.0.0">
+
+	<!-- ================================================================= -->         
+    <!-- SOA ENTITY MODEL                                                  -->
+    <!-- List of entities participating in the soa services                -->
+    <!-- ================================================================= -->       
+
+	<xs:complexType name="Account">
+		<xs:sequence>
+			<xs:element name="number" type="xs:string" minOccurs="0" />
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="balance" type="xs:integer" minOccurs="0" />
+			<xs:element name="ownerDocNumber" type="xs:string" minOccurs="0" />
+			<xs:element name="ownerDocType" type="xs:string" minOccurs="0" />
+			<xs:element name="type" type="xs:string" minOccurs="0" />
+			<xs:element name="custom" type="tns:AccountCustomFields"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AccountCustomFields">
+		<xs:sequence/>
+	</xs:complexType>
+	
+	<xs:complexType name="Movement">
+	    <xs:sequence>
+	      <xs:element name="description" type="xs:string" minOccurs="0"/>
+	      <xs:element name="source" type="xs:string" minOccurs="0"/>
+	      <xs:element name="target" type="xs:string" minOccurs="0"/>
+	      <xs:element name="date" type="xs:dateTime" minOccurs="0"/>
+	      <xs:element name="type" type="xs:string" minOccurs="0"/>
+	      <xs:element name="transactionId" type="xs:string" minOccurs="0"/>
+	      <xs:element name="value" type="xs:integer" minOccurs="0"/>
+	      <xs:element name="custom" type="tns:MovementCustomFields"/>
+	    </xs:sequence>
+  	</xs:complexType>
+
+	<xs:complexType name="MovementCustomFields">
+		<xs:sequence/>
+	</xs:complexType>
+
+    <xs:complexType name="Due">
+	    <xs:sequence>
+	      <xs:element name="id" type="xs:string" minOccurs="0"/>
+	      <xs:element name="paymentDate" type="xs:dateTime" minOccurs="0"/>
+	      <xs:element name="paymentValue" type="xs:integer" minOccurs="0"/>
+	      <xs:element name="status" type="xs:string" minOccurs="0"/>
+	      <xs:element name="custom" type="tns:DueCustomFields"/>
+	    </xs:sequence>
+  	</xs:complexType>
+  	
+  	<xs:complexType name="DueCustomFields">
+		<xs:sequence/>
+	</xs:complexType>
+
+  	<xs:complexType name="Loan">
+    	<xs:sequence>
+	      <xs:element name="id" type="xs:string" minOccurs="0"/>
+	      <xs:element name="balance" type="xs:integer" minOccurs="0"/>
+	      <xs:element name="duePaymentValue" type="xs:string" minOccurs="0"/>
+	      <xs:element name="ownerDocNumber" type="xs:string" minOccurs="0"/>
+	      <xs:element name="ownerDocType" type="xs:string" minOccurs="0"/>
+	      <xs:element name="requestedValue" type="xs:integer" minOccurs="0"/>
+	      <xs:element name="totalDues" type="xs:short" minOccurs="0"/>
+	      <xs:element name="custom" type="tns:LoanCustomFields"/>
+    	</xs:sequence>
+  	</xs:complexType>
+	
+	<xs:complexType name="LoanCustomFields">
+		<xs:sequence/>
+	</xs:complexType>
+
+	<xs:complexType name="Customer">
+		<xs:sequence>
+			<xs:element name="address" type="xs:string"/>
+			<xs:element name="docNumber" type="xs:string"/>
+			<xs:element name="docType" type="xs:string"/>
+			<xs:element name="email" type="xs:string"/>
+			<xs:element name="firstName" type="xs:string"/>
+			<xs:element name="lastName" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string"/>
+			<xs:element name="salary" type="xs:integer"/>
+			<xs:element name="score" type="xs:int"/>
+			<xs:element name="custom" type="tns:CustomerCustomFields"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomerCustomFields">
+		<xs:sequence/>
+	</xs:complexType>
+
+
+	<!-- ================================================================= -->         
+    <!-- MESSAGES AGREGATIONS / REUSABLE ESTRUCTURES                       -->
+    <!-- List of message agreations created from source entities           -->
+    <!-- ================================================================= -->
+	
+	
+	<xs:complexType name="AccountDetails">
+		<xs:sequence>
+			<xs:element name="account" type="tns:Account"/>
+			<xs:element name="movements" type="tns:Movement" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CanonicalFault">
+			<xs:sequence>
+				<xs:element name="code" type="xs:string"/>
+				<xs:element name="description" type="xs:string"/>
+			</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!-- ================================================================= -->         
+    <!-- XML MESSAGES                                             		   -->
+    <!-- List of xml element messages referenced from wsdl contracts       -->
+    <!-- ================================================================= -->
+	
+	<xs:element name="GetCustomerRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="documentNumber" type="xs:string"/>
+				<xs:element name="documentType" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="GetCustomerResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerInfo" type="tns:Customer"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="CreateCustomerRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerInfo" type="tns:Customer"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="LoanProcessRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerInfo" type="tns:Customer"/>
+				<xs:element name="requestedValue" type="xs:integer"/>
+				<xs:element name="totalDues" type="xs:integer"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="LoanProcessResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="loanNumber" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SearchUserAccountsRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="documentNumber" type="xs:string"/>
+				<xs:element name="documentType" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SearchUserAccountsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="accounts" type="tns:Account" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SearchAccountsRequest">
+		<xs:complexType>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SearchAccountsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="accounts" type="tns:Account" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="CreateAccountRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="account" type="tns:Account"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="GetAccountDetailRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="accountNumber" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="GetAccountDetailResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="accountDetail" type="tns:AccountDetails"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- ================================================================= -->         
+    <!-- COMMON MESSAGES                      							   -->
+    <!-- List of commons message            							   -->
+    <!-- ================================================================= -->
+	
+	<xs:element name="TransactionVoidResponse">
+		<xs:complexType>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SystemFault">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:CanonicalFault"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="BusinessFault">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:CanonicalFault"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
