@@ -11,7 +11,6 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author garciniegas
  */
 
@@ -22,14 +21,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
         @NamedQuery(name = "Product.findAll",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
-                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate) FROM Product p " ,
-                hints = { @QueryHint(name = "org.hibernate.cacheable",value = "true") }),
+                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate) FROM Product p ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findAllByCriteria",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
                         "p.code, p.spectacleDate, p.arrivalDate, p.departureDate) FROM Product p WHERE " +
                         "TRIM(p.code) = TRIM(:CODE) OR LOWER(p.name) LIKE TRIM(LOWER(:NAME)) OR " +
                         "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION))",
-                hints = { @QueryHint(name = "org.hibernate.cacheable",value = "true") })
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "Product.findAllCount",
+                query = "SELECT count(p) FROM Product p ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "Product.findAllByCriteriaCount",
+                query = "SELECT count(p) FROM Product p WHERE " +
+                        "TRIM(p.code) = TRIM(:CODE) OR LOWER(p.name) LIKE TRIM(LOWER(:NAME)) OR " +
+                        "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION))",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
 public class Product implements Serializable {
 
@@ -78,7 +85,7 @@ public class Product implements Serializable {
     private City spectacleCity;
 
     @Lob
-    @Column( name = "image_ref" )
+    @Column(name = "image_ref")
     private byte[] imageRef;
 
     public Product() {

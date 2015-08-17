@@ -47,6 +47,8 @@ public class ProductBoundary {
 
         if( isEmpty( code ) && isEmpty( name ) && isEmpty( descripttion )) {
             return em.createNamedQuery("Product.findAll", Product.class)
+                    .setMaxResults(pageSize)
+                    .setFirstResult(pageIndex)
                     .getResultList();
         }else{
             return em.createNamedQuery("Product.findAllByCriteria", Product.class)
@@ -58,6 +60,30 @@ public class ProductBoundary {
                     .getResultList();
         }
     }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public int searchProductsCount( String code, String name, String descripttion,int pageSize){
+        int count=0;
+
+        if( isEmpty( code ) && isEmpty( name ) && isEmpty( descripttion )) {
+           count =em.createNamedQuery("Product.findAllCount", Long.class)
+                    .setMaxResults(pageSize)
+                    .getSingleResult().intValue();
+
+            return count;
+        }else{
+           count= em.createNamedQuery("Product.findAllByCriteriaCount",  Long.class)
+                    .setParameter("CODE", code)
+                    .setParameter("NAME", "%" + name + "%")
+                    .setParameter("DESCRIPTION", "%" + descripttion + "%")
+                    .setMaxResults(pageSize)
+                    .getSingleResult().intValue();
+            return count/pageSize;
+        }
+    }
+
+
+
 
     // [method] -----------------------------
 

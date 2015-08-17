@@ -5,6 +5,7 @@ import co.com.touresbalon.foundation.products.boundary.ProductBoundary;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import co.com.touresbalon.foundation.products.entity.Product;
 
@@ -41,6 +42,18 @@ public class ProductResource {
                                          @QueryParam("pageIndex") int pageIndex,
                                          @QueryParam("pageSize") int pageSize) {
         return boundary.searchProducts(code, name, description,pageIndex,pageSize);
+    }
+
+
+    @GET
+    @Path("/count")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getTotalPageBySearchProducts( @QueryParam("code") String code,
+                                         @QueryParam("name") String name,
+                                         @QueryParam("description") String description,
+                                         @QueryParam("pageSize") int pageSize) {
+        int totalPages = boundary.searchProductsCount(code, name, description,pageSize);
+        return Response.status(200).entity("{total: "+ totalPages +"}").build();
     }
 
 
