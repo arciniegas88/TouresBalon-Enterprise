@@ -10,6 +10,6 @@ import java.util.Set;
 public class ApplicationConfig extends Application {
 
     public Set<Class<?>> getClasses() {
-        return new HashSet<Class<?>>(Arrays.asList( ProductResource.class ));
+        return new HashSet<Class<?>>(Arrays.asList( ProductResource.class ,CampaignResource.class));
     }
 }
