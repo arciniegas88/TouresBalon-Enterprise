@@ -14,7 +14,10 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
 
-    <!-- infraestructura servicios web soap -->
+       <!-- ================================================================= -->
+       <!-- ESB SERVICE INFRAESTRUCTURE                                       -->
+       <!-- Service environment configuration                                 -->
+       <!-- ================================================================= -->
 
 
 </beans>

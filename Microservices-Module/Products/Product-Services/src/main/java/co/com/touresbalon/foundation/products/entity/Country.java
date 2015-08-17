@@ -40,9 +40,6 @@ public class Country implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "country")
-    private List<City> cityList;
-
     public Country() {
     }
 
@@ -64,15 +61,6 @@ public class Country implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @XmlTransient
-    public List<City> getCityList() {
-        return cityList;
-    }
-
-    public void setCityList(List<City> cityList) {
-        this.cityList = cityList;
     }
 
     @Override
