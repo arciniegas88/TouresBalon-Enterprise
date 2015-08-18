@@ -1,0 +1,49 @@
+﻿@{ 
+    var menu = (ViewData["menu"] as B2C.Utils.Menu).Items;
+
+}
+
+<!-- Header -->
+<div id="header-wrapper">
+    <header id="header" class="container">
+
+        <!-- Logo -->
+        <div id="logo">
+            <a href="index.html"><img src="~/Resources/images/logo.png" /></a>
+        </div>
+
+        <!-- Nav -->
+        <nav id="nav">
+
+            <ul>
+
+                @foreach (var item in menu)
+                {
+                    if (item.Url == "")
+                    {
+                        @Html.Raw("<li>")
+                        @Html.ActionLink(item.Text, item.ActionName, item.ControllerName, new { }, item.HtmlAttributes)
+                        @Html.Raw("</li>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<li>")
+                        @Html.ActionLink(item.Text, item.Url, new { }, item.HtmlAttributes)
+                        @Html.Raw("</li>")
+                    }
+                }
+            </ul>
+        </nav>
+
+    </header>
+</div>
+
+
+@if ( ViewBag.userID == 0 )
+{
+<<div id="login_form"  style="display: none;">
+     @RenderPage("~/Views/Autenticacion/LoginForm.cshtml")
+
+
+ </div>
+}
