@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="~/Resources/css/main.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Resources//js/jquery.min.js"></script>
+    <script src="~/Resources//js/jquery.dropotron.min.js"></script>
+    <script src="~/Resources//js/skel.min.js"></script>
+    
+    <!-- Scripts del template-->
+    <script src="~/Resources//js/util.js"></script>
+    <!--[if lte IE 8]><script src="~/Resources/js/ie/respond.min.js"></script><![endif]-->
+    <script src="~/Resources//js/main.js"></script>
+
+    <script type="text/javascript" src="~/Resources/lib/jquery-ui-1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Resources/lib/jquery-ui-1.11.4/jquery-ui.css" media="screen" />
+
+    <!-- Script de la navegacion del B2C-->
+    <script src="~/Resources/js/frontend.js"></script>
+
+
+    <title>Toures Balon</title>
+    
+</head>
+<body class="homepage">
+    <div id="page-wrapper">
+
+        @RenderPage("~/Views/Shared/header.cshtml")
+        @RenderPage("~/Views/Shared/carrousel.cshtml")
+        @RenderPage("~/Views/Shared/features.cshtml")
+
+
+        <div id="main">
+            @if (!IsSectionDefined("content"))
+            {
+                // some default code
+            }
+            else
+            {
+                // render the code that was overridden in the child view
+                @RenderSection("content")
+            }
+        </div>
+
+
+        @RenderBody();
+
+        @RenderPage("~/Views/Shared/footer.cshtml")
+    </div>
+</body>
+</html>
