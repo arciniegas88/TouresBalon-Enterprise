@@ -40,10 +40,13 @@ public class ProductBoundary {
         return em.find( Product.class,id);
     }
 
+
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Product> searchProducts( String code, String name, String descripttion,int pageIndex,int pageSize){
+
+        logger.info("--------------------------> search products: " );
 
         if( isEmpty( code ) && isEmpty( name ) && isEmpty( descripttion )) {
             return em.createNamedQuery("Product.findAll", Product.class)
@@ -62,23 +65,19 @@ public class ProductBoundary {
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public int searchProductsCount( String code, String name, String descripttion,int pageSize){
-        int count=0;
+    public int countProducts( String code, String name, String descripttion,int pageSize){
 
         if( isEmpty( code ) && isEmpty( name ) && isEmpty( descripttion )) {
-           count =em.createNamedQuery("Product.findAllCount", Long.class)
+           return em.createNamedQuery("Product.findAllCount", Long.class)
                     .setMaxResults(pageSize)
                     .getSingleResult().intValue();
-
-            return count;
         }else{
-           count= em.createNamedQuery("Product.findAllByCriteriaCount",  Long.class)
+           return em.createNamedQuery("Product.findAllByCriteriaCount",  Long.class)
                     .setParameter("CODE", code)
                     .setParameter("NAME", "%" + name + "%")
                     .setParameter("DESCRIPTION", "%" + descripttion + "%")
                     .setMaxResults(pageSize)
                     .getSingleResult().intValue();
-            return count/pageSize;
         }
     }
 

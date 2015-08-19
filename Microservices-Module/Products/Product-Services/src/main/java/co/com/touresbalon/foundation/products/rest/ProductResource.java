@@ -32,6 +32,7 @@ public class ProductResource {
         return boundary.getProductDetail(id);
     }
 
+
     // [search all products] -------------------------------
 
     @GET
@@ -45,14 +46,17 @@ public class ProductResource {
     }
 
 
+
+    // [count service] -------------------------------
+
     @GET
     @Path("/count")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getTotalPageBySearchProducts( @QueryParam("code") String code,
+    public Response getTotalPagesByProductSearch( @QueryParam("code") String code,
                                          @QueryParam("name") String name,
                                          @QueryParam("description") String description,
                                          @QueryParam("pageSize") int pageSize) {
-        int totalPages = boundary.searchProductsCount(code, name, description,pageSize);
+        int totalPages = boundary.countProducts(code, name, description, pageSize);
         return Response.status(200).entity("{total: "+ totalPages +"}").build();
     }
 
