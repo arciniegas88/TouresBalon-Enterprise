@@ -1,6 +1,7 @@
 package co.com.touresbalon.foundation.crosscutting.factory;
 
 import co.com.touresbalon.foundation.crosscutting.annotations.cache.CacheStore;
+import co.com.touresbalon.foundation.crosscutting.annotations.cache.HazelcastService;
 import com.hazelcast.cache.impl.HazelcastServerCachingProvider;
 import co.com.touresbalon.foundation.crosscutting.annotations.cache.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
@@ -37,9 +38,19 @@ public class ResourceFactory {
 
     @Produces
     @Singleton
-    @Hazelcast
-    public CacheManager createHazelcastInstance() {
+    @HazelcastService
+    public HazelcastInstance createHazelcastInstance() {
         HazelcastInstance hzInstance = com.hazelcast.core.Hazelcast.newHazelcastInstance();
+        return hzInstance;
+    }
+
+
+    // [cache manager service] -------------------------------------------
+
+    @Produces
+    @Singleton
+    @Hazelcast
+    public CacheManager createHazelcastCacheManager( @HazelcastService HazelcastInstance hzInstance ) {
         HazelcastServerCachingProvider cacheProvider = HazelcastServerCachingProvider.createCachingProvider(hzInstance);
         return cacheProvider.getCacheManager();
     }
@@ -48,10 +59,14 @@ public class ResourceFactory {
     // [cache service] -------------------------------------------
 
     @Produces
-    @CacheStore("")
-    public Cache getCache(InjectionPoint ip, @Hazelcast CacheManager cm){
+    @CacheStore(value = "",keyType = Class.class, valueType =  Class.class)
+    public Cache getCache( @Hazelcast CacheManager cm,InjectionPoint ip ){
 
-        Cache cache = cm.getCache( ip.getAnnotated().getAnnotation( CacheStore.class ).value() );
+        String name = ip.getAnnotated().getAnnotation( CacheStore.class ).value();
+        Class kType = ip.getAnnotated().getAnnotation( CacheStore.class ).keyType();
+        Class vType = ip.getAnnotated().getAnnotation( CacheStore.class ).valueType();
+
+        Cache cache = cm.getCache( name,kType,vType );
         return cache;
     }
 
