@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using B2C.Models;
+using B2C.Forms;
 namespace B2C.Controllers
 {
     public class AutenticarController : Controller
@@ -13,7 +13,7 @@ namespace B2C.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginForm model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {

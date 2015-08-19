@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace B2C.Models
+namespace B2C.Forms
 {
-    public class LoginModel
+    public class LoginForm
     {
         [Required]
         [Display(Name = "Email")]
