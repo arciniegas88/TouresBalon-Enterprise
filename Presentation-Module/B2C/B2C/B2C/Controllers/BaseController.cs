@@ -18,7 +18,7 @@ namespace B2C.Controllers
         {
 
             /*** Se obtiene el usuario sea anonimo o logueado ***/
-            this.user = HandlerSession.getUsuario();
+            this.user = HandlerSession.getUser();
             ViewBag.userID = this.user.UserID;
             ViewBag.email = this.user.Email;
 

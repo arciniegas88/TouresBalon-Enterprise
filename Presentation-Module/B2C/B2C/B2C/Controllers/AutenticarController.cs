@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using B2C.Forms;
+using B2C.Facades;
+using B2C.Entities;
+using B2C.Handlers;
+
 namespace B2C.Controllers
 {
     public class AutenticarController : Controller
@@ -13,18 +17,19 @@ namespace B2C.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginForm model, string returnUrl)
+        public async Task<ActionResult> Login(LoginForm form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(form);
             }
             else
             {
-                Session.Add("username", model.Email);
-                Session.Add("UserID", 10);
-
-                
+                User user = SecurityFacade.Instance.getLoginUser(form.Email, form.Password);
+                if( user != null && user.UserID != 0)
+                {
+                    HandlerSession.setUser(user);
+                }
             }
 
             return RedirectToLocal(returnUrl);
@@ -47,6 +52,17 @@ namespace B2C.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }*/
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            HandlerSession.destroy();
+            return RedirectToAction("Index", "Home");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

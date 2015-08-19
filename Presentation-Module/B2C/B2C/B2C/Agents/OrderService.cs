@@ -6,7 +6,7 @@ using B2C.Entities;
 
 namespace B2C.Agents
 {
-    public class ProductService
+    public class OrderService
     {
 
         public Product getProduct(int id)

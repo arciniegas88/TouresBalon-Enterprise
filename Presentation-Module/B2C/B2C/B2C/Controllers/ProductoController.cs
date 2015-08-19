@@ -14,7 +14,7 @@ namespace B2C.Controllers
         {
             this.ini();
 
-            ProductService pro_service = new ProductService();
+            OrderService pro_service = new OrderService();
             ViewData.Add("products", pro_service.getProducts());
 
             return View();
@@ -24,7 +24,7 @@ namespace B2C.Controllers
         {
             this.ini();
 
-            ProductService pro_service = new ProductService();
+            OrderService pro_service = new OrderService();
             ViewData.Add("product", pro_service.getProduct(id));
             ViewData.Add("products", pro_service.getTopFive(id));
 
