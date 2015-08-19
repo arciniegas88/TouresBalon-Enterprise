@@ -17,6 +17,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({TYPE, METHOD, FIELD, PARAMETER})
 public @interface CacheStore {
 
-    @Nonbinding public String value();
+    @Nonbinding String value();
 
 }
