@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author garciniegas
+ * @author Jenny Rodriguez
  */
 @Entity
 @Table(name = "SALES_ORDER")
@@ -34,7 +33,7 @@ public class SalesOrder implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private BigDecimal id;
+    private Long id;
     @Column(name = "ORDER_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
@@ -56,21 +55,21 @@ public class SalesOrder implements Serializable {
     public SalesOrder() {
     }
 
-    public SalesOrder(BigDecimal id) {
+    public SalesOrder(Long id) {
         this.id = id;
     }
 
-    public SalesOrder(BigDecimal id, String custDocumentNumber, String custDocumentType) {
+    public SalesOrder(Long id, String custDocumentNumber, String custDocumentType) {
         this.id = id;
         this.custDocumentNumber = custDocumentNumber;
         this.custDocumentType = custDocumentType;
     }
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -155,5 +154,5 @@ public class SalesOrder implements Serializable {
     public String toString() {
         return "co.com.touresbalon.foundation.orders.entity.SalesOrder[ id=" + id + " ]";
     }
-    
+
 }

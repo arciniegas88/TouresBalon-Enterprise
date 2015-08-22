@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author garciniegas
+ * @author Jenny Rodriguez
  */
 
 @Entity
@@ -21,10 +21,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
-        @NamedQuery(name = "OrderItem.OrderItemByOrderId",
-                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.OrderItem( o.id ) " +
-                        "FROM OrderItem o WHERE o.orderId.id = :ID_ORDEN ",
+        @NamedQuery(name = "OrderItem.TopFiveProductByOrder",
+                    query = "SELECT oi.productId,oi.productName, COUNT( oi.productId ) FROM OrderItem oi " +
+                            "WHERE oi.orderId.id IN( SELECT oii.orderId.id FROM OrderItem oii WHERE oii.productId = :PRODUCT_ID )" +
+                            "GROUP BY oi.productId,oi.productName " +
+                            "ORDER BY  COUNT( oi.productId ) DESC ",
         hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
+
 })
 
 public class OrderItem implements Serializable {
@@ -33,7 +36,7 @@ public class OrderItem implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private BigDecimal id;
+    private Long id;
     @Column(name = "PRODUCT_ID")
     private Long productId;
     @Column(name = "PRODUCT_NAME")
@@ -51,15 +54,15 @@ public class OrderItem implements Serializable {
     public OrderItem() {
     }
 
-    public OrderItem(BigDecimal id) {
+    public OrderItem(Long id) {
         this.id = id;
     }
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,6 +1,7 @@
 package co.com.touresbalon.foundation.orders.rest;
 
 import co.com.touresbalon.foundation.orders.boundary.SalesOrdersBoundary;
+import co.com.touresbalon.foundation.orders.dto.Product;
 import co.com.touresbalon.foundation.orders.entity.OrderItem;
 import co.com.touresbalon.foundation.orders.entity.SalesOrder;
 
@@ -14,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * Created by garciniegas on 19/08/2015.
+ * Created by Jenny Rodriguez on 19/08/2015.
  */
 
 @Path("/order-items")
@@ -27,23 +28,11 @@ public class OrderIntemResource {
     }
 
     @GET
-    @Path("/orders")
+    @Path("/topItems")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<SalesOrder> searchSalesOrderByIdProduct (@QueryParam("idProduct")Long idProduct){
-        return boundary.searchSalesOrderByIdProduct(idProduct);
+    public List<Product> getTopFiveProducts(@QueryParam("idProduct") Long idProduct){
+        return boundary.getTopFiveProducts(idProduct);
     }
-
-
-    @GET
-    @Path("/items")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<OrderItem> searchOrderItemsByIdOrder(@QueryParam("idOrder") Long idOrder){
-        return boundary.searchOrderItemsByIdOrder(idOrder);
-    }
-
-
-  
-
 
     // [cache service] -------------------------------
 
