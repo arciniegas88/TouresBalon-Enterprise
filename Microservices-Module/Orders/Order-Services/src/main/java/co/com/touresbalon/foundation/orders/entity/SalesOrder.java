@@ -9,16 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,8 +21,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "SALES_ORDER")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "SalesOrder.findAll", query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.OrderItem( oi.id ) FROM OrderItem oi WHERE oi.orderId.id = :ID_ORDEN "),
-        @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s")})
+        @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s"),
+        @NamedQuery(name = "SalesOrder.byIdProduct",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder( s.id ) FROM SalesOrder s " +
+                        "INNER JOIN s.orderItemList o WHERE o.id = :PRODUCT_ID",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
+
+})
 public class SalesOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
