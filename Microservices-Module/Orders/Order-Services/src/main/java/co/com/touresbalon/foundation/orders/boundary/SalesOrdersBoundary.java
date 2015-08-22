@@ -64,9 +64,14 @@ public class SalesOrdersBoundary {
         return productsList;
 
     }
-    
-    public String testCache(){
-        return cache.get("prueba").toString();
+
+
+    public List<SalesOrder> searchSalesOrderByCustomer(String typeDocument, String numberDocument){
+        return em.createNamedQuery("SalesOrder.ByCustomer", SalesOrder.class)
+                .setParameter("TYPE_DOCUMENT",typeDocument)
+                .setParameter("NUMBER_DOCUMENT",numberDocument)
+                .getResultList();
     }
+
 
 }

@@ -19,11 +19,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "SALES_ORDER")
 @XmlRootElement
-@NamedQueries({
+@NamedQueries(value = {
         @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s"),
-        @NamedQuery(name = "SalesOrder.byIdProduct",
-                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder( s.id ) FROM SalesOrder s " +
-                        "INNER JOIN s.orderItemList o WHERE o.id = :PRODUCT_ID",
+        @NamedQuery(name = "SalesOrder.ByCustomer",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
+                        "s.comments) FROM SalesOrder s " +
+                        "WHERE s.custDocumentType =:TYPE_DOCUMENT and   s.custDocumentNumber =:NUMBER_DOCUMENT ",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 
 })
@@ -63,6 +64,14 @@ public class SalesOrder implements Serializable {
         this.id = id;
         this.custDocumentNumber = custDocumentNumber;
         this.custDocumentType = custDocumentType;
+    }
+
+    public SalesOrder(Long id, Date orderDate, Long price, String status, String comments) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.price = price;
+        this.status = status;
+        this.comments = comments;
     }
 
     public Long getId() {

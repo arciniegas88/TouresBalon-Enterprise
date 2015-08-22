@@ -34,12 +34,11 @@ public class OrderIntemResource {
         return boundary.getTopFiveProducts(idProduct);
     }
 
-    // [cache service] -------------------------------
-
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response testCache() {
-        return Response.status(200).entity("{total: "+ boundary.testCache() +"}").build();
+    @Path("/ordersByCustomer")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public List<SalesOrder>searchSalesOrderByCustomer(@QueryParam("typeDocument") String typeDocument ,@QueryParam("numberDocument") String numberDocument){
+        return boundary.searchSalesOrderByCustomer(typeDocument,numberDocument);
     }
 
 
