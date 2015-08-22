@@ -45,6 +45,13 @@
         <processorPath useClasspath="true" />
         <module name="Cross-Cutting-Artifacts" />
       </profile>
+      <profile default="false" name="Annotation profile for Transport-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Transport-Services" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -64,6 +71,8 @@
       <module name="Product-Services" target="1.7" />
       <module name="Products" target="1.5" />
       <module name="TouresBalon-Enterprise" target="1.5" />
+      <module name="Transport-Services" target="1.7" />
+      <module name="Transports" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

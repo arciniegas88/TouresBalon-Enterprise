@@ -6,6 +6,7 @@
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services/src/main/java/co/com/touresbalon/foundation/products/boundary/CampaignBoundary.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services/src/main/resources/logback.xml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services" charset="UTF-8" />
   </component>
 </project>

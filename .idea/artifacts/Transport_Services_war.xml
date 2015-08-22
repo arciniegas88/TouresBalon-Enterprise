@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Transport-Services:war">
+    <output-path>$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services/target</output-path>
+    <root id="archive" name="Transport-Services.war">
+      <element id="artifact" artifact-name="Transport-Services:war exploded" />
+    </root>
+  </artifact>
+</component>
