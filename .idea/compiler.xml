@@ -52,6 +52,20 @@
         <processorPath useClasspath="true" />
         <module name="Transport-Services" />
       </profile>
+      <profile default="false" name="Annotation profile for Order-Proxy-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Order-Proxy-Services" />
+      </profile>
+      <profile default="false" name="Annotation profile for Customer-Proxy-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Customer-Proxy-Services" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -59,11 +73,13 @@
       <module name="Clients" target="1.5" />
       <module name="Cross-Cutting" target="1.5" />
       <module name="Cross-Cutting-Artifacts" target="1.5" />
+      <module name="Customer-Proxy-Services" target="1.7" />
       <module name="EIS-Module" target="1.5" />
       <module name="ESB-Module" target="1.5" />
       <module name="Microservices-Module" target="1.5" />
       <module name="Middleware-Module" target="1.5" />
       <module name="OMS" target="1.5" />
+      <module name="Order-Proxy-Services" target="1.7" />
       <module name="Order-Services" target="1.7" />
       <module name="Orders" target="1.5" />
       <module name="Presentation-Module" target="1.5" />

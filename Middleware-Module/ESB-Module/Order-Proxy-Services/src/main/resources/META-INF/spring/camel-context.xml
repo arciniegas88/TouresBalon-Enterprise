@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Camel Context -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+       xsi:schemaLocation="
+	   http://www.springframework.org/schema/osgi-compendium https://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <!-- ================================================================= -->
+    <!-- ESB SERVICE INFRAESTRUCTURE                                       -->
+    <!-- Service environment configuration                                 -->
+    <!-- ================================================================= -->
+
+    <import resource="service-infrastructure.xml"/>
+    <osgix:cm-properties id="esbProps" persistent-id="esbadmin"/>
+    <ctx:property-placeholder properties-ref="esbProps"/>
+
+    <!-- ================================================================= -->
+    <!-- ESB PROXY SERVICES                                                -->
+    <!-- List of proxy services and camel-fuse routes                      -->
+    <!-- ================================================================= -->
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="esb" location="ref:esbProps"/>
+        
+    </camelContext>
+</beans>
