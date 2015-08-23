@@ -7,35 +7,36 @@ package co.com.touresbalon.foundation.orders.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  *
- * @author garciniegas
+ * @author Jenny Rodriguez
  */
 
 @Entity
 @Table(name = "ORDER_ITEM")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o")})
-public class OrderItem implements Serializable {
+        @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
+        @NamedQuery(name = "OrderItem.TopFiveProductByOrder",
+                    query = "SELECT oi.productId,oi.productName, COUNT( oi.productId ) FROM OrderItem oi " +
+                            "WHERE oi.orderId.id IN( SELECT oii.orderId.id FROM OrderItem oii WHERE oii.productId = :PRODUCT_ID )" +
+                            "GROUP BY oi.productId,oi.productName " +
+                            "ORDER BY  COUNT( oi.productId ) DESC ",
+        hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 
+})
+
+public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private BigDecimal id;
+    private Long id;
     @Column(name = "PRODUCT_ID")
     private Long productId;
     @Column(name = "PRODUCT_NAME")
@@ -53,15 +54,15 @@ public class OrderItem implements Serializable {
     public OrderItem() {
     }
 
-    public OrderItem(BigDecimal id) {
+    public OrderItem(Long id) {
         this.id = id;
     }
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

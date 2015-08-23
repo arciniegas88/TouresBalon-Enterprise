@@ -9,35 +9,32 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author garciniegas
+ * @author Jenny Rodriguez
  */
 @Entity
 @Table(name = "SALES_ORDER")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s")})
+@NamedQueries(value = {
+        @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s"),
+        @NamedQuery(name = "SalesOrder.ByCustomer",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
+                        "s.comments) FROM SalesOrder s " +
+                        "WHERE s.custDocumentType =:TYPE_DOCUMENT and   s.custDocumentNumber =:NUMBER_DOCUMENT ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
+
+})
 public class SalesOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private BigDecimal id;
+    private Long id;
     @Column(name = "ORDER_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
@@ -59,21 +56,29 @@ public class SalesOrder implements Serializable {
     public SalesOrder() {
     }
 
-    public SalesOrder(BigDecimal id) {
+    public SalesOrder(Long id) {
         this.id = id;
     }
 
-    public SalesOrder(BigDecimal id, String custDocumentNumber, String custDocumentType) {
+    public SalesOrder(Long id, String custDocumentNumber, String custDocumentType) {
         this.id = id;
         this.custDocumentNumber = custDocumentNumber;
         this.custDocumentType = custDocumentType;
     }
 
-    public BigDecimal getId() {
+    public SalesOrder(Long id, Date orderDate, Long price, String status, String comments) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.price = price;
+        this.status = status;
+        this.comments = comments;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -158,5 +163,5 @@ public class SalesOrder implements Serializable {
     public String toString() {
         return "co.com.touresbalon.foundation.orders.entity.SalesOrder[ id=" + id + " ]";
     }
-    
+
 }

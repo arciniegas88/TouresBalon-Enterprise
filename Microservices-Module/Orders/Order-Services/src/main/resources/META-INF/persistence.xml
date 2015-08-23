@@ -6,8 +6,8 @@
 
         <jta-data-source>java:jboss/datasources/orders</jta-data-source>
 
-        <class>co.com.touresbalon.foundation.products.entity.SalesOrder</class>
-        <class>co.com.touresbalon.foundation.products.entity.OrderItem</class>
+        <class>co.com.touresbalon.foundation.orders.entity.SalesOrder</class>
+        <class>co.com.touresbalon.foundation.orders.entity.OrderItem</class>
 
         <shared-cache-mode>ALL</shared-cache-mode>
 
