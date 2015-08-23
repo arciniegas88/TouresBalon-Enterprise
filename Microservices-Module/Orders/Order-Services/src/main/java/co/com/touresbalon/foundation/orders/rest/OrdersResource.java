@@ -6,10 +6,7 @@ import co.com.touresbalon.foundation.orders.entity.OrderItem;
 import co.com.touresbalon.foundation.orders.entity.SalesOrder;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -18,48 +15,50 @@ import java.util.List;
  * Created by Jenny Rodriguez on 19/08/2015.
  */
 
-@Path("/order-items")
-public class OrderIntemResource {
+@Path("/orders")
+public class OrdersResource {
 
     @Inject
     private SalesOrdersBoundary boundary;
 
-    public OrderIntemResource() {
+    public OrdersResource() {
     }
 
     @GET
-    @Path("/topItems")
+    @Path("/topItems/{idProduct}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<Product> getTopFiveProducts(@QueryParam("idProduct") Long idProduct){
+    public List<Product> getTopFiveProducts(@PathParam("idProduct") Long idProduct){
         return boundary.getTopFiveProducts(idProduct);
     }
 
     @GET
-    @Path("/ordersByCustomer")
+    @Path("/customerOrders")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<SalesOrder>searchSalesOrderByCustomer(@QueryParam("typeDocument") String typeDocument ,@QueryParam("numberDocument") String numberDocument){
         return boundary.searchSalesOrderByCustomer(typeDocument, numberDocument);
     }
 
     @GET
-    @Path("/idOrder")
+    @Path("/generateOrderId")
     @Produces({MediaType.APPLICATION_JSON})
     public Response generateSalesOrderId(){
         Long idSalesOrder =boundary.generateSalesOrderId();
         return Response.status(200).entity("{idOrder: "+ idSalesOrder +"}").build();
 
     }
+
+
     @GET
-    @Path("/orderItems")
+    @Path("/orderItems/{idSalesOrder}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<OrderItem> getOrderItems(@QueryParam("idSalesOrder")Long idSalesOrder){
+    public List<OrderItem> getOrderItems(@PathParam("idSalesOrder")Long idSalesOrder){
         return boundary.getOrderItems(idSalesOrder);
     }
 
     @GET
-    @Path("/orderDetail")
+    @Path("/{idSalesOrder}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<SalesOrder> getSalesOrderDetail(@QueryParam("idSalesOrder") Long idSalesOrder){
+    public List<SalesOrder> getSalesOrderDetail(@PathParam("idSalesOrder") Long idSalesOrder){
         return boundary.getSalesOrderDetail(idSalesOrder);
     }
 
