@@ -26,8 +26,12 @@ import javax.xml.bind.annotation.XmlRootElement;
                             "WHERE oi.orderId.id IN( SELECT oii.orderId.id FROM OrderItem oii WHERE oii.productId = :PRODUCT_ID )" +
                             "GROUP BY oi.productId,oi.productName " +
                             "ORDER BY  COUNT( oi.productId ) DESC ",
-        hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
-
+        hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "OrderItem.getOrderItems",
+                    query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.OrderItem(oi.id,oi.productId, " +
+                            "oi.productName ,oi.partnum, oi.price, oi.quantity )"+
+                            "FROM OrderItem oi WHERE oi.orderId.id = :ID_SALES_ORDER ",
+                    hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
 
 public class OrderItem implements Serializable {
@@ -52,6 +56,15 @@ public class OrderItem implements Serializable {
     private SalesOrder orderId;
 
     public OrderItem() {
+    }
+
+    public OrderItem(Long id, Long productId, String productName, String partnum, Long price, Short quantity) {
+        this.id = id;
+        this.productId = productId;
+        this.productName = productName;
+        this.partnum = partnum;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public OrderItem(Long id) {

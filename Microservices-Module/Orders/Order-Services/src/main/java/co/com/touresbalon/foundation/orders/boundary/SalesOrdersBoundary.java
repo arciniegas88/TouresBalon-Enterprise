@@ -8,9 +8,13 @@ import org.slf4j.Logger;
 
 import javax.cache.Cache;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,7 +42,7 @@ public class SalesOrdersBoundary {
     }
 
 
-
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Product> getTopFiveProducts(Long idProduct){
 
         int maxResult =6;
@@ -65,13 +69,32 @@ public class SalesOrdersBoundary {
 
     }
 
-
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<SalesOrder> searchSalesOrderByCustomer(String typeDocument, String numberDocument){
         return em.createNamedQuery("SalesOrder.ByCustomer", SalesOrder.class)
                 .setParameter("TYPE_DOCUMENT",typeDocument)
-                .setParameter("NUMBER_DOCUMENT",numberDocument)
+                .setParameter("NUMBER_DOCUMENT", numberDocument)
                 .getResultList();
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public Long generateSalesOrderId(){
+        String sql = "SELECT sequence_sales_orders.nextval FROM dual";
+        return ((BigDecimal)em.createNativeQuery( sql ).getSingleResult()).longValue();
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<OrderItem> getOrderItems(Long idSalesOrder){
+        return em.createNamedQuery("OrderItem.getOrderItems", OrderItem.class)
+                .setParameter("ID_SALES_ORDER",idSalesOrder)
+                .getResultList();
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<SalesOrder> getSalesOrderDetail(Long idSalesOrder){
+        return em.createNamedQuery("SalesOrder.getDetail",SalesOrder.class)
+                .setParameter("ID_SALES_ORDER",idSalesOrder)
+                .getResultList();
+    }
 
 }
