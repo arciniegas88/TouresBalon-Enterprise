@@ -1,34 +1,35 @@
 package co.com.touresbalon.foundation.transports.boundary;
 
-import co.com.touresbalon.foundation.transports.control.AviancaReservationExecutor;
-import co.com.touresbalon.foundation.transports.control.BolivarianoReservationExecutor;
-import co.com.touresbalon.foundation.transports.control.ReservationExecutor;
+import co.com.touresbalon.foundation.crosscutting.annotations.cache.CacheStore;
+import co.com.touresbalon.foundation.transports.model.Reservation;
 import co.com.touresbalon.foundation.transports.model.ReservationRequestMessage;
 import co.com.touresbalon.foundation.transports.model.ReservationResponseMessage;
-import co.com.touresbalon.foundation.transports.soap.TransportWS;
 import org.slf4j.Logger;
 
+import java.util.Iterator;
+import java.util.List;
+
+import static javax.cache.Cache.Entry;
+import javax.cache.Cache;
 import javax.ejb.*;
 import javax.inject.Inject;
-import javax.jws.WebService;
 
 /**
  * Created by garciniegas on 19/08/2015.
  */
 
 @Singleton
-@WebService(endpointInterface = "co.com.touresbalon.foundation.transports.soap.TransportWS")
 @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
-public class TransportBoundary implements TransportWS {
+public class TransportBoundary {
 
     //[attributes] --------------------------
 
     @Inject
     private Logger logger;
+
     @Inject
-    private BolivarianoReservationExecutor bolivarianoExecutor;
-    @Inject
-    private AviancaReservationExecutor aviancaExecutor;
+    @CacheStore("bolivariano-cache")
+    private Cache<String,Object> cache;
 
     //[constructor] --------------------------
 
@@ -38,25 +39,39 @@ public class TransportBoundary implements TransportWS {
 
     //[service] --------------------------
 
-    @Override
     @Lock(LockType.WRITE)
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public ReservationResponseMessage generateReservation( ReservationRequestMessage request ) {
+    public ReservationResponseMessage generateBolivarianoReservation( ReservationRequestMessage request ) {
 
-        ReservationExecutor executor = null;
+        ReservationResponseMessage response = new ReservationResponseMessage();
+        response.setAvailable(false);
 
-        switch ( request.getProvider() ){
 
-            case AVIANCA:{
-                executor = aviancaExecutor;
-                break;
+        Iterator<Entry<String,Object>> iterator = cache.iterator();
+
+        while( iterator.hasNext() ){
+            Entry<String,Object> entry = iterator.next();
+            List<Reservation> list = (List<Reservation>) entry.getValue();
+
+            for( Reservation r: list ){
+                System.out.println( r );
             }
-            case BOLIVARIANO:{
-                executor = bolivarianoExecutor;
-                break;
-            }
+
         }
 
-        return executor.generateReservation( request );
+        return response;
+    }
+
+
+    //[service] --------------------------
+
+    @Lock(LockType.WRITE)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public ReservationResponseMessage generateAviancaReservation( ReservationRequestMessage request ) {
+
+        ReservationResponseMessage response = new ReservationResponseMessage();
+        response.setAvailable(false);
+
+        return response;
     }
 }

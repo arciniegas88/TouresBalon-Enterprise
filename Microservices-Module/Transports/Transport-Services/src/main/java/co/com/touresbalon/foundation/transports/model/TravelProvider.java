@@ -5,5 +5,5 @@ package co.com.touresbalon.foundation.transports.model;
  */
 
 public enum TravelProvider {
-    BOLIVARIANO, AVIANCA
+    BOLIVARIANO, AVIANCA, AMERICAN_AIRLINES
 }
