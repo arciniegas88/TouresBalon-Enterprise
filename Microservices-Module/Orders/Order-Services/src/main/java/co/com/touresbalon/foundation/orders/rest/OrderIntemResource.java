@@ -38,8 +38,29 @@ public class OrderIntemResource {
     @Path("/ordersByCustomer")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<SalesOrder>searchSalesOrderByCustomer(@QueryParam("typeDocument") String typeDocument ,@QueryParam("numberDocument") String numberDocument){
-        return boundary.searchSalesOrderByCustomer(typeDocument,numberDocument);
+        return boundary.searchSalesOrderByCustomer(typeDocument, numberDocument);
     }
 
+    @GET
+    @Path("/idOrder")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response generateSalesOrderId(){
+        Long idSalesOrder =boundary.generateSalesOrderId();
+        return Response.status(200).entity("{idOrder: "+ idSalesOrder +"}").build();
+
+    }
+    @GET
+    @Path("/orderItems")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public List<OrderItem> getOrderItems(@QueryParam("idSalesOrder")Long idSalesOrder){
+        return boundary.getOrderItems(idSalesOrder);
+    }
+
+    @GET
+    @Path("/orderDetail")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public List<SalesOrder> getSalesOrderDetail(@QueryParam("idSalesOrder") Long idSalesOrder){
+        return boundary.getSalesOrderDetail(idSalesOrder);
+    }
 
 }

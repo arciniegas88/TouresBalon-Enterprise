@@ -25,6 +25,11 @@ import javax.xml.bind.annotation.XmlTransient;
                 query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
                         "s.comments) FROM SalesOrder s " +
                         "WHERE s.custDocumentType =:TYPE_DOCUMENT and   s.custDocumentNumber =:NUMBER_DOCUMENT ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.getDetail",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
+                        "s.comments, s.custDocumentNumber ,s.custDocumentType) FROM SalesOrder s " +
+                        "WHERE s.id=:ID_SALES_ORDER",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 
 })
@@ -72,6 +77,16 @@ public class SalesOrder implements Serializable {
         this.price = price;
         this.status = status;
         this.comments = comments;
+    }
+
+    public SalesOrder(Long id, Date orderDate, Long price, String status, String comments, String custDocumentNumber, String custDocumentType) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.price = price;
+        this.status = status;
+        this.comments = comments;
+        this.custDocumentNumber = custDocumentNumber;
+        this.custDocumentType = custDocumentType;
     }
 
     public Long getId() {
