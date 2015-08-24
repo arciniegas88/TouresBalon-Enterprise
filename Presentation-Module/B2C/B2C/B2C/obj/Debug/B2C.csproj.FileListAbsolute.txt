@@ -67,7 +67,6 @@ C:\Users\aleji_000\Documents\Visual Studio 2015\Projects\B2C\B2C\bin\Microsoft.O
 C:\Users\aleji_000\Documents\Visual Studio 2015\Projects\B2C\B2C\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\aleji_000\Documents\Visual Studio 2015\Projects\B2C\B2C\obj\Debug\B2C.dll
 C:\Users\aleji_000\Documents\Visual Studio 2015\Projects\B2C\B2C\obj\Debug\B2C.pdb
-C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C\obj\Debug\B2C.csprojResolveAssemblyReference.cache
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C\obj\Debug\B2C.dll
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C\obj\Debug\B2C.pdb
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C\bin\roslyn\csc.exe
@@ -136,3 +135,4 @@ C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C\obj\Debug\B2C.csprojResolveAssemblyReference.cache

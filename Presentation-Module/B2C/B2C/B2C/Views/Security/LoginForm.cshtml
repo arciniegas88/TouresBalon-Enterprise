@@ -1,0 +1,59 @@
+﻿@using B2C.Forms
+@{ var form = ViewData["loginForm"] as LoginForm; }
+
+@{ 
+    if (form.Email != null && !form.Email.Equals("") )
+    {
+        @Html.Raw("<script type='text/javascript'>$(document).ready(function(){ $('#login').click(); })</script>");
+    }
+}
+
+<div id="login_div">
+    <fieldset>
+        <legend>Iniciar Sesion</legend>
+
+        @using (Html.BeginForm("Login", "Security", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "loginForm" }))
+        {
+            if (TempData["errors"] != null)
+            {
+                @RenderPage("~/Views/Shared/errors.cshtml", new { errors = TempData["errors"] })
+            }
+
+            @Html.AntiForgeryToken()
+            @Html.Hidden("returnUrl", this.Request.RawUrl)
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => form.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => form.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => form.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => form.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => form.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => form.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => form.RememberMe)
+                            @Html.LabelFor(m => form.RememberMe)
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Log in" class="btn btn-default" />
+                    <input type="button" value="Registrarse" id="btn_register" class="btn btn-default" />
+                </div>
+        }
+    </fieldset>
+</div>

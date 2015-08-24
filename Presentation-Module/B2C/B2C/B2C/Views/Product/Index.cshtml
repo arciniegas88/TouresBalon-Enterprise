@@ -12,7 +12,7 @@
             <div class="row">
                 @foreach (var item in products)
                 {
-                    @RenderPage("~/Views/Producto/ProductoSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image })
+                    @RenderPage("~/Views/Product/ProductSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image })
                 }
             </div>
         </div>

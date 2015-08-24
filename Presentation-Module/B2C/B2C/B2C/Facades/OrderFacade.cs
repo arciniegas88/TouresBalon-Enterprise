@@ -11,10 +11,11 @@ namespace B2C.Facades
     {
 
         private static OrderFacade instance = null;
+        private OrderService orderService;
 
         private OrderFacade()
         {
-
+            this.orderService = new OrderService();
         }
 
         public static OrderFacade Instance
@@ -31,14 +32,17 @@ namespace B2C.Facades
 
         public Product getProduct(int id)
         {
-            OrderService service = new OrderService();
-            return service.getProduct(id);
+            return this.orderService.getProduct(id);
         }
 
         public List<Product> getProducts()
         {
-            OrderService service = new OrderService();
-            return service.getProducts();
+            return this.orderService.getProducts();
+        }
+
+        public List<Product> getTopFive(int id)
+        {
+            return this.orderService.getTopFive(id);
         }
 
     }

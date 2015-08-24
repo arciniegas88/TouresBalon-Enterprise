@@ -41,9 +41,8 @@
 
 @if ( ViewBag.userID == 0 )
 {
-<<div id="login_form"  style="display: none;">
-     @RenderPage("~/Views/Autenticacion/LoginForm.cshtml")
-
-
+<div id="login_form"  style="display: none;">
+     @RenderPage("~/Views/Security/LoginForm.cshtml")
+     @RenderPage("~/Views/Customer/RegisterForm.cshtml")
  </div>
 }

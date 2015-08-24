@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using B2C.Entities;
 
 namespace B2C.Utils
 {
@@ -11,8 +12,6 @@ namespace B2C.Utils
     {
 
         private List<ItemMenu> items;
-        private string actual_controller;
-        private string actual_action;
         protected static ItemMenu item;
 
         public List<ItemMenu> Items
@@ -28,33 +27,31 @@ namespace B2C.Utils
             }
         }
 
-        public Menu(string controller, string action)
+        public Menu()
         {
-            this.actual_controller = controller;
-            this.actual_action = action;
         }
 
-        public void buildMenu(int userID, string username)
+        public void buildMenu(Customer customer, string controller_actual, string action_actual)
         {
             this.items = new List<ItemMenu>();
 
-            this.addMenu("Home", "home", "index", "", null);
-            this.addMenu("Quienes Somos?", "home", "quienes", "", null);
-            this.addMenu("Producto", "producto", "index", "", null);
-            this.addMenu("Contactenos", "home", "contactenos", "", null);
+            this.addMenu(controller_actual, action_actual, "Home", "Home", "Index", "", null);
+            this.addMenu(controller_actual, action_actual, "Quienes Somos?", "Home", "Quienes", "", null);
+            this.addMenu(controller_actual, action_actual, "Producto", "Product", "Index", "", null);
+            this.addMenu(controller_actual, action_actual, "Contactenos", "Home", "Contactenos", "", null);
             
-            if(userID == 0)
+            if(customer.UserID == 0)
             {
-                this.addMenu("Iniciar Sesion", "", "", "#", new { id = "login", title = "Iniciar Sesion", href = "#" });
+                this.addMenu(controller_actual, action_actual, "Iniciar Sesion", "", "", "#", new { id = "login", title = "Iniciar Sesion", href = "#" });
             }
             else
             {
                 
-                this.addMenu(String.Concat("Cerrar Sesion (", username, ")"), "autenticar", "logout", "", null);
+                this.addMenu(controller_actual, action_actual, String.Concat("Cerrar Sesion (", customer.Email, ")"), "security", "logout", "", null);
             }
        }
 
-        public void addMenu(string text, string controller, string action, string url, Object attributes)
+        public void addMenu(string controller_actual, string action_actual, string text, string controller, string action, string url, Object attributes)
         {
             Menu.item = new ItemMenu();
             item.Text = text;
@@ -64,7 +61,7 @@ namespace B2C.Utils
 
             if(attributes == null)
             {
-                if( this.actual_controller.Equals(controller) && this.actual_action.Equals("action"))
+                if(controller_actual.Equals(controller) && action_actual.Equals(action))
                 {
                     item.HtmlAttributes = new { @class = "current" };
                 }

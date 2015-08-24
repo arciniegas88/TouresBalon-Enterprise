@@ -11,10 +11,11 @@ namespace B2C.Facades
     {
 
         private static SecurityFacade instance = null;
+        private SecurityService securityService;
 
         private SecurityFacade()
         {
-
+            this.securityService = new SecurityService();
         }
 
         public static SecurityFacade Instance
@@ -31,10 +32,9 @@ namespace B2C.Facades
 
 
 
-        public User getLoginUser(string username, string password)
+        public Customer getLoginUser(Customer customer)
         {
-            SecurityService service = new SecurityService();
-            return service.loginUser(username, password);
+            return this.securityService.loginUser(customer);
         }
     }
 }

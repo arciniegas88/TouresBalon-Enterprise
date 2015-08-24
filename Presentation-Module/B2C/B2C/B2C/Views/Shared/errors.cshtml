@@ -1,0 +1,8 @@
+﻿<div class="errors">
+    @{
+        foreach (String error in @Page.errors as List<String>)
+        {
+            <p class="error">@error</p>
+        }
+    }
+</div>

@@ -162,24 +162,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agents\OrderService.cs" />
-    <Compile Include="Agents\SecurityService.cs" />
+    <Compile Include="AgentsService\CustomerAgentsService.cs" />
+    <Compile Include="AgentsService\OrderAgentsService.cs" />
+    <Compile Include="AgentsService\SecurityAgentsService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AutenticarController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Contracts\DataContractLogin.cs" />
     <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Facades\CustomerFacade.cs" />
     <Compile Include="Facades\OrderFacade.cs" />
     <Compile Include="Facades\SecurityFacade.cs" />
     <Compile Include="Forms\RegisterForm.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\HandlerRequest.cs" />
     <Compile Include="Handlers\HandlerSession.cs" />
     <Compile Include="Forms\LoginForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -231,12 +236,14 @@
     <Content Include="Views\Shared\header.cshtml" />
     <Content Include="Views\Layout\Simple.cshtml" />
     <Content Include="Views\Shared\features.cshtml" />
-    <Content Include="Views\Autenticacion\LoginForm.cshtml" />
+    <Content Include="Views\Security\LoginForm.cshtml" />
     <Content Include="Views\Home\Quienes.cshtml" />
     <Content Include="Views\Layout\Interna.cshtml" />
-    <Content Include="Views\Producto\Detalle.cshtml" />
-    <Content Include="Views\Producto\Index.cshtml" />
-    <Content Include="Views\Producto\ProductoSmall.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\ProductSmall.cshtml" />
+    <Content Include="Views\Shared\errors.cshtml" />
+    <Content Include="Views\Customer\RegisterForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

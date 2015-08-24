@@ -11,7 +11,7 @@ using B2C.Handlers;
 
 namespace B2C.Controllers
 {
-    public class AutenticarController : Controller
+    public class SecurityController : BaseController
     {
         
         [HttpPost]
@@ -21,17 +21,19 @@ namespace B2C.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(form);
+                TempData.Add("errors", this.getErrorsModel());
+                TempData.Add("loginForm", form);
+                return RedirectToLocal(returnUrl);
             }
             else
             {
-                User user = SecurityFacade.Instance.getLoginUser(form.Email, form.Password);
-                if( user != null && user.UserID != 0)
+                Customer customer = new Customer(form); 
+                customer = SecurityFacade.Instance.getLoginUser(customer);
+                if(customer != null && customer.UserID != 0)
                 {
-                    HandlerSession.setUser(user);
+                    HandlerSession.setUser(customer);
                 }
             }
-
             return RedirectToLocal(returnUrl);
 
             //return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
