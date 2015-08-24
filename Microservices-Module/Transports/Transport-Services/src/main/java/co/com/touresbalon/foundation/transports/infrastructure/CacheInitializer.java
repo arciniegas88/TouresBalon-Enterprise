@@ -72,7 +72,7 @@ public class CacheInitializer {
                 .setStatisticsEnabled(false);
 
         Cache<String,Object> cache = cm.createCache("bolivariano-cache", config);
-        BolivarianoCSVFilesMonitor bolivarianoMonitor = new BolivarianoCSVFilesMonitor(cache,logger);
+        BolivarianoCSVFilesMonitor bolivarianoMonitor = new BolivarianoCSVFilesMonitor(cm,logger);
         File folder = new File( System.getProperty("touresbalon.transports.bolivariano.shared_directory") );
 
         try{

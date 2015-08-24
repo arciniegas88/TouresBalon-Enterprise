@@ -7,6 +7,7 @@ import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.slf4j.Logger;
 
 import javax.cache.Cache;
+import javax.cache.CacheManager;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +18,11 @@ import java.util.List;
 
 public class BolivarianoCSVFilesMonitor extends FileAlterationListenerAdaptor {
 
-    private Cache<String,Object> cache;
+    private CacheManager cm;
     private Logger loggger;
 
-    public BolivarianoCSVFilesMonitor(Cache<String, Object> cache, Logger loggger) {
-        this.cache = cache;
+    public BolivarianoCSVFilesMonitor(CacheManager cm, Logger loggger) {
+        this.cm = cm;
         this.loggger = loggger;
     }
 
@@ -37,6 +38,7 @@ public class BolivarianoCSVFilesMonitor extends FileAlterationListenerAdaptor {
 
     public void loadCSVToCache( File csvFile ) throws IOException{
 
+        Cache<String, Object> cache = cm.getCache("bolivariano-cache",String.class,Object.class);
         loggger.info("csv monitor: loading file -> " + csvFile.getName());
 
         if (csvFile.exists()) {

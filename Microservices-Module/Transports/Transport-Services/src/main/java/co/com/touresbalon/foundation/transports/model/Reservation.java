@@ -1,5 +1,7 @@
 package co.com.touresbalon.foundation.transports.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 
 /**
@@ -55,6 +57,11 @@ public class Reservation implements Serializable{
 
     public void setOutTime(String outTime) {
         this.outTime = outTime;
+    }
+
+    public boolean isEqualsTo( String sourceCity, String targetCity , String outTime){
+        return StringUtils.equals(this.sourceCity,sourceCity) && StringUtils.equals(this.targetCity,targetCity) &&
+               StringUtils.equals(this.outTime,outTime);
     }
 
     @Override
