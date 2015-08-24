@@ -7,11 +7,13 @@
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Clients/Clients.iml" filepath="$PROJECT_DIR$/Microservices-Module/Clients/Clients.iml" />
       <module fileurl="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting.iml" filepath="$PROJECT_DIR$/Cross-Cutting/Cross-Cutting.iml" />
       <module fileurl="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/Cross-Cutting-Artifacts.iml" filepath="$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/Cross-Cutting-Artifacts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services/Customer-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services/Customer-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/EIS-Module.iml" filepath="$PROJECT_DIR$/EIS-Module/EIS-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/ESB-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/ESB-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" filepath="$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/Middleware-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/Middleware-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS.iml" filepath="$PROJECT_DIR$/Presentation-Module/OMS/OMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services/Order-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services/Order-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Orders/Order-Services/Order-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Orders/Order-Services/Order-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Orders/Orders.iml" filepath="$PROJECT_DIR$/Microservices-Module/Orders/Orders.iml" />
       <module fileurl="file://$PROJECT_DIR$/Presentation-Module/Presentation-Module.iml" filepath="$PROJECT_DIR$/Presentation-Module/Presentation-Module.iml" />
