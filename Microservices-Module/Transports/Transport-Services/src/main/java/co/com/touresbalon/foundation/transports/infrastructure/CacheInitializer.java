@@ -55,14 +55,28 @@ public class CacheInitializer {
     public void init() {
 
         logger.info("--------------[ intializing cache stores ]-------------------");
-        initializeBolivarianoCSVCache();
+        initializeCSVCache();
     }
 
 
 
     // [ bolivariano csv cache service ] --------------------------------------
 
-    private void initializeBolivarianoCSVCache() {
+    private void initializeCSVCache() {
+
+        String[] caches = { "bolivariano-cache", "aa-cache", "avianca-cache"};
+        String[] paths  = { System.getProperty("touresbalon.transports.bolivariano.shared_directory"),
+                            System.getProperty("touresbalon.transports.aa.shared_directory"),
+                            System.getProperty("touresbalon.transports.avianca.shared_directory")};
+
+        for( int i=0;i<3;++i )
+        {
+            initializeCache(caches[i]);
+            installFileListener( paths[i], caches[i] );
+        }
+    }
+
+    private void initializeCache( String cacheName ){
 
         MutableConfiguration<String, Object> config = new MutableConfiguration<>();
 
@@ -71,15 +85,20 @@ public class CacheInitializer {
                 .setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(Duration.ETERNAL))
                 .setStatisticsEnabled(false);
 
-        Cache<String,Object> cache = cm.createCache("bolivariano-cache", config);
-        BolivarianoCSVFilesMonitor bolivarianoMonitor = new BolivarianoCSVFilesMonitor(cm,logger);
-        File folder = new File( System.getProperty("touresbalon.transports.bolivariano.shared_directory") );
+        cm.createCache(cacheName, config);
+    }
+
+    private void installFileListener( String directory, String cacheName ){
+
+        directory = directory + "/reserves";
+        CSVFilesMonitor listener = new CSVFilesMonitor(cm,logger, cacheName);
+        File folder = new File( directory );
 
         try{
 
             for( File f : folder.listFiles()){
                 logger.info("prepare file loading: " + f.getName());
-                bolivarianoMonitor.loadCSVToCache( f );
+                listener.loadCSVToCache( f );
             }
 
         }catch (IOException io) {
@@ -88,10 +107,9 @@ public class CacheInitializer {
 
         try{
 
-            String directoryPath = System.getProperty("touresbalon.transports.bolivariano.shared_directory");
-            FileAlterationObserver observer = new FileAlterationObserver(directoryPath);
+            FileAlterationObserver observer = new FileAlterationObserver(directory);
             FileAlterationMonitor monitor = new FileAlterationMonitor(10000);
-            observer.addListener(bolivarianoMonitor);
+            observer.addListener(listener);
             monitor.addObserver(observer);
             monitor.start();
 
@@ -100,9 +118,8 @@ public class CacheInitializer {
         }catch (Exception io) {
             logger.error("CacheInitializer - an internal server error has ocurred: " + io.getMessage());
         }
+
     }
-
-
 
     // [ clean-up service ] --------------------------------------
 
@@ -111,7 +128,6 @@ public class CacheInitializer {
 
         logger.info("--------------[ destroying cache stores ]-------------------");
         instance.shutdown();
-
     }
 
 }

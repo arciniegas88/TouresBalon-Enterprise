@@ -1,12 +1,13 @@
 package co.com.touresbalon.foundation.transports.boundary;
 
 import co.com.touresbalon.foundation.crosscutting.annotations.cache.CacheStore;
-import co.com.touresbalon.foundation.transports.model.Reservation;
-import co.com.touresbalon.foundation.transports.model.ReservationRequestMessage;
-import co.com.touresbalon.foundation.transports.model.ReservationResponseMessage;
+import co.com.touresbalon.foundation.transports.model.*;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +34,15 @@ public class TransportBoundary {
 
     @Inject
     @CacheStore("bolivariano-cache")
-    private Cache<String,Object> cache;
+    private Cache<String,Object> cacheBolivariano;
+
+    @Inject
+    @CacheStore("aa-cache")
+    private Cache<String,Object> cacheAa;
+
+    @Inject
+    @CacheStore("avianca-cache")
+    private Cache<String,Object> cacheAvianca;
 
     //[constructor] --------------------------
 
@@ -41,11 +50,72 @@ public class TransportBoundary {
     {}
 
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public void confirmTravel( Long orderId, TravelProvider provider , List<TravelConfirmation> request ){
+
+        String folder = null;
+
+        switch ( provider ) {
+
+            case AVIANCA: {
+                folder = System.getProperty("touresbalon.transports.avianca.shared_directory");
+                break;
+            }
+            case AMERICAN_AIRLINES: {
+                folder = System.getProperty("touresbalon.transports.aa.shared_directory");
+                break;
+            }
+            case BOLIVARIANO: {
+                folder = System.getProperty("touresbalon.transports.bolivariano.shared_directory");
+                break;
+            }
+            default:{
+                logger.error("Invalid provider spicified");
+                return;
+            }
+        }
+
+        try{
+
+            File outFile = FileUtils.getFile(folder + "/confirmations/touresbalon_orden_"+orderId+".csv");
+            for ( TravelConfirmation c : request ){
+                FileUtils.write(outFile, c.toString(), true);
+            }
+
+        }catch (IOException io) {
+            logger.error("An internal server error has ocurred: " + io.getMessage(),io);
+        }
+    }
+
+
     //[service] --------------------------
 
     @Lock(LockType.WRITE)
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public ReservationResponseMessage generateBolivarianoReservation( ReservationRequestMessage request ) {
+        return generateReservation( cacheBolivariano,request );
+    }
+
+
+    //[service] --------------------------
+
+    @Lock(LockType.WRITE)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public ReservationResponseMessage generateAAReservation( ReservationRequestMessage request ) {
+        return generateReservation( cacheAa,request );
+    }
+
+
+    //[service] --------------------------
+
+    @Lock(LockType.WRITE)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public ReservationResponseMessage generateAviancaReservation( ReservationRequestMessage request ) {
+        return generateReservation( cacheAvianca,request );
+    }
+
+
+    public ReservationResponseMessage generateReservation(  Cache<String,Object> cache, ReservationRequestMessage request ) {
 
         ReservationResponseMessage response = new ReservationResponseMessage();
         response.setAvailable(false);
@@ -54,6 +124,7 @@ public class TransportBoundary {
         Iterator<Entry<String,Object>> iterator = cache.iterator();
 
         while( iterator.hasNext() ){
+
             Entry<String,Object> entry = iterator.next();
 
             if( StringUtils.equals( entry.getKey(), df.format( request.getDate() ) )){
@@ -82,16 +153,4 @@ public class TransportBoundary {
         return response;
     }
 
-
-    //[service] --------------------------
-
-    @Lock(LockType.WRITE)
-    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public ReservationResponseMessage generateAviancaReservation( ReservationRequestMessage request ) {
-
-        ReservationResponseMessage response = new ReservationResponseMessage();
-        response.setAvailable(false);
-
-        return response;
-    }
 }
