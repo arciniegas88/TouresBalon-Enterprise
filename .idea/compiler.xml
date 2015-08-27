@@ -76,6 +76,7 @@
       <module name="Cross-Cutting" target="1.5" />
       <module name="Cross-Cutting-Artifacts" target="1.5" />
       <module name="Customer-Proxy-Services" target="1.7" />
+      <module name="Customers" target="1.5" />
       <module name="EIS-Module" target="1.5" />
       <module name="ESB-Module" target="1.5" />
       <module name="Microservices-Module" target="1.5" />
