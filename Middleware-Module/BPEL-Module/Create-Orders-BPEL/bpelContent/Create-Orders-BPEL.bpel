@@ -46,7 +46,7 @@
     <!-- Set of activities coordinating the flow of messages across the    -->
     <!-- services integrated within this business process                  -->
     <!-- ================================================================= -->         
-    <bpel:sequence name="main">
+    <bpel:sequence name="MAIN">
         
         <!-- Receive input from requestor. 
              Note: This maps to operation defined in Create-Orders-BPEL.wsdl 
@@ -57,9 +57,39 @@
                  operation="process" variable="input"
                  createInstance="yes"/>
                  
-        <bpel:empty name="FIX_ME-Add_Business_Logic_Here"></bpel:empty>
+        
+        
+        <bpel:sequence name="VALIDATION_STAGE">
+            <bpel:flow name="Flow">
+            <bpel:sequence name="VALIDATE_TRANSPORT"><bpel:empty name="validate_trasnport_services"></bpel:empty>
+            
+            </bpel:sequence>
+            <bpel:sequence name="VALIDATE_LODGING">
+                <bpel:empty name="validate_lodging_services"></bpel:empty>
+            </bpel:sequence>
+            <bpel:sequence name="VALIDATE_SPECTACLE"><bpel:empty name="validate_spectacle_services"></bpel:empty>
+            
+        </bpel:sequence>
+        <bpel:sequence name="VALIDATE_CREDIT_CARD">
+                    <bpel:empty name="validate_creditcard_services"></bpel:empty>
+                </bpel:sequence><bpel:sequence name="VALIDATE_CUSTOMER">
+                    <bpel:empty name="validate_rules_service"></bpel:empty>
+                </bpel:sequence></bpel:flow>
+        </bpel:sequence>
+        
+        
+        
+        
+        
        
         
+        <bpel:sequence name="ALLOCATION_STAGE">
+            
+            
+            <bpel:flow name="Flow1"><bpel:sequence name="Sequence3">
+                    <bpel:empty name="Empty3"></bpel:empty>
+                </bpel:sequence></bpel:flow>
+        </bpel:sequence>
     </bpel:sequence>
 </bpel:process>
 

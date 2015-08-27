@@ -22,6 +22,30 @@
 
             <import namespace="http://touresbalon.com.co/model/canonical/1.0.0" 
             		schemaLocation="canonical_schema.xsd"/>
+            		
+            <element name="validationResponse">
+            	<complexType>
+            		<sequence>
+            			<element name="transportAvailable" type="boolean"/>
+            			<element name="logingAvailable" type="boolean"/>
+            			<element name="spectacleAvailable" type="boolean"/>
+            			<element name="creditCardIsValid" type="boolean"/>
+            			<element name="manualApprovaRequired" type="boolean"/>
+            		</sequence>
+            	</complexType>
+            </element>	
+            
+            <element name="reservationResponse">
+            	<complexType>
+            		<sequence>
+            			<element name="transportAvailable" type="boolean"/>
+            			<element name="logingAvailable" type="boolean"/>
+            			<element name="spectacleAvailable" type="boolean"/>
+            			<element name="creditCardIsValid" type="boolean"/>
+            			<element name="manualApprovaRequired" type="boolean"/>
+            		</sequence>
+            	</complexType>
+            </element>		
 
         </schema>
     </types>
