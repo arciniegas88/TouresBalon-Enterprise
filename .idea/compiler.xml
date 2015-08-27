@@ -18,22 +18,22 @@
         <processorPath useClasspath="true" />
       </profile>
       <profile default="false" name="Annotation profile for Order-Services" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Order-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Product-Services" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Product-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Product-Proxy-Services" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Product-Proxy-Services" />
@@ -43,25 +43,26 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="Create-Orders-BPEL" />
         <module name="Cross-Cutting-Artifacts" />
       </profile>
       <profile default="false" name="Annotation profile for Transport-Services" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Transport-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Order-Proxy-Services" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Order-Proxy-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Customer-Proxy-Services" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Customer-Proxy-Services" />
@@ -71,6 +72,7 @@
       <module name="B2C" target="1.5" />
       <module name="BPEL-Module" target="1.5" />
       <module name="Clients" target="1.5" />
+      <module name="Create-Orders-BPEL" target="1.5" />
       <module name="Cross-Cutting" target="1.5" />
       <module name="Cross-Cutting-Artifacts" target="1.5" />
       <module name="Customer-Proxy-Services" target="1.7" />
