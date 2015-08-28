@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.expiry.AccessedExpiryPolicy;

@@ -1,6 +1,9 @@
 package co.com.touresbalon.foundation.products.boundary;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+
+import co.com.touresbalon.foundation.crosscutting.exceptions.ExceptionBuilder;
+import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import org.slf4j.Logger;
 
 import co.com.touresbalon.foundation.products.entity.Product;
@@ -10,6 +13,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
@@ -27,6 +31,9 @@ public class ProductBoundary {
     @Inject
     private Logger logger;
 
+    @Inject
+    private ExceptionBuilder exceptionBuilder;
+
     @PersistenceContext
     private EntityManager em;
 
@@ -36,80 +43,74 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public Product getProductDetail(Long id) {
-        return em.find( Product.class,id);
+    public Product getProductDetail(Long id) throws SystemException {
+
+        try {
+
+            return em.createNamedQuery("Product.findById", Product.class)
+                    .setParameter("ID",id)
+                    .getSingleResult();
+
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
     }
 
 
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Product> searchProducts( String code, String name, String descripttion,int pageIndex,int pageSize){
+    public List<Product> searchProducts(String code, String name, String descripttion, int pageIndex, int pageSize) throws SystemException {
 
-        logger.info("--------------------------> search products: " );
+        try {
 
-        if( isEmpty( code ) && isEmpty( name ) && isEmpty( descripttion )) {
-            return em.createNamedQuery("Product.findAll", Product.class)
-                    .setMaxResults(pageSize)
-                    .setFirstResult(pageIndex)
-                    .getResultList();
-        }else{
-            return em.createNamedQuery("Product.findAllByCriteria", Product.class)
-                    .setParameter("CODE", code)
-                    .setParameter("NAME", "%" + name + "%")
-                    .setParameter("DESCRIPTION", "%" + descripttion + "%")
-                    .setMaxResults(pageSize)
-                    .setFirstResult(pageIndex)
-                    .getResultList();
+            if (isEmpty(code) && isEmpty(name) && isEmpty(descripttion)) {
+                return em.createNamedQuery("Product.findAll", Product.class)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            } else {
+                return em.createNamedQuery("Product.findAllByCriteria", Product.class)
+                        .setParameter("CODE", code)
+                        .setParameter("NAME", "%" + name + "%")
+                        .setParameter("DESCRIPTION", "%" + descripttion + "%")
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            }
+
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
         }
     }
-
-    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public int countProducts( String code, String name, String descripttion,int pageSize){
-
-        if( isEmpty( code ) && isEmpty( name ) && isEmpty( descripttion )) {
-           return em.createNamedQuery("Product.findAllCount", Long.class)
-                    .setMaxResults(pageSize)
-                    .getSingleResult().intValue();
-        }else{
-           return em.createNamedQuery("Product.findAllByCriteriaCount",  Long.class)
-                    .setParameter("CODE", code)
-                    .setParameter("NAME", "%" + name + "%")
-                    .setParameter("DESCRIPTION", "%" + descripttion + "%")
-                    .setMaxResults(pageSize)
-                    .getSingleResult().intValue();
-        }
-    }
-
-
 
 
     // [method] -----------------------------
 
-    @Deprecated
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Product> searchProductsOld(String code, String name, String descritption) {
+    public int countProducts(String code, String name, String descripttion, int pageSize) throws SystemException {
 
-        logger.info("--------------------------> inicio de la consulta: " );
+        try{
 
-        StringBuilder jpql = new StringBuilder();
+            if (isEmpty(code) && isEmpty(name) && isEmpty(descripttion)) {
+                return em.createNamedQuery("Product.findAllCount", Long.class)
+                        .setMaxResults(pageSize)
+                        .getSingleResult().intValue();
+            } else {
+                return em.createNamedQuery("Product.findAllByCriteriaCount", Long.class)
+                        .setParameter("CODE", code)
+                        .setParameter("NAME", "%" + name + "%")
+                        .setParameter("DESCRIPTION", "%" + descripttion + "%")
+                        .setMaxResults(pageSize)
+                        .getSingleResult().intValue();
+            }
 
-        jpql.append("SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description, p.code, p.spectacleDate, p.arrivalDate, p.departureDate) ")
-                .append("FROM Product p WHERE 1=1 ")
-                .append(code != null ? "AND p.code = :CODE " : "")
-                .append(name != null ? "AND LOWER(p.name) LIKE TRIM(LOWER(:NAME)) " : "")
-                .append(descritption != null ? "AND LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION)) " : "");
-
-        Query query = em.createQuery(jpql.toString(), Product.class);
-
-        if (!isEmpty(code)) query.setParameter("CODE", code);
-
-        if (!isEmpty(descritption))
-            query.setParameter("DESCRIPTION", "%" + descritption + "%");
-
-        if (!isEmpty(name)) query.setParameter("NAME","%" + name + "%");
-
-        return query.getResultList();
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
     }
 
 }
