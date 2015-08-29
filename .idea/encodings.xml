@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/src/main/java/co/com/touresbalon/foundation/crosscutting/exceptions/BusinessExceptionHttpStatusResolver.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/src/main/java/co/com/touresbalon/foundation/crosscutting/exceptions/SystemExceptionHttpStatusResolver.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/src/main/resources/META-INF/beans.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Orders/Order-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services/src/main/java/co/com/touresbalon/foundation/products/boundary/CampaignBoundary.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services/src/main/resources/logback.xml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/bpelContent/canonical_schema.xsd" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services" charset="UTF-8" />

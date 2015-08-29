@@ -1,9 +1,13 @@
 package co.com.touresbalon.foundation.products.rest;
 
+import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
+import co.com.touresbalon.foundation.crosscutting.util.RESTUtil;
 import co.com.touresbalon.foundation.products.boundary.ProductBoundary;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -17,6 +21,10 @@ import co.com.touresbalon.foundation.products.entity.Product;
 public class ProductResource {
 
     // [attributes] -------------------------------
+
+    @Context
+    private HttpHeaders headers;
+
     @Inject
     private ProductBoundary boundary;
 
@@ -28,7 +36,8 @@ public class ProductResource {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Product searchProduct( @PathParam("id") Long id ) {
+    public Product searchProduct( @PathParam("id") Long id ) throws SystemException {
+
         return boundary.getProductDetail(id);
     }
 
@@ -41,7 +50,8 @@ public class ProductResource {
                                          @QueryParam("name") String name,
                                          @QueryParam("description") String description,
                                          @QueryParam("pageIndex") int pageIndex,
-                                         @QueryParam("pageSize") int pageSize) {
+                                         @QueryParam("pageSize") int pageSize)throws SystemException  {
+
         return boundary.searchProducts(code, name, description,pageIndex,pageSize);
     }
 
@@ -51,13 +61,15 @@ public class ProductResource {
 
     @GET
     @Path("/count")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response getTotalPagesByProductSearch( @QueryParam("code") String code,
                                          @QueryParam("name") String name,
                                          @QueryParam("description") String description,
-                                         @QueryParam("pageSize") int pageSize) {
+                                         @QueryParam("pageSize") int pageSize) throws SystemException {
+
         int totalPages = boundary.countProducts(code, name, description, pageSize);
-        return Response.status(200).entity("{total: "+ totalPages +"}").build();
+        String content = RESTUtil.getNegotiatedContent(headers,totalPages,"total");
+        return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
     }
 
 

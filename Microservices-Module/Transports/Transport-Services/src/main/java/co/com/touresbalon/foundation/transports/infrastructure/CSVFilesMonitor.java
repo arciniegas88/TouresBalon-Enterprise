@@ -16,14 +16,16 @@ import java.util.List;
  * Created by garciniegas on 22/08/2015.
  */
 
-public class BolivarianoCSVFilesMonitor extends FileAlterationListenerAdaptor {
+public class CSVFilesMonitor extends FileAlterationListenerAdaptor {
 
     private CacheManager cm;
     private Logger loggger;
+    private String cacheName;
 
-    public BolivarianoCSVFilesMonitor(CacheManager cm, Logger loggger) {
+    public CSVFilesMonitor(CacheManager cm, Logger loggger, String cacheName) {
         this.cm = cm;
         this.loggger = loggger;
+        this.cacheName = cacheName;
     }
 
     @Override
@@ -38,10 +40,10 @@ public class BolivarianoCSVFilesMonitor extends FileAlterationListenerAdaptor {
 
     public void loadCSVToCache( File csvFile ) throws IOException{
 
-        Cache<String, Object> cache = cm.getCache("bolivariano-cache",String.class,Object.class);
-        loggger.info("csv monitor: loading file -> " + csvFile.getName());
+        Cache<String, Object> cache = cm.getCache(cacheName,String.class,Object.class);
+            loggger.info("csv monitor: loading file -> " + csvFile.getName());
 
-        if (csvFile.exists()) {
+            if (csvFile.exists()) {
 
             String key = csvFile.getName().replace("viajes_","").replace(".csv","");
 
@@ -67,7 +69,7 @@ public class BolivarianoCSVFilesMonitor extends FileAlterationListenerAdaptor {
 
             loggger.info("csv monitor: file loaded ok -> " + csvFile.getName());
             cache.put(key,reservations);
-        }
+            }
 
     }
 

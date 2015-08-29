@@ -1,7 +1,8 @@
-package co.com.touresbalon.foundation.crosscutting.factory;
+package co.com.touresbalon.foundation.crosscutting.service.factory;
 
 import co.com.touresbalon.foundation.crosscutting.annotations.cache.CacheStore;
 import co.com.touresbalon.foundation.crosscutting.annotations.cache.HazelcastService;
+import co.com.touresbalon.foundation.crosscutting.exceptions.ExceptionBuilder;
 import com.hazelcast.cache.impl.HazelcastServerCachingProvider;
 import co.com.touresbalon.foundation.crosscutting.annotations.cache.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
@@ -20,9 +21,19 @@ import javax.inject.Singleton;
  */
 
 @ApplicationScoped
-public class ResourceFactory {
+public class ServiceFactory {
 
-    public ResourceFactory() {
+    public ServiceFactory() {
+    }
+
+
+    // [exception-builder service] -------------------------------------------
+
+    @Produces
+    @Singleton
+    public ExceptionBuilder createExceptionBuilder(){
+        ExceptionBuilder builder = new ExceptionBuilder( LoggerFactory.getLogger("co.com.touresbalon.foundation.logservice") );
+        return builder;
     }
 
     // [log service] -------------------------------------------

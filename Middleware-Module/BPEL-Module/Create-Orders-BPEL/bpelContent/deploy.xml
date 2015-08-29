@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03"
+        xmlns:bpel="http://touresbalon.com.co/orders/service/task/1.0.0">
+    <process name="bpel:Create-Orders-BPEL">
+        <active>true</active>
+        <retired>false</retired>
+        <process-events generate="all"/>
+        <provide partnerLink="client">
+            <service name="bpel:Create-Orders-BPEL" port="Create-Orders-BPELPort"/>
+        </provide>
+    </process>
+</deploy>

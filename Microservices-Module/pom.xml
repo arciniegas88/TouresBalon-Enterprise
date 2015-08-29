@@ -14,7 +14,7 @@
     <modules>
         <module>Products</module>
         <module>Orders</module>
-        <module>Clients</module>
+        <module>Customers</module>
 		<module>Transports</module>
     </modules>
 

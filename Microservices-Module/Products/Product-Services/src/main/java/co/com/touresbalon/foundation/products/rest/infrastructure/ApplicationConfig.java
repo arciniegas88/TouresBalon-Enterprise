@@ -1,4 +1,7 @@
-package co.com.touresbalon.foundation.products.rest;
+package co.com.touresbalon.foundation.products.rest.infrastructure;
+
+import co.com.touresbalon.foundation.products.rest.CampaignResource;
+import co.com.touresbalon.foundation.products.rest.ProductResource;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
