@@ -6,11 +6,10 @@
 package co.com.touresbalon.foundation.creditcard.dto;
 
 /**
- *
  * @author nrodriguez
  */
 public class Card {
-    
+
     private String numberCard;
     private String expirationDate;
     private String franquicia;
@@ -56,5 +55,20 @@ public class Card {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(getNumberCard());
+        sb.append(",");
+        sb.append(getName());
+        sb.append(",");
+        sb.append(getExpirationDate());
+        sb.append(",");
+        sb.append(getCcv());
+        sb.append(",");
+        sb.append(getFranquicia());
+
+        return sb.toString();
+    }
 }

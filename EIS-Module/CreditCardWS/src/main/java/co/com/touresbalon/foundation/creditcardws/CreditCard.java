@@ -10,6 +10,7 @@ import co.com.touresbalon.foundation.creditcard.bussines.SearchCreditCardBundary
 import co.com.touresbalon.foundation.creditcard.dto.Card;
 import co.com.touresbalon.foundation.creditcard.dto.Person;
 import java.io.IOException;
+import javax.jws.Oneway;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -18,7 +19,8 @@ import javax.jws.WebParam;
  *
  * @author nrodriguez
  */
-@WebService()
+
+@WebService(targetNamespace = "http://redeban.com/creditcards/ws")
 public class CreditCard {
     
     private final SearchCreditCardBundary searchCreditCardBundary = new SearchCreditCardBundary();
@@ -29,10 +31,11 @@ public class CreditCard {
     public boolean validateCreditCard(@WebParam(name = "person") Person person ){
         return searchCreditCardBundary.searchCreditCardBundary(person);
     }
-    
-    @WebMethod(operationName = "registryCreditCard",action = "registryCreditCard")
-    public boolean registryCreditCard(@WebParam(name = "card") Card card ) throws IOException{
-        return registryCreditCardBundary.addTarjetaCredito(card);
+
+    @Oneway
+    @WebMethod(operationName = "executeTransaction",action = "executeTransaction")
+    public void executeTransaction(@WebParam(name = "card") Card card ){
+        registryCreditCardBundary.executeTransaction(card);
     }
     
 }
