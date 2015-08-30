@@ -75,6 +75,8 @@
 			<xs:sequence>
                 <xs:element name="order" type="tns:SalesOrder"/>
                 <xs:element name="creditCardNumber" type="xs:string"/>
+                <xs:element name="sourceCity" type="xs:string"/>
+                <xs:element name="targetCity" type="xs:string"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

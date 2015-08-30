@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +39,13 @@ public class Transport implements Serializable {
     @Column(name = "cost")
     private Long cost;
 
+    @Column(name = "travel_date")
+    @Temporal(TemporalType.DATE)
+    private Date travelDate;
+
+    @Column(name = "travel_out_time")
+    private String travelOutTime;
+
     public Transport() {
     }
 
@@ -51,6 +59,22 @@ public class Transport implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Date getTravelDate() {
+        return travelDate;
+    }
+
+    public void setTravelDate(Date travelDate) {
+        this.travelDate = travelDate;
+    }
+
+    public String getTravelOutTime() {
+        return travelOutTime;
+    }
+
+    public void setTravelOutTime(String travelOutTime) {
+        this.travelOutTime = travelOutTime;
     }
 
     public String getName() {
