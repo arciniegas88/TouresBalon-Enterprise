@@ -5,7 +5,7 @@
  */
 package co.com.touresbalon.foundation.creditcard.bussines;
 
-import co.com.touresbalon.foundation.creditcard.dto.Card;
+import co.com.touresbalon.foundation.creditcard.dto.Transaction;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -38,7 +38,7 @@ public class RegistryCreditCardBundary implements Serializable {
 
     @Lock(LockType.WRITE)
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public void executeTransaction(Card card) {
+    public void executeTransaction(Transaction card) {
 
         try {
 
