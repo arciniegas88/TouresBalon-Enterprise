@@ -83,9 +83,13 @@ public class Product implements Serializable {
     @ManyToOne
     private Lodging lodgingType;
 
-    @JoinColumn(name = "spectacle_city", referencedColumnName = "Id")
+    @JoinColumn(name = "source_city", referencedColumnName = "Id")
     @ManyToOne
-    private City spectacleCity;
+    private City sourceCity;
+
+    @JoinColumn(name = "target_city", referencedColumnName = "Id")
+    @ManyToOne
+    private City targetCity;
 
     @Lob
     @Column(name = "image_ref")
@@ -173,12 +177,20 @@ public class Product implements Serializable {
         this.lodgingType = lodgingType;
     }
 
-    public City getSpectacleCity() {
-        return spectacleCity;
+    public City getSourceCity() {
+        return sourceCity;
     }
 
-    public void setSpectacleCity(City spectacleCity) {
-        this.spectacleCity = spectacleCity;
+    public void setSourceCity(City sourceCity) {
+        this.sourceCity = sourceCity;
+    }
+
+    public City getTargetCity() {
+        return targetCity;
+    }
+
+    public void setTargetCity(City targetCity) {
+        this.targetCity = targetCity;
     }
 
     public String getCode() {

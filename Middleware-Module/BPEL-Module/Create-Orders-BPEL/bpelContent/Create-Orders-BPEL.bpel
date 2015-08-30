@@ -19,7 +19,7 @@
                  namespace="http://redeban.com/creditcards/ws"
                  importType="http://schemas.xmlsoap.org/wsdl/"/>
 
-	<bpel:import location="TransportWS.wsdl"
+    <bpel:import location="TransportWS.wsdl"
                  namespace="http://touresbalon.com.co/transport/service/task/1.0.0"
                  importType="http://schemas.xmlsoap.org/wsdl/"/>
 
@@ -59,6 +59,10 @@
                        messageType="credit:validateCreditCard"/>
         <bpel:variable name="validateCCOutput"
                        messageType="credit:validateCreditCardResponse"/>
+        <bpel:variable name="validateTransportInput"
+                       messageType="transport:generateReservation"/>
+        <bpel:variable name="validateTransportOutput"
+                       messageType="transport:generateReservationResponse"/>
     </bpel:variables>
 
     <!-- ================================================================= -->
@@ -92,7 +96,7 @@
 
                 </bpel:sequence>
                 <bpel:sequence name="VALIDATE_CREDIT_CARD">
-                    <bpel:empty name="validate_creditcard_services"></bpel:empty>
+
                     <bpel:assign validate="no" name="Assign-Input">
                         <bpel:copy>
                             <bpel:from>
