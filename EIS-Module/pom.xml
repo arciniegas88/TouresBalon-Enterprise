@@ -6,8 +6,13 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>co.com.touresbalon.foundation</groupId>
+    <groupId>co.com.touresbalon.foundation.eis</groupId>
     <artifactId>EIS-Module</artifactId>
     <packaging>pom</packaging>
     <name>EIS-Module</name>
+
+    <modules>
+        <module>CreditCardWS</module>
+    </modules>
+
 </project>

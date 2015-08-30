@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="CreditCardWS:war">
+    <output-path>$PROJECT_DIR$/EIS-Module/CreditCardWS/target</output-path>
+    <root id="archive" name="CreditCardWS-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="CreditCardWS:war exploded" />
+    </root>
+  </artifact>
+</component>

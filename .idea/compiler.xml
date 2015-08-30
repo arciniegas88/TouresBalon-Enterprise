@@ -74,12 +74,20 @@
         <processorPath useClasspath="true" />
         <module name="Lodging-Services" />
       </profile>
+      <profile default="false" name="Annotation profile for CreditCardWS" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="CreditCardWS" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
       <module name="BPEL-Module" target="1.5" />
       <module name="Clients" target="1.5" />
       <module name="Create-Orders-BPEL" target="1.5" />
+      <module name="CreditCardWS" target="1.7" />
       <module name="Cross-Cutting" target="1.5" />
       <module name="Cross-Cutting-Artifacts" target="1.5" />
       <module name="Customer-Proxy-Services" target="1.7" />

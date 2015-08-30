@@ -11,8 +11,17 @@ package co.com.touresbalon.foundation.creditcard.dto;
  */
 public class Person {
 
+    private String identificationType;
     private String numberIdentification;
     private String numberCreditCard;
+
+    public String getIdentificationType() {
+        return identificationType;
+    }
+
+    public void setIdentificationType(String identificationType) {
+        this.identificationType = identificationType;
+    }
 
     public String getNumberIdentification() {
         return numberIdentification;

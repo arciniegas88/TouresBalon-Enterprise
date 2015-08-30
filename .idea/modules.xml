@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Presentation-Module/B2C/B2C.iml" filepath="$PROJECT_DIR$/Presentation-Module/B2C/B2C.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/BPEL-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/BPEL-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/Create-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/Create-Orders-BPEL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EIS-Module/CreditCardWS/CreditCardWS.iml" filepath="$PROJECT_DIR$/EIS-Module/CreditCardWS/CreditCardWS.iml" />
       <module fileurl="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting.iml" filepath="$PROJECT_DIR$/Cross-Cutting/Cross-Cutting.iml" />
       <module fileurl="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/Cross-Cutting-Artifacts.iml" filepath="$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/Cross-Cutting-Artifacts.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services/Customer-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services/Customer-Proxy-Services.iml" />
