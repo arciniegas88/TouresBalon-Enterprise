@@ -24,11 +24,11 @@ import javax.xml.bind.annotation.XmlRootElement;
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findAll",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
-                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate) FROM Product p ",
+                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate ,p.imageRef) FROM Product p ",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findAllByCriteria",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
-                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate) FROM Product p WHERE " +
+                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate, p.imageRef) FROM Product p WHERE " +
                         "TRIM(p.code) = TRIM(:CODE) OR LOWER(p.name) LIKE TRIM(LOWER(:NAME)) OR " +
                         "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION))",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
@@ -94,7 +94,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, String code, Date spectacleDate, Date arrivalDate, Date departureDate) {
+    public Product(Long id, String name, String description, String code, Date spectacleDate, Date arrivalDate, Date departureDate , byte[] imageRef) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -102,6 +102,7 @@ public class Product implements Serializable {
         this.spectacleDate = spectacleDate;
         this.arrivalDate = arrivalDate;
         this.departureDate = departureDate;
+        this.imageRef = imageRef;
     }
 
     public Product(Long id) {
