@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Layout/interna.cshtml";
+    ViewBag.Title = "DetalleProducto";
+
+    var product = (ViewData["product"] as B2C.Entities.Product);
+
+    var products = (ViewData["products"] as List<B2C.Entities.Product>);
+
+
+
+}
+
+@section content
+{
+<div id="main-wrapper">
+    <div class="container">
+        <div class="row 200%">
+            <div class="4u 12u(medium)">
+
+                <!-- Sidebar -->
+                <div id="sidebar">
+                    <section class="widget thumbnails">
+                        <h3>@product.Name</h3>
+                        <div class="grid">
+                            <div class="row 50%">
+                                <img src='@product.Image' width='384' height='304' />
+                             </div>
+                        </div>
+
+                        <p>Fecha Espectaculo @product.SpectacleDate</p>
+                        <p>Fecha Vuelo @product.DepartureDate</p>
+                        <p>Fecha Aterrizaje @product.ArrivalDate</p>
+
+
+                        <p>@product.Transport.Name</p>
+                        <p>@product.Spectacle.Name</p>
+                        <p>@product.Lodging.Name</p>
+                        <a href="#" class="button icon fa-file-text-o">Ver Mas</a>
+                    </section>
+                </div>
+
+            </div>
+            <div class="8u 12u(medium) important(medium)">
+
+                <!-- Content -->
+                <div id="content">
+                    <section class="last">
+                        <h2>Descripcion del producto</h2>
+                        <p>
+                            @product.Description
+                        </p>
+                        <a href="#" class="button icon fa-arrow-circle-right">Agregar a carrito de compras</a>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--Container de top five-->
+        <div class="container">
+            <p class="subtitle">Productos relacionados</p>
+            <div class="row">
+                @foreach (var item in products)
+                {
+                    @RenderPage("~/Views/Product/ProductSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image })
+                }
+            </div>
+        </div>
+    </div>
+</div>
+}

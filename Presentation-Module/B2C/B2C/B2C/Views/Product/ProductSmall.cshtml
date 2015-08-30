@@ -1,0 +1,13 @@
+﻿<div class="product_small">
+    <div class="col-md-1">
+        <p class="subtitle">@Page.name</p>
+        <span>@Page.description</span>
+        <div class="img-responsive"><img src="@Page.image" /></div>
+        <div class="d_button">
+            @Html.ActionLink("Ver mas", "detail", "product", new { @id = Page.id }, new { @class = "button icon fa - file - text - o" })
+        </div>
+        <div class="d_button">
+            @Html.ActionLink("Comprar", "#", new { }, new { @class = "button icon fa - file - text - o", @id = "pro_" + Page.id })
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+co\com\touresbalon\foundation\crosscutting\util\RESTUtil.class
+co\com\touresbalon\foundation\crosscutting\exceptions\SystemException.class
+co\com\touresbalon\foundation\crosscutting\annotations\cache\HazelcastService.class
+co\com\touresbalon\foundation\crosscutting\exceptions\ExceptionBuilder.class
+co\com\touresbalon\foundation\crosscutting\exceptions\SystemExceptionHttpStatusResolver.class
+co\com\touresbalon\foundation\crosscutting\annotations\cache\CacheStore.class
+co\com\touresbalon\foundation\crosscutting\service\factory\ServiceFactory.class
+co\com\touresbalon\foundation\crosscutting\annotations\cache\Hazelcast.class
+co\com\touresbalon\foundation\crosscutting\exceptions\BusinessExceptionHttpStatusResolver.class
+co\com\touresbalon\foundation\crosscutting\exceptions\BusinessException.class
