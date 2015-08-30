@@ -13,7 +13,7 @@ import java.util.Date;
 @XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "Campaign.findAll",
-                query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign(c.name,c.imageRef, c.product.id)  FROM Campaign c",
+                query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign(c.id, c.name,c.imageRef, c.product.id)  FROM Campaign c",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
 public class Campaign implements Serializable {
@@ -43,7 +43,8 @@ public class Campaign implements Serializable {
     public Campaign() {
     }
 
-    public Campaign(String name, byte[] imageRef, Long productId) {
+    public Campaign(Long id ,String name, byte[] imageRef, Long productId) {
+        this.id = id;
         this.name = name;
         this.imageRef = imageRef;
         product = new Product();
