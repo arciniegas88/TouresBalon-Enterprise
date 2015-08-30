@@ -1,5 +1,10 @@
 ﻿@media screen and (max-width: 1280px) {
 
+    .image-product-small
+    {
+        height: 170px;
+    }
+
     body, input, select, textarea {
         font-size: 11pt;
     }
@@ -29,6 +34,7 @@
     .row > * {
         padding: 25px 0 0 25px;
     }
+
 
     .row {
         margin: -25px 0 -1px -25px;
@@ -236,4 +242,6 @@
     .\-1u\28large\29 {
         margin-left: 8.33333%;
     }
+
+ 
 }

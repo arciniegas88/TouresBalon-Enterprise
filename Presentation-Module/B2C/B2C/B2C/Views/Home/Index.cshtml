@@ -9,11 +9,11 @@
 {
     <div id="features-wrapper">
         <div class="container">
-            <div class="title">Campa&ntilde;as</div>
+            <div class="header">Campa&ntilde;as</div>
             <div class="row">
                 @foreach (var item in campaigns)
                 {
-                    @RenderPage("~/Views/Product/Campaign.cshtml", new { @name = item.Name, @image = item.Image_ref, @id = 1 })
+                    @RenderPage("~/Views/Product/Campaign.cshtml", new { @name = item.Name, @image = item.Image_ref, @id = item.Id })
                 }
             </div>
         </div>

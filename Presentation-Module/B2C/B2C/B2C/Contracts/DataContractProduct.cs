@@ -8,6 +8,23 @@ using B2C.Entities;
 
 namespace B2C.Contracts
 {
+
+    public class DataContractOrder
+    {
+        [JsonProperty("id")]
+        public int id { get; set; }
+
+        [JsonProperty("price")]
+        public double price { get; set; }
+
+        [JsonProperty("status")]
+        public int status { get; set; }
+
+        [JsonProperty("comments")]
+        public string comments { get; set; }
+
+    }
+
     public class DataContractProduct
     {
         [JsonProperty("id")]
@@ -47,6 +64,12 @@ namespace B2C.Contracts
         [JsonProperty("lodgingType", NullValueHandling = NullValueHandling.Ignore)]
         public DataContractType lodgingType { get; set; }
 
+    }
+
+    public class DataContractCount
+    {
+        [JsonProperty("total")]
+        public int total { get; set; }
     }
 
     public class DataContractType

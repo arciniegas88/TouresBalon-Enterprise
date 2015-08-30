@@ -6,6 +6,7 @@ using B2C.Entities;
 using B2C.Handlers;
 using Newtonsoft.Json;
 using B2C.Contracts;
+using System.Text;
 
 namespace B2C.Agents
 {
@@ -33,22 +34,27 @@ namespace B2C.Agents
             }
         }
 
-        public List<DataContractProduct> getProducts()
+        public List<DataContractProduct> getProducts(string search, string search_by, int page, int byPage)
         {
             //SERVICE URI
-            String url = "http://localhost:9494/esb/services/web-api/products/";
-            /*
-            PARA CONTEO
-@QueryParam("code") String code,
-@QueryParam("name") String name,
-@QueryParam("description") String description,
-@QueryParam("pageSize") int pageSize
-pageIndex solo para productos. 
-*/
+            StringBuilder builder = new StringBuilder();
+            builder.Append("http://localhost:9494/esb/services/web-api/products?");
 
+            builder.Append("pageIndex=");
+            builder.Append( (page - 1) * byPage);
+            builder.Append("&pageSize=");
+            builder.Append(byPage);
 
+            if( !search_by.Equals(""))
+            {
+                builder.Append("&");
+                builder.Append(search_by);
+                builder.Append("=");
+                builder.Append(search);
+            }
+            
             HandlerRequest request = new HandlerRequest();
-            String response = request.doRequest(url, "GET");
+            String response = request.doRequest(builder.ToString(), "GET");
 
             try
             {
@@ -62,20 +68,56 @@ pageIndex solo para productos.
             }
         }
 
-        public List<Product> getTopFive(int product)
+        public int  getTotalProducts(string search, string search_by, int page, int byPage)
         {
-            List<Product> products = new List<Product>();
+            String url = "http://localhost:9494/esb/services/web-api/products/count?";
 
-            int i = 0;
-            Product p;
+            StringBuilder builder = new StringBuilder();
+            builder.Append(url);
 
-            for (i = 0; i < 5; i++)
+            builder.Append("pageIndex=");
+            builder.Append((page - 1) * byPage);
+            builder.Append("&pageSize=");
+            builder.Append(byPage);
+
+            if (!search_by.Equals(""))
             {
-                p = new Product(i, "Producto " + i, "http://ecx.images-amazon.com/images/I/81Tsd0nZ39L._SL1500_.jpg", "Descripcion del producto " + i);
-                products.Add(p);
+                builder.Append("&");
+                builder.Append(search_by);
+                builder.Append("=");
+                builder.Append(search);
             }
 
-            return products;
+            HandlerRequest request = new HandlerRequest();
+            String response = request.doRequest(builder.ToString(), "GET");
+
+            try
+            {
+                DataContractCount contract = JsonConvert.DeserializeObject<DataContractCount>((response)) as DataContractCount;
+                return contract.total;
+            }
+            catch (JsonSerializationException exception)
+            {
+                throw (exception);
+            }
+        }
+
+        public List<DataContractProduct> getTopFive(int product)
+        {
+            string url = "http://localhost:9495/esb/services/web-api/orders/topItems/" + product;
+            HandlerRequest request = new HandlerRequest();
+            String response = request.doRequest(url, "GET");
+
+            try
+            {
+                List<DataContractProduct> contract = JsonConvert.DeserializeObject<List<DataContractProduct>>((response)) as List<DataContractProduct>;
+                return contract;
+            }
+            catch (JsonSerializationException exception)
+            {
+                throw (exception);
+                // return new Campaign();
+            }
         }
 
         public List<DataContractCampaigns> getCampigns()
@@ -95,6 +137,27 @@ pageIndex solo para productos.
             {
                 throw (exception);
                // return new Campaign();
+            }
+        }
+
+        public List<DataContractOrder> getOrdersCustomer(Customer customer)
+        {
+            StringBuilder builder = new StringBuilder("http://localhost:9495/esb/services/web-api/orders/customerOrders?");
+            builder.Append("typeDocument=1&");
+            builder.Append("numberDocument=1053793730");
+
+            HandlerRequest request = new HandlerRequest();
+            String response = request.doRequest(builder.ToString(), "GET");
+
+            try
+            {
+                List<DataContractOrder> contract = JsonConvert.DeserializeObject<List<DataContractOrder>>((response)) as List<DataContractOrder>;
+                return contract;
+            }
+            catch (JsonSerializationException exception)
+            {
+                throw (exception);
+                // return new Campaign();
             }
         }
     }

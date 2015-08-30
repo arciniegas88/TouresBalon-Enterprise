@@ -171,6 +171,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Contracts\DataContractProduct.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -249,6 +250,8 @@
     <Content Include="Views\Shared\errors.cshtml" />
     <Content Include="Views\Customer\RegisterForm.cshtml" />
     <Content Include="Views\Product\Campaign.cshtml" />
+    <Content Include="Views\Product\Filter.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-﻿@media screen and (max-width: 1680px) {
+﻿@media screen and (max-width: 1921px) {
 
     body, input, select, textarea {
         font-size: 12pt;
@@ -235,5 +235,16 @@
 
     .\-1u\28xlarge\29 {
         margin-left: 8.33333%;
+    }
+
+    .img-responsive img
+    {
+        height: 170px;
+    }
+
+    
+    .image-product-small
+    {
+        height: 170px;
     }
 }

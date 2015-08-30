@@ -1,0 +1,10 @@
+﻿<div class="filter">
+
+    @using (Html.BeginForm("Index", "Product", new { }, FormMethod.Get, new { }))
+    {
+        @Html.TextBox("search", "", new { @class = "custom", placeholder = "Buscar por" })
+        @Html.DropDownList("search_by", @Page.filter_options as SelectList, new { @class = "custom" })
+        <input type="submit" value="Buscar" class="button" />
+        @Html.ActionLink("Limpiar", "index", "product", new { }, new { @class = "button icon fa - file - text - o" })
+    }
+</div>
