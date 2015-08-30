@@ -31,23 +31,28 @@
 
         <!-- search products -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/products?restletMethod=GET"/>
-            <camel:log message="------- CamelHttpQuery ----------: ${in.headers.CamelHttpQuery}"/>
-            <camel:to uri="restlet:http://{{products.ms.physical}}/Product-Services/web-api/products?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products?restletMethod=GET"/>
         </camel:route>
 
         <!-- get product detail -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/products/{id}?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products/{id}?restletMethod=GET"/>
             <camel:recipientList>
-                <camel:simple>restlet:http://{{products.ms.physical}}/Product-Services/web-api/products/${header.id}?restletMethod=GET</camel:simple>
+                <camel:simple>restlet:http://{{target.jboss.location}}/Product-Services/web-api/products/${header.id}?restletMethod=GET</camel:simple>
             </camel:recipientList>
+        </camel:route>
+
+        <!-- count products -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products/count?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products/count?restletMethod=GET"/>
         </camel:route>
 
         <!-- search campaigns -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/campaigns?restletMethod=GET"/>
-            <camel:to uri="restlet:http://{{products.ms.physical}}/Product-Services/web-api/campaigns?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/campaigns?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/campaigns?restletMethod=GET"/>
         </camel:route>
 
     </camelContext>

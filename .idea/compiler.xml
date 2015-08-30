@@ -18,22 +18,22 @@
         <processorPath useClasspath="true" />
       </profile>
       <profile default="false" name="Annotation profile for Order-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Order-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Product-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Product-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Product-Proxy-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Product-Proxy-Services" />
@@ -47,25 +47,32 @@
         <module name="Cross-Cutting-Artifacts" />
       </profile>
       <profile default="false" name="Annotation profile for Transport-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Transport-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Order-Proxy-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Order-Proxy-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Customer-Proxy-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Customer-Proxy-Services" />
+      </profile>
+      <profile default="false" name="Annotation profile for Lodging-Services" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Lodging-Services" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -79,6 +86,8 @@
       <module name="Customers" target="1.5" />
       <module name="EIS-Module" target="1.5" />
       <module name="ESB-Module" target="1.5" />
+      <module name="Lodging" target="1.5" />
+      <module name="Lodging-Services" target="1.6" />
       <module name="Microservices-Module" target="1.5" />
       <module name="Middleware-Module" target="1.5" />
       <module name="OMS" target="1.5" />

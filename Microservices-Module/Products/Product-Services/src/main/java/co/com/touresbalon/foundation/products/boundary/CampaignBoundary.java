@@ -1,5 +1,7 @@
 package co.com.touresbalon.foundation.products.boundary;
 
+import co.com.touresbalon.foundation.crosscutting.exceptions.ExceptionBuilder;
+import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import co.com.touresbalon.foundation.products.entity.Campaign;
 import org.slf4j.Logger;
 
@@ -23,21 +25,28 @@ public class CampaignBoundary {
     @Inject
     private Logger logger;
 
+    @Inject
+    private ExceptionBuilder exceptionBuilder;
+
     @PersistenceContext
     private EntityManager em;
 
 
-    public CampaignBoundary(){
+    public CampaignBoundary() {
 
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Campaign> searchCampaign(){
+    public List<Campaign> searchCampaign() throws SystemException {
 
-        return em.createNamedQuery("Campaign.findAll", Campaign.class)
-                .getResultList();
+        try {
+            return em.createNamedQuery("Campaign.findAll", Campaign.class)
+                    .getResultList();
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
     }
-
 
 
 }

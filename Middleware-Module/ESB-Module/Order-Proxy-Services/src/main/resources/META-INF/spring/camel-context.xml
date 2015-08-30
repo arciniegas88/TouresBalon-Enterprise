@@ -32,40 +32,40 @@
 
         <!-- get Top Five Products-->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/orders/topItems/{idProduct}?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/topItems/{idProduct}?restletMethod=GET"/>
             <camel:recipientList>
-                <camel:simple> restlet:http://{{orders.ms.physical}}/Order-Services/web-api/orders/topItems/${header.idProduct}?restletMethod=GET</camel:simple>
+                <camel:simple>restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/topItems/${header.idProduct}?restletMethod=GET</camel:simple>
             </camel:recipientList>
         </camel:route>
 
         <!--customer Orders -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/orders/customerOrders?restletMethod=GET"/>
-            <camel:to uri="restlet:http://{{orders.ms.physical}}/Order-Services/web-api/orders/customerOrders?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/customerOrders?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/customerOrders?restletMethod=GET"/>
         </camel:route>
 
         <!--generate Order Id-->
 
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/orders/generateOrderId?restletMethod=GET"/>
-            <camel:to uri="restlet:http://{{orders.ms.physical}}/Order-Services/web-api/orders/generateOrderId?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/generateOrderId?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/generateOrderId?restletMethod=GET"/>
         </camel:route>
 
         <!--get Order Items-->
 
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/orders/orderItems/{idSalesOrder}?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/orderItems/{idSalesOrder}?restletMethod=GET"/>
             <camel:recipientList>
-                <camel:simple> restlet:http://{{orders.ms.physical}}/Order-Services/web-api/orders/orderItems/${header.idSalesOrder}?restletMethod=GET</camel:simple>
+                <camel:simple> restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/orderItems/${header.idSalesOrder}?restletMethod=GET</camel:simple>
             </camel:recipientList>
         </camel:route>
 
         <!--get Sales Order Detail-->
 
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.service.port}}/esb/services/web-api/orders/{idSalesOrder}?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/{idSalesOrder}?restletMethod=GET"/>
             <camel:recipientList>
-                <camel:simple> restlet:http://{{orders.ms.physical}}/Order-Services/web-api/orders/${header.idSalesOrder}?restletMethod=GET</camel:simple>
+                <camel:simple> restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/${header.idSalesOrder}?restletMethod=GET</camel:simple>
             </camel:recipientList>
         </camel:route>
 

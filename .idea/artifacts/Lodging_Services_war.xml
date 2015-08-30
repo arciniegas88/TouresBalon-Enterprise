@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Lodging-Services:war">
+    <output-path>$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services/target</output-path>
+    <root id="archive" name="Lodging-Services-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Lodging-Services:war exploded" />
+    </root>
+  </artifact>
+</component>

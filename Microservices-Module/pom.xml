@@ -16,6 +16,7 @@
         <module>Orders</module>
         <module>Customers</module>
 		<module>Transports</module>
+        <module>Lodging</module>
     </modules>
 
 </project>
