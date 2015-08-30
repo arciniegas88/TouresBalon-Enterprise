@@ -15,7 +15,7 @@ namespace B2C.Handlers
     public class HandlerRequest
     {
 
-        public DataContractLogin doRequest(String url, String method)
+        public String doRequest(String url, String method)
         {
             // Create a request for the URL. 
             WebRequest request = WebRequest.Create(url);
@@ -38,8 +38,7 @@ namespace B2C.Handlers
             reader.Close();
             response.Close();
 
-            return JsonConvert.DeserializeObject<DataContractLogin>((responseFromServer)) as DataContractLogin;
-      
+            return responseFromServer;
         }
 
     }

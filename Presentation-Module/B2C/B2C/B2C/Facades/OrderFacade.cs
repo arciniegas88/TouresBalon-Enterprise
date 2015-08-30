@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using B2C.Entities;
 using B2C.Agents;
+using B2C.Contracts;
 
 namespace B2C.Facades
 {
@@ -30,6 +31,17 @@ namespace B2C.Facades
             }
         }
 
+        public List<Campaign> getCampaigns()
+        {
+            List<Campaign> campaigns = new List<Campaign>();
+
+            foreach (DataContractCampaigns temp in this.orderService.getCampigns())
+            {
+                campaigns.Add(new Campaign(temp));    
+            }
+            return campaigns;
+        }
+
         public Product getProduct(int id)
         {
             return this.orderService.getProduct(id);
@@ -37,7 +49,12 @@ namespace B2C.Facades
 
         public List<Product> getProducts()
         {
-            return this.orderService.getProducts();
+            List<Product> products = new List<Product>();
+            foreach( DataContractProduct item in this.orderService.getProducts())
+            {
+                products.Add(new Product(item));
+            }
+            return products;
         }
 
         public List<Product> getTopFive(int id)

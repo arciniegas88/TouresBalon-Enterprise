@@ -11,8 +11,8 @@ namespace B2C.Agents
 
         public Customer loginUser(Customer customer)
         {
-            HandlerRequest request = new HandlerRequest();
-            customer.Email = "test " + request.doRequest("http://jsonplaceholder.typicode.com/posts/1", "GET").userId;
+            //HandlerRequest request = new HandlerRequest();
+            //customer.Email = "test " + request.doRequest("http://jsonplaceholder.typicode.com/posts/1", "GET");
 
             Random random = new Random();
             customer.UserID = random.Next(1, 150);

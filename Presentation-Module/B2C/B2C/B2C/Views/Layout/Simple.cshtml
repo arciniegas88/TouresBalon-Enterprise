@@ -38,8 +38,17 @@
 
         @RenderPage("~/Views/Shared/header.cshtml")
         @RenderPage("~/Views/Shared/carrousel.cshtml")
-        @RenderPage("~/Views/Shared/features.cshtml")
 
+
+        @if (!IsSectionDefined("campaign"))
+        {
+            // some default code
+        }
+        else
+        {
+            // render the code that was overridden in the child view
+            @RenderSection("campaign")
+        }
 
         <div id="main">
             @if (!IsSectionDefined("content"))

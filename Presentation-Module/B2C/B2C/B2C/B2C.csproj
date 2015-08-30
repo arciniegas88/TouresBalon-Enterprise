@@ -169,14 +169,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Contracts\DataContractProduct.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Contracts\DataContractLogin.cs" />
+    <Compile Include="Entities\Campaign.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Type.cs" />
     <Compile Include="Facades\CustomerFacade.cs" />
     <Compile Include="Facades\OrderFacade.cs" />
     <Compile Include="Facades\SecurityFacade.cs" />
@@ -184,6 +187,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\HandlerImage.cs" />
     <Compile Include="Handlers\HandlerRequest.cs" />
     <Compile Include="Handlers\HandlerSession.cs" />
     <Compile Include="Forms\LoginForm.cs" />
@@ -244,6 +248,7 @@
     <Content Include="Views\Product\ProductSmall.cshtml" />
     <Content Include="Views\Shared\errors.cshtml" />
     <Content Include="Views\Customer\RegisterForm.cshtml" />
+    <Content Include="Views\Product\Campaign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

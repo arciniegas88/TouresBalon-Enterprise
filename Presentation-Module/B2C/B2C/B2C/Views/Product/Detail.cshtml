@@ -23,12 +23,18 @@
                         <h3>@product.Name</h3>
                         <div class="grid">
                             <div class="row 50%">
-                                <div class="6u"><a href="#" class="image fit"><img src="~/Resources/images/pic04.jpg" alt="" /></a></div>
-                                <div class="6u"><a href="#" class="image fit"><img src="~/Resources/images/pic05.jpg" alt="" /></a></div>
-                                <div class="6u"><a href="#" class="image fit"><img src="~/Resources/images/pic06.jpg" alt="" /></a></div>
-                                <div class="6u"><a href="#" class="image fit"><img src="~/Resources/images/pic07.jpg" alt="" /></a></div>
-                            </div>
+                                <img src='@product.Image' width='384' height='304' />
+                             </div>
                         </div>
+
+                        <p>Fecha Espectaculo @product.SpectacleDate</p>
+                        <p>Fecha Vuelo @product.DepartureDate</p>
+                        <p>Fecha Aterrizaje @product.ArrivalDate</p>
+
+
+                        <p>@product.Transport.Name</p>
+                        <p>@product.Spectacle.Name</p>
+                        <p>@product.Lodging.Name</p>
                         <a href="#" class="button icon fa-file-text-o">Ver Mas</a>
                     </section>
                 </div>

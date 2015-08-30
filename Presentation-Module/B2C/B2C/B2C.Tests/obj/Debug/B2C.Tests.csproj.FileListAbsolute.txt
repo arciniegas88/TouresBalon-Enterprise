@@ -13,8 +13,6 @@ C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\B2C.Tests.dll.config
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\B2C.Tests.dll
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\B2C.Tests.pdb
-C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\B2C.Tests.dll.CodeAnalysisLog.xml
-C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\B2C.Tests.dll.lastcodeanalysissucceeded
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\B2C.dll
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
@@ -41,3 +39,4 @@ C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\obj\Debug\B2C.Tests.csprojResolveAssemblyReference.cache
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\obj\Debug\B2C.Tests.dll
 C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\obj\Debug\B2C.Tests.pdb
+C:\Users\aleji_000\Desktop\TouresBalon-Enterprise\Presentation-Module\B2C\B2C\B2C.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml

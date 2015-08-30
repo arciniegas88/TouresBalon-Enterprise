@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using B2C.Utils;
 using B2C.Entities;
+using B2C.Facades;
 
 namespace B2C.Controllers
 {
@@ -16,6 +17,8 @@ namespace B2C.Controllers
 
             //Inicializamos el controller
             this.ini();
+
+            ViewData.Add("campaigns", OrderFacade.Instance.getCampaigns());
 
             return View();
         }
