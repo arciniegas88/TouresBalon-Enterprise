@@ -16,6 +16,7 @@
         <module>Product-Proxy-Services</module>
 		<module>Order-Proxy-Services</module>
 		<module>Customer-Proxy-Services</module>
+        <module>CreditCard-Adapter</module>
     </modules>
 
 </project>

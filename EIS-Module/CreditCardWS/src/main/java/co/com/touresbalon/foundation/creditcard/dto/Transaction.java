@@ -51,7 +51,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Card{" +
+        return "Transaction{" +
                 "number='" + number + '\'' +
                 ", amount=" + amount +
                 ", identificationType='" + identificationType + '\'' +

@@ -33,8 +33,8 @@ public class CreditCard {
 
     @Oneway
     @WebMethod(operationName = "executeTransaction",action = "executeTransaction")
-    public void executeTransaction(@WebParam(name = "card") Transaction card ){
-        registryCreditCardBundary.executeTransaction(card);
+    public void executeTransaction(@WebParam(name = "transaction") Transaction transaction ){
+        registryCreditCardBundary.executeTransaction(transaction);
     }
     
 }

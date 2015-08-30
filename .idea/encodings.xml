@@ -13,6 +13,8 @@
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services/src/main/resources/logback.xml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/bpelContent/canonical_schema.xsd" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter/src/main/resources/service_contracts/CreditCard.wsdl" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services" charset="UTF-8" />
