@@ -43,7 +43,7 @@ namespace B2C.Agents
 @QueryParam("name") String name,
 @QueryParam("description") String description,
 @QueryParam("pageSize") int pageSize
-pageIndex solo para productos.
+pageIndex solo para productos. 
 */
 
 

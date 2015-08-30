@@ -65,8 +65,8 @@ namespace B2C.Contracts
     public class DataContractCampaigns
     {
         
-        /*[JsonProperty("id")]
-        public int id { get; set; }*/
+        [JsonProperty("id")]
+        public int id { get; set; } 
 
         [JsonProperty("name")]
         public String name { get; set; }
