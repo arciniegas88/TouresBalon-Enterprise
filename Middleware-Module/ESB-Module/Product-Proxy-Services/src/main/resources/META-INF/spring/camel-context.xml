@@ -43,6 +43,12 @@
             </camel:recipientList>
         </camel:route>
 
+        <!-- count products -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products/count?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products/count?restletMethod=GET"/>
+        </camel:route>
+
         <!-- search campaigns -->
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/campaigns?restletMethod=GET"/>
