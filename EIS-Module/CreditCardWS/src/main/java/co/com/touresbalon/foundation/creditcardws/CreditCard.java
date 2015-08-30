@@ -7,9 +7,8 @@ package co.com.touresbalon.foundation.creditcardws;
 
 import co.com.touresbalon.foundation.creditcard.bussines.RegistryCreditCardBundary;
 import co.com.touresbalon.foundation.creditcard.bussines.SearchCreditCardBundary;
-import co.com.touresbalon.foundation.creditcard.dto.Card;
+import co.com.touresbalon.foundation.creditcard.dto.Transaction;
 import co.com.touresbalon.foundation.creditcard.dto.Person;
-import java.io.IOException;
 import javax.jws.Oneway;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -34,7 +33,7 @@ public class CreditCard {
 
     @Oneway
     @WebMethod(operationName = "executeTransaction",action = "executeTransaction")
-    public void executeTransaction(@WebParam(name = "card") Card card ){
+    public void executeTransaction(@WebParam(name = "card") Transaction card ){
         registryCreditCardBundary.executeTransaction(card);
     }
     
