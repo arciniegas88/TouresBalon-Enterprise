@@ -1,8 +1,8 @@
 ﻿<div class="product_small">
     <div class="col-md-1">
-        <p class="subtitle">@Page.name</p>
-        <span>@Page.description</span>
-        <div class="img-responsive"><img src="@Page.image" /></div>
+        <p class="title">@Page.name</p>
+        <div class="text-description">@Page.description</div>
+        <div class="img-responsive"><img class="image-product-small" src="@Page.image" /></div>
         <div class="d_button">
             @Html.ActionLink("Ver mas", "detail", "product", new { @id = Page.id }, new { @class = "button icon fa - file - text - o" })
         </div>

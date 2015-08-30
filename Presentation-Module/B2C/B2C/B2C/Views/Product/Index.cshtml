@@ -3,18 +3,51 @@
     ViewBag.Title = "Producto";
 
     var products = (ViewData["products"] as List<B2C.Entities.Product>);
+    var filter_options = ViewData["filter_options"] as SelectList;
+
+    var total_page = (int)ViewData["total_pages"];
+    var actual_page = (int)ViewData["actual_page"];
+    var search = (string)ViewData["search"];
+    var search_by = (string)ViewData["search_by"];
 }
 
 @section content
 {
     <div id="main-wrapper">
         <div class="container">
+
+            @RenderPage("~/Views/Product/Filter.cshtml", new { filter_options = filter_options })
+
             <div class="row">
                 @foreach (var item in products)
                 {
                     @RenderPage("~/Views/Product/ProductSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image })
                 }
             </div>
+
+            <div class="paginator">
+                <nav class="n_pagination">
+                    <ul class="pagination">
+                        @for (var i = 1; i <= total_page; i++)
+                        {
+                            if (i != actual_page)
+                            {
+                                <li>
+                                    @Html.ActionLink(i.ToString(), "Index", "Product", new { @page = i, search = search, search_by = search_by }, new { @class = "pager" })
+                                </li>
+                            }
+                            else
+                            {
+                                @Html.Raw(String.Concat("<li><span>", i, "</span></li>"));
+                            }
+                        }
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
+
+  
+
+    
 }

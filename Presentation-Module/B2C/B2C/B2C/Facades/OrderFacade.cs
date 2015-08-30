@@ -47,20 +47,35 @@ namespace B2C.Facades
             return this.orderService.getProduct(id);
         }
 
-        public List<Product> getProducts()
+        public List<Product> getProducts(string search, string search_by, int page, int byPage)
         {
             List<Product> products = new List<Product>();
-            foreach( DataContractProduct item in this.orderService.getProducts())
+            foreach( DataContractProduct item in this.orderService.getProducts(search, search_by, page, byPage))
             {
                 products.Add(new Product(item));
             }
             return products;
         }
 
+        public int getTotalProducts(string search, string search_by, int page, int byPage)
+        {
+            return this.orderService.getTotalProducts(search, search_by, page, byPage);
+        }
+
         public List<Product> getTopFive(int id)
         {
-            return this.orderService.getTopFive(id);
+            List<Product> products = new List<Product>();
+            foreach (DataContractProduct item in this.orderService.getTopFive(id))
+            {
+                products.Add(new Product(item));
+            }
+            return products;
         }
+
+        /*public List<Order> getOrdersCustomer()
+        {
+            
+        }*/
 
     }
 }

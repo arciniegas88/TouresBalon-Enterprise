@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using B2C.Contracts;
 using B2C.Handlers;
+using System.Text;
 
 namespace B2C.Entities
 {
@@ -24,10 +25,15 @@ namespace B2C.Entities
         public Product(DataContractProduct contract)
         {
             this.id = contract.id;
-            this.name = contract.name;
-            this.description = contract.description;
 
-            if( contract.imageRef != null)
+
+            byte[] data = Encoding.Default.GetBytes(contract.name);
+            this.name = Encoding.UTF8.GetString(data);
+
+            data = Encoding.Default.GetBytes(contract.description);
+            this.description = Encoding.UTF8.GetString(data);
+
+            if ( contract.imageRef != null)
                 this.image = HandlerImage.convertStreamToImage(contract.imageRef);
 
             this.code = contract.code;
