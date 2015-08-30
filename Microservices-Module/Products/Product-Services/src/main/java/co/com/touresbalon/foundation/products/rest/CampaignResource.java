@@ -1,5 +1,6 @@
 package co.com.touresbalon.foundation.products.rest;
 
+import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import co.com.touresbalon.foundation.products.boundary.CampaignBoundary;
 import co.com.touresbalon.foundation.products.entity.Campaign;
 
@@ -27,7 +28,7 @@ public class CampaignResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<Campaign> searchProducts() {
+    public List<Campaign> searchProducts() throws SystemException {
         return boundary.searchCampaign();
     }
 }
