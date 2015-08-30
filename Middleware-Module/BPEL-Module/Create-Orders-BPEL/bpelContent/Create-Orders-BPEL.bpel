@@ -2,110 +2,132 @@
 <!-- Date: Mon Mar 05 12:18:58 IST 2012 -->
 
 <bpel:process name="Create-Orders-BPEL"
-         targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0"
-         suppressJoinFailure="yes"
-         xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0"
-         xmlns:credit="http://redeban.com/creditcards/ws"
-         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
-    
-    <!-- Import the client WSDL -->
-    
-	<bpel:import location="Create-Orders-Process.wsdl"
-                 namespace="http://touresbalon.com.co/orders/service/task/1.0.0"
-                 importType="http://schemas.xmlsoap.org/wsdl/" />
+              targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0"
+              suppressJoinFailure="yes"
+              xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0"
+              xmlns:credit="http://redeban.com/creditcards/ws"
+              xmlns:transport="http://touresbalon.com.co/transport/service/task/1.0.0"
+              xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
 
-	<bpel:import location="CreditCard.wsdl"
+    <!-- Import the client WSDL -->
+
+    <bpel:import location="Create-Orders-Process.wsdl"
+                 namespace="http://touresbalon.com.co/orders/service/task/1.0.0"
+                 importType="http://schemas.xmlsoap.org/wsdl/"/>
+
+    <bpel:import location="CreditCard.wsdl"
                  namespace="http://redeban.com/creditcards/ws"
-                 importType="http://schemas.xmlsoap.org/wsdl/" />
+                 importType="http://schemas.xmlsoap.org/wsdl/"/>
+
+	<bpel:import location="TransportWS.wsdl"
+                 namespace="http://touresbalon.com.co/transport/service/task/1.0.0"
+                 importType="http://schemas.xmlsoap.org/wsdl/"/>
 
     <!-- ================================================================= -->
     <!-- PARTNERLINKS                                                      -->
     <!-- List of services participating in this BPEL process               -->
-    <!-- ================================================================= -->         
-    
+    <!-- ================================================================= -->
+
     <bpel:partnerLinks>
-    
+
         <bpel:partnerLink name="client"
                           partnerLinkType="tns:Create-Orders-BPEL"
                           myRole="Create-Orders-BPELProvider"/>
-                          
-       <bpel:partnerLink name="CreditCardPartnerLink" 
-       					 partnerLinkType="credit:CreditCard_PLT" 
-       					 partnerRole="CreditCard_Role"
-       					 initializePartnerRole="yes"/>                   
-           
+
+        <bpel:partnerLink name="CreditCardPartnerLink"
+                          partnerLinkType="credit:CreditCard_PLT"
+                          partnerRole="CreditCard_Role"
+                          initializePartnerRole="yes"/>
+
+        <bpel:partnerLink name="TransportWSPartnerLink"
+                          partnerLinkType="transport:TransportWS_PLT"
+                          partnerRole="TransportWS_Role"
+                          initializePartnerRole="yes"/>
+
     </bpel:partnerLinks>
-  
-    <!-- ================================================================= -->         
+
+    <!-- ================================================================= -->
     <!-- VARIABLES                                                         -->
     <!-- List of messages and XML documents used within this BPEL process  -->
-    <!-- ================================================================= -->         
+    <!-- ================================================================= -->
     <bpel:variables>
         <!-- Reference to the message passed as input during initiation -->
-        <bpel:variable name="input" messageType="tns:CreateSalesOrderRequest-Message"/>
-       
-        <bpel:variable name="validateCCUnput" messageType="credit:validateCreditCard"></bpel:variable>
-        <bpel:variable name="validateCCOutput" messageType="credit:validateCreditCardResponse"></bpel:variable>
+        <bpel:variable name="input"
+                       messageType="tns:CreateSalesOrderRequest-Message"/>
+
+        <bpel:variable name="validateCCUnput"
+                       messageType="credit:validateCreditCard"/>
+        <bpel:variable name="validateCCOutput"
+                       messageType="credit:validateCreditCardResponse"/>
     </bpel:variables>
 
-    <!-- ================================================================= -->         
+    <!-- ================================================================= -->
     <!-- ORCHESTRATION LOGIC                                               -->
     <!-- Set of activities coordinating the flow of messages across the    -->
     <!-- services integrated within this business process                  -->
-    <!-- ================================================================= -->         
+    <!-- ================================================================= -->
     <bpel:sequence name="MAIN">
-        
+
         <!-- Receive input from requestor. 
              Note: This maps to operation defined in Create-Orders-BPEL.wsdl 
              -->
-             
+
         <bpel:receive name="receiveInput" partnerLink="client"
-                 portType="tns:Create-Orders-BPEL"
-                 operation="process" variable="input"
-                 createInstance="yes"/>
-                 
-        
-        
+                      portType="tns:Create-Orders-BPEL"
+                      operation="process" variable="input"
+                      createInstance="yes"/>
+
+
         <bpel:sequence name="VALIDATION_STAGE">
             <bpel:flow name="Flow">
-            <bpel:sequence name="VALIDATE_TRANSPORT"><bpel:empty name="validate_trasnport_services"></bpel:empty>
-            
-            </bpel:sequence>
-            <bpel:sequence name="VALIDATE_LODGING">
-                <bpel:empty name="validate_lodging_services"></bpel:empty>
-            </bpel:sequence>
-            <bpel:sequence name="VALIDATE_SPECTACLE"><bpel:empty name="validate_spectacle_services"></bpel:empty>
-            
-        </bpel:sequence>
-        <bpel:sequence name="VALIDATE_CREDIT_CARD">
+                <bpel:sequence name="VALIDATE_TRANSPORT">
+                    <bpel:empty name="validate_trasnport_services"></bpel:empty>
+
+                </bpel:sequence>
+                <bpel:sequence name="VALIDATE_LODGING">
+                    <bpel:empty name="validate_lodging_services"></bpel:empty>
+                </bpel:sequence>
+                <bpel:sequence name="VALIDATE_SPECTACLE">
+                    <bpel:empty name="validate_spectacle_services"></bpel:empty>
+
+                </bpel:sequence>
+                <bpel:sequence name="VALIDATE_CREDIT_CARD">
                     <bpel:empty name="validate_creditcard_services"></bpel:empty>
                     <bpel:assign validate="no" name="Assign-Input">
                         <bpel:copy>
-                            <bpel:from><bpel:literal><tns:validateCreditCard xmlns:tns="http://redeban.com/creditcards/ws" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <person>
-    <identificationType>identificationType</identificationType>
-    <numberCreditCard>numberCreditCard</numberCreditCard>
-    <numberIdentification>numberIdentification</numberIdentification>
-  </person>
-</tns:validateCreditCard>
-</bpel:literal></bpel:from>
+                            <bpel:from>
+                                <bpel:literal>
+                                    <tns:validateCreditCard xmlns:tns="http://redeban.com/creditcards/ws"
+                                                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                        <person>
+                                            <identificationType>identificationType</identificationType>
+                                            <numberCreditCard>numberCreditCard</numberCreditCard>
+                                            <numberIdentification>numberIdentification</numberIdentification>
+                                        </person>
+                                    </tns:validateCreditCard>
+                                </bpel:literal>
+                            </bpel:from>
                             <bpel:to variable="validateCCUnput" part="parameters"></bpel:to>
                         </bpel:copy>
                         <bpel:copy>
                             <bpel:from part="payload" variable="input">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/custDocumentNumber]]></bpel:query>
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[order/custDocumentNumber]]></bpel:query>
                             </bpel:from>
                             <bpel:to part="parameters" variable="validateCCUnput">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[person/numberIdentification]]></bpel:query>
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[person/numberIdentification]]></bpel:query>
                             </bpel:to>
                         </bpel:copy>
-                        
+
                         <bpel:copy>
                             <bpel:from part="payload" variable="input">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/custDocumentType]]></bpel:query>
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[order/custDocumentType]]></bpel:query>
                             </bpel:from>
                             <bpel:to part="parameters" variable="validateCCUnput">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[person/identificationType]]></bpel:query>
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[person/identificationType]]></bpel:query>
                             </bpel:to>
                         </bpel:copy>
                         <bpel:copy>
@@ -115,27 +137,32 @@
                                 </bpel:query>
                             </bpel:from>
                             <bpel:to part="parameters" variable="validateCCUnput">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[person/numberCreditCard]]></bpel:query>
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[person/numberCreditCard]]></bpel:query>
                             </bpel:to>
                         </bpel:copy>
                     </bpel:assign>
-                    
-                    <bpel:invoke name="InvokeCreditCardValidation" partnerLink="CreditCardPartnerLink" operation="validateCreditCard" portType="credit:CreditCard" inputVariable="validateCCUnput" outputVariable="validateCCOutput"></bpel:invoke>
-                	</bpel:sequence>
-                	
-                	<bpel:sequence name="VALIDATE_CUSTOMER">
-                    	<bpel:empty name="validate_rules_service">
+
+                    <bpel:invoke name="InvokeCreditCardValidation" partnerLink="CreditCardPartnerLink"
+                                 operation="validateCreditCard" portType="credit:CreditCard"
+                                 inputVariable="validateCCUnput" outputVariable="validateCCOutput"></bpel:invoke>
+                </bpel:sequence>
+
+                <bpel:sequence name="VALIDATE_CUSTOMER">
+                    <bpel:empty name="validate_rules_service">
                     </bpel:empty>
                 </bpel:sequence>
-                </bpel:flow>
+            </bpel:flow>
         </bpel:sequence>
-        
+
         <bpel:sequence name="ALLOCATION_STAGE">
-            
-            
-            <bpel:flow name="Flow1"><bpel:sequence name="Sequence3">
+
+
+            <bpel:flow name="Flow1">
+                <bpel:sequence name="Sequence3">
                     <bpel:empty name="Empty3"></bpel:empty>
-                </bpel:sequence></bpel:flow>
+                </bpel:sequence>
+            </bpel:flow>
         </bpel:sequence>
     </bpel:sequence>
 </bpel:process>
