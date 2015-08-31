@@ -50,6 +50,7 @@
     <!-- VARIABLES                                                         -->
     <!-- List of messages and XML documents used within this BPEL process  -->
     <!-- ================================================================= -->
+    
     <bpel:variables>
         <!-- Reference to the message passed as input during initiation -->
         <bpel:variable name="input"
@@ -70,6 +71,7 @@
     <!-- Set of activities coordinating the flow of messages across the    -->
     <!-- services integrated within this business process                  -->
     <!-- ================================================================= -->
+    
     <bpel:sequence name="MAIN">
 
         <!-- Receive input from requestor. 
@@ -137,7 +139,7 @@
                         <bpel:copy>
                             <bpel:from part="payload" variable="input">
                                 <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                    <![CDATA[creditCardNumber]]>
+                                    <![CDATA[order/creditCardNumber]]>
                                 </bpel:query>
                             </bpel:from>
                             <bpel:to part="parameters" variable="validateCCUnput">

@@ -46,6 +46,9 @@ public class Transport implements Serializable {
     @Column(name = "travel_out_time")
     private String travelOutTime;
 
+    @Column(name = "business_provider")
+    private String businessProvider;
+
     public Transport() {
     }
 
@@ -59,6 +62,15 @@ public class Transport implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+
+    public String getBusinessProvider() {
+        return businessProvider;
+    }
+
+    public void setBusinessProvider(String businessProvider) {
+        this.businessProvider = businessProvider;
     }
 
     public Date getTravelDate() {

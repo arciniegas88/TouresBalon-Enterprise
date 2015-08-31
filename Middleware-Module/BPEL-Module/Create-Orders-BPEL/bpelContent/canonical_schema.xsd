@@ -10,13 +10,10 @@
 
 	<xs:complexType name="SalesOrder">
 		<xs:sequence>
-			<xs:element name="id" type="xs:long" minOccurs="0" />
-			<xs:element name="orderDate" type="xs:date"/>
-			<xs:element name="price" type="xs:decimal" minOccurs="0" />
-			<xs:element name="status" type="tns:orderStatus" minOccurs="0" />
 			<xs:element name="comments" type="xs:string" minOccurs="0" />
 			<xs:element name="custDocumentNumber" type="xs:string" minOccurs="0" />
             <xs:element name="custDocumentType" type="tns:documentType" minOccurs="0" />
+            <xs:element name="creditCardNumber" type="xs:string"/>
             <xs:element name="items" type="tns:OrderItem" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="custom" type="tns:SalesOrderCustomFields"/>
 		</xs:sequence>
@@ -28,18 +25,33 @@
 
     <xs:complexType name="OrderItem">
         <xs:sequence>
-            <xs:element name="id" type="xs:long" minOccurs="0" />
             <xs:element name="productId" type="xs:long"/>
             <xs:element name="productName" type="xs:string" minOccurs="0" />
             <xs:element name="partnum" type="xs:string" minOccurs="0" />
+            <xs:element name="transport" type="tns:Transport" minOccurs="0" />
             <xs:element name="price" type="xs:decimal" minOccurs="0" />
-            <xs:element name="quantity" type="xs:short" minOccurs="0" />
             <xs:element name="custom" type="tns:OrderItemCustomFields"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="OrderItemCustomFields">
         <xs:sequence/>
+    </xs:complexType>
+
+	<xs:complexType name="Transport">
+        <xs:sequence>
+            <xs:element name="sourceCity" type="xs:string"/>
+            <xs:element name="targetCity" type="xs:string"/>
+            <xs:element name="travelDate" type="xs:string"/>
+            <xs:element name="travelOutTime" type="xs:string"/>
+            <xs:element name="travelBusinessProvider" type="tns:transportProvider"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Lodging">
+        <xs:sequence>
+            <xs:element name="lodgingBusinessProvider" type="xs:string"/>
+        </xs:sequence>
     </xs:complexType>
 
 	<!-- ================================================================= -->
@@ -64,6 +76,14 @@
             <xs:enumeration value="REJECTED" />
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="transportProvider" final="restriction" >
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AVIANCA" />
+            <xs:enumeration value="AMERICAN_AIRLINES" />
+            <xs:enumeration value="BOLIVARIANO" />
+        </xs:restriction>
+    </xs:simpleType>
 
 	<!-- ================================================================= -->
     <!-- XML MESSAGES                                             		   -->
@@ -74,9 +94,6 @@
 		<xs:complexType>
 			<xs:sequence>
                 <xs:element name="order" type="tns:SalesOrder"/>
-                <xs:element name="creditCardNumber" type="xs:string"/>
-                <xs:element name="sourceCity" type="xs:string"/>
-                <xs:element name="targetCity" type="xs:string"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
