@@ -74,7 +74,7 @@
   </extensions>
   <extensions>
     <extendedObject href="Create-Orders-BPEL.bpel#/"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1440948140576"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1440978716871"/>
   </extensions>
   <extensions>
     <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.1"/>

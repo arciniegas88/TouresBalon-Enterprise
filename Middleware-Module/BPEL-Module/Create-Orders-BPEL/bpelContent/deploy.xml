@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:bpel="http://touresbalon.com.co/orders/service/task/1.0.0" xmlns:ws="http://redeban.com/creditcards/ws">
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" 
+		xmlns:bpel="http://touresbalon.com.co/orders/service/task/1.0.0" 
+		xmlns:transport="http://touresbalon.com.co/transport/service/task/1.0.0"
+		xmlns:ws="http://redeban.com/creditcards/ws">
   <process name="bpel:Create-Orders-BPEL">
     <active>true</active>
     <retired>false</retired>
@@ -9,6 +12,9 @@
     </provide>
     <invoke partnerLink="CreditCardPartnerLink">
       <service name="ws:CreditCardService" port="CreditCardPort"/>
+    </invoke>
+    <invoke partnerLink="TransportWSPartnerLink">
+      <service name="transport:TransportWSService" port="TransportWSPort"/>
     </invoke>
   </process>
 </deploy>
