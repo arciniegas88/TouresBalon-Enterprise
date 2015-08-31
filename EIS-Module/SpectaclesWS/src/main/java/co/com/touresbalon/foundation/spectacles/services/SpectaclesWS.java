@@ -34,8 +34,6 @@ public class SpectaclesWS {
      */
     @WebMethod(operationName = "searchTicketByIdSpectacle",action = "searchTicketByIdSpectacle")
     public TicketResponseDTO searchTicketByIdSpectacle(@WebParam(name = "idSpectacle") BigInteger idSpectacle){
-        System.out.println(""+ idSpectacle);
-        System.out.println(spectaclesPersistenceServices + "spectaclesPersistenceServices: %%%%%%%%%%%%%%%%%%%%%%%%%%%");
         return spectaclesPersistenceServices.searchTicketByIdSpectacle(idSpectacle);
     }
     /**
