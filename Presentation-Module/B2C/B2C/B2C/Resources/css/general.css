@@ -781,11 +781,6 @@ blockquote, q {
         content: none;
     }
 
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
 body {
     -webkit-text-size-adjust: none;
 }
@@ -836,6 +831,24 @@ body {
     font-weight: bold;
     font-size: 36px;
     text-align: center;
+}
+
+.info_product
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.info_product p
+{
+    clear: both;
+    display: block;
+    padding: 3px; 
+}
+
+.text-big
+{
+    font-size: 14px;
 }
 
 
@@ -1214,4 +1227,59 @@ input.custom, select.custom
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #ddd;
+}
+
+.glyphicon-plane:before {
+  content: "\e108";
+}
+
+.icon-detail{
+    width:40px;
+    height:40px;
+    background-size:cover;
+    float:left;
+}
+
+.left
+{
+    float:left;
+    clear: right !important;
+}
+
+.hotel{
+    background-image: url("../images/hotel.png");
+}
+
+.plane{
+    background-image: url("../images/plane.png");
+}
+
+.spectacle{
+    background-image: url("../images/spectacle.png");
+}
+
+.info_type{
+    margin: 20px 0px;
+    padding-bottom: 40px;
+}
+
+.container_topfive
+{
+    width: 100%;
+    text-align:center;
+}
+
+.container_topfive .header
+{
+    width: 375px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.item_topfive
+{
+    font-size: 18px;
+    float: left;
+    padding: 20px;
+
 }

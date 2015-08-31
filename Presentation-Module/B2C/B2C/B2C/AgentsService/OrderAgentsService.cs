@@ -102,7 +102,7 @@ namespace B2C.Agents
             }
         }
 
-        public List<DataContractProduct> getTopFive(int product)
+        public List<DataContractTopFive> getTopFive(int product)
         {
             string url = "http://localhost:9495/esb/services/web-api/orders/topItems/" + product;
             HandlerRequest request = new HandlerRequest();
@@ -110,7 +110,7 @@ namespace B2C.Agents
 
             try
             {
-                List<DataContractProduct> contract = JsonConvert.DeserializeObject<List<DataContractProduct>>((response)) as List<DataContractProduct>;
+                List<DataContractTopFive> contract = JsonConvert.DeserializeObject<List<DataContractTopFive>>((response)) as List<DataContractTopFive>;
                 return contract;
             }
             catch (JsonSerializationException exception)

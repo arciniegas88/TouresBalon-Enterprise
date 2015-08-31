@@ -14,14 +14,9 @@ namespace B2C.Entities
 
         public Type(DataContractType type)
         {
-            /*if( type.id != null)
-                this.id = type.id;
-
-            if( type.name != null)
-                this.name = type.name;
-
-            if( type.cost != null)
-                this.cost = type.cost;*/
+            this.id = type.id;
+            this.name = type.name;
+            this.cost = type.cost;
         }
 
         public int Id

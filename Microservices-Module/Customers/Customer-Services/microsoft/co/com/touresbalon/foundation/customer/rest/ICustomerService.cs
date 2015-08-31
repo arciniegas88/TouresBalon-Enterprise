@@ -1,4 +1,5 @@
-﻿using Customer_Services.microsoft.co.com.touresbalon.foundation.customer.entity;
+﻿using Cross_Cutting.microsoft.co.com.touresbalon.foundation.crosscutting.entity;
+using Customer_Services.microsoft.co.com.touresbalon.foundation.customer.entity;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -14,6 +15,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "customer/id={id}")]
+        [FaultContract(typeof(GeneralResponse))]
         Customer getCustomer(string id);
 
         [OperationContract]
@@ -38,7 +40,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
         string deleteCustomer(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "UPDATE",
+        [WebInvoke(Method = "PUT",
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "updateCustomer")]

@@ -65,7 +65,7 @@ namespace B2C.Facades
         public List<Product> getTopFive(int id)
         {
             List<Product> products = new List<Product>();
-            foreach (DataContractProduct item in this.orderService.getTopFive(id))
+            foreach (DataContractTopFive item in this.orderService.getTopFive(id))
             {
                 products.Add(new Product(item));
             }

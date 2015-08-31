@@ -85,6 +85,15 @@ namespace B2C.Contracts
         public double cost { get; set; }
     }
 
+    public class DataContractTopFive
+    {
+        [JsonProperty("idProduct", NullValueHandling = NullValueHandling.Ignore)]
+        public int idProduct { get; set; }
+
+        [JsonProperty("nameProduct", NullValueHandling = NullValueHandling.Ignore)]
+        public string nameProduct { get; set; }
+    }
+
     public class DataContractCampaigns
     {
         
