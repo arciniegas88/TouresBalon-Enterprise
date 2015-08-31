@@ -7,10 +7,13 @@
               xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0"
               xmlns:credit="http://redeban.com/creditcards/ws"
               xmlns:transport="http://touresbalon.com.co/transport/service/task/1.0.0"
-              xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+              xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+              xmlns:canonical="http://touresbalon.com.co/model/canonical/1.0.0">
 
     <!-- Import the client WSDL -->
 
+    <bpel:import namespace="http://touresbalon.com.co/model/canonical/1.0.0" location="canonical_schema.xsd"
+                 importType="http://www.w3.org/2001/XMLSchema"></bpel:import>
     <bpel:import location="Create-Orders-Process.wsdl"
                  namespace="http://touresbalon.com.co/orders/service/task/1.0.0"
                  importType="http://schemas.xmlsoap.org/wsdl/"/>
@@ -50,7 +53,7 @@
     <!-- VARIABLES                                                         -->
     <!-- List of messages and XML documents used within this BPEL process  -->
     <!-- ================================================================= -->
-    
+
     <bpel:variables>
         <!-- Reference to the message passed as input during initiation -->
         <bpel:variable name="input"
@@ -64,6 +67,9 @@
                        messageType="transport:generateReservation"/>
         <bpel:variable name="validateTransportOutput"
                        messageType="transport:generateReservationResponse"/>
+
+
+        <bpel:variable name="counter" element="canonical:IteratorCounter"/>
     </bpel:variables>
 
     <!-- ================================================================= -->
@@ -71,7 +77,7 @@
     <!-- Set of activities coordinating the flow of messages across the    -->
     <!-- services integrated within this business process                  -->
     <!-- ================================================================= -->
-    
+
     <bpel:sequence name="MAIN">
 
         <!-- Receive input from requestor. 
@@ -85,80 +91,208 @@
 
 
         <bpel:sequence name="VALIDATION_STAGE">
-            <bpel:flow name="Flow">
-                <bpel:sequence name="VALIDATE_TRANSPORT">
-                    <bpel:empty name="validate_trasnport_services"></bpel:empty>
 
-                </bpel:sequence>
-                <bpel:sequence name="VALIDATE_LODGING">
-                    <bpel:empty name="validate_lodging_services"></bpel:empty>
-                </bpel:sequence>
-                <bpel:sequence name="VALIDATE_SPECTACLE">
-                    <bpel:empty name="validate_spectacle_services"></bpel:empty>
+            <bpel:sequence name="VALIDATE_CUSTOMER">
+                <bpel:empty name="validate_rules_service">
+                </bpel:empty>
+            </bpel:sequence>
 
-                </bpel:sequence>
-                <bpel:sequence name="VALIDATE_CREDIT_CARD">
+            <bpel:sequence name="VALIDATE_CREDIT_CARD">
 
-                    <bpel:assign validate="no" name="Assign-Input">
-                        <bpel:copy>
-                            <bpel:from>
-                                <bpel:literal>
-                                    <tns:validateCreditCard xmlns:tns="http://redeban.com/creditcards/ws"
-                                                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                                        <person>
-                                            <identificationType>identificationType</identificationType>
-                                            <numberCreditCard>numberCreditCard</numberCreditCard>
-                                            <numberIdentification>numberIdentification</numberIdentification>
-                                        </person>
-                                    </tns:validateCreditCard>
-                                </bpel:literal>
-                            </bpel:from>
-                            <bpel:to variable="validateCCUnput" part="parameters"></bpel:to>
-                        </bpel:copy>
-                        <bpel:copy>
-                            <bpel:from part="payload" variable="input">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                    <![CDATA[order/custDocumentNumber]]></bpel:query>
-                            </bpel:from>
-                            <bpel:to part="parameters" variable="validateCCUnput">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                    <![CDATA[person/numberIdentification]]></bpel:query>
-                            </bpel:to>
-                        </bpel:copy>
+                <bpel:assign validate="no" name="Assign-Input">
+                    <bpel:copy>
+                        <bpel:from>
+                            <bpel:literal>
+                                <tns:validateCreditCard xmlns:tns="http://redeban.com/creditcards/ws"
+                                                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                    <person>
+                                        <identificationType>identificationType</identificationType>
+                                        <numberCreditCard>numberCreditCard</numberCreditCard>
+                                        <numberIdentification>numberIdentification</numberIdentification>
+                                    </person>
+                                </tns:validateCreditCard>
+                            </bpel:literal>
+                        </bpel:from>
+                        <bpel:to variable="validateCCUnput" part="parameters"></bpel:to>
+                    </bpel:copy>
+                    <bpel:copy>
+                        <bpel:from part="payload" variable="input">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[order/custDocumentNumber]]></bpel:query>
+                        </bpel:from>
+                        <bpel:to part="parameters" variable="validateCCUnput">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[person/numberIdentification]]></bpel:query>
+                        </bpel:to>
+                    </bpel:copy>
 
+                    <bpel:copy>
+                        <bpel:from part="payload" variable="input">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[order/custDocumentType]]></bpel:query>
+                        </bpel:from>
+                        <bpel:to part="parameters" variable="validateCCUnput">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[person/identificationType]]></bpel:query>
+                        </bpel:to>
+                    </bpel:copy>
+                    <bpel:copy>
+                        <bpel:from part="payload" variable="input">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[order/creditCardNumber]]>
+                            </bpel:query>
+                        </bpel:from>
+                        <bpel:to part="parameters" variable="validateCCUnput">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[person/numberCreditCard]]></bpel:query>
+                        </bpel:to>
+                    </bpel:copy>
+                </bpel:assign>
+
+                <bpel:invoke name="InvokeCreditCardValidation" partnerLink="CreditCardPartnerLink"
+                             operation="validateCreditCard" portType="credit:CreditCard"
+                             inputVariable="validateCCUnput" outputVariable="validateCCOutput"></bpel:invoke>
+            </bpel:sequence>
+
+            <bpel:assign validate="no" name="Assign-counters">
+                <bpel:copy>
+                    <bpel:from>
+                        <bpel:literal>
+                            <tns:IteratorCounter xmlns:tns="http://touresbalon.com.co/model/canonical/1.0.0"
+                                                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                <counter>0</counter>
+                                <iterations>0</iterations>
+                            </tns:IteratorCounter>
+                        </bpel:literal>
+                    </bpel:from>
+                    <bpel:to variable="counter"></bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from>
+                        <bpel:literal>1</bpel:literal>
+                    </bpel:from>
+                    <bpel:to variable="counter">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                            <![CDATA[counter]]></bpel:query>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[count($input.payload/order/items)]]>
+                    </bpel:from>
+                    <bpel:to variable="counter">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                            <![CDATA[iterations]]></bpel:query>
+                    </bpel:to>
+                </bpel:copy>
+            </bpel:assign>
+
+
+            <bpel:while name="While-Iterate-Over-Products">
+                <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$counter/counter <= $counter/iterations]]></bpel:condition>
+
+                <bpel:sequence name="Sequence-Product-Iterations">
+
+                    <bpel:flow name="Flow">
+                        <bpel:sequence name="VALIDATE_TRANSPORT">
+
+
+                            <bpel:assign validate="no" name="Assign-input">
+                                <bpel:copy>
+                                    <bpel:from>
+                                        <bpel:literal>
+                                            <tns:generateReservation
+                                                    xmlns:tns="http://touresbalon.com.co/transport/service/task/1.0.0"
+                                                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                                <request>
+                                                    <date>2001-12-31T12:00:00</date>
+                                                    <provider>BOLIVARIANO</provider>
+                                                    <sourceCity>sourceCity</sourceCity>
+                                                    <targetCity>targetCity</targetCity>
+                                                    <time>time</time>
+                                                </request>
+                                            </tns:generateReservation>
+                                        </bpel:literal>
+                                    </bpel:from>
+                                    <bpel:to variable="validateTransportInput" part="parameters"></bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelDate]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateTransportInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[request/date]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelBusinessProvider]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateTransportInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[request/provider]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/sourceCity]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateTransportInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[request/sourceCity]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/targetCity]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateTransportInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[request/targetCity]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelOutTime]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateTransportInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[request/time]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                            </bpel:assign>
+
+                            <bpel:invoke name="InvokeTransportValidation" partnerLink="TransportWSPartnerLink"
+                                         operation="generateReservation" portType="transport:TransportWS"
+                                         inputVariable="validateTransportInput"
+                                         outputVariable="validateTransportOutput"></bpel:invoke>
+                        </bpel:sequence>
+                        <bpel:sequence name="VALIDATE_LODGING">
+                            <bpel:empty name="validate_lodging_services"></bpel:empty>
+                        </bpel:sequence>
+                        <bpel:sequence name="VALIDATE_SPECTACLE">
+                            <bpel:empty name="validate_spectacle_services"></bpel:empty>
+
+                        </bpel:sequence>
+
+                    </bpel:flow>
+
+                    <bpel:assign validate="no" name="Assign-increment-counter">
                         <bpel:copy>
-                            <bpel:from part="payload" variable="input">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                    <![CDATA[order/custDocumentType]]></bpel:query>
+                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[$counter/counter+1]]>
                             </bpel:from>
-                            <bpel:to part="parameters" variable="validateCCUnput">
+                            <bpel:to variable="counter">
                                 <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                    <![CDATA[person/identificationType]]></bpel:query>
-                            </bpel:to>
-                        </bpel:copy>
-                        <bpel:copy>
-                            <bpel:from part="payload" variable="input">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                    <![CDATA[order/creditCardNumber]]>
-                                </bpel:query>
-                            </bpel:from>
-                            <bpel:to part="parameters" variable="validateCCUnput">
-                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                    <![CDATA[person/numberCreditCard]]></bpel:query>
+                                    <![CDATA[counter]]></bpel:query>
                             </bpel:to>
                         </bpel:copy>
                     </bpel:assign>
 
-                    <bpel:invoke name="InvokeCreditCardValidation" partnerLink="CreditCardPartnerLink"
-                                 operation="validateCreditCard" portType="credit:CreditCard"
-                                 inputVariable="validateCCUnput" outputVariable="validateCCOutput"></bpel:invoke>
                 </bpel:sequence>
+            </bpel:while>
 
-                <bpel:sequence name="VALIDATE_CUSTOMER">
-                    <bpel:empty name="validate_rules_service">
-                    </bpel:empty>
-                </bpel:sequence>
-            </bpel:flow>
         </bpel:sequence>
 
         <bpel:sequence name="ALLOCATION_STAGE">

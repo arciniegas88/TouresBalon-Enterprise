@@ -138,4 +138,13 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name="IteratorCounter">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="counter" type="xs:int"/>
+				<xs:element name="iterations" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
 </xs:schema>
