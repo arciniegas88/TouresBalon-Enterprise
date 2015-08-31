@@ -26,13 +26,19 @@ namespace B2C.Entities
         {
             this.id = contract.id;
 
+            byte[] data;
 
-            byte[] data = Encoding.Default.GetBytes(contract.name);
-            this.name = Encoding.UTF8.GetString(data);
+            if (contract.name != null)
+            { 
+                data = Encoding.Default.GetBytes(contract.name);
+                this.name = Encoding.UTF8.GetString(data);
+            }
 
-            data = Encoding.Default.GetBytes(contract.description);
-            this.description = Encoding.UTF8.GetString(data);
-
+            if(contract.description != null )
+            { 
+                data = Encoding.Default.GetBytes(contract.description);
+                this.description = Encoding.UTF8.GetString(data);
+            }
             if ( contract.imageRef != null)
                 this.image = HandlerImage.convertStreamToImage(contract.imageRef);
 
@@ -41,13 +47,20 @@ namespace B2C.Entities
             this.departureDate = contract.departureDate;
 
             if( contract.transportType != null)
-                this.transport = new Type(contract.transportType);
+                this.Transport = new Type(contract.transportType);
 
-            if( contract.spectacleDate != null)
-                this.spectacle = new Type(contract.spectacleType);
+            if (contract.lodgingType != null)
+                this.Lodging = new Type(contract.lodgingType);
 
-            if( contract.lodgingType != null)
-                this.lodging = new Type(contract.lodgingType);
+            if ( contract.spectacleType != null)
+                this.Spectacle = new Type(contract.spectacleType);
+
+        }
+
+        public Product (DataContractTopFive contract)
+        {
+            this.id = contract.idProduct;
+            this.name = contract.nameProduct;
         }
 
         public Product(int _id, string _name, string _image, string _description)

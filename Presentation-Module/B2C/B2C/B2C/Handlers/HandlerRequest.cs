@@ -19,6 +19,9 @@ namespace B2C.Handlers
         {
             // Create a request for the URL. 
             WebRequest request = WebRequest.Create(url);
+
+            request.ContentType = "application/json; charset=utf-8";
+
             // If required by the server, set the credentials.
             request.Credentials = CredentialCache.DefaultCredentials;
             // Get the response.
