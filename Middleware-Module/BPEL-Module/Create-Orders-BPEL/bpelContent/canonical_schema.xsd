@@ -116,6 +116,14 @@
 		</xs:sequence>
 	</xs:complexType>
 
+	<xs:element name="EvaluationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 	<xs:element name="TransactionVoidResponse">
 		<xs:complexType>
 			<xs:sequence/>
