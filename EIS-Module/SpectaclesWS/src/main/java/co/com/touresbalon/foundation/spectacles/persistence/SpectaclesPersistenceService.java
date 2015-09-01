@@ -86,6 +86,26 @@ public class SpectaclesPersistenceService {
         }
         return valido;
     }
+    @Lock(LockType.READ)
+    public boolean cancelSpectacleReservation(BigInteger idSpectacle, BigInteger idTicket) {
+        boolean valido = false;
+
+        if (idSpectacle != null && idTicket != null) {
+            try {
+                Spectacle spectacle = entityManager.createNamedQuery("Spectacle.findByBuySpectacle", Spectacle.class)
+                        .setParameter("idSpectacle", idSpectacle)
+                        .setParameter("idTicket", idTicket)
+                        .setParameter("state", spectacleTicketReservation).getSingleResult();
+
+                if (spectacle != null) {
+                    valido = updateStateTikect(spectacle, spectacleTicketOpen);
+                }
+            } catch (NoResultException e) {
+                System.out.println("noo se encontro registros");
+            }
+        }
+        return valido;
+    }
 
     /**
      *

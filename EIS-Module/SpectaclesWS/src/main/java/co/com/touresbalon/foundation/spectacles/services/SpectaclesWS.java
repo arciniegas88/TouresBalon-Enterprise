@@ -46,4 +46,16 @@ public class SpectaclesWS {
         return spectaclesPersistenceServices.buySpectacleByTicket(idSpectacle,idTicket);
     }
     
+    /**
+     * @param idSpectacle
+     * @param idTicket
+     * @return
+     */
+    @WebMethod(operationName = "cancelSpectacleReservation",action = "cancelSpectacleReservation")
+    public boolean cancelSpectacleReservation(@WebParam(name = "idSpectacle") BigInteger idSpectacle, @WebParam(name = "idTicket") BigInteger idTicket){
+        return spectaclesPersistenceServices.cancelSpectacleReservation(idSpectacle,idTicket);
+    }
+    
+    
+    
 }  
