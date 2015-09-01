@@ -52,35 +52,34 @@ public class TransportBoundary {
 
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public void confirmTravel( Long orderId, TravelProvider provider , List<TravelConfirmation> request ){
+    public void confirmTravel( Long orderId , List<TravelConfirmation> request ){
 
-        String folder = null;
+        String aviancaFile      = System.getProperty("touresbalon.transports.avianca.shared_directory") + "/confirmations/touresbalon_orden_"+orderId+".csv";
+        String americanFile     = System.getProperty("touresbalon.transports.aa.shared_directory") + "/confirmations/touresbalon_orden_"+orderId+".csv";
+        String bolivarianoFile  = System.getProperty("touresbalon.transports.bolivariano.shared_directory") + "/confirmations/touresbalon_orden_"+orderId+".csv";
 
-        switch ( provider ) {
-
-            case AVIANCA: {
-                folder = System.getProperty("touresbalon.transports.avianca.shared_directory");
-                break;
-            }
-            case AMERICAN_AIRLINES: {
-                folder = System.getProperty("touresbalon.transports.aa.shared_directory");
-                break;
-            }
-            case BOLIVARIANO: {
-                folder = System.getProperty("touresbalon.transports.bolivariano.shared_directory");
-                break;
-            }
-            default:{
-                logger.error("Invalid provider spicified");
-                return;
-            }
-        }
 
         try{
 
-            File outFile = FileUtils.getFile(folder + "/confirmations/touresbalon_orden_"+orderId+".csv");
+            File outFileAvianca = null, outFileBolivariano = null, outFileAmerican= null;
+
             for ( TravelConfirmation c : request ){
-                FileUtils.write(outFile, c.toString(), true);
+
+                if( c.getProvider().equals( TravelProvider.AMERICAN_AIRLINES ) ){
+                    outFileAmerican = (outFileAmerican == null) ? FileUtils.getFile(americanFile) : outFileAmerican;
+                    FileUtils.write(outFileAmerican, c.toString(), true);
+                }
+
+                if( c.getProvider().equals( TravelProvider.AVIANCA ) ){
+                    outFileAvianca = (outFileAvianca == null) ? FileUtils.getFile(aviancaFile) : outFileAvianca;
+                    FileUtils.write(outFileAvianca, c.toString(), true);
+                }
+
+                if( c.getProvider().equals( TravelProvider.BOLIVARIANO ) ){
+                    outFileBolivariano = (outFileBolivariano == null) ? FileUtils.getFile(bolivarianoFile) : outFileBolivariano;
+                    FileUtils.write(outFileBolivariano, c.toString(), true);
+                }
+
             }
 
         }catch (IOException io) {

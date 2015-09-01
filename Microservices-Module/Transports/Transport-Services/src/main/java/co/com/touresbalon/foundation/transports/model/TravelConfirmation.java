@@ -10,6 +10,7 @@ public class TravelConfirmation {
 
     private static SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
 
+    private TravelProvider provider;
     private String firstName;
     private String lastName;
     private Date outDate;
@@ -17,6 +18,14 @@ public class TravelConfirmation {
     private String chairNumber;
 
     public TravelConfirmation() {
+    }
+
+    public TravelProvider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(TravelProvider provider) {
+        this.provider = provider;
     }
 
     public String getFirstName() {

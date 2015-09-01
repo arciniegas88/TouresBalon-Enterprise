@@ -47,9 +47,9 @@ public class TransportWS {
 
     @Oneway
     @WebMethod(operationName = "confirmTravel", action = "confirmTravel")
-    public void confirmTravel(@WebParam(name = "orderId") Long orderId, @WebParam(name = "provider") TravelProvider provider,
+    public void confirmTravel(@WebParam(name = "orderId") Long orderId,
                               @WebParam(name = "confirmations") List<TravelConfirmation> confirmations) {
-        boundary.confirmTravel(orderId, provider, confirmations);
+        boundary.confirmTravel(orderId, confirmations);
     }
 
     //[service] --------------------------
