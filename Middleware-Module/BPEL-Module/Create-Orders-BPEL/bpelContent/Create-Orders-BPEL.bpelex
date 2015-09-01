@@ -5,6 +5,38 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
   </extensions>
   <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#/"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1441080028308"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.4"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.5"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.6"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.7"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
     <extendedObject href="Create-Orders-BPEL.bpel#//@activity"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
@@ -17,43 +49,23 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.1"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.0"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="8" y="8"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.0/@activities.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.1/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.1"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="276" y="8"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.1/@activities.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.2"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.2"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="537" y="8"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.2/@activities.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.3"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="806" y="8"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.4"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="1079" y="8"/>
-  </extensions>
-  <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.4/@activities.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.4"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
@@ -65,55 +77,275 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.0/@activities.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.1/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.1/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.1/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.1/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.1/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.2/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.2/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="8" y="8"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.0/@activities.0/@activities.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#/"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1440978716871"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.1"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.2"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.3/@activities.1"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.0/@copy.4"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.0/@copy.5"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.1"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.3/@activities.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="275" y="8"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.1/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.3/@activities.0/@copy.1"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="536" y="8"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.2/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@else/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@else/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="8" y="8"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0/@copy.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.3/@activities.0/@copy.0"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0/@copy.1"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.3/@activities.0/@copy.2"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0/@copy.2"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@activities.3/@activities.0/@copy.3"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0/@copy.3"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.3"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0/@copy.4"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0/@copy.5"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0/@copy.6"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.0/@copy.7"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.0/@activities.0/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="395" y="8"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.1/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="627" y="8"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.1/@activity/@activities.0/@activities.2/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.4/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.0/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="8" y="8"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.0/@activities.0/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.0/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="269" y="8"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.0/@activities.1/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.0/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="523" y="8"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.0/@activities.2/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.2/@activities.1/@activity/@activities.1/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.8"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Create-Orders-BPEL.bpel#//@variables/@children.4"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.2/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.2/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.2/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.3/@activity/@activities.0/@activities.0/@activities.2/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Create-Orders-BPEL.bpel#//@activity/@activities.1/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
   </extensions>
 </extensionmodel:ExtensionMap>

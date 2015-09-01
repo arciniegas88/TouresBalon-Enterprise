@@ -1,7 +1,11 @@
 ﻿using Customer_Services.microsoft.co.com.touresbalon.foundation.customer.entity;
 using Customer_Services.microsoft.co.com.touresbalon.foundation.customer.boundary;
+using Cross_Cutting.microsoft.co.com.touresbalon.foundation.crosscutting.exception;
 using System;
 using System.Collections.Generic;
+using System.ServiceModel.Web;
+using Cross_Cutting.microsoft.co.com.touresbalon.foundation.crosscutting.entity;
+using System.Net;
 
 namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.rest
 {
@@ -11,9 +15,17 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
     {
         public string createCustomer(Customer customer)
         {
-            CustomerBoundary customerBoundary = new CustomerBoundary();
+            try
+            {
+                CustomerBoundary customerBoundary = new CustomerBoundary();
 
-            return customerBoundary.createCustomer(customer);
+                return customerBoundary.createCustomer(customer);
+            }catch(BusinessException e)
+            {
+                throw new WebFaultException<GeneralResponse>
+                    (new GeneralResponse { message = e.Message, status = GeneralResponse.STATUS_ERROR,
+                        code = "400"}, HttpStatusCode.BadRequest);
+            }
         }
 
         public string deleteCustomer(string id)
@@ -25,9 +37,22 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
 
         public Customer getCustomer(string id)
         {
-            CustomerBoundary customerBoundary = new CustomerBoundary();
-            
-            return customerBoundary.getCustomer(id);
+            try
+            {
+                CustomerBoundary customerBoundary = new CustomerBoundary();
+                return customerBoundary.getCustomer(id);
+
+            }
+            catch (BusinessException e)
+            {
+                throw new WebFaultException<GeneralResponse>
+                    (new GeneralResponse
+                    {
+                        message = e.Message,
+                        status = GeneralResponse.STATUS_ERROR,
+                        code = HttpStatusCode.BadRequest.ToString()
+                    }, HttpStatusCode.BadRequest);
+            }
         }
 
         public IList<Customer> getCustomers(string pagina, string regPagina)

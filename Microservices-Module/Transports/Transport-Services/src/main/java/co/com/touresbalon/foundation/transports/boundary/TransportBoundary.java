@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -114,6 +115,39 @@ public class TransportBoundary {
         return generateReservation( cacheAvianca,request );
     }
 
+    @Lock(LockType.WRITE)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public void cancelAviancaReservation( Reservation reservation, Date travelDate ){
+        cancelReservation( reservation,travelDate,cacheAvianca );
+    }
+
+    @Lock(LockType.WRITE)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public void cancelAAReservation( Reservation reservation, Date travelDate ){
+        cancelReservation( reservation,travelDate,cacheAa );
+    }
+
+    @Lock(LockType.WRITE)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public void cancelBolivarianoReservation( Reservation reservation, Date travelDate ){
+        cancelReservation( reservation,travelDate,cacheBolivariano );
+    }
+
+    public void cancelReservation( Reservation reservation, Date travelDate, Cache<String,Object> cache ){
+
+        Iterator<Entry<String,Object>> iterator = cache.iterator();
+
+        while( iterator.hasNext() ){
+
+            Entry<String,Object> entry = iterator.next();
+
+            if( StringUtils.equals( entry.getKey(), df.format( travelDate ) )){
+                List<Reservation> data = (List<Reservation>) entry.getValue();
+                data.add( reservation );
+                cache.put( entry.getKey(), data );
+            }
+        }
+    }
 
     public ReservationResponseMessage generateReservation(  Cache<String,Object> cache, ReservationRequestMessage request ) {
 

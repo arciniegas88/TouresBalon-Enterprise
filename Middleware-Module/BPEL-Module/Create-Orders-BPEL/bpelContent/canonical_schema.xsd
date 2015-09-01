@@ -53,6 +53,41 @@
             <xs:element name="lodgingBusinessProvider" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:complexType name="ProvisioningStock">
+        <xs:sequence>
+            <xs:element name="completed" type="xs:boolean"/>
+            <xs:element name="transport" type="tns:TransportReservation"/>
+            <xs:element name="lodging" type="tns:LodgingReservation"/>
+            <xs:element name="spectacle" type="tns:SpectacleReservation"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TransportReservation">
+        <xs:sequence>
+        	<xs:element name="available" type="xs:boolean"/>
+            <xs:element name="travelNumber" type="xs:string"/>
+            <xs:element name="chairNumber" type="xs:string"/>
+            <xs:element name="observations" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="LodgingReservation">
+        <xs:sequence>
+        	<xs:element name="available" type="xs:boolean"/>
+            <xs:element name="hotel" type="xs:string"/>
+            <xs:element name="roomNumber" type="xs:string"/>
+            <xs:element name="observations" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SpectacleReservation">
+        <xs:sequence>
+        	<xs:element name="available" type="xs:boolean"/>
+            <xs:element name="ticketSerial" type="xs:string"/>
+            <xs:element name="observations" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
 
 	<!-- ================================================================= -->
 	<!-- CONSTANTS                                                         -->
@@ -116,6 +151,22 @@
 		</xs:sequence>
 	</xs:complexType>
 
+	<xs:element name="JournalProvisioning">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="stock" type="tns:ProvisioningStock" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="EvaluationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 	<xs:element name="TransactionVoidResponse">
 		<xs:complexType>
 			<xs:sequence/>
@@ -135,6 +186,15 @@
 			<xs:complexContent>
 				<xs:extension base="tns:CanonicalFault"/>
 			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="IteratorCounter">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="counter" type="xs:int"/>
+				<xs:element name="iterations" type="xs:int"/>
+			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 

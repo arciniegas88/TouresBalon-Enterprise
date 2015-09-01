@@ -13,6 +13,6 @@
 
     <modules>
         <module>CreditCardWS</module>
+        <module>SpectaclesWS</module>
     </modules>
-
 </project>
