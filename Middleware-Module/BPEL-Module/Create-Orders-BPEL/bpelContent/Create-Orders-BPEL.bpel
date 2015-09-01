@@ -522,6 +522,41 @@
                                                             <![CDATA[provider]]></bpel:query>
                                                     </bpel:to>
                                                 </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                        
+                                                        
+                                                        <![CDATA[false()]]>
+                                                    </bpel:from>
+                                                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        <![CDATA[$journal/canonical:stock[ round($counter/counter) ]/transport/available]]>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                                
                                             </bpel:assign>
                                             <bpel:invoke name="InvokeTransportCancelReservation"
                                                          partnerLink="TransportWSPartnerLink"
@@ -575,6 +610,7 @@
             </bpel:while>
 
             <bpel:sequence name="VALIDATE_CUSTOMER">
+                <bpel:empty name="Validate-almost-oneproduct-in-order"></bpel:empty>
                 <bpel:empty name="validate_rules_service">
                 </bpel:empty>
             </bpel:sequence>
@@ -744,6 +780,13 @@
 
                 </bpel:sequence>
             </bpel:while>
+
+            <bpel:flow name="PROVISIONING_DISPATH_FLOW">
+                <bpel:sequence name="PROVISIONING_TRANSPORT_DISPATH">
+                    <bpel:invoke name="Invoke-transport-confirmation-package" partnerLink="TransportWSPartnerLink" operation="confirmTravel" portType="transport:TransportWS" inputVariable="confirmTransportInput"></bpel:invoke>
+                </bpel:sequence>
+            </bpel:flow>
+
         </bpel:sequence>
 
     </bpel:sequence>
