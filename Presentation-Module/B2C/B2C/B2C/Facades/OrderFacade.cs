@@ -6,6 +6,7 @@ using B2C.Entities;
 using B2C.Agents;
 using B2C.Contracts;
 
+
 namespace B2C.Facades
 {
     public class OrderFacade
@@ -72,10 +73,29 @@ namespace B2C.Facades
             return products;
         }
 
-        /*public List<Order> getOrdersCustomer()
+        public List<Order> getOrdersCustomer(Customer customer)
         {
-            
-        }*/
+            List<Order> orders = new List<Order>();
+
+            foreach( DataContractOrder temp in this.orderService.getOrdersCustomer(customer) )
+            {
+                orders.Add(new Order(temp));
+            }
+
+            return orders;
+        }
+
+        public List<ItemOrder> getItemsOrder(int order)
+        {
+            List<ItemOrder> items = new List<ItemOrder>();
+
+            foreach (DataContractItemOrder temp in this.orderService.getOrder(order)) 
+            {
+                items.Add(new ItemOrder(temp));
+            }
+
+            return items;
+        }
 
     }
 }

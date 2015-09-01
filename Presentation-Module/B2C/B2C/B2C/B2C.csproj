@@ -178,6 +178,8 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Contracts\DataContractLogin.cs" />
     <Compile Include="Entities\Campaign.cs" />
+    <Compile Include="Entities\ItemOrder.cs" />
+    <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Type.cs" />
@@ -255,6 +257,9 @@
     <Content Include="Views\Product\Campaign.cshtml" />
     <Content Include="Views\Product\Filter.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\OrderSmall.cshtml" />
+    <Content Include="Views\Order\Order.cshtml" />
+    <Content Include="Views\Order\Item.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

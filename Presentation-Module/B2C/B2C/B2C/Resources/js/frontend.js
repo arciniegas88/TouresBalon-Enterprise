@@ -94,6 +94,21 @@ $(document).ready(function () {
         }
     });
 
-    
+
+    $(".get_order").click(function () {
+        
+        var id = $(this).attr("id");
+        var temp = id.split("_");
+
+        $.get("/order/get/" + temp[1], function (data) {
+            $("#order_detail").html(data);
+            $("#order_detail").dialog(
+              {
+              height: '400',
+              width: '500',
+              modal: true
+          });
+        });
+    });
     
 });

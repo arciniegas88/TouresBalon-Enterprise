@@ -22,10 +22,10 @@ namespace B2C.Entities
 
         public Campaign(DataContractCampaigns campaing)
         {
-            //this.id = campaing.id;
-            //this.effective_date_up = campaing.effectiveDate;
+            this.id = campaing.id;
             this.image_ref =  HandlerImage.convertStreamToImage(campaing.imageRef);
             this.name = campaing.name;
+            this.product_id = campaing.product.id;
         }
 
         public Campaign()

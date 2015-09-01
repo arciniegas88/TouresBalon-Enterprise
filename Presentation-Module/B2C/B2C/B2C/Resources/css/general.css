@@ -1276,10 +1276,47 @@ input.custom, select.custom
     margin-right: auto;
 }
 
-.item_topfive
-{
+.item_topfive {
     font-size: 18px;
     float: left;
     padding: 20px;
+}
 
+.div_table{
+    display: table;
+}
+
+.order_item
+{
+    clear:both;
+    margin: 10px;
+    width: 100%;
+    display: table-row;   
+    height:100px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.info_left{
+    width:230px;
+    display: table-cell;
+    height: 100px;
+
+}
+
+.button_right
+{
+    display: table-cell;
+    height: 20px;
+}
+
+.space-2
+{
+    padding-top: 25px;
+}
+
+.full-width{
+    width:100%;
 }

@@ -1,0 +1,22 @@
+﻿@{
+    var items = (ViewData["items"] as List<B2C.Entities.ItemOrder>);
+}
+
+<div class="div_table">
+    @foreach (var it in items)
+    {
+        <div class="order_item">
+            <div class="info_left">
+                <p class="bold">Producto</p>
+                <p>@it.ProductName</p>
+                <p><span class="bold">Precio </span> @it.Price</p>
+                <p><span class="bold">Cantidad:  </span> @it.Quantity</p>
+            </div>
+            <div class="button_right">
+                <div class="space-2">
+                    @Html.ActionLink("Ver mas", "detail", "product", new { @id = it.Id }, new { @class = "button icon fa - file - text - o " })
+                </div>
+           </div>
+        </div>
+    }
+</div>
