@@ -25,7 +25,7 @@ namespace B2C.Controllers
         {
             this.ini();
 
-            int totalProducts = 10;//OrderFacade.Instance.getTotalProducts(search, search_by, page, ProductController.BY_PAGE);
+            int totalProducts = OrderFacade.Instance.getTotalProducts(search, search_by, page, ProductController.BY_PAGE);
             int totalPage = (int) Math.Ceiling( (double) totalProducts / (double) ProductController.BY_PAGE );
 
 

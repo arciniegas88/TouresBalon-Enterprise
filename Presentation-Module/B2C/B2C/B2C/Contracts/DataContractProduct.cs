@@ -25,6 +25,27 @@ namespace B2C.Contracts
 
     }
 
+    public class DataContractItemOrder
+    {
+        [JsonProperty("id")]
+        public int id { get; set; }
+
+        [JsonProperty("productId")]
+        public int productId { get; set; }
+
+        [JsonProperty("productName")]
+        public string productName { get; set; }
+
+        [JsonProperty("partnum")]
+        public int partnum { get; set; }
+
+        [JsonProperty("price")]
+        public double price { get; set; }
+
+        [JsonProperty("quantity")]
+        public int quantity { get; set; }
+    }
+
     public class DataContractProduct
     {
         [JsonProperty("id")]
@@ -94,6 +115,13 @@ namespace B2C.Contracts
         public string nameProduct { get; set; }
     }
 
+    public class DataContractProductSmall
+    {
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+        public int id { get; set; }
+    }
+
+
     public class DataContractCampaigns
     {
         
@@ -103,15 +131,11 @@ namespace B2C.Contracts
         [JsonProperty("name")]
         public String name { get; set; }
 
-        /*
-        [JsonProperty("effectiveDate")]
-        public DateTime effectiveDate { get; set; }
-        */
         [JsonProperty("imageRef")]
         public byte[] imageRef { get; set; }
 
-        /*[JsonProperty("product_id")]
-        public int product_id { get; set; }*/
+        [JsonProperty("product")]
+        public DataContractProductSmall product { get; set; }
        
     }
 }

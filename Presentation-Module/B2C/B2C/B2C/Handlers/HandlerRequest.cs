@@ -18,10 +18,9 @@ namespace B2C.Handlers
         public String doRequest(String url, String method)
         {
             // Create a request for the URL. 
-            WebRequest request = WebRequest.Create(url);
-
-            request.ContentType = "application/json; charset=utf-8";
-
+            HttpWebRequest request = HttpWebRequest.CreateHttp(url);
+            request.Accept = "application/json";
+                
             // If required by the server, set the credentials.
             request.Credentials = CredentialCache.DefaultCredentials;
             // Get the response.
