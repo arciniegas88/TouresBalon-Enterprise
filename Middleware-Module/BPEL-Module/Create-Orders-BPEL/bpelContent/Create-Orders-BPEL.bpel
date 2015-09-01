@@ -541,7 +541,7 @@
                         <bpel:copy>
                             <bpel:from queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"
                                        expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0">
-                                <![CDATA[ode:insert-as-first-into($journal, $stock)]]>
+                                <![CDATA[ode:insert-as-last-into($journal, $stock)]]>
                             </bpel:from>
                             <bpel:to variable="journal"/>
                         </bpel:copy>
