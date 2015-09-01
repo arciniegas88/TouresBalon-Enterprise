@@ -151,10 +151,12 @@
 		</xs:sequence>
 	</xs:complexType>
 
+	<xs:element name="stock" type="tns:ProvisioningStock"/>
+
 	<xs:element name="JournalProvisioning">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="stock" type="tns:ProvisioningStock" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="tns:stock" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
