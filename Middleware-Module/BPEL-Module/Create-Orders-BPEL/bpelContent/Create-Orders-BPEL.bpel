@@ -74,6 +74,7 @@
         <bpel:variable name="evaluation" element="canonical:EvaluationResponse"/>
         <bpel:variable name="compTransportInput" messageType="transport:cancelReservation"/>
 
+        <bpel:variable name="journal" element="canonical:JournalProvisioning"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->
@@ -96,11 +97,39 @@
 
         <bpel:sequence name="VALIDATION_STAGE">
 
-            <bpel:sequence name="VALIDATE_CUSTOMER">
-                <bpel:empty name="validate_rules_service">
-                </bpel:empty>
-            </bpel:sequence>
+            <bpel:assign validate="no" name="Assign-variable-init">
+                
 
+                
+                
+                <bpel:copy>
+                    <bpel:from><bpel:literal><tns:JournalProvisioning xmlns:tns="http://touresbalon.com.co/model/canonical/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <stock>
+    <completed/>
+    <transport>
+      <available/>
+      <travelNumber/>
+      <chairNumber/>
+      <observations/>
+    </transport>
+    <lodging>
+      <available/>
+      <hotel/>
+      <roomNumber/>
+      <observations/>
+    </lodging>
+    <spectacle>
+      <available/>
+      <ticketSerial/>
+      <observations/>
+    </spectacle>
+  </stock>
+</tns:JournalProvisioning>
+</bpel:literal></bpel:from>
+                    <bpel:to variable="journal"></bpel:to>
+                </bpel:copy>
+                
+            </bpel:assign>
             <bpel:sequence name="VALIDATE_CREDIT_CARD">
 
                 <bpel:assign validate="no" name="Assign-Input">
@@ -223,7 +252,7 @@
                                 </bpel:copy>
                                 <bpel:copy>
                                     <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelDate]]>
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/transport/travelDate]]>
                                     </bpel:from>
                                     <bpel:to part="parameters" variable="validateTransportInput">
                                         <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
@@ -232,7 +261,7 @@
                                 </bpel:copy>
                                 <bpel:copy>
                                     <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelBusinessProvider]]>
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/transport/travelBusinessProvider]]>
                                     </bpel:from>
                                     <bpel:to part="parameters" variable="validateTransportInput">
                                         <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
@@ -241,7 +270,7 @@
                                 </bpel:copy>
                                 <bpel:copy>
                                     <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/sourceCity]]>
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/transport/sourceCity]]>
                                     </bpel:from>
                                     <bpel:to part="parameters" variable="validateTransportInput">
                                         <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
@@ -250,7 +279,7 @@
                                 </bpel:copy>
                                 <bpel:copy>
                                     <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/targetCity]]>
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/transport/targetCity]]>
                                     </bpel:from>
                                     <bpel:to part="parameters" variable="validateTransportInput">
                                         <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
@@ -259,7 +288,7 @@
                                 </bpel:copy>
                                 <bpel:copy>
                                     <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelOutTime]]>
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/transport/travelOutTime]]>
                                     </bpel:from>
                                     <bpel:to part="parameters" variable="validateTransportInput">
                                         <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
@@ -272,6 +301,46 @@
                                          operation="generateReservation" portType="transport:TransportWS"
                                          inputVariable="validateTransportInput"
                                          outputVariable="validateTransportOutput"></bpel:invoke>
+                            <bpel:assign validate="no" name="Assign-output">
+                                <bpel:copy ignoreMissingFromData="yes">
+                                    <bpel:from part="parameters" variable="validateTransportOutput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[return/available]]>
+                                        </bpel:query>
+                                    </bpel:from>
+                                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$journal/stock[ $counter/counter ]/transport/available]]>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy ignoreMissingFromData="yes">
+                                    <bpel:from part="parameters" variable="validateTransportOutput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[return/chairNumber]]></bpel:query>
+                                    </bpel:from>
+                                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$journal/stock[ $counter/counter ]/transport/chairNumber]]>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy ignoreMissingFromData="yes">
+                                    <bpel:from part="parameters" variable="validateTransportOutput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[return/description]]></bpel:query>
+                                    </bpel:from>
+                                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$journal/stock[ $counter/counter ]/transport/observations]]>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy ignoreMissingFromData="yes">
+                                    <bpel:from part="parameters" variable="validateTransportOutput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[return/travelNumber]]></bpel:query>
+                                    </bpel:from>
+                                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$journal/stock[ $counter/counter ]/transport/travelNumber]]>
+                                    </bpel:to>
+                                </bpel:copy>
+
+                            </bpel:assign>
                         </bpel:sequence>
                         <bpel:sequence name="VALIDATE_LODGING">
                             <bpel:empty name="validate_lodging_services"></bpel:empty>
@@ -285,14 +354,17 @@
 
 
                     <bpel:if name="If-compensation-required">
-                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateTransportOutput.parameters/return/available = false()]]></bpel:condition>
+                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                            <![CDATA[$validateTransportOutput.parameters/return/available = false()]]></bpel:condition>
                         <bpel:sequence name="COMPENSATION-FLOW">
                             <bpel:flow name="Flow2">
                                 <bpel:sequence name="COMPENSATE_TRANSPORT">
 
 
                                     <bpel:if name="If-compensate-reservation">
-                                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateTransportOutput.parameters/return/available = true()]]></bpel:condition>
+                                        <bpel:condition
+                                                expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[$validateTransportOutput.parameters/return/available = true()]]></bpel:condition>
                                         <bpel:sequence>
                                             <bpel:assign validate="no" name="Assign-input">
                                                 <bpel:copy>
@@ -413,15 +485,18 @@
                                                          partnerLink="TransportWSPartnerLink"
                                                          operation="cancelReservation" portType="transport:TransportWS"
                                                          inputVariable="compTransportInput"></bpel:invoke>
+
                                         </bpel:sequence>
                                     </bpel:if>
                                 </bpel:sequence>
 
-                            <bpel:sequence name="COMPENSATE_LODGING">
+                                <bpel:sequence name="COMPENSATE_LODGING">
                                     <bpel:empty name="Empty-compensate"></bpel:empty>
-                                </bpel:sequence><bpel:sequence name="COMPENSATE_SPECTACLE">
+                                </bpel:sequence>
+                                <bpel:sequence name="COMPENSATE_SPECTACLE">
                                     <bpel:empty name="Empty-compensate-spectacle"></bpel:empty>
-                                </bpel:sequence></bpel:flow>
+                                </bpel:sequence>
+                            </bpel:flow>
                         </bpel:sequence>
                         <bpel:else>
                             <bpel:sequence name="STANDAR-FLOW">
@@ -446,16 +521,62 @@
                 </bpel:sequence>
             </bpel:while>
 
+            <bpel:sequence name="VALIDATE_CUSTOMER">
+                <bpel:empty name="validate_rules_service">
+                </bpel:empty>
+            </bpel:sequence>
+
         </bpel:sequence>
 
-        <bpel:sequence name="ALLOCATION_STAGE">
+        <bpel:sequence name="PROVISIONING_STAGE">
+
+            <bpel:assign validate="no" name="Assign-clean-counters">
+                <bpel:copy>
+                    <bpel:from>
+                        <bpel:literal>1</bpel:literal>
+                    </bpel:from>
+                    <bpel:to variable="counter">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                            <![CDATA[counter]]></bpel:query>
+                    </bpel:to>
+                </bpel:copy>
+            </bpel:assign>
 
 
-            <bpel:flow name="Flow1">
-                <bpel:sequence name="Sequence3">
-                    <bpel:empty name="Empty3"></bpel:empty>
+            <bpel:while name="While-Iterate-Over-Products">
+                <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                    <![CDATA[$counter/counter <= $counter/iterations]]></bpel:condition>
+
+                <bpel:sequence name="Sequence-Product-Iterations">
+
+                    <bpel:flow name="PROVISIONING_FLOW">
+                        <bpel:sequence name="PROVISIONING_TRANSPORT">
+                            <bpel:empty name="Empty-allocate-transport"></bpel:empty>
+                        </bpel:sequence>
+                        <bpel:sequence name="PROVISIONING_LODGING">
+                            <bpel:empty name="Empty-allocate-lodging"></bpel:empty>
+                        </bpel:sequence>
+                        <bpel:sequence name="PROVISIONING_SPECTACLE">
+                            <bpel:empty name="Empty-allocate-spectacle"></bpel:empty>
+                        </bpel:sequence>
+                    </bpel:flow>
+
+                    <bpel:assign validate="no" name="Assign-increment-counter">
+                        <bpel:copy>
+                            <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[$counter/counter+1]]>
+                            </bpel:from>
+                            <bpel:to variable="counter">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[counter]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                    </bpel:assign>
+
                 </bpel:sequence>
-            </bpel:flow>
+            </bpel:while>
+
+
         </bpel:sequence>
     </bpel:sequence>
 </bpel:process>
