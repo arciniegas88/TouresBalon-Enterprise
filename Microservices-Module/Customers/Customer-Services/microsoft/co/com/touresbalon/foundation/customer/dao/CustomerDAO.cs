@@ -49,7 +49,6 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                                 creditcard_type = reader.GetString(7),
                                 status = reader.GetString(8)
                             };
-
                             return customer;
                         }
                         else
@@ -101,28 +100,35 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                     {
                         connection.Open();
                         SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            Customer customer = new Customer()
-                            {
-                                Id = reader.GetString(0),
-                                first_name = reader.GetString(1),
-                                last_name = reader.GetString(2),
-                                phone_number = reader.GetString(3),
-                                email = reader.GetString(4),
-                                password = reader.GetString(5),
-                                creditcard_number = reader.GetString(6),
-                                creditcard_type = reader.GetString(7),
-                                status = reader.GetString(8)
-                            };
 
-                            customers.Add(customer);
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Customer customer = new Customer()
+                                {
+                                    Id = reader.GetString(0),
+                                    first_name = reader.GetString(1),
+                                    last_name = reader.GetString(2),
+                                    phone_number = reader.GetString(3),
+                                    email = reader.GetString(4),
+                                    password = reader.GetString(5),
+                                    creditcard_number = reader.GetString(6),
+                                    creditcard_type = reader.GetString(7),
+                                    status = reader.GetString(8)
+                                };
+                                customers.Add(customer);
+                            }
+                            return customers;
                         }
-                        return customers;
+                        else
+                        {
+                            throw new BusinessException("Customers result is empty");
+                        }
                     }
                     catch (Exception ex)
                     {
-                        throw new CustomerException("Error in method to get all customers");
+                        throw new PlatformException(ex.Message, ex);
                     }
                 }
             }
@@ -171,7 +177,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                 }
                 catch (Exception ex)
                 {
-                    return "Error in customer creation method";
+                    throw new PlatformException(ex.Message);
                 }
             }
 
@@ -242,7 +248,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                 }
                 catch (Exception e)
                 {
-                    return "Error in method to delete customer registry";
+                    throw new PlatformException(e.Message);
                 }
             }
 
@@ -304,7 +310,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                 }
                 catch (Exception ex)
                 {
-                    return "Error in method to update customer data";
+                    throw new PlatformException(ex.Message);
                 }
             }
         }
