@@ -577,7 +577,7 @@
                         </bpel:sequence>
                         <bpel:else>
                             <bpel:sequence name="STANDAR-FLOW">
-                                <bpel:empty name="Empty-standar-flow"></bpel:empty>
+                                <bpel:empty name="Empty-chek-almost-one-product-to-provisioning"></bpel:empty>
                             </bpel:sequence>
                         </bpel:else>
                     </bpel:if>
@@ -663,8 +663,7 @@
 
 
                             <bpel:if name="If-apply-provisioning">
-                                <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                    <![CDATA[$journal/canonical:stock[ $counter/counter ]/transport/available = true()]]></bpel:condition>
+                                <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$journal/canonical:stock[ round($counter/counter) ]/transport/available ='true']]></bpel:condition>
                                 <bpel:assign validate="no" name="Assign-provisioning-detail">
 
                                     <bpel:copy>
