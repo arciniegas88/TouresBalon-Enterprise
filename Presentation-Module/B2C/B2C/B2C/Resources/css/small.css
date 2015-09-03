@@ -58,7 +58,7 @@
         width: 100%;
         text-align: center;
         font-size: 1.25em !important;
-        padding: 0.65em 0 !important;
+        padding: 0.65em 0.4em !important;
     }
 
         input[type="button"].icon,
@@ -142,6 +142,8 @@
 
     #main-wrapper, #footer-wrapper {
         padding: 40px 30px 40px 30px;
+        text-align:center;
+
     }
 
     /* Logo */
@@ -165,7 +167,7 @@
 
         #banner h2 {
             font-size: 2em;
-            margin: 0.75em 0 0.5em 0;
+            margin: 0.1em 0 0.5em 0;
         }
 
         #banner p {
@@ -181,6 +183,14 @@
         #banner .button {
             margin: 0 0 1em 0;
         }
+
+         #banner .links
+        {
+            width: 40%;
+            float:right;
+        }
+
+
 
     /* Content */
 
@@ -218,8 +228,9 @@
         width: 25%;
     }
 
+    
     .container {
-        width: 100% !important;
+        width: 90% !important;
     }
 
     .title {
@@ -306,6 +317,7 @@
         .row.uniform.\32 5\25 {
             margin: -5px 0 -1px -5px;
         }
+    
 
     .\31 2u\28small\29, .\31 2u\24\28small\29 {
         width: 100%;
@@ -394,6 +406,12 @@
             clear: left;
         }
 
+            .\31 2u\28medium\29, .\31 2u\24\28medium\29 {
+        width: 100%;
+        clear: none;
+        margin-left: 0;
+    }
+
     .\-11u\28small\29 {
         margin-left: 91.66667%;
     }
@@ -442,4 +460,227 @@
         width: 100%;
         margin: 1%;
     }
+
+    .button
+    {
+        margin-top: 10px;
+    }
+
+    #search
+    {
+        width: 95% !important;
+        margin-left: 2%;
+    }
+
+    #search_by
+    {
+        width: 95% !important;
+        margin-left: 2%;
+    }
+
+    .title
+    {
+        font-size: 20px;
+    }
+
+    .info_type .left
+    {
+        clear: both;
+    }
+
+    .icon-detail 
+    {
+        clear: left;
+    }
+
+    .grid div img{
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .container_topfive
+    {
+        height:230px;
+    }
+
+    .item_topfive
+    {
+        clear: both;
+        width: 100%;
+        text-align: left;
+        padding: 5px;
+    }
+
+    /*** MENU SMALL ***/
+    #navToggle {
+        -moz-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -moz-transition: -moz-transform 0.5s ease;
+        -webkit-transition: -webkit-transform 0.5s ease;
+        -ms-transition: -ms-transform 0.5s ease;
+        transition: transform 0.5s ease;
+        display: block;
+        height: 44px;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 20%;
+        z-index: 10001;
+    }
+
+        #navToggle .toggle {
+            width: 70px;
+            height: 50px;
+            opacity: 0.35;
+        }
+
+            #navToggle .toggle:before {
+                display: inline-block;
+                font-family: FontAwesome;
+                text-decoration: none;
+                font-style: normal;
+                font-weight: normal;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                position: absolute;
+                left: 6px;
+                top: 6px;
+                background: rgba(0, 0, 0, 0.5);
+                width: 58px;
+                height: 38px;
+                border-radius: 6px;
+                content: '\f0c9';
+                color: #fff;
+                text-align: center;
+                line-height: 38px;
+                font-size: 20px;
+            }
+
+            #navToggle .toggle:active {
+                opacity: 0.75;
+            }
+
+    #navPanel {
+        -moz-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -moz-transform: translateX(-275px);
+        -webkit-transform: translateX(-275px);
+        -ms-transform: translateX(-275px);
+        transform: translateX(-275px);
+        -moz-transition: -moz-transform 0.5s ease;
+        -webkit-transition: -webkit-transform 0.5s ease;
+        -ms-transition: -ms-transform 0.5s ease;
+        transition: transform 0.5s ease;
+        display: block;
+        height: 100%;
+        left: 0;
+        overflow-y: auto;
+        position: fixed;
+        top: 0;
+        width: 275px;
+        z-index: 10002;
+        background: #fff;
+        box-shadow: inset -3px 0px 0px 0px #dfdfdf;
+        padding: 0 23px 0 20px;
+    }
+
+        #navPanel .link {
+            display: block;
+            text-decoration: none;
+            height: 54px;
+            line-height: 54px;
+            border-top: solid 1px #e8e8e8;
+            color: #696969;
+        }
+
+            #navPanel .link:first-child {
+                border-top: 0;
+            }
+
+        #navPanel .indent-1 {
+            display: inline-block;
+            width: 1em;
+        }
+
+        #navPanel .indent-2 {
+            display: inline-block;
+            width: 2em;
+        }
+
+        #navPanel .indent-3 {
+            display: inline-block;
+            width: 3em;
+        }
+
+        #navPanel .indent-4 {
+            display: inline-block;
+            width: 4em;
+        }
+
+        #navPanel .indent-5 {
+            display: inline-block;
+            width: 5em;
+        }
+
+        #navPanel .depth-0 {
+            color: #444;
+            font-weight: 800;
+        }
+
+    body.navPanel-visible #page-wrapper {
+        -moz-transform: translateX(275px);
+        -webkit-transform: translateX(275px);
+        -ms-transform: translateX(275px);
+        transform: translateX(275px);
+    }
+
+    body.navPanel-visible #navToggle {
+        -moz-transform: translateX(275px);
+        -webkit-transform: translateX(275px);
+        -ms-transform: translateX(275px);
+        transform: translateX(275px);
+    }
+
+    body.navPanel-visible #navPanel {
+        -moz-transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    
+    #header {
+        margin: 0 auto;
+    }
+
+    .header{
+        padding: 15px 2px;
+    }
+
+    /* Logo */
+
+    #logo span {
+        display: block;
+        margin: 0;
+    }
+
+    /* Nav */
+
+    #nav {
+        display: none;
+    }
+
+    .paginator{
+        float:left;
+    }
+
+    .n_pagination{
+        float: left;
+        width: 380px;
+    }
+
 }

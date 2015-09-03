@@ -1,4 +1,4 @@
-﻿@media screen and (max-width: 980px) {
+﻿@media screen and (min-width:737px) and (max-width: 980px) {
 
     /* Basic */
 
@@ -122,6 +122,13 @@
             position: relative;
             right: auto;
             top: auto;
+            float: right;
+        }
+
+        #banner .links
+        {
+            width: 40%;
+            float:right;
         }
 
     /* Content */

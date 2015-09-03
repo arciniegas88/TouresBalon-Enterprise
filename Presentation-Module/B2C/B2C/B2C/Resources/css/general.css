@@ -293,15 +293,15 @@ button,
     position: relative;
     display: inline-block;
     background: #0090c5;
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 6px !important;
     font-weight: 800;
     outline: 0;
     border: 0;
     cursor: pointer;
     font-size: 1.35em;
-    padding: 0.6em 1.5em;
+    padding: 0.6em 1.5em !important;
 }
 
     input[type="button"].icon:before,
@@ -686,11 +686,15 @@ ol.default {
 #banner {
     position: relative;
     padding: 4.5em;
+    background-image:url("../images/banner.jpg");
+    background-size:100% 100%;
 }
 
     #banner h2 {
         font-size: 3.5em;
-        margin: 0.1em 0 0.35em 0;
+        margin: -0.9em 0 0.35em 0;
+        color: white; 
+
     }
 
     #banner p {
@@ -1319,4 +1323,23 @@ input.custom, select.custom
 
 .full-width{
     width:100%;
+}
+
+.social_media 
+{
+    clear:both;
+    margin-left: auto;
+    margin-right: auto;
+    width: 130px;
+}
+
+.social_media img
+{
+    float: left;
+    padding:5px;
+}
+
+.info_contact
+{
+    clear: both;
 }

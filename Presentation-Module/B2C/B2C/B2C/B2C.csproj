@@ -213,9 +213,13 @@
     <Content Include="Resources\css\medium.css" />
     <Content Include="Resources\css\small.css" />
     <Content Include="Resources\css\xlarge.css" />
+    <Content Include="Resources\images\banner.jpg" />
+    <Content Include="Resources\images\facebook.png" />
     <Content Include="Resources\images\hotel.png" />
+    <Content Include="Resources\images\instagram.png" />
     <Content Include="Resources\images\plane.png" />
     <Content Include="Resources\images\spectacle.png" />
+    <Content Include="Resources\images\twitter.png" />
     <Content Include="Resources\js\frontend.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

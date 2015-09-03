@@ -10,29 +10,11 @@
 
 @section content
 {
-    <!-- Banner -->
-<div id="banner-wrapper">
-    <div id="banner" class="box container">
-        <div class="row">
-            <div class="7u 12u(medium)">
-                <h2>Toures Balon</h2>
-                <p>Tus Ordenes</p>
-            </div>
-            <div class="5u 12u(medium)">
-                <ul>
-                    <li><a href="#" class="button big icon fa-arrow-circle-right">Arma tu plan</a></li>
-                    <li>@Html.ActionLink("Productos", "Index", "Product", new { }, new { @class = "button alt big icon fa-question-circle" })</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div id="order_detail" style="display:none;" >
+    <div id="order_detail" style="display:none;">
 
     </div>
 
-    <div id="main-wrapper">
+    <div id="features-wrapper">
         <div class="container">
             <div class="row">
                 @foreach (var item in orders)
