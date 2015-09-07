@@ -13,7 +13,7 @@ namespace B2C.Agents
     public class OrderService
     {
 
-        public Product getProduct(int id)
+        public DataContractProduct getProduct(int id)
         {
             //SERVICE URI
             String url = "http://localhost:9494/esb/services/web-api/products/" + id;
@@ -24,8 +24,7 @@ namespace B2C.Agents
             try
             {
                 DataContractProduct contract = JsonConvert.DeserializeObject<DataContractProduct>((response)) as DataContractProduct;
-                Product pr = new Product(contract);
-                return pr;
+                return contract;
             }
             catch (JsonSerializationException exception)
             {
@@ -68,7 +67,7 @@ namespace B2C.Agents
             }
         }
 
-        public int  getTotalProducts(string search, string search_by, int page, int byPage)
+        public DataContractCount getTotalProducts(string search, string search_by, int page, int byPage)
         {
             String url = "http://localhost:9494/esb/services/web-api/products/count?";
 
@@ -94,7 +93,7 @@ namespace B2C.Agents
             try
             {
                 DataContractCount contract = JsonConvert.DeserializeObject<DataContractCount>((response)) as DataContractCount;
-                return contract.total;
+                return contract;
             }
             catch (JsonSerializationException exception)
             {

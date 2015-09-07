@@ -63,14 +63,6 @@ namespace B2C.Entities
             this.name = contract.nameProduct;
         }
 
-        public Product(int _id, string _name, string _image, string _description)
-        {
-            this.id = _id;
-            this.name = _name;
-            this.image = _image;
-            this.description = _description;
-        }
-
         public int Id
         {
             get

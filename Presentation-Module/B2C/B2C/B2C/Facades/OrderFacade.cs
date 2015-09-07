@@ -45,7 +45,7 @@ namespace B2C.Facades
 
         public Product getProduct(int id)
         {
-            return this.orderService.getProduct(id);
+            return new Product( this.orderService.getProduct(id));
         }
 
         public List<Product> getProducts(string search, string search_by, int page, int byPage)
@@ -60,7 +60,7 @@ namespace B2C.Facades
 
         public int getTotalProducts(string search, string search_by, int page, int byPage)
         {
-            return this.orderService.getTotalProducts(search, search_by, page, byPage);
+            return this.orderService.getTotalProducts(search, search_by, page, byPage).total;
         }
 
         public List<Product> getTopFive(int id)
