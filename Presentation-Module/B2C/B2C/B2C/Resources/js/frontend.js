@@ -110,5 +110,12 @@ $(document).ready(function () {
           });
         });
     });
+
+    $(".comprar").click(function () {
+        var value = $(this).attr("id");
+        var id = value.split("_")
+        alert(id[1]);
+        return false;
+    });
     
 });

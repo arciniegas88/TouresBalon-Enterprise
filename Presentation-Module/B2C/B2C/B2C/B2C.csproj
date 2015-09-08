@@ -162,9 +162,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgentsService\CustomerAgentsService.cs" />
-    <Compile Include="AgentsService\OrderAgentsService.cs" />
-    <Compile Include="AgentsService\SecurityAgentsService.cs" />
+    <Compile Include="Facades\ProductFacade.cs" />
+    <Compile Include="ServiceAgent\CustomerServiceAgent.cs" />
+    <Compile Include="ServiceAgent\OrderServiceAgent.cs" />
+    <Compile Include="ServiceAgent\ProductServiceAgent.cs" />
+    <Compile Include="ServiceAgent\SecurityServiceAgent.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

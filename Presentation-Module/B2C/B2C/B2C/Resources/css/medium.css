@@ -544,4 +544,21 @@
         width: 30%;
         margin: 1%;
     }
+
+    
+     .footer{
+         margin-right: auto;
+         margin-left: auto;
+     }
+
+     .\33 u, .\33 u\$ {
+       margin-right: auto;
+       margin-left: auto;
+    }
+
+     .footer h3, .footer .info_contact
+     {
+         text-align: center;
+     }
+
 }

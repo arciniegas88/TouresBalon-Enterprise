@@ -523,7 +523,7 @@ ol.default {
 /* Wrappers */
 
 #header-wrapper {
-    padding: 4.5em 0 1em 0;
+    padding: 0.5em 0 1em 0;
 }
 
 #features-wrapper {
@@ -544,6 +544,7 @@ ol.default {
 
 #header {
     position: relative;
+    height: 30px;
 }
 
 /* Logo */

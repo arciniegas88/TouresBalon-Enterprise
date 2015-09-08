@@ -18,7 +18,7 @@ namespace B2C.Controllers
             //Inicializamos el controller
             this.ini();
 
-            ViewData.Add("campaigns", OrderFacade.Instance.getCampaigns());
+            ViewData.Add("campaigns", ProductFacade.Instance.getCampaigns());
 
             return View();
         }

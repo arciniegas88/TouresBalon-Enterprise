@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using B2C.Contracts;
+using System.Text;
 
 namespace B2C.Entities
 {
@@ -16,6 +17,10 @@ namespace B2C.Entities
         {
             this.id = type.id;
             this.name = type.name;
+
+            byte[] data = Encoding.Default.GetBytes(type.name);
+            this.name = Encoding.UTF8.GetString(data);
+
             this.cost = type.cost;
         }
 

@@ -1,4 +1,4 @@
-﻿@media screen and (max-width: 1280px) {
+﻿@media screen and  (min-width:981px) and (max-width: 1280px) {
 
     .image-product-small
     {
@@ -243,5 +243,81 @@
         margin-left: 8.33333%;
     }
 
- 
+    .content_all
+    {
+        width: 100%;
+    }
+
+    .content_all .grid
+    {
+        width: 384px;
+        float: left;
+        margin-top: 20px;
+    }
+    
+    .content_all .last
+    {
+        margin-left: 50px;
+        float: left;
+        width: 500px;
+    }
+
+    .content_all .last .title
+    {
+        margin-top: 20px;
+    }
+
+     .content_all .last .info_type
+     {
+         margin-right: auto;
+         margin-left: auto;
+     }
+
+     .content_all .last .comprar 
+     {
+         
+     }
+
+     .all
+     {
+         width: 340px;
+         margin-right: auto;
+         margin-left: auto;
+     }
+
+     .container_topfive
+     {
+         margin-top: 25px;
+     }
+    
+     .icon-detail
+     {
+         clear: left;
+     }
+
+     .content_all .last .all
+     {
+         clear: both;
+     }
+
+     #navPanel
+     {
+         display:none;
+     }
+
+     
+     .footer{
+         margin-right: auto;
+         margin-left: auto;
+     }
+
+     .\33 u, .\33 u\$ {
+       margin-right: auto;
+       margin-left: auto;
+    }
+
+     .footer h3, .footer .info_contact
+     {
+         text-align: center;
+     }
 }
