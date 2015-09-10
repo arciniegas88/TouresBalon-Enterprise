@@ -162,6 +162,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ShoppingcartController.cs" />
+    <Compile Include="Entities\ProductCart.cs" />
     <Compile Include="Facades\ProductFacade.cs" />
     <Compile Include="ServiceAgent\CustomerServiceAgent.cs" />
     <Compile Include="ServiceAgent\OrderServiceAgent.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\ItemMenu.cs" />
     <Compile Include="Utils\Menu.cs" />
+    <Compile Include="Utils\Message.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -221,6 +224,7 @@
     <Content Include="Resources\images\instagram.png" />
     <Content Include="Resources\images\plane.png" />
     <Content Include="Resources\images\spectacle.png" />
+    <Content Include="Resources\images\sprite.png" />
     <Content Include="Resources\images\twitter.png" />
     <Content Include="Resources\js\frontend.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -266,6 +270,8 @@
     <Content Include="Views\Order\OrderSmall.cshtml" />
     <Content Include="Views\Order\Order.cshtml" />
     <Content Include="Views\Order\Item.cshtml" />
+    <Content Include="Views\Shoppingcart\Show.cshtml" />
+    <Content Include="Views\Shoppingcart\Item.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

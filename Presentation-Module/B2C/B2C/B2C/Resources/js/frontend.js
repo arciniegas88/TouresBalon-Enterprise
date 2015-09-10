@@ -111,11 +111,41 @@ $(document).ready(function () {
         });
     });
 
-    $(".comprar").click(function () {
+    $(".buy").click(function () {
+        //pro_id
         var value = $(this).attr("id");
-        var id = value.split("_")
-        alert(id[1]);
+        var id = value.split("_")[1];
+        var name = $(this).attr("dataname");
+
+        $.post("/shoppingcart/add", { id: id, name: name }, function (data) {
+            alert(data.message);
+        });
         return false;
     });
+
+    $('.delete_item').click(function () {
+        var r = confirm("Esta seguro que desea eliminar este item?");
+
+        if( r )
+        {
+            //delete_ID_POS
+            var value = $(this).attr("id");
+            value = value.split("_");
+            var id = value[1];
+            var pos = value[2];
+            $.post("/shoppingcart/delete", { id: id, pos: pos }, function (data) {
+                if (data.success)
+                {
+                    $("#car_item_" + id).remove();
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+            });
+            return false;
+        }
+
+    });
+
     
 });

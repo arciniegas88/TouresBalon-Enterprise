@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Layout/interna.cshtml";
+    ViewBag.Title = "Compras";
+
+    var products = (ViewData["products"] as List<B2C.Entities.ProductCart>);
+   
+}
+
+@section content
+{
+    <div class="container">
+        <div class="bigcart"></div>
+        <h1 class="header">Tu carrito de compras</h1>
+
+
+        <div class="container_cart">
+    @foreach (var item in products)
+    {
+        @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, pos = item.Pos, delete = String.Concat(item.Id,"_", item.Pos) })
+    }
+        </div>
+    </div>
+
+}
