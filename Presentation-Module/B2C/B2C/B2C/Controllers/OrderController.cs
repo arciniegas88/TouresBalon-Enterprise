@@ -13,7 +13,7 @@ namespace B2C.Controllers
 
     public class OrderController : BaseController
     {
-        // GET: Order
+
         public ActionResult Index()
         {
             this.ini();

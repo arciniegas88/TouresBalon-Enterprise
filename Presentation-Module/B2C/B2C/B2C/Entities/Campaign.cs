@@ -14,11 +14,12 @@ namespace B2C.Entities
 {
     public class Campaign
     {
+        private int id;
+        private int product_id;
         private string name;
         private DateTime effective_date_up;
         private string image_ref;
-        private int id;
-        private int product_id;
+        
 
         public Campaign(DataContractCampaigns campaing)
         {

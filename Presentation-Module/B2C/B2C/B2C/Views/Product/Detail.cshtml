@@ -15,26 +15,18 @@
 <div id="main-wrapper">
     <div class="container">
         <div class="row 200%">
-            <div class="4u 12u(medium)">
-
-                <!-- Sidebar -->
-                <div id="sidebar">
-                    <section class="widget thumbnails">
-                        <h3 class="header">@product.Name</h3>
-                        <div class="grid">
-                            <div class="row 50%">
-                                <img src='@product.Image' width='384' height='304' />
-                             </div>
-                        </div>
-                        <a href="#" class="button icon fa-file-text-o">Ver Mas</a>
-                    </section>
-                </div>
-
-            </div>
-            <div class="8u 12u(medium) important(medium)">
+            <div class="content_all 8u 12u(medium) important(medium)">
 
                 <!-- Content -->
                 <div id="content">
+                    <h3 class="header">@product.Name</h3>
+
+                    <div class="grid">
+                        <div class="row 50%">
+                            <img src='@product.Image' width='384' height='304' />
+                        </div>
+                    </div>
+
                     <section class="last">
                         <h2 class="title">Descripcion del producto</h2>
                         <p class="text-big">
@@ -52,7 +44,7 @@
                             </div>
                         </div>
 
-                        <a href="#" class="button icon fa-arrow-circle-right">Agregar a carrito de compras</a>
+                        <div class="all"><a href="#" class="buy button icon fa-arrow-circle-right" id="pro_@product.Id" dataname="@product.Name">Agregar a carrito de compras</a></div>
                     </section>
                 </div>
 

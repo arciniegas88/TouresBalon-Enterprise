@@ -280,7 +280,6 @@ table {
 
 /* Button */
 
-input[type="button"],
 input[type="submit"],
 input[type="reset"],
 button,
@@ -293,15 +292,36 @@ button,
     position: relative;
     display: inline-block;
     background: #0090c5;
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 6px !important;
     font-weight: 800;
     outline: 0;
     border: 0;
     cursor: pointer;
     font-size: 1.35em;
-    padding: 0.6em 1.5em;
+    padding: 0.6em 1.5em !important;
+}
+
+.buttonsmall
+{
+    -moz-transition: background-color .25s ease-in-out;
+    -webkit-transition: background-color .25s ease-in-out;
+    -ms-transition: background-color .25s ease-in-out;
+    transition: background-color .25s ease-in-out;
+    -webkit-appearance: none;
+    position: relative;
+    display: inline-block;
+    background: #0090c5;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 6px !important;
+    font-weight: 800;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 0.2em 0.9em !important;
 }
 
     input[type="button"].icon:before,
@@ -523,7 +543,7 @@ ol.default {
 /* Wrappers */
 
 #header-wrapper {
-    padding: 4.5em 0 1em 0;
+    padding: 0.5em 0 1em 0;
 }
 
 #features-wrapper {
@@ -544,6 +564,7 @@ ol.default {
 
 #header {
     position: relative;
+    height: 30px;
 }
 
 /* Logo */
@@ -686,11 +707,15 @@ ol.default {
 #banner {
     position: relative;
     padding: 4.5em;
+    background-image:url("../images/banner.jpg");
+    background-size:100% 100%;
 }
 
     #banner h2 {
         font-size: 3.5em;
-        margin: 0.1em 0 0.35em 0;
+        margin: -0.9em 0 0.35em 0;
+        color: white; 
+
     }
 
     #banner p {
@@ -1319,4 +1344,59 @@ input.custom, select.custom
 
 .full-width{
     width:100%;
+}
+
+.social_media 
+{
+    clear:both;
+    margin-left: auto;
+    margin-right: auto;
+    width: 130px;
+}
+
+.social_media img
+{
+    float: left;
+    padding:5px;
+}
+
+.info_contact
+{
+    clear: both;
+}
+
+.car_item
+{
+    float: left;
+    margin: 10px 10px;
+}
+
+.container_cart
+{
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 40px;
+}
+
+.minicart,.minicart:hover {
+	background:#0090c5  url(../images/sprite.png);
+	background-position: -156px 26px;
+	background-repeat:no-repeat;
+}
+
+
+.acart
+{
+    float: left;
+}
+
+.bigcart{
+	background:url(../images/sprite.png);
+	background-position: 0px 11px;
+	background-repeat:no-repeat;
+	width: 110px;
+    float: left;
+	height: 120px;
+	margin:0 0 40px 60px;
 }

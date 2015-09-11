@@ -2,26 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using B2C.Contracts;
-using System.Text;
 
 namespace B2C.Entities
 {
-    public class Type
+    public class ProductCart
     {
         private int id;
         private string name;
-        private double cost;
+        private int pos;
+        private int state = 0;
 
-        public Type(DataContractType type)
+        public Boolean isDelete()
         {
-            this.id = type.id;
-            this.name = type.name;
+            if( this.state == 1)
+            {
+                return true;
+            }
+            return false;
+        }
 
-            byte[] data = Encoding.Default.GetBytes(type.name);
-            this.name = Encoding.UTF8.GetString(data);
+        public void delete()
+        {
+            this.state = 1;
+        }
 
-            this.cost = type.cost;
+        public ProductCart(int id, string name, int pos)
+        {
+            this.id = id;
+            this.name = name;
+            this.pos = pos;
         }
 
         public int Id
@@ -50,16 +59,16 @@ namespace B2C.Entities
             }
         }
 
-        public double Cost
+        public int Pos
         {
             get
             {
-                return cost;
+                return pos;
             }
 
             set
             {
-                cost = value;
+                pos = value;
             }
         }
     }

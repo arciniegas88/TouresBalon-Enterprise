@@ -24,8 +24,8 @@ namespace B2C.Controllers
         public ActionResult Index(string search = "", string search_by="", int page = 1)
         {
             this.ini();
-
-            int totalProducts = OrderFacade.Instance.getTotalProducts(search, search_by, page, ProductController.BY_PAGE);
+            
+            int totalProducts = ProductFacade.Instance.getTotalProducts(search, search_by, page, ProductController.BY_PAGE);
             int totalPage = (int) Math.Ceiling( (double) totalProducts / (double) ProductController.BY_PAGE );
 
 
@@ -34,7 +34,7 @@ namespace B2C.Controllers
             ViewData.Add("search", search);
             ViewData.Add("search_by", search_by);
 
-            ViewData.Add("products", OrderFacade.Instance.getProducts(search, search_by, page, ProductController.BY_PAGE));
+            ViewData.Add("products", ProductFacade.Instance.getProducts(search, search_by, page, ProductController.BY_PAGE));
             ViewData.Add("filter_options", ProductController.FILTER_OPTIONS);
             return View();
         }
@@ -43,8 +43,8 @@ namespace B2C.Controllers
         {
             this.ini();
 
-            ViewData.Add("product", OrderFacade.Instance.getProduct(id));
-            ViewData.Add("products", OrderFacade.Instance.getTopFive(id));
+            ViewData.Add("product", ProductFacade.Instance.getProduct(id));
+            ViewData.Add("products", ProductFacade.Instance.getTopFive(id));
 
             return View();
         }
