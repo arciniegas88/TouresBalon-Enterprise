@@ -10,6 +10,7 @@
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services" />
     <file type="web" url="file://$PROJECT_DIR$/EIS-Module/CreditCardWS" />
     <file type="web" url="file://$PROJECT_DIR$/EIS-Module/SpectaclesWS" />
+    <file type="web" url="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services" />
     <file type="web" url="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services" />
     <file type="web" url="file://$PROJECT_DIR$/Microservices-Module/Orders/Order-Services" />
     <file type="web" url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services" />
@@ -20,6 +21,11 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
