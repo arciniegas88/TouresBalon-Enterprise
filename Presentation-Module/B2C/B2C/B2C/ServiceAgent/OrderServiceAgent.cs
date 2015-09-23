@@ -14,7 +14,7 @@ namespace B2C.Agents
     {
         public List<DataContractItemOrder> getOrder(int order)
         {
-            StringBuilder builder = new StringBuilder("http://localhost:9495/esb/services/web-api/orders/orderItems/");
+            StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("getOrder"));
             builder.Append(order);
 
             HandlerRequest request = new HandlerRequest();
@@ -33,7 +33,7 @@ namespace B2C.Agents
 
         public List<DataContractOrder> getOrdersCustomer(Customer customer)
         {
-            StringBuilder builder = new StringBuilder("http://localhost:9495/esb/services/web-api/orders/customerOrders?");
+            StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("getOrdersCustomer"));
             builder.Append("typeDocument=CC&");
             builder.Append("numberDocument=777777");
 
@@ -50,6 +50,12 @@ namespace B2C.Agents
                 throw (exception);
                 // return new Campaign();
             }
+        }
+
+        public void proccessOrder()
+        {
+            HandlerRequest request = new HandlerRequest();
+            request.doMessage("<order>SALES ORDER REQUEST</order>");
         }
     }
 }

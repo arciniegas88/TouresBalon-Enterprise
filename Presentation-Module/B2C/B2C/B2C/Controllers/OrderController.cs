@@ -30,7 +30,7 @@ namespace B2C.Controllers
             List<ItemOrder> items = OrderFacade.Instance.getItemsOrder(id);
             ViewData.Add("items", items);
             return PartialView("~/Views/Order/Item.cshtml", new { items = items });
-
         }
+
     }
 }

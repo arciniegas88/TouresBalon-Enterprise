@@ -112,14 +112,42 @@ $(document).ready(function () {
     });
 
     $(".buy").click(function () {
-        //pro_id
+
         var value = $(this).attr("id");
         var id = value.split("_")[1];
         var name = $(this).attr("dataname");
 
-        $.post("/shoppingcart/add", { id: id, name: name }, function (data) {
-            alert(data.message);
+        $("#account").val(1);
+
+        $("#name_product").html(name);
+        $("#name_product").attr('data-id', id);
+        
+        $("#lightbox_buy").dialog(
+        {
+           height: 300,
+           width: 450,
+           modal: true
         });
+
+        return false;
+    });
+
+    $('#buyproduct').click(function () {
+        var account = $("#account").val();
+
+        if (account > 0)
+        {
+            var id = $("#name_product").attr('data-id');
+            var name = $("#name_product").html();
+
+            $.post("/shoppingcart/add", { id: id, name: name, account:account }, function (data) {
+                alert(data.message);
+                $("#lightbox_buy").dialog('close');
+            });
+        } else {
+            alert("No se aceptan valores negativos.");
+        }
+
         return false;
     });
 
@@ -145,6 +173,23 @@ $(document).ready(function () {
             return false;
         }
 
+    });
+
+    $('.pager').click(function () {
+        var url = $(this).attr("href");
+        
+        $.post(url, {}, function (data) {
+            $("#list_items").html(data);
+        });
+
+        $("#pagination .disable").addClass("pager");
+        $("#pagination .disable").removeClass("disable");
+        $(this).addClass("disable");
+        return false;
+    });
+
+    $('.disable').click(function () {
+        return false;
     });
 
     

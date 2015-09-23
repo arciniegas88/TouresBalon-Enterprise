@@ -16,9 +16,14 @@
         <div class="container_cart">
     @foreach (var item in products)
     {
-        @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, pos = item.Pos, delete = String.Concat(item.Id,"_", item.Pos) })
+        @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, @account = item.Account, pos = item.Pos, delete = String.Concat(item.Id,"_", item.Pos) })
     }
         </div>
     </div>
+
+    <form action="Proccess">
+        Procesar Orden
+        <input type="submit" value="Procesar Orden" />
+    </form>
 
 }
