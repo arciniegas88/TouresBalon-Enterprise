@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="BusinessRule-Services:war">
+    <output-path>$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/target</output-path>
+    <root id="archive" name="BusinessRule-Services.war">
+      <element id="artifact" artifact-name="BusinessRule-Services:war exploded" />
+    </root>
+  </artifact>
+</component>
