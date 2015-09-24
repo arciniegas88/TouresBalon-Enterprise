@@ -1,0 +1,60 @@
+import co.com.foundation.javeriana.procesos.bolivar.facts.SalenOrders
+
+dialect  "mvel"
+
+
+
+/*--------------------------------------------------------------------
+ * --------   REGLAS DE NEGOCIO PARA CLIENTES TIPO PLATINO   ----------
+ *--------------------------------------------------------------------
+ */
+
+
+
+rule "platinum customers"
+    when
+    $p : SalenOrders( userType == 'platinum')
+    then
+     System.out.println(" ********* order pass platinum customers **********");
+    $p.setApproval(true);
+end
+
+
+/*--------------------------------------------------------------------
+ * --------   REGLAS DE NEGOCIO PARA CLIENTES TIPO DORADO   ----------
+ *--------------------------------------------------------------------
+ */
+
+rule "gold customers"
+    when
+    $p : SalenOrders( userType == 'gold')
+    then
+     System.out.println(" ********* order pass customer gold **********");
+    $p.setApproval(true);
+end
+
+/*--------------------------------------------------------------------
+ * --------   REGLAS DE NEGOCIO PARA CLIENTES TIPO DORADO MONTO MAYOR   ----------
+ *--------------------------------------------------------------------
+ */
+rule "gold customer with greater amount"
+    when
+    $p : SalenOrders( userType == 'gold' &&  6000000 < orderAmount )
+    then
+     System.out.println(" ********* order pass customer gold with greater amount **********");
+    $p.setApproval(false);
+end
+
+
+/*--------------------------------------------------------------------
+ * --------   REGLAS DE NEGOCIO PARA CLIENTES TIPO PLATEADO----------
+ *--------------------------------------------------------------------
+ */
+
+rule "silver customer"
+    when
+    $p : SalenOrders( userType == 'silver')
+    then
+     System.out.println(" ********* order pass customer silver **********");
+    $p.setApproval(false);
+end
