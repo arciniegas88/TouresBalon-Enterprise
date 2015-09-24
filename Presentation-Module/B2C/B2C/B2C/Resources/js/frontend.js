@@ -20,6 +20,15 @@ $(document).ready(function () {
            });
     });
 
+    $("#proccess_button").click(function () {
+        $("#form_proccess").dialog(
+        {
+               height: 600,
+               width: 600,
+               modal: true
+        });
+    });
+
     $("#btn_register").click(function () {
         $("#login_div").hide();
         $("#register_div").show();
@@ -91,6 +100,43 @@ $(document).ready(function () {
                 minlength: "Tu password debe tener mas de 6 caracteres"
             },
             "form.Email": "Ingrese un email valido"
+        }
+    });
+
+    $("#creditCardForm").validate({
+        rules: {
+            "form.Franchise": {
+                required: true,
+            },
+            "form.Number": {
+                required: true,
+                minlength: 12
+            },
+            "form.SECRET_CODE": {
+                required: true,
+                minlength: 4
+            },
+            "form.Year": {
+                required: true,
+            },
+            "form.Month": {
+                required: true,
+            },
+            "form.Dues": {
+                required: true,
+                minlength: 1
+            },
+        },
+        messages: {
+            "form.Dues": {
+                required: "Por favor ingrese Las cuotas",
+                minlength: "Tu password debe tener mas de 6 caracteres"
+            },
+            "form.Month": "Por favor ingrese el mes",
+            "form.Year": "Por favor ingrese el año",
+            "form.SECRET_CODE": "Por favor ingrese el Codigo",
+            "form.Number": "Por favor ingrese el Numero",
+            "form.Franchise": "Por favor ingrese la franquicia",
         }
     });
 

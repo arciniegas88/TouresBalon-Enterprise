@@ -1,0 +1,41 @@
+﻿@using B2C.Forms
+@using B2C.Handlers
+@{ var form = ViewData["form"] as CreditCardForm; }
+
+@using (Html.BeginForm("Proccess", "ShoppingCart", FormMethod.Post, new { @class = "form-horizontal", id = "creditCardForm",role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-card">
+        <label for="form_Franchise">Franquicia</label> 
+        @Html.DropDownListFor(m => form.Franchise, HandlerResource.getFranchises())
+    </div>
+    
+    <div class="form-card">
+        <label for="form_Number">Numero</label>
+         @Html.TextBoxFor(m => form.Number, new { @class = "form-control" })
+    </div>
+
+    <div class="form-card">
+        <label for="form_SECRET_CODE">Codigo</label>
+         @Html.TextBoxFor(m => form.SECRET_CODE, new { @class = "form-control" })
+    </div>
+
+
+    <div class="form-small">
+        <label for="form_Year">Vencimiento</label>
+        @Html.DropDownListFor(m => form.Year, HandlerResource.getYears())
+        @Html.DropDownListFor(m => form.Month, HandlerResource.getMonths())
+    </div>
+
+    <div class="form-small">
+        <label for="form_Dues">Cuotas</label>
+        @Html.DropDownListFor(m => form.Dues, HandlerResource.getDues())
+    </div>
+
+    <div class="form-card">
+        <input type="submit" value="Procesar Orden" class="btn btn-default" />
+    </div>
+
+}

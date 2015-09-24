@@ -19,11 +19,16 @@
         @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, @account = item.Account, pos = item.Pos, delete = String.Concat(item.Id,"_", item.Pos) })
     }
         </div>
+
+        <div class="clear center-block">
+            <a id="proccess_button" href="#" class="buy button icon fa - file - text - o">Procesar Orden</a>
+        </div>
+
     </div>
 
-    <form action="Proccess">
-        Procesar Orden
-        <input type="submit" value="Procesar Orden" />
-    </form>
 
+    
+    <div id="form_proccess" style="display:none;">
+        @RenderPage("~/Views/ShoppingCart/CreditCard.cshtml")
+    </div>
 }

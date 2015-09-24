@@ -1439,5 +1439,38 @@ input.custom, select.custom
 .ui-widget-header
 {
     background-color: #0090c5  !important;
+}
 
+.form-card, .form-small
+{
+    width: 100% !important;
+    padding:2% !important;
+    clear: both !important;
+}
+
+.form-card input,.form-card select
+{
+    width: 60% !important;
+    float: left !important;
+}
+
+.form-small input, .form-small select 
+{
+    width: 20% !important;
+    float: left !important;
+}
+
+.form-small label, .form-card label
+{
+    margin-top: 15px;
+    width: 20% !important;
+    padding-right: 10% !important;
+    float: left !important;
+}
+
+.form-small label.error, .form-card label.error
+{
+    width: 100% !important;
+    clear: both;
+    color: red;
 }
