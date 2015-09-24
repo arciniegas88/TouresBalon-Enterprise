@@ -5,29 +5,37 @@
 	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="TransportWSService"
 	targetNamespace="http://touresbalon.com.co/transport/service/task/1.0.0">
 	<wsdl:types>
+
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 			xmlns:tns="http://touresbalon.com.co/transport/service/task/1.0.0"
 			elementFormDefault="unqualified"
 			targetNamespace="http://touresbalon.com.co/transport/service/task/1.0.0"
 			version="1.0">
+
 			<xs:element name="cancelReservation" type="tns:cancelReservation" />
 			<xs:element name="confirmTravel" type="tns:confirmTravel" />
 			<xs:element name="generateReservation" type="tns:generateReservation" />
 			<xs:element name="generateReservationResponse" type="tns:generateReservationResponse" />
+			<xs:element name="reservationResponseMessage" type="tns:reservationResponseMessage" />
+
+			<xs:element name="confirmations" type="tns:travelConfirmation"/>
+
 			<xs:complexType name="confirmTravel">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="orderId" type="xs:long" />
-					<xs:element minOccurs="0" name="provider" type="tns:travelProvider" />
-					<xs:element maxOccurs="unbounded" minOccurs="0"
-						name="confirmations" type="tns:travelConfirmation" />
+					<xs:element maxOccurs="unbounded"
+                                minOccurs="0"
+                                ref="tns:confirmations"/>
 				</xs:sequence>
 			</xs:complexType>
+			
 			<xs:complexType name="travelConfirmation">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="chairNumber" type="xs:string" />
 					<xs:element minOccurs="0" name="firstName" type="xs:string" />
 					<xs:element minOccurs="0" name="lastName" type="xs:string" />
 					<xs:element minOccurs="0" name="outDate" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="provider" type="tns:travelProvider" />
 					<xs:element minOccurs="0" name="travelNumber" type="xs:string" />
 				</xs:sequence>
 			</xs:complexType>
@@ -54,10 +62,13 @@
 			</xs:complexType>
 			<xs:complexType name="reservationResponseMessage">
 				<xs:sequence>
-					<xs:element name="available" type="xs:boolean" />
-					<xs:element minOccurs="0" name="chairNumber" type="xs:string" />
-					<xs:element minOccurs="0" name="description" type="xs:string" />
-					<xs:element minOccurs="0" name="travelNumber" type="xs:string" />
+					<xs:element name="available" nillable="true" type="xs:boolean" />
+					<xs:element minOccurs="0" name="description" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="travelNumber" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="chairNumber" nillable="true"
+						type="xs:string" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="cancelReservation">

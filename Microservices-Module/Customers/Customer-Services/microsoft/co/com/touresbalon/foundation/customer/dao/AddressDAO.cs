@@ -1,4 +1,5 @@
-﻿using Customer_Services.microsoft.co.com.touresbalon.foundation.customer.entity;
+﻿using Cross_Cutting.microsoft.co.com.touresbalon.foundation.crosscutting.exception;
+using Customer_Services.microsoft.co.com.touresbalon.foundation.customer.entity;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -34,6 +35,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                     try
                     {
                         SqlDataReader reader = command.ExecuteReader();
+
                         while (reader.Read())
                         {
                             Address address = new Address()
@@ -52,9 +54,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                     }
                     catch (Exception ex)
                     {
-                        Address address = new Address() { Id = 1 };
-                        addresses.Add(address);
-                        return addresses;
+                        throw new PlatformException(ex.Message);
                     }
                 }
             }
@@ -94,7 +94,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                 }
                 catch (Exception ex)
                 {
-                    return "Error in method to update address data";
+                    throw new PlatformException(ex.Message);
                 }
             }
         }
@@ -137,13 +137,11 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
 
                         transaction.Commit();
                     }
-
                     return "OK";
-
                 }
                 catch (Exception ex)
                 {
-                    return "Error in address creation method";
+                    throw new PlatformException(ex.Message);
                 }
             }
         }
@@ -184,7 +182,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                     }
                     catch (Exception e)
                     {
-                        return "Error in method to delete address";
+                        throw new PlatformException(e.Message);
                     }
                 }
             }

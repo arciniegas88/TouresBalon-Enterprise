@@ -17,27 +17,6 @@
       <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
-      <profile default="false" name="Annotation profile for Order-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
-        <module name="Order-Services" />
-      </profile>
-      <profile default="false" name="Annotation profile for Product-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
-        <module name="Product-Services" />
-      </profile>
-      <profile default="false" name="Annotation profile for Product-Proxy-Services" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
-        <module name="Product-Proxy-Services" />
-      </profile>
       <profile default="false" name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -46,19 +25,19 @@
         <module name="Create-Orders-BPEL" />
         <module name="Cross-Cutting-Artifacts" />
       </profile>
-      <profile default="false" name="Annotation profile for Transport-Services" enabled="true">
+      <profile default="false" name="Annotation profile for Product-Proxy-Services" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="Transport-Services" />
+        <module name="Product-Proxy-Services" />
       </profile>
-      <profile default="false" name="Annotation profile for Order-Proxy-Services" enabled="true">
+      <profile default="false" name="Annotation profile for Product-Services" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="Order-Proxy-Services" />
+        <module name="Product-Services" />
       </profile>
       <profile default="false" name="Annotation profile for Customer-Proxy-Services" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
@@ -74,12 +53,26 @@
         <processorPath useClasspath="true" />
         <module name="Lodging-Services" />
       </profile>
-      <profile default="false" name="Annotation profile for CreditCardWS" enabled="true">
+      <profile default="false" name="Annotation profile for Order-Proxy-Services" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="CreditCardWS" />
+        <module name="Order-Proxy-Services" />
+      </profile>
+      <profile default="false" name="Annotation profile for Transport-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Transport-Services" />
+      </profile>
+      <profile default="false" name="Annotation profile for Order-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Order-Services" />
       </profile>
       <profile default="false" name="Annotation profile for CreditCard-Adapter" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
@@ -88,10 +81,33 @@
         <processorPath useClasspath="true" />
         <module name="CreditCard-Adapter" />
       </profile>
+      <profile default="false" name="Annotation profile for BusinessRule-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="BusinessRule-Services" />
+      </profile>
+      <profile default="false" name="Annotation profile for CreditCardWS" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="CreditCardWS" />
+      </profile>
+      <profile default="false" name="Annotation profile for SpectaclesWS" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="SpectaclesWS" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
       <module name="BPEL-Module" target="1.5" />
+      <module name="BusinessRule-Services" target="1.7" />
+      <module name="BusinessRules" target="1.5" />
       <module name="Clients" target="1.5" />
       <module name="Create-Orders-BPEL" target="1.5" />
       <module name="CreditCard-Adapter" target="1.7" />
@@ -114,6 +130,7 @@
       <module name="Product-Proxy-Services" target="1.7" />
       <module name="Product-Services" target="1.7" />
       <module name="Products" target="1.5" />
+      <module name="SpectaclesWS" target="1.7" />
       <module name="TouresBalon-Enterprise" target="1.5" />
       <module name="Transport-Services" target="1.7" />
       <module name="Transports" target="1.5" />

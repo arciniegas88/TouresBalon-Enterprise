@@ -4,10 +4,8 @@ import co.com.touresbalon.foundation.transports.boundary.TransportBoundary;
 import co.com.touresbalon.foundation.transports.model.*;
 
 import javax.inject.Inject;
-import javax.jws.Oneway;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebService;
+import javax.jws.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +13,7 @@ import java.util.List;
  * Created by garciniegas on 21/08/2015.
  */
 
+@HandlerChain(file = "/handler-chain.xml")
 @WebService(targetNamespace = "http://touresbalon.com.co/transport/service/task/1.0.0")
 public class TransportWS {
 
@@ -47,9 +46,9 @@ public class TransportWS {
 
     @Oneway
     @WebMethod(operationName = "confirmTravel", action = "confirmTravel")
-    public void confirmTravel(@WebParam(name = "orderId") Long orderId, @WebParam(name = "provider") TravelProvider provider,
+    public void confirmTravel(@WebParam(name = "orderId") BigDecimal orderId,
                               @WebParam(name = "confirmations") List<TravelConfirmation> confirmations) {
-        boundary.confirmTravel(orderId, provider, confirmations);
+        boundary.confirmTravel(orderId.toBigInteger().longValue(), confirmations);
     }
 
     //[service] --------------------------

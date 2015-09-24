@@ -11,6 +11,9 @@
 	<xs:complexType name="SalesOrder">
 		<xs:sequence>
 			<xs:element name="comments" type="xs:string" minOccurs="0" />
+			<xs:element name="custFirstName" type="xs:string" minOccurs="0" />
+			<xs:element name="custLastName" type="xs:string" minOccurs="0" />
+			<xs:element name="custDocumentNumber" type="xs:string" minOccurs="0" />
 			<xs:element name="custDocumentNumber" type="xs:string" minOccurs="0" />
             <xs:element name="custDocumentType" type="tns:documentType" minOccurs="0" />
             <xs:element name="creditCardNumber" type="xs:string"/>
@@ -151,10 +154,12 @@
 		</xs:sequence>
 	</xs:complexType>
 
+	<xs:element name="stock" type="tns:ProvisioningStock"/>
+
 	<xs:element name="JournalProvisioning">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="stock" type="tns:ProvisioningStock" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="tns:stock" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

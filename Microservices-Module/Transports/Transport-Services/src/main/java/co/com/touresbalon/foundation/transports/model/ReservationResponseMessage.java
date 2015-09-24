@@ -1,14 +1,25 @@
 package co.com.touresbalon.foundation.transports.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by garciniegas on 21/08/2015.
  */
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ReservationResponseMessage {
 
+    @XmlElement(nillable=true)
     private boolean available;
+    @XmlElement(nillable=true)
     private String description;
+    @XmlElement(nillable=true)
     private String travelNumber;
+    @XmlElement(nillable=true)
     private String chairNumber;
 
     public ReservationResponseMessage() {

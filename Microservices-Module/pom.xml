@@ -17,6 +17,7 @@
         <module>Customers</module>
 		<module>Transports</module>
         <module>Lodging</module>
+        <module>BusinessRules</module>
     </modules>
 
 </project>

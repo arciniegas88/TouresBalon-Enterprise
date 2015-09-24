@@ -23,36 +23,97 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
             {
                 throw e;
             }
+            catch (PlatformException e)
+            {
+                throw e;
+            }
         }
 
         public IList<Customer> getCustomers(int pagina, int regPagina)
         {
-            CustomerDAO customerDAO = new CustomerDAO();
-            return customerDAO.getCustomers(pagina, regPagina);
+            try
+            {
+                CustomerDAO customerDAO = new CustomerDAO();
+                return customerDAO.getCustomers(pagina, regPagina);
+            }
+            catch (BusinessException e)
+            {
+                throw e;
+            }
+            catch (PlatformException e)
+            {
+                throw e;
+            }
         }
 
         public string createCustomer(Customer customer)
         {
-            CustomerDAO customerDAO = new CustomerDAO();
-            return customerDAO.createCustomer(customer);
+            try
+            {
+                CustomerDAO customerDAO = new CustomerDAO();
+                return customerDAO.createCustomer(customer);
+            }
+            catch (BusinessException e)
+            {
+                throw e;
+            }
+            catch (PlatformException e)
+            {
+                throw e;
+            }
+
         }
 
         public string deleteCustomer(string id)
         {
-            CustomerDAO customerDAO = new CustomerDAO();
-            return customerDAO.deleteCustomer(id);
+            try
+            {
+                CustomerDAO customerDAO = new CustomerDAO();
+                return customerDAO.deleteCustomer(id);
+            }
+            catch (BusinessException e)
+            {
+                throw e;
+            }
+            catch (PlatformException e)
+            {
+                throw e;
+            }
+
         }
 
         public string updateCustomer(Customer customer)
         {
-            CustomerDAO customerDAO = new CustomerDAO();
-            return customerDAO.updateCustomer(customer);
+            try
+            {
+                CustomerDAO customerDAO = new CustomerDAO();
+                return customerDAO.updateCustomer(customer);
+            }
+            catch (BusinessException e)
+            {
+                throw e;
+            }
+            catch (PlatformException e)
+            {
+                throw e;
+            }
         }
 
         public string updateAddress(Address address)
         {
-            AddressDAO addressDAO = new AddressDAO();
-            return addressDAO.updateAddress(address);
+            try
+            {
+                AddressDAO addressDAO = new AddressDAO();
+                return addressDAO.updateAddress(address);
+            }
+            catch (BusinessException e)
+            {
+                throw e;
+            }
+            catch (PlatformException e)
+            {
+                throw e;
+            }
         }
     }
 }

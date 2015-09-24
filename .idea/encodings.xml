@@ -6,6 +6,10 @@
     <file url="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/src/main/java/co/com/touresbalon/foundation/crosscutting/marshall/JacksonJsonProvider.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Cross-Cutting/Cross-Cutting-Artifacts/src/main/resources/META-INF/beans.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/EIS-Module/CreditCardWS" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/EIS-Module/SpectaclesWS" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/src/main/resources/validate_orders.drl" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/src/main/resources/validate_orders.drl" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Orders/Order-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services" charset="UTF-8" />

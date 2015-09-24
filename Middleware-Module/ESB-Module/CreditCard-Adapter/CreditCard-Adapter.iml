@@ -5,7 +5,7 @@
       <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="CreditCard-Adapter-1.0.0-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="co.com.touresbalon.foundation.middleware.CreditCard-Adapter" bundleVersion="1.0.0.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
         <additionalProperties>
           <property key="Bundle-Name" value="CreditCard-Adapter" />
-          <property key="Include-Resource" value="log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,META-INF/spring/service-infrastructure.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/service-infrastructure.xml" />
+          <property key="Include-Resource" value="log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,META-INF/spring/service-infrastructure.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/service-infrastructure.xml,service_contracts/CreditCard.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/CreditCard.wsdl" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>
