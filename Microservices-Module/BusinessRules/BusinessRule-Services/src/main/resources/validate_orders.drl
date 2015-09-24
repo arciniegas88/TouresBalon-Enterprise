@@ -1,4 +1,4 @@
-import co.com.foundation.javeriana.procesos.bolivar.facts.SalenOrders
+import co.com.touresbalon.foundation.businessrules.model.OrderFact
 
 dialect  "mvel"
 
@@ -13,7 +13,7 @@ dialect  "mvel"
 
 rule "platinum customers"
     when
-    $p : SalenOrders( userType == 'platinum')
+    $p : OrderFact( userType == 'platinum')
     then
      System.out.println(" ********* order pass platinum customers **********");
     $p.setApproval(true);
@@ -26,8 +26,9 @@ end
  */
 
 rule "gold customers"
+salience 10
     when
-    $p : SalenOrders( userType == 'gold')
+    $p : OrderFact( userType == 'gold')
     then
      System.out.println(" ********* order pass customer gold **********");
     $p.setApproval(true);
@@ -38,8 +39,9 @@ end
  *--------------------------------------------------------------------
  */
 rule "gold customer with greater amount"
+salience 5
     when
-    $p : SalenOrders( userType == 'gold' &&  6000000 < orderAmount )
+    $p : OrderFact( userType == 'gold' &&  6000000 < orderAmount )
     then
      System.out.println(" ********* order pass customer gold with greater amount **********");
     $p.setApproval(false);
@@ -53,7 +55,7 @@ end
 
 rule "silver customer"
     when
-    $p : SalenOrders( userType == 'silver')
+    $p : OrderFact( userType == 'silver')
     then
      System.out.println(" ********* order pass customer silver **********");
     $p.setApproval(false);
