@@ -9,9 +9,9 @@ namespace B2C.Entities
     {
         private int id;
         private string name;
-        private int pos;
         private int state = 0;
-
+        private int pos = 0;
+        private int account = 0;
         public Boolean isDelete()
         {
             if( this.state == 1)
@@ -26,11 +26,12 @@ namespace B2C.Entities
             this.state = 1;
         }
 
-        public ProductCart(int id, string name, int pos)
+        public ProductCart(int id, string name, int pos, int account)
         {
             this.id = id;
             this.name = name;
             this.pos = pos;
+            this.account = account;
         }
 
         public int Id
@@ -69,6 +70,19 @@ namespace B2C.Entities
             set
             {
                 pos = value;
+            }
+        }
+
+        public int Account
+        {
+            get
+            {
+                return account;
+            }
+
+            set
+            {
+                account = value;
             }
         }
     }

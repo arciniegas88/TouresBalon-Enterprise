@@ -1,7 +1,7 @@
 ﻿<div class="car_item" id="car_item_@Page.id">
     <div class="info_left">
         <p class="bold">@Page.name</p>
-        <p><span class="bold">Cantidad:  </span></p>
+        <p><span class="bold">Cantidad:  @Page.account</span></p>
         <div class="buttons">
             @Html.ActionLink("Ver producto", "detail", "product", new { @id = @Page.id }, new { @class = "buttonsmall icon fa - file - text - o " })
             <input value="Eliminar" id="delete_@Page.delete" type="button" class="delete_item buttonsmall" />

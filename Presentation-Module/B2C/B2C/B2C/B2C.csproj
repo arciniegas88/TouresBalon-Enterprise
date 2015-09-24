@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Apache.NMS">
+      <HintPath>..\..\..\..\..\..\..\..\References\Apache.NMS.dll</HintPath>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ">
+      <HintPath>..\..\..\..\..\..\..\..\References\Apache.NMS.ActiveMQ.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -165,6 +171,8 @@
     <Compile Include="Controllers\ShoppingcartController.cs" />
     <Compile Include="Entities\ProductCart.cs" />
     <Compile Include="Facades\ProductFacade.cs" />
+    <Compile Include="Handlers\HandlerResource.cs" />
+    <Compile Include="Handlers\HandlerXML.cs" />
     <Compile Include="ServiceAgent\CustomerServiceAgent.cs" />
     <Compile Include="ServiceAgent\OrderServiceAgent.cs" />
     <Compile Include="ServiceAgent\ProductServiceAgent.cs" />
@@ -227,6 +235,7 @@
     <Content Include="Resources\images\sprite.png" />
     <Content Include="Resources\images\twitter.png" />
     <Content Include="Resources\js\frontend.js" />
+    <Content Include="Resources\protected\xml\resources.xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -272,6 +281,10 @@
     <Content Include="Views\Order\Item.cshtml" />
     <Content Include="Views\Shoppingcart\Show.cshtml" />
     <Content Include="Views\Shoppingcart\Item.cshtml" />
+    <Content Include="Views\Product\BuyProduct.cshtml" />
+    <Content Include="Views\Shared\paginator.cshtml" />
+    <Content Include="Views\Product\Products.cshtml" />
+    <Content Include="Views\Shoppingcart\Proccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

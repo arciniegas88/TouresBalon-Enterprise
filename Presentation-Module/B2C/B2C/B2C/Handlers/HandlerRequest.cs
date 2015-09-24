@@ -9,11 +9,39 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using B2C.Contracts;
+using Apache.NMS;
+using Apache.NMS.ActiveMQ;
 
 namespace B2C.Handlers
 {
     public class HandlerRequest
     {
+        private static IConnectionFactory factory = null;
+        private static IConnection connection;
+        private static ISession session;
+        private static IDestination destination;
+
+        private static void createConnection()
+        {
+            if (HandlerRequest.factory == null)
+            {
+                HandlerRequest.factory  = new ConnectionFactory(HandlerResource.getServiceAgentLocation("proccessOrder"));
+                HandlerRequest.connection = HandlerRequest.factory.CreateConnection("admin", "admin");
+                HandlerRequest.connection.Start();
+                HandlerRequest.session = HandlerRequest.connection.CreateSession();
+                HandlerRequest.destination = HandlerRequest.session.GetQueue("salesorder.queue");
+            }
+        }
+
+        public void doMessage(String message)
+        {
+            HandlerRequest.createConnection();
+            using (IMessageProducer producer = HandlerRequest.session.CreateProducer(HandlerRequest.destination))
+            {
+                var message_sent = producer.CreateTextMessage(message);
+                producer.Send(message_sent);
+            }
+        }
 
         public String doRequest(String url, String method)
         {

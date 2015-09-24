@@ -8,6 +8,7 @@ namespace B2C
     {
         public void Configuration(IAppBuilder app)
         {
+            Handlers.HandlerResource.iniServiceAgentLocation();
             ConfigureAuth(app);
         }
     }

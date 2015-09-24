@@ -1168,6 +1168,12 @@ body {
 .img-responsive img {
     width: 100%;
     display: block;
+    border-radius: 30px;
+}
+
+.grid img, .feature img
+{
+  border-radius: 30px;
 }
 
 .img-campaign{
@@ -1376,7 +1382,7 @@ input.custom, select.custom
     width: 100%;
     margin-left: 10%;
     margin-right: 10%;
-    margin-top: 40px;
+    margin-top: 140px;
 }
 
 .minicart,.minicart:hover {
@@ -1399,4 +1405,39 @@ input.custom, select.custom
     float: left;
 	height: 120px;
 	margin:0 0 40px 60px;
+}
+
+#lightbox_buy #name_product
+{
+    font-family: 'FontAwesome';
+    font-size: 18px;
+    color: #444;
+    text-align: center;
+    padding: 4px;
+}
+
+#lightbox_buy #account 
+{
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-family: 'FontAwesome';
+    font-size: 14px;
+    color: #444;
+    height:50px;
+}
+
+#lightbox_buy #buyproduct
+{
+    width: 100%;
+    text-align:center;
+}
+
+.ui-widget-header
+{
+    background-color: #0090c5  !important;
+
 }

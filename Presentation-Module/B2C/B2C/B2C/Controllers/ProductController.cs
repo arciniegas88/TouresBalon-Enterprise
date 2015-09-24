@@ -48,5 +48,15 @@ namespace B2C.Controllers
 
             return View();
         }
+
+        public PartialViewResult GetPage()
+        {
+            int page = Int32.Parse(Request.Params.Get("page"));
+            String search = Request.Params.Get("search");
+            String search_by = Request.Params.Get("search_by");
+            List < B2C.Entities.Product > items = ProductFacade.Instance.getProducts(search, search_by, page, ProductController.BY_PAGE);
+            ViewData.Add("items", items);
+            return PartialView("~/Views/Product/Products.cshtml", new { items = items });
+        }
     }
 }

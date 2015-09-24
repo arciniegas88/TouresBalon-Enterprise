@@ -50,6 +50,12 @@ namespace B2C.Facades
 
         public List<Product> getProducts(string search, string search_by, int page, int byPage)
         {
+            if (search == null)
+                search = "";
+
+            if (search_by == null)
+                search_by = "";
+
             List<Product> products = new List<Product>();
             foreach (DataContractProduct item in this.productService.getProducts(search, search_by, page, byPage))
             {

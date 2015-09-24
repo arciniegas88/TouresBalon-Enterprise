@@ -56,5 +56,10 @@ namespace B2C.Facades
             return items;
         }
 
+        public void proccessOrder()
+        {
+            this.orderService.proccessOrder();
+        }
+
     }
 }

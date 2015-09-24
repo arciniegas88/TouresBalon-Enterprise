@@ -13,41 +13,26 @@
 
 @section content
 {
+    <div id="lightbox_buy" style="display:none;">
+        @RenderPage("~/Views/Product/Buyproduct.cshtml")
+    </div>
     <div id="main-wrapper">
         <div class="container">
 
             @RenderPage("~/Views/Product/Filter.cshtml", new { filter_options = filter_options })
 
-            <div class="row">
+            <div class="row" id="list_items">
                 @foreach (var item in products)
                 {
                     @RenderPage("~/Views/Product/ProductSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image })
                 }
             </div>
 
-            <div class="paginator">
-                <nav class="n_pagination">
-                    <ul class="pagination">
-                        @for (var i = 1; i <= total_page; i++)
-                        {
-                            if (i != actual_page)
-                            {
-                                <li>
-                                    @Html.ActionLink(i.ToString(), "Index", "Product", new { @page = i, search = search, search_by = search_by }, new { @class = "pager" })
-                                </li>
-                            }
-                            else
-                            {
-                                @Html.Raw(String.Concat("<li><span>", i, "</span></li>"));
-                            }
-                        }
-                    </ul>
-                </nav>
-            </div>
+            @RenderPage("~/Views/Shared/paginator.cshtml", new { @action = "GetPage", @controller = "Product" , @total_page = total_page, @actual_page = actual_page, @search = search, @search_by = search_by })
         </div>
     </div>
 
-  
 
-    
+
+
 }

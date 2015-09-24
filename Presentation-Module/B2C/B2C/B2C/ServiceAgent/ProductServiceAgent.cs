@@ -16,10 +16,11 @@ namespace B2C.ServiceAgent
         public DataContractProduct getProduct(int id)
         {
             //SERVICE URI
-            String url = "http://localhost:9494/esb/services/web-api/products/" + id;
+            StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("getProduct"));
+            builder.Append(id);
 
             HandlerRequest request = new HandlerRequest();
-            String response = request.doRequest(url, "GET");
+            String response = request.doRequest(builder.ToString(), "GET");
 
             try
             {
@@ -36,8 +37,7 @@ namespace B2C.ServiceAgent
         public List<DataContractProduct> getProducts(string search, string search_by, int page, int byPage)
         {
             //SERVICE URI
-            StringBuilder builder = new StringBuilder();
-            builder.Append("http://localhost:9494/esb/services/web-api/products?");
+            StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("getProducts"));
 
             builder.Append("pageIndex=");
             builder.Append((page - 1) * byPage);
@@ -69,10 +69,7 @@ namespace B2C.ServiceAgent
 
         public DataContractCount getTotalProducts(string search, string search_by, int page, int byPage)
         {
-            String url = "http://localhost:9494/esb/services/web-api/products/count?";
-
-            StringBuilder builder = new StringBuilder();
-            builder.Append(url);
+            StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("getTotalProducts"));
 
             builder.Append("pageIndex=");
             builder.Append((page - 1) * byPage);
@@ -104,7 +101,7 @@ namespace B2C.ServiceAgent
         public List<DataContractCampaigns> getCampigns()
         {
             //SERVICE URI
-            String url = "http://localhost:9494/esb/services/web-api/campaigns";
+            String url = HandlerResource.getServiceAgentLocation("getCampigns");
 
             HandlerRequest request = new HandlerRequest();
             String response = request.doRequest(url, "GET");
@@ -123,9 +120,10 @@ namespace B2C.ServiceAgent
 
         public List<DataContractTopFive> getTopFive(int product)
         {
-            string url = "http://localhost:9495/esb/services/web-api/orders/topItems/" + product;
+            StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("getTopFive"));
+            builder.Append(product);
             HandlerRequest request = new HandlerRequest();
-            String response = request.doRequest(url, "GET");
+            String response = request.doRequest(builder.ToString(), "GET");
 
             try
             {
