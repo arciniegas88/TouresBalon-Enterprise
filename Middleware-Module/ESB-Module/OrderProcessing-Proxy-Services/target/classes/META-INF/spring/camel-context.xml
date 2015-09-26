@@ -19,35 +19,37 @@
     <!-- ================================================================= -->
 
     <!--Configuration of connection to activeMQ -->
+    <!-- infraestructura del broker (message bus) -->
+
     <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="tcp://localhost:61616" />
         <property name="userName" value="admin" />
         <property name="password" value="admin" />
     </bean>
 
-    <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" init-method="start" destroy-method="stop">
-           <property name="maxConnections" value="8" />
-           <property name="connectionFactory" ref="jmsConnectionFactory" />
+    <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+          init-method="start" destroy-method="stop">
+        <property name="maxConnections" value="4" />
+        <property name="connectionFactory" ref="jmsConnectionFactory" />
     </bean>
-         
+
     <bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
-           <property name="connectionFactory" ref="pooledConnectionFactory"/>
-           <property name="concurrentConsumers" value="10"/>
+        <property name="connectionFactory" ref="pooledConnectionFactory" />
+        <property name="transacted" value="false" />
+        <property name="concurrentConsumers" value="10" />
     </bean>
-         
+
     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
         <property name="configuration" ref="jmsConfig" />
     </bean>
 
-    <!-- ================================================================= -->
-    <!-- ESB PROXY SERVICES                                                -->
-    <!-- List of proxy services and camel-fuse routes                      -->
-    <!-- ================================================================= -->
+    <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
 
-    <camelContext xmlns="http://camel.apache.org/schema/spring">
         <camel:route>
             <camel:from uri="activemq:queue:proccessOrder?jmsMessageType=Text" />
             <camel:to uri="file://C:/ORDERS?fileName=request-${date:now:yyyyMMdd_hhmmss}.xml"/>
         </camel:route>
-    </camelContext>
+
+    </camel:camelContext>
+
 </beans>

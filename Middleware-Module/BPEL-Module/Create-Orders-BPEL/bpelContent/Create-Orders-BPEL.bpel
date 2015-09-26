@@ -227,6 +227,8 @@
 
                 <bpel:sequence name="Sequence-Product-Iterations">
 
+
+
                     <bpel:flow name="Flow">
 
                         <bpel:sequence name="VALIDATE_TRANSPORT">
@@ -664,6 +666,7 @@
 
                             <bpel:if name="If-apply-provisioning">
                                 <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$journal/canonical:stock[ round($counter/counter) ]/transport/available ='true']]></bpel:condition>
+                                <!--
                                 <bpel:assign validate="no" name="Assign-provisioning-detail">
 
                                     <bpel:copy>
@@ -751,6 +754,8 @@
                                     </bpel:copy>
 
                                 </bpel:assign>
+                                -->
+                                <bpel:empty name="Empty-allocate-transport"></bpel:empty>
                             </bpel:if>
 
                         </bpel:sequence>

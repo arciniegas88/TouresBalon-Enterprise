@@ -14,7 +14,6 @@
 			<xs:element name="custFirstName" type="xs:string" minOccurs="0" />
 			<xs:element name="custLastName" type="xs:string" minOccurs="0" />
 			<xs:element name="custDocumentNumber" type="xs:string" minOccurs="0" />
-			<xs:element name="custDocumentNumber" type="xs:string" minOccurs="0" />
             <xs:element name="custDocumentType" type="tns:documentType" minOccurs="0" />
             <xs:element name="creditCardNumber" type="xs:string"/>
             <xs:element name="items" type="tns:OrderItem" minOccurs="0" maxOccurs="unbounded"/>

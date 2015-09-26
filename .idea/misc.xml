@@ -7,6 +7,7 @@
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services" />
+    <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderProcessing-Proxy-Services" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services" />
     <file type="web" url="file://$PROJECT_DIR$/EIS-Module/CreditCardWS" />
     <file type="web" url="file://$PROJECT_DIR$/EIS-Module/SpectaclesWS" />
@@ -28,5 +29,5 @@
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK" />
 </project>
