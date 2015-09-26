@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Camel Context -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+       xsi:schemaLocation="
+	   http://www.springframework.org/schema/osgi-compendium https://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+    <!-- ================================================================= -->
+    <!-- ESB SERVICE INFRAESTRUCTURE                                       -->
+    <!-- Service environment configuration                                 -->
+    <!-- ================================================================= -->
+
+    <!--Configuration of connection to activeMQ -->
+    <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:61616" />
+        <property name="userName" value="admin" />
+        <property name="password" value="admin" />
+    </bean>
+
+    <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" init-method="start" destroy-method="stop">
+           <property name="maxConnections" value="8" />
+           <property name="connectionFactory" ref="jmsConnectionFactory" />
+    </bean>
+         
+    <bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+           <property name="connectionFactory" ref="pooledConnectionFactory"/>
+           <property name="concurrentConsumers" value="10"/>
+    </bean>
+         
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="configuration" ref="jmsConfig" />
+    </bean>
+
+    <!-- ================================================================= -->
+    <!-- ESB PROXY SERVICES                                                -->
+    <!-- List of proxy services and camel-fuse routes                      -->
+    <!-- ================================================================= -->
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <camel:route>
+            <camel:from uri="activemq:queue:proccessOrder?jmsMessageType=Text" />
+            <camel:to uri="file://C:/ORDERS?fileName=request-${date:now:yyyyMMdd_hhmmss}.xml"/>
+        </camel:route>
+    </camelContext>
+</beans>
