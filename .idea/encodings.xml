@@ -9,7 +9,6 @@
     <file url="file://$PROJECT_DIR$/EIS-Module/SpectaclesWS" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/src/main/resources/validate_orders.drl" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/src/main/resources/validate_orders.drl" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Orders/Order-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services" charset="UTF-8" />
@@ -21,6 +20,7 @@
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter/src/main/resources/service_contracts/CreditCard.wsdl" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderProcessing-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services" charset="UTF-8" />
   </component>
 </project>

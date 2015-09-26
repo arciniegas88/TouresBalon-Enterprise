@@ -104,7 +104,7 @@
     </wsdl:binding>
     <wsdl:service name="CreditCardService">
         <wsdl:port binding="tns:CreditCardServiceSoapBinding" name="CreditCardPort">
-            <soap:address location="http://localhost:7001/CreditCardWS-1.0-SNAPSHOT/CreditCard"/>
+            <soap:address location="http://localhost:9494/esb/services/entity/CreditCardWS/1.0.0"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
