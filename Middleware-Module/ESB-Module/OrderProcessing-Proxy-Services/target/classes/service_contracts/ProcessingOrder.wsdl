@@ -1,0 +1,53 @@
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.TouresBalon.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.TouresBalon.com">
+    <wsdl:types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://www.TouresBalon.com">
+            <s:element name="processOrder">
+                <s:complexType>
+                    <s:sequence>
+					<s:element minOccurs="1" maxOccurs="1" name="order" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="processOrderResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="processOrderResult" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="string" nillable="true" type="s:string"/>
+        </s:schema>
+    </wsdl:types>
+    <wsdl:message name="processOrderSoapIn">
+        <wsdl:part name="parameters" element="tns:processOrder"/>
+    </wsdl:message>
+    <wsdl:message name="processOrderSoapOut">
+        <wsdl:part name="parameters" element="tns:processOrderResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ProcessOrderServiceSoap">
+        <wsdl:operation name="processOrder">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+                Hola Mundo
+            </wsdl:documentation>
+            <wsdl:input message="tns:processOrderSoapIn"/>
+            <wsdl:output message="tns:processOrderSoapOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ProcessOrderServiceSoap12" type="tns:ProcessOrderServiceSoap">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="processOrder">
+            <soap12:operation soapAction="http://www.TouresBalon.com/processOrder" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ProcessOrderService">
+        <wsdl:port name="ProcessOrderServiceSoap12" binding="tns:ProcessOrderServiceSoap12">
+            <soap12:address location="http://localhost:9080/ProcessingOrder/ProcessOrderService?wsdl"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
