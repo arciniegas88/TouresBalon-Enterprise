@@ -5,6 +5,7 @@
               xmlns:ode="http://www.apache.org/ode/type/extension"
               xmlns:credit="http://redeban.com/creditcards/ws"
               xmlns:transport="http://touresbalon.com.co/transport/service/task/1.0.0"
+              xmlns:spectacle="http://spectacles.com.co/service/task/1.0.0"
               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
               xmlns:canonical="http://touresbalon.com.co/model/canonical/1.0.0"
               name="Create-Orders-BPEL"
@@ -29,6 +30,10 @@
                  namespace="http://touresbalon.com.co/transport/service/task/1.0.0"
                  importType="http://schemas.xmlsoap.org/wsdl/"/>
 
+	<bpel:import location="SpectaclesWS.wsdl"
+                 namespace="http://spectacles.com.co/service/task/1.0.0"
+                 importType="http://schemas.xmlsoap.org/wsdl/"/>
+
     <!-- ================================================================= -->
     <!-- PARTNERLINKS                                                      -->
     <!-- List of services participating in this BPEL process               -->
@@ -49,6 +54,11 @@
                           partnerLinkType="transport:TransportWS_PLT"
                           partnerRole="TransportWS_Role"
                           initializePartnerRole="yes"/>
+                          
+       <bpel:partnerLink name="SpectaclesWSPartnerLink"
+                         partnerLinkType="spectacle:SpectaclesWS_PLT"
+                         partnerRole="SpectaclesWS_Role"
+                         initializePartnerRole="yes"/>                   
 
     </bpel:partnerLinks>
 

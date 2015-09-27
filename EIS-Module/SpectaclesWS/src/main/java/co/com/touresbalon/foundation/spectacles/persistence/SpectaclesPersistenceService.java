@@ -41,14 +41,13 @@ public class SpectaclesPersistenceService {
     public SpectaclesPersistenceService() {
     }
 
-    @Lock(LockType.READ)
+    @Lock(LockType.WRITE)
     public TicketResponseDTO searchTicketByIdSpectacle(BigInteger idSpectacle) {
 
         TicketResponseDTO tickecResponseDTO = new TicketResponseDTO();
-        tickecResponseDTO.setTicket(new BigInteger("0"));
         tickecResponseDTO.setTransactionSuccess(false);
 
-        List<Spectacle> listSpectacle = new ArrayList<Spectacle>();
+        List<Spectacle> listSpectacle = new ArrayList<>();
         if (idSpectacle != null) {
             listSpectacle = entityManager.createNamedQuery("Spectacle.findBySpectacleAndState", Spectacle.class)
                     .setParameter("idSpectacle", idSpectacle)
@@ -66,12 +65,13 @@ public class SpectaclesPersistenceService {
         return tickecResponseDTO;
     }
 
-    @Lock(LockType.READ)
+    @Lock(LockType.WRITE)
     public boolean buySpectacleByTicket(BigInteger idSpectacle, BigInteger idTicket) {
         boolean valido = false;
 
         if (idSpectacle != null && idTicket != null) {
             try {
+
                 Spectacle spectacle = entityManager.createNamedQuery("Spectacle.findByBuySpectacle", Spectacle.class)
                         .setParameter("idSpectacle", idSpectacle)
                         .setParameter("idTicket", idTicket)
@@ -86,6 +86,7 @@ public class SpectaclesPersistenceService {
         }
         return valido;
     }
+
     @Lock(LockType.READ)
     public boolean cancelSpectacleReservation(BigInteger idSpectacle, BigInteger idTicket) {
         boolean valido = false;
@@ -157,28 +158,6 @@ public class SpectaclesPersistenceService {
         return listSpectacleDTO;
     }
 
-    /**
-     * realizar una compra por varios espectaculos
-     *
-     * @param spectacleList
-     * @return
-     */
-    public MensajeRespuesta buyReservationSpectacle(List<SpectacleDTO> spectacleList) {
-        MensajeRespuesta mensajeRespuesta = new MensajeRespuesta();
 
-        for (SpectacleDTO spectacleDTO : spectacleList) {
-            Spectacle spectacle = entityManager.createNamedQuery("Spectacle.findByPK", Spectacle.class)
-                    .setParameter("idSpectacle", spectacleDTO.getIdSpectacle())
-                    .setParameter("idTicket", spectacleDTO.getIdTicket()).getSingleResult();
-            if (spectacle.getState().compareTo(spectacleTicketClosed) == 0) {
-                mensajeRespuesta.setCodigoRespuesta("002");
-                mensajeRespuesta.setDescripcionRespuesta("El tiquite ya no esta disponible");
-                break;
-            }
-
-        }
-
-        return mensajeRespuesta;
-    }
 
 }

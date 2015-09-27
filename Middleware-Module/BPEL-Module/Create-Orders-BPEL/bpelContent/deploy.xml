@@ -2,6 +2,7 @@
 <deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" 
 		xmlns:bpel="http://touresbalon.com.co/orders/service/task/1.0.0" 
 		xmlns:transport="http://touresbalon.com.co/transport/service/task/1.0.0"
+		xmlns:spectacle="http://spectacles.com.co/service/task/1.0.0"
 		xmlns:ws="http://redeban.com/creditcards/ws">
   <process name="bpel:Create-Orders-BPEL">
     <active>true</active>
@@ -15,6 +16,9 @@
     </invoke>
     <invoke partnerLink="TransportWSPartnerLink">
       <service name="transport:TransportWSService" port="TransportWSPort"/>
+    </invoke>
+    <invoke partnerLink="SpectaclesWSPartnerLink">
+      <service name="spectacle:SpectaclesWSService" port="SpectaclesWSPort"/>
     </invoke>
   </process>
 </deploy>

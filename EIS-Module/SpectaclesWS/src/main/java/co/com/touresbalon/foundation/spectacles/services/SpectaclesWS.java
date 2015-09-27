@@ -18,7 +18,7 @@ import javax.jws.WebParam;
  * @author nrodriguez
  */
 
-@WebService()
+@WebService(targetNamespace = "http://spectacles.com.co/service/task/1.0.0")
 public class SpectaclesWS {
 
     /**
@@ -32,6 +32,7 @@ public class SpectaclesWS {
      * @param idSpectacle
      * @return
      */
+
     @WebMethod(operationName = "searchTicketByIdSpectacle",action = "searchTicketByIdSpectacle")
     public TicketResponseDTO searchTicketByIdSpectacle(@WebParam(name = "idSpectacle") BigInteger idSpectacle){
         return spectaclesPersistenceServices.searchTicketByIdSpectacle(idSpectacle);
@@ -45,7 +46,7 @@ public class SpectaclesWS {
     public boolean buySpectacleByTicket(@WebParam(name = "idSpectacle") BigInteger idSpectacle, @WebParam(name = "idTicket") BigInteger idTicket){
         return spectaclesPersistenceServices.buySpectacleByTicket(idSpectacle,idTicket);
     }
-    
+
     /**
      * @param idSpectacle
      * @param idTicket
