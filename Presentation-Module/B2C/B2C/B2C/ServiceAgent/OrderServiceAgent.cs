@@ -7,6 +7,7 @@ using B2C.Handlers;
 using Newtonsoft.Json;
 using B2C.Contracts;
 using System.Text;
+using B2C.Utils;
 
 namespace B2C.Agents
 {
@@ -54,8 +55,21 @@ namespace B2C.Agents
 
         public void proccessOrder()
         {
+            List<ProductCart> products = HandlerSession.getProducts();
+            String xml = HandlerXML.buildMessage(products);
+
             HandlerRequest request = new HandlerRequest();
-            request.doMessage("<order>SALES ORDER REQUEST</order>");
+            request.doMessage(xml, HandlerResource.getServiceAgentLocation("queueProcessingOrder"));
+        }
+
+        public Object cancelOrder(int id)
+        {
+            HandlerRequest request = new HandlerRequest();
+            StringBuilder builder = new StringBuilder("<orderCancel>$id</orderCancel>");
+            builder.Replace("$id", id.ToString());
+
+            request.doMessage( builder.ToString(), HandlerResource.getServiceAgentLocation("queueCancelingOrder"));
+            return (new { success = true, message = Message.CANCEL_IN_PROCESS });
         }
     }
 }

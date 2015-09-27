@@ -9,7 +9,7 @@ namespace B2C.Forms
 {
     public class CreditCardForm
     {
-
+        
 
         [Required]
         [Display(Name = "Franchise")]

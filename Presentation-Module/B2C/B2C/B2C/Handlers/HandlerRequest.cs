@@ -29,14 +29,18 @@ namespace B2C.Handlers
                 HandlerRequest.connection = HandlerRequest.factory.CreateConnection("admin", "admin");
                 HandlerRequest.connection.Start();
                 HandlerRequest.session = HandlerRequest.connection.CreateSession();
-                HandlerRequest.destination = HandlerRequest.session.GetQueue("salesorder.queue");
             }
         }
 
-        public void doMessage(String message)
+        private IDestination getDestination(String queue)
+        {
+            return HandlerRequest.session.GetQueue(queue);
+        }
+
+        public void doMessage(String message, String queue)
         {
             HandlerRequest.createConnection();
-            using (IMessageProducer producer = HandlerRequest.session.CreateProducer(HandlerRequest.destination))
+            using (IMessageProducer producer = HandlerRequest.session.CreateProducer(this.getDestination(queue)))
             {
                 var message_sent = producer.CreateTextMessage(message);
                 producer.Send(message_sent);

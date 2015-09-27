@@ -35,16 +35,16 @@ namespace B2C.Handlers
             HttpContext.Current.Session.Add("UserID", user.UserID);
         }
 
-        public static Object addProduct(int id, string name, int account)
+        public static Object addProduct(int id, string name, int account, double cost)
         {
             int count = HandlerSession.getTotalOrder();
             count += 1;
 
             HandlerSession.setTotalOrder(count);
 
-            HttpContext.Current.Session.Add(String.Concat("producto", count), new ProductCart(id, name, count, account));
+            HttpContext.Current.Session.Add(String.Concat("producto", count), new ProductCart(id, name, count, account, cost));
 
-            return (new { success = true, total = count, message = Message.ADD_SUCCESS });
+            return (new { success = true, total = count, message = Message.CANCEL_IN_PROCESS });
         }
 
         public static Object deleteProduct(int id, int pos)

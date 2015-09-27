@@ -16,4 +16,8 @@
       </serviceAgent>
       <serviceAgent name="getTopFive" location="http://localhost:9495/esb/services/web-api/orders/topItems/">
       </serviceAgent>
+      <serviceAgent name="queueProcessingOrder" location="proccessOrder">
+      </serviceAgent>
+      <serviceAgent name="queueCancelingOrder" location="cancelOrder">
+      </serviceAgent>
 </serviceAgents>

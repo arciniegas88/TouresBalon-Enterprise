@@ -21,6 +21,17 @@
     <!--Configuration of connection to activeMQ -->
     <!-- infraestructura del broker (message bus) -->
 
+    <osgix:cm-properties id="esbProps" persistent-id="esbadmin"/>
+    <ctx:property-placeholder properties-ref="esbProps"/>
+
+    <cxf:cxfEndpoint address="http://localhost:9080/ProcessingOrder/ProcessOrderService?wsdl"
+                     serviceName="s:ProcessOrderService"
+                     endpointName="s:ProcessOrderServiceSoap12"
+                     wsdlURL="service_contracts/ProcessingOrder.wsdl"
+                     id="ProcessOrderService"
+                     xmlns:s="http://www.TouresBalon.com" />
+
+
     <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="tcp://localhost:61616" />
         <property name="userName" value="admin" />
@@ -47,7 +58,22 @@
 
         <camel:route>
             <camel:from uri="activemq:queue:proccessOrder?jmsMessageType=Text" />
-            <camel:to uri="file://C:/ORDERS?fileName=request-${date:now:yyyyMMdd_hhmmss}.xml"/>
+            <camel:to uri="file://C:/ORDERS?fileName=order-${date:now:yyyyMMdd_hhmmss}.xml"/>
+            <!-- <camel:to uri="cxf:bean:ProcessOrderService?dataFormat=MESSAGE"/>
+            <choice>
+                <when>
+                    <camel:xpath>//processOrderResponse/processOrderResult = 'OK'</camel:xpath>
+                    <camel:to uri="file://C:/ORDERS?fileName=response-${date:now:yyyyMMdd_hhmmss}.xml"/>
+                </when>
+                <otherwise>
+                    <camel:to uri="file://C:/ORDERS?fileName=fail-${date:now:yyyyMMdd_hhmmss}.xml"/>
+                </otherwise>
+            </choice> -->
+        </camel:route>
+
+        <camel:route>
+            <camel:from uri="activemq:queue:cancelOrder?jmsMessageType=Text" />
+            <camel:to uri="file://C:/ORDERS?fileName=cancel-${date:now:yyyyMMdd_hhmmss}.xml"/>
         </camel:route>
 
     </camel:camelContext>

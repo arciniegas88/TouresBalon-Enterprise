@@ -73,9 +73,11 @@ namespace B2C.Facades
         public List<Product> getTopFive(int id)
         {
             List<Product> products = new List<Product>();
+            Product product;
             foreach (DataContractTopFive item in this.productService.getTopFive(id))
             {
-                products.Add(new Product(item));
+                product = ProductFacade.Instance.getProduct(item.idProduct);
+                products.Add(product);
             }
             return products;
         }

@@ -683,4 +683,47 @@
         width: 380px;
     }
 
+    #content{
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+    }
+
+     .img_left
+     {
+         clear: both;
+         margin-right: auto;
+         margin-left: auto;
+         width: 100%;
+         max-width: 100%;
+     }
+
+     .content_right
+     {
+         width: 450px;
+         max-width: 100%;
+         clear: both;
+         margin-left: auto;
+         margin-right: auto;
+     }
+
+     .five_items
+    {
+        width: 100%;
+        float: left;
+    }
+
+    .img_left img
+    {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container_topfive
+    {
+        height: 400px;
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+
 }

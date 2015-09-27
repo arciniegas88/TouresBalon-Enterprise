@@ -145,8 +145,9 @@ $(document).ready(function () {
         
         var id = $(this).attr("id");
         var temp = id.split("_");
+        id = temp[1];
 
-        $.get("/order/get/" + temp[1], function (data) {
+        $.get("/order/get/" + id, function (data) {
             $("#order_detail").html(data);
             $("#order_detail").dialog(
               {
@@ -157,17 +158,32 @@ $(document).ready(function () {
         });
     });
 
+    $('.cancel_order').click(function () {
+        var id = $(this).attr("id");
+        var temp = id.split("_");
+        id = temp[1];
+
+        $.post("/order/cancel/" + id, function (data) {
+            if (data.success) {
+                alert(data.message);
+            }
+        }, 'json');
+    });
+
     $(".buy").click(function () {
 
         var value = $(this).attr("id");
         var id = value.split("_")[1];
         var name = $(this).attr("dataname");
+        var cost = $(this).attr("datacost");
 
         $("#account").val(1);
 
         $("#name_product").html(name);
         $("#name_product").attr('data-id', id);
         
+        $("#cost_product").html(cost);
+
         $("#lightbox_buy").dialog(
         {
            height: 300,
@@ -185,8 +201,9 @@ $(document).ready(function () {
         {
             var id = $("#name_product").attr('data-id');
             var name = $("#name_product").html();
+            var cost = $("#cost_product").html();
 
-            $.post("/shoppingcart/add", { id: id, name: name, account:account }, function (data) {
+            $.post("/shoppingcart/add", { id: id, name: name, account:account, cost:cost }, function (data) {
                 alert(data.message);
                 $("#lightbox_buy").dialog('close');
             });

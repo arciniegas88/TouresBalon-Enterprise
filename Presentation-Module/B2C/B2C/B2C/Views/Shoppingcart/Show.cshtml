@@ -3,7 +3,7 @@
     ViewBag.Title = "Compras";
 
     var products = (ViewData["products"] as List<B2C.Entities.ProductCart>);
-   
+    double cost = 0;
 }
 
 @section content
@@ -14,12 +14,16 @@
 
 
         <div class="container_cart">
-    @foreach (var item in products)
-    {
-        @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, @account = item.Account, pos = item.Pos, delete = String.Concat(item.Id,"_", item.Pos) })
-    }
+        @foreach (var item in products)
+        {
+            @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, @account = item.Account, @cost = item.Cost, pos = item.Pos, delete = String.Concat(item.Id, "_", item.Pos) })
+            cost = cost + item.Cost;
+        }
         </div>
-
+        
+        <div class="total">
+            <span class="title">Total: </span> @cost
+        </div>
         <div class="clear center-block">
             <a id="proccess_button" href="#" class="buy button icon fa - file - text - o">Procesar Orden</a>
         </div>
