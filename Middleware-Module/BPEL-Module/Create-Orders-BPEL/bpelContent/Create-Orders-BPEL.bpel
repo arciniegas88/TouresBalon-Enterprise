@@ -88,6 +88,11 @@
 
         <bpel:variable name="confirmTransportInput" messageType="transport:confirmTravel"/>
 
+        <bpel:variable name="searchTicketInput" messageType="spectacle:searchTicketByIdSpectacle"/>
+        <bpel:variable name="searchTicketOutput" messageType="spectacle:searchTicketByIdSpectacleResponse"/>
+        
+        <bpel:variable name="cancelSpectacleInput" messageType="spectacle:cancelSpectacleReservation"></bpel:variable>
+        <bpel:variable name="cancelSpectacleOutput" messageType="spectacle:cancelSpectacleReservationResponse"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->
@@ -248,28 +253,26 @@
 
                     <bpel:copy>
                         <bpel:from>
-                            <bpel:literal>
-                                <stock xmlns:tns="http://touresbalon.com.co/model/canonical/1.0.0">
-                                    <completed/>
+                            <bpel:literal><stock xmlns:tns="http://touresbalon.com.co/model/canonical/1.0.0">
+                                    <completed></completed>
                                     <transport>
-                                        <available/>
-                                        <travelNumber/>
-                                        <chairNumber/>
-                                        <observations/>
+                                        <available></available>
+                                        <travelNumber></travelNumber>
+                                        <chairNumber></chairNumber>
+                                        <observations></observations>
                                     </transport>
                                     <lodging>
-                                        <available/>
-                                        <hotel/>
-                                        <roomNumber/>
-                                        <observations/>
+                                        <available></available>
+                                        <hotel></hotel>
+                                        <roomNumber></roomNumber>
+                                        <observations></observations>
                                     </lodging>
                                     <spectacle>
-                                        <available/>
-                                        <ticketSerial/>
-                                        <observations/>
+                                        <available></available>
+                                        <ticket></ticket>
+                                        <observations></observations>
                                     </spectacle>
-                                </stock>
-                            </bpel:literal>
+                                </stock></bpel:literal>
                         </bpel:from>
                         <bpel:to variable="stock"></bpel:to>
                     </bpel:copy>
@@ -401,10 +404,73 @@
                             </bpel:assign>
                         </bpel:sequence>
                         <bpel:sequence name="VALIDATE_LODGING">
+                            
+                            
+                            
+                            
                             <bpel:empty name="validate_lodging_services"></bpel:empty>
                         </bpel:sequence>
                         <bpel:sequence name="VALIDATE_SPECTACLE">
-                            <bpel:empty name="validate_spectacle_services"></bpel:empty>
+                            
+                            <bpel:assign validate="no" name="Assign-input"><bpel:copy>
+                                    <bpel:from><bpel:literal><tns:searchTicketByIdSpectacle xmlns:tns="http://spectacles.com.co/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <idSpectacle>0</idSpectacle>
+</tns:searchTicketByIdSpectacle>
+</bpel:literal></bpel:from>
+                                    <bpel:to variable="searchTicketInput" part="parameters"></bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/spectacle/id]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="searchTicketInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[idSpectacle]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                            
+                            </bpel:assign>
+                            <bpel:invoke name="InvokeSpectacleTicketSearch" partnerLink="SpectaclesWSPartnerLink" operation="searchTicketByIdSpectacle" portType="spectacle:SpectaclesWS" inputVariable="searchTicketInput" outputVariable="searchTicketOutput"></bpel:invoke>
+                            <bpel:assign validate="no" name="Assign-output"><bpel:copy>
+                                    <bpel:from part="parameters" variable="searchTicketOutput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[return/transactionSuccess]]>
+                                        </bpel:query>
+                                    </bpel:from>
+                                    <bpel:to variable="stock">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[spectacle/available]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from part="parameters" variable="searchTicketOutput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[return/ticket]]></bpel:query>
+                                    </bpel:from>
+                                    <bpel:to variable="stock">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[spectacle/ticket]]></bpel:query>
+                                    </bpel:to>
+                                </bpel:copy>
+                            
+                            </bpel:assign>
                         </bpel:sequence>
 
                     </bpel:flow>
@@ -416,8 +482,7 @@
                     <!-- ================================================================= -->
 
                     <bpel:if name="If-compensation-required">
-                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                            <![CDATA[$validateTransportOutput.parameters/return/available = false()]]></bpel:condition>
+                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateTransportOutput.parameters/return/available = false() or $searchTicketOutput.parameters/return/transactionSuccess = false()]]></bpel:condition>
                         <bpel:sequence name="COMPENSATION-FLOW">
                             <bpel:flow name="Flow2">
                                 <bpel:sequence name="COMPENSATE_TRANSPORT">
@@ -591,7 +656,45 @@
                                     <bpel:empty name="Empty-compensate"></bpel:empty>
                                 </bpel:sequence>
                                 <bpel:sequence name="COMPENSATE_SPECTACLE">
-                                    <bpel:empty name="Empty-compensate-spectacle"></bpel:empty>
+                                    
+                                    <bpel:if name="If-compensate-spectacle-required">
+                                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                            <![CDATA[$searchTicketOutput.parameters/return/transactionSuccess = false()]]>
+                                        </bpel:condition>
+                                        <bpel:sequence>
+                                            
+                                            <bpel:assign validate="no" name="Assign-input">
+                                                <bpel:copy>
+                                                    <bpel:from><bpel:literal><tns:cancelSpectacleReservation xmlns:tns="http://spectacles.com.co/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <idSpectacle>0</idSpectacle>
+  <idTicket>0</idTicket>
+</tns:cancelSpectacleReservation>
+</bpel:literal></bpel:from>
+                                                    <bpel:to variable="cancelSpectacleInput" part="parameters"></bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from part="parameters" variable="searchTicketOutput">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[return/ticket]]></bpel:query>
+                                                    </bpel:from>
+                                                    <bpel:to part="parameters" variable="cancelSpectacleInput">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                            <![CDATA[idTicket]]>
+                                                        </bpel:query>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/spectacle/id]]>
+                                                    </bpel:from>
+                                                    <bpel:to part="parameters" variable="cancelSpectacleInput">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[idSpectacle]]></bpel:query>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                            </bpel:assign>
+                                            
+                                            <bpel:invoke name="InvokeCancelSpectacle" partnerLink="SpectaclesWSPartnerLink" operation="cancelSpectacleReservation" portType="spectacle:SpectaclesWS" inputVariable="cancelSpectacleInput" outputVariable="cancelSpectacleOutput"></bpel:invoke>
+                                        </bpel:sequence>
+                                    </bpel:if>
                                 </bpel:sequence>
                             </bpel:flow>
                         </bpel:sequence>

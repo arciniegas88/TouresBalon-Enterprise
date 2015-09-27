@@ -29,8 +29,8 @@
         <xs:sequence>
             <xs:element name="productId" type="xs:long"/>
             <xs:element name="productName" type="xs:string" minOccurs="0" />
-            <xs:element name="partnum" type="xs:string" minOccurs="0" />
             <xs:element name="transport" type="tns:Transport" minOccurs="0" />
+            <xs:element name="spectacle" type="tns:Spectacle" minOccurs="0" />
             <xs:element name="price" type="xs:decimal" minOccurs="0" />
             <xs:element name="custom" type="tns:OrderItemCustomFields"/>
         </xs:sequence>
@@ -49,6 +49,12 @@
             <xs:element name="travelBusinessProvider" type="tns:transportProvider"/>
         </xs:sequence>
     </xs:complexType>
+    
+	<xs:complexType name="Spectacle">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>    
     
     <xs:complexType name="Lodging">
         <xs:sequence>
@@ -86,7 +92,7 @@
     <xs:complexType name="SpectacleReservation">
         <xs:sequence>
         	<xs:element name="available" type="xs:boolean"/>
-            <xs:element name="ticketSerial" type="xs:string"/>
+            <xs:element name="ticket" type="xs:string"/>
             <xs:element name="observations" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
