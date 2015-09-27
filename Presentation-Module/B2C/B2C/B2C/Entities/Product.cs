@@ -63,6 +63,22 @@ namespace B2C.Entities
             this.name = contract.nameProduct;
         }
 
+        public double getCost()
+        {
+            double cost = 0;
+
+            if (this.transport != null)
+                cost += this.transport.Cost;
+
+            if (this.spectacle != null)
+                cost += this.spectacle.Cost;
+
+            if (this.lodging != null)
+                cost += this.lodging.Cost;
+
+            return cost;
+        }
+
         public int Id
         {
             get

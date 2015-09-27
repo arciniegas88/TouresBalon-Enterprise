@@ -17,7 +17,8 @@ namespace B2C.Controllers
                 int id = Int32.Parse(Request.Params.Get("id"));
                 String name = Request.Params.Get("name");
                 int account = Int32.Parse(Request.Params.Get("account"));
-                Object r = HandlerSession.addProduct(id, name, account);
+                double cost = Double.Parse(Request.Params.Get("cost"));
+                Object r = HandlerSession.addProduct(id, name, account, cost);
 
                 return Json(r);
             }

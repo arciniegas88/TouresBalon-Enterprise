@@ -32,5 +32,10 @@ namespace B2C.Controllers
             return PartialView("~/Views/Order/Item.cshtml", new { items = items });
         }
 
+        public JsonResult Cancel(int id)
+        {
+            return Json(OrderFacade.Instance.cancelOrder(id));
+        }
+
     }
 }

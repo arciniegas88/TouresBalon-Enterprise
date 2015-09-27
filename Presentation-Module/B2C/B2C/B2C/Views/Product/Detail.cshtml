@@ -19,52 +19,53 @@
 <div id="main-wrapper">
     <div class="container">
         <div class="row 200%">
-            <div class="content_all 8u 12u(medium) important(medium)">
-
                 <!-- Content -->
                 <div id="content">
                     <h3 class="header">@product.Name</h3>
 
-                    <div class="grid">
-                        <div class="row 50%">
-                            <img src='@product.Image' width='384' height='304' />
-                        </div>
+                    <div class="grid img_left">
+                         <img src='@product.Image' width='384' height='304' />
                     </div>
+                    <div class="content_right">
+                        <section class="last">
+                            <h2 class="title">Descripcion del producto</h2>
+                            <p class="text-big">
+                                @product.Description
+                            </p>
 
-                    <section class="last">
-                        <h2 class="title">Descripcion del producto</h2>
-                        <p class="text-big">
-                            @product.Description
-                        </p>
-                        
-                        <div class="info_product">
+                            <div class="info_product">
                                 <p><span class="title">Fecha Espectaculo: </span>@product.SpectacleDate</p>
                                 <p><span class="title">Fecha Vuelo: </span>@product.DepartureDate</p>
                                 <p><span class="title">Fecha Aterrizaje: </span>@product.ArrivalDate</p>
-                            <div class="info_type">
-                                <div class="icon-detail plane"></div><p class="left">@product.Transport.Name</p>
-                                <div class="icon-detail spectacle"></div><p class="left">@product.Spectacle.Name</p>
-                                <div class="icon-detail hotel"></div><p class="left">@product.Lodging.Name</p>
+                                <div class="info_type">
+                                    <div class="icon-detail plane"></div><p class="left">@product.Transport.Name</p>
+                                    <div class="icon-detail spectacle"></div><p class="left">@product.Spectacle.Name</p>
+                                    <div class="icon-detail hotel"></div><p class="left">@product.Lodging.Name</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="all"><a href="#" class="buy button icon fa-arrow-circle-right" id="pro_@product.Id" dataname="@product.Name">Agregar a carrito de compras</a></div>
-                    </section>
+                            <div class="price"><span class="title">Precio: </span>@product.getCost()</div>
+
+                            <div class="all"><a href="#" class="buy button icon fa-arrow-circle-right" id="pro_@product.Id" dataname="@product.Name" datacost="@product.getCost()">Agregar a carrito de compras</a></div>
+                        </section>
+                    </div>
                 </div>
-
+            <!--Container de top five-->
+            <div class="container_topfive">
+                <div class="header">Productos relacionados</div>
+                <div class="item_topfive">
+                    @foreach (var item in products)
+                    {
+                        <div class="five_items">
+                            <img src="@item.Image" />
+                            @Html.ActionLink(item.Name, "Detail", "Product", new { @id = item.Id }, new { @class = "top_five" })
+                        </div>
+                    }
+                </div>
             </div>
+
         </div>
 
-
-        <!--Container de top five-->
-        <div class="container_topfive">
-            <div class="header">Productos relacionados</div>
-            @foreach (var item in products)
-            {
-                <div class="item_topfive">@Html.ActionLink(item.Name, "Detail", "Product", new { @id = item.Id }, new { @class = "top_five" })</div>
-            }
-            </div>
-        </div>
     </div>
 </div>
 }

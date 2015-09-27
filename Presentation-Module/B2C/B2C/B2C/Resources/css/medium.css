@@ -561,4 +561,24 @@
          text-align: center;
      }
 
+     .img_left
+     {
+         clear: both;
+         margin-right: auto;
+         margin-left: auto;
+     }
+
+     .content_right
+     {
+         width: 450px;
+         margin-left: auto;
+         margin-right: auto;
+     }
+
+     .img_left img
+     {
+         width: 268px;
+         height: 212px;
+     }
+
 }

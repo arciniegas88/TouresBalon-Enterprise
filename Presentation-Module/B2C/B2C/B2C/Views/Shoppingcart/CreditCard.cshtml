@@ -1,6 +1,6 @@
 ﻿@using B2C.Forms
 @using B2C.Handlers
-@{ var form = ViewData["form"] as CreditCardForm; }
+@{ var form = new CreditCardForm(); }
 
 @using (Html.BeginForm("Proccess", "ShoppingCart", FormMethod.Post, new { @class = "form-horizontal", id = "creditCardForm",role = "form" }))
 {

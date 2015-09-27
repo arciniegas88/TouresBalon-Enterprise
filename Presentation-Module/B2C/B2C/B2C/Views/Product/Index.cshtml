@@ -24,7 +24,7 @@
             <div class="row" id="list_items">
                 @foreach (var item in products)
                 {
-                    @RenderPage("~/Views/Product/ProductSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image })
+                    @RenderPage("~/Views/Product/ProductSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image, cost = item.getCost() })
                 }
             </div>
 
