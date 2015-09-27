@@ -47,8 +47,8 @@ public class TransportWS {
     @Oneway
     @WebMethod(operationName = "confirmTravel", action = "confirmTravel")
     public void confirmTravel(@WebParam(name = "orderId") BigDecimal orderId,
-                              @WebParam(name = "confirmations") List<TravelConfirmation> confirmations) {
-        boundary.confirmTravel(orderId.toBigInteger().longValue(), confirmations);
+                              @WebParam(name = "confirmations") TravelConfirmation confirmation) {
+        boundary.confirmTravel(orderId.toBigInteger().longValue(), confirmation);
     }
 
     //[service] --------------------------

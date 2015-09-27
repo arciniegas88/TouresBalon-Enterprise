@@ -2,33 +2,25 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://touresbalon.com.co/transport/service/task/1.0.0"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
-	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="TransportWSService"
-	targetNamespace="http://touresbalon.com.co/transport/service/task/1.0.0">
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+	name="TransportWSService" targetNamespace="http://touresbalon.com.co/transport/service/task/1.0.0">
 	<wsdl:types>
-
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 			xmlns:tns="http://touresbalon.com.co/transport/service/task/1.0.0"
 			elementFormDefault="unqualified"
 			targetNamespace="http://touresbalon.com.co/transport/service/task/1.0.0"
 			version="1.0">
-
 			<xs:element name="cancelReservation" type="tns:cancelReservation" />
 			<xs:element name="confirmTravel" type="tns:confirmTravel" />
 			<xs:element name="generateReservation" type="tns:generateReservation" />
 			<xs:element name="generateReservationResponse" type="tns:generateReservationResponse" />
 			<xs:element name="reservationResponseMessage" type="tns:reservationResponseMessage" />
-
-			<xs:element name="confirmations" type="tns:travelConfirmation"/>
-
 			<xs:complexType name="confirmTravel">
 				<xs:sequence>
-					<xs:element minOccurs="0" name="orderId" type="xs:long" />
-					<xs:element maxOccurs="unbounded"
-                                minOccurs="0"
-                                ref="tns:confirmations"/>
+					<xs:element minOccurs="0" name="orderId" type="xs:decimal" />
+					<xs:element minOccurs="0" name="confirmations" type="tns:travelConfirmation" />
 				</xs:sequence>
 			</xs:complexType>
-			
 			<xs:complexType name="travelConfirmation">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="chairNumber" type="xs:string" />
@@ -108,11 +100,11 @@
 	<wsdl:message name="confirmTravel">
 		<wsdl:part element="tns:confirmTravel" name="parameters"></wsdl:part>
 	</wsdl:message>
-
+	
 	<plnk:partnerLinkType name="TransportWS_PLT">
 		<plnk:role name="TransportWS_Role" portType="tns:TransportWS" />
 	</plnk:partnerLinkType>
-
+	
 	<wsdl:portType name="TransportWS">
 		<wsdl:operation name="confirmTravel">
 			<wsdl:input message="tns:confirmTravel" name="confirmTravel"></wsdl:input>
