@@ -482,16 +482,14 @@
                     <!-- ================================================================= -->
 
                     <bpel:if name="If-compensation-required">
-                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateTransportOutput.parameters/return/available = false() or $searchTicketOutput.parameters/return/transactionSuccess = false()]]></bpel:condition>
+                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateTransportOutput.parameters/return/available = 'false' or $searchTicketOutput.parameters/return/transactionSuccess = 'false']]></bpel:condition>
                         <bpel:sequence name="COMPENSATION-FLOW">
                             <bpel:flow name="Flow2">
                                 <bpel:sequence name="COMPENSATE_TRANSPORT">
 
 
                                     <bpel:if name="If-compensate-reservation">
-                                        <bpel:condition
-                                                expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                            <![CDATA[$validateTransportOutput.parameters/return/available = true()]]></bpel:condition>
+                                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateTransportOutput.parameters/return/available = 'true']]></bpel:condition>
                                         <bpel:sequence>
                                             <bpel:assign validate="no" name="Assign-input">
                                                 <bpel:copy>
@@ -658,9 +656,7 @@
                                 <bpel:sequence name="COMPENSATE_SPECTACLE">
                                     
                                     <bpel:if name="If-compensate-spectacle-required">
-                                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                            <![CDATA[$searchTicketOutput.parameters/return/transactionSuccess = false()]]>
-                                        </bpel:condition>
+                                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$searchTicketOutput.parameters/return/transactionSuccess = 'true']]></bpel:condition>
                                         <bpel:sequence>
                                             
                                             <bpel:assign validate="no" name="Assign-input">

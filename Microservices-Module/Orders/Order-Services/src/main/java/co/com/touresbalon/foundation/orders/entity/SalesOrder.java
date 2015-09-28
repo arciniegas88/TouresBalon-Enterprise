@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
         @NamedQuery(name = "SalesOrder.ByCustomer",
                 query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
                         "s.comments) FROM SalesOrder s " +
-                        "WHERE s.custDocumentType =:TYPE_DOCUMENT and   s.custDocumentNumber =:NUMBER_DOCUMENT ",
+                        "WHERE s.custDocumentType =:TYPE_DOCUMENT AND s.custDocumentNumber =:NUMBER_DOCUMENT AND s.status = :STATUS",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "SalesOrder.getDetail",
                 query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
@@ -114,7 +114,7 @@ public class SalesOrder implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        return SalesOrderStatus.valueOf( status ).getLabel();
     }
 
     public void setStatus(String status) {

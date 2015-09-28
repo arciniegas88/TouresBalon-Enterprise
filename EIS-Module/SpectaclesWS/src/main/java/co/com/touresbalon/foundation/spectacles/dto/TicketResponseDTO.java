@@ -5,15 +5,24 @@
  */
 package co.com.touresbalon.foundation.spectacles.dto;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigInteger;
 
 /**
  *
  * @author nrodriguez
  */
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TicketResponseDTO {
-    
+
+    @XmlElement(nillable=true)
     private BigInteger ticket;
+    @XmlElement(nillable=true)
     private boolean transactionSuccess;
 
     public BigInteger getTicket() {

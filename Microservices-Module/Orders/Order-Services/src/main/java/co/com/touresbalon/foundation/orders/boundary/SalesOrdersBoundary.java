@@ -6,6 +6,7 @@ import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import co.com.touresbalon.foundation.orders.dto.Product;
 import co.com.touresbalon.foundation.orders.entity.OrderItem;
 import co.com.touresbalon.foundation.orders.entity.SalesOrder;
+import co.com.touresbalon.foundation.orders.entity.SalesOrderStatus;
 import org.slf4j.Logger;
 
 import javax.cache.Cache;
@@ -73,10 +74,13 @@ public class SalesOrdersBoundary {
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<SalesOrder> searchSalesOrderByCustomer(String typeDocument, String numberDocument) throws SystemException {
+
         try {
+
             return em.createNamedQuery("SalesOrder.ByCustomer", SalesOrder.class)
                     .setParameter("TYPE_DOCUMENT", typeDocument)
                     .setParameter("NUMBER_DOCUMENT", numberDocument)
+                    .setParameter("STATUS", SalesOrderStatus.IN_VALIDATION.toString() )
                     .getResultList();
 
         } catch (Throwable enf) {
