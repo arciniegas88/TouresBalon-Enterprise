@@ -481,9 +481,19 @@
                     <!-- Compensate the not aprovisioned products                          -->
                     <!-- ================================================================= -->
 
+                    <bpel:assign validate="no" name="Assign-journal-entry">
+                        <bpel:copy><bpel:from queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0">
+                                <![CDATA[ode:insert-as-last-into($journal, $stock)]]>
+                            </bpel:from>
+                            <bpel:to variable="journal" />
+                        
+                        </bpel:copy>
+                            
+                    </bpel:assign>
                     <bpel:if name="If-compensation-required">
                         <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateTransportOutput.parameters/return/available = 'false' or $searchTicketOutput.parameters/return/transactionSuccess = 'false']]></bpel:condition>
                         <bpel:sequence name="COMPENSATION-FLOW">
+                            
                             <bpel:flow name="Flow2">
                                 <bpel:sequence name="COMPENSATE_TRANSPORT">
 
@@ -751,17 +761,7 @@
                         </bpel:else>
                     </bpel:if>
 
-                    <bpel:assign validate="no" name="Assign-journal-entry">
-
-                        <bpel:copy>
-                            <bpel:from queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"
-                                       expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0">
-                                <![CDATA[ode:insert-as-last-into($journal, $stock)]]>
-                            </bpel:from>
-                            <bpel:to variable="journal"/>
-                        </bpel:copy>
-
-                    </bpel:assign>
+                    
 
                     <bpel:assign validate="no" name="Assign-increment-counter">
                         <bpel:copy>
