@@ -114,7 +114,7 @@ public class SalesOrder implements Serializable {
     }
 
     public String getStatus() {
-        return SalesOrderStatus.valueOf( status ).getLabel();
+        return status != null ? SalesOrderStatus.valueOf( status ).getLabel() : null;
     }
 
     public void setStatus(String status) {

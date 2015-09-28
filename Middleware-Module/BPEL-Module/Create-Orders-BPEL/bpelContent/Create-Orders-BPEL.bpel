@@ -531,7 +531,9 @@
                                                 <bpel:copy>
                                                     <bpel:from
                                                             expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelOutTime]]>
+                                                        
+                                                        
+                                                        <![CDATA[$input.payload/order/items[round($counter/counter) ]/transport/travelOutTime]]>
                                                     </bpel:from>
                                                     <bpel:to part="parameters" variable="compTransportInput">
                                                         <bpel:query
@@ -545,7 +547,49 @@
                                                             expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
 
 
-                                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/sourceCity]]>
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        <![CDATA[$input.payload/order/items[round($counter/counter) ]/transport/sourceCity]]>
                                                     </bpel:from>
                                                     <bpel:to part="parameters" variable="compTransportInput">
                                                         <bpel:query
@@ -558,7 +602,9 @@
                                                             expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
 
 
-                                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/targetCity]]>
+                                                        
+                                                        
+                                                        <![CDATA[$input.payload/order/items[round($counter/counter) ]/transport/targetCity]]>
                                                     </bpel:from>
                                                     <bpel:to part="parameters" variable="compTransportInput">
                                                         <bpel:query
@@ -584,7 +630,10 @@
                                                             expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
 
 
-                                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelDate]]>
+                                                        
+                                                        
+                                                        
+                                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/transport/travelDate]]>
                                                     </bpel:from>
                                                     <bpel:to part="parameters" variable="compTransportInput">
                                                         <bpel:query
@@ -597,7 +646,8 @@
                                                             expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
 
 
-                                                        <![CDATA[$input.payload/order/items[$counter/counter]/transport/travelBusinessProvider]]>
+                                                        
+                                                        <![CDATA[$input.payload/order/items[round($counter/counter) ]/transport/travelBusinessProvider]]>
                                                     </bpel:from>
                                                     <bpel:to part="parameters" variable="compTransportInput">
                                                         <bpel:query
