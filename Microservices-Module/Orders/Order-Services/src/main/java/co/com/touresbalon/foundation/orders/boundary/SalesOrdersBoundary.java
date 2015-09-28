@@ -43,6 +43,15 @@ public class SalesOrdersBoundary {
     public SalesOrdersBoundary() {
     }
 
+    public Long createSalesOrder( SalesOrder so, List<OrderItem> ois)throws SystemException{
+        System.out.println( so );
+        System.out.println( ois );
+        return new Long("23");
+    }
+
+    public void updateItem( OrderItem oi ){
+        System.out.println( oi );
+    }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Product> getTopFiveProducts(Long idProduct) throws SystemException {
