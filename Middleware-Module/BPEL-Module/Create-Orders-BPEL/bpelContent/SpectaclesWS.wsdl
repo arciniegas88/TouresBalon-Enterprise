@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://spectacles.com.co/service/task/1.0.0"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+	name="SpectaclesWSService" targetNamespace="http://spectacles.com.co/service/task/1.0.0">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://spectacles.com.co/service/task/1.0.0"
+			elementFormDefault="unqualified" targetNamespace="http://spectacles.com.co/service/task/1.0.0"
+			version="1.0">
+
+			<xs:element name="buySpectacleByTicket" type="tns:buySpectacleByTicket" />
+
+			<xs:element name="buySpectacleByTicketResponse" type="tns:buySpectacleByTicketResponse" />
+
+			<xs:element name="cancelSpectacleReservation" type="tns:cancelSpectacleReservation" />
+
+			<xs:element name="cancelSpectacleReservationResponse"
+				type="tns:cancelSpectacleReservationResponse" />
+
+			<xs:element name="searchTicketByIdSpectacle" type="tns:searchTicketByIdSpectacle" />
+
+			<xs:element name="searchTicketByIdSpectacleResponse" type="tns:searchTicketByIdSpectacleResponse" />
+
+			<xs:complexType name="buySpectacleByTicket">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="idSpectacle" type="xs:integer" />
+					<xs:element minOccurs="0" name="idTicket" type="xs:integer" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="buySpectacleByTicketResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="searchTicketByIdSpectacle">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="idSpectacle" type="xs:integer" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="searchTicketByIdSpectacleResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="tns:ticketResponseDTO" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="ticketResponseDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ticket" type="xs:integer" />
+					<xs:element name="transactionSuccess" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="cancelSpectacleReservation">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="idSpectacle" type="xs:integer" />
+					<xs:element minOccurs="0" name="idTicket" type="xs:integer" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="cancelSpectacleReservationResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="cancelSpectacleReservationResponse">
+		<wsdl:part element="tns:cancelSpectacleReservationResponse"
+			name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="cancelSpectacleReservation">
+		<wsdl:part element="tns:cancelSpectacleReservation" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="buySpectacleByTicket">
+		<wsdl:part element="tns:buySpectacleByTicket" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="searchTicketByIdSpectacle">
+		<wsdl:part element="tns:searchTicketByIdSpectacle" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="searchTicketByIdSpectacleResponse">
+		<wsdl:part element="tns:searchTicketByIdSpectacleResponse"
+			name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="buySpectacleByTicketResponse">
+		<wsdl:part element="tns:buySpectacleByTicketResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<plnk:partnerLinkType name="SpectaclesWS_PLT">
+		<plnk:role name="SpectaclesWS_Role" portType="tns:SpectaclesWS" />
+	</plnk:partnerLinkType>
+	
+	<wsdl:portType name="SpectaclesWS">
+		<wsdl:operation name="buySpectacleByTicket">
+			<wsdl:input message="tns:buySpectacleByTicket" name="buySpectacleByTicket">
+			</wsdl:input>
+			<wsdl:output message="tns:buySpectacleByTicketResponse"
+				name="buySpectacleByTicketResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="searchTicketByIdSpectacle">
+			<wsdl:input message="tns:searchTicketByIdSpectacle" name="searchTicketByIdSpectacle">
+			</wsdl:input>
+			<wsdl:output message="tns:searchTicketByIdSpectacleResponse"
+				name="searchTicketByIdSpectacleResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancelSpectacleReservation">
+			<wsdl:input message="tns:cancelSpectacleReservation" name="cancelSpectacleReservation">
+			</wsdl:input>
+			<wsdl:output message="tns:cancelSpectacleReservationResponse"
+				name="cancelSpectacleReservationResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SpectaclesWSServiceSoapBinding" type="tns:SpectaclesWS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="buySpectacleByTicket">
+			<soap:operation soapAction="buySpectacleByTicket"
+				style="document" />
+			<wsdl:input name="buySpectacleByTicket">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="buySpectacleByTicketResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="searchTicketByIdSpectacle">
+			<soap:operation soapAction="searchTicketByIdSpectacle"
+				style="document" />
+			<wsdl:input name="searchTicketByIdSpectacle">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="searchTicketByIdSpectacleResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancelSpectacleReservation">
+			<soap:operation soapAction="cancelSpectacleReservation"
+				style="document" />
+			<wsdl:input name="cancelSpectacleReservation">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="cancelSpectacleReservationResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SpectaclesWSService">
+		<wsdl:port binding="tns:SpectaclesWSServiceSoapBinding"
+			name="SpectaclesWSPort">
+			<soap:address
+				location="http://localhost:9090/SpectaclesWS-1.0-SNAPSHOT/SpectaclesWS" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
