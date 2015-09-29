@@ -1144,7 +1144,7 @@ body {
 
 
 .product_small {
-    width: 23%;
+    width: 20%;
     margin: 1%;
 }
 
@@ -1194,6 +1194,11 @@ body {
     font-size: 12px;
     padding: 12px 0px;
     clear: both;
+    min-height: 90px; 
+}
+
+.product_small .title{
+    height: 50px;
 }
 
 .image-product-small
@@ -1540,4 +1545,19 @@ input.custom, select.custom
 {
     clear: both;
     margin-bottom: 25px;
+}
+
+.clear
+{
+    clear: both;
+}
+
+#navToggle
+{
+    display: none;
+}
+
+#navPanel
+{
+    display:none;
 }

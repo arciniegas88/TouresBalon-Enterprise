@@ -17,15 +17,17 @@
         @foreach (var item in products)
         {
             @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, @account = item.Account, @cost = item.Cost, pos = item.Pos, delete = String.Concat(item.Id, "_", item.Pos) })
-            cost = cost + item.Cost;
+            cost = cost + (item.Cost * item.Account);
         }
         </div>
         
-        <div class="total">
-            <span class="title">Total: </span> @cost
-        </div>
-        <div class="clear center-block">
-            <a id="proccess_button" href="#" class="buy button icon fa - file - text - o">Procesar Orden</a>
+        <div class="clear">
+            <div class="total">
+                <span class="title">Total: </span> @cost
+            </div>
+            <div class="clear center-block">
+                <a id="proccess_button" href="#" class="buy button icon fa - file - text - o">Procesar Orden</a>
+            </div>
         </div>
 
     </div>
