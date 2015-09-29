@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+	name="SalesOrderWSService" targetNamespace="http://touresbalon.com.co/salesorder/service/task/1.0.0">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
+			attributeFormDefault="unqualified" elementFormDefault="unqualified"
+			targetNamespace="http://touresbalon.com.co/salesorder/service/task/1.0.0">
+			<xs:element name="createSalesOrder" type="tns:createSalesOrder" />
+			<xs:element name="createSalesOrderResponse" type="tns:createSalesOrderResponse" />
+			<xs:element name="orderItem" type="tns:orderItem" />
+			<xs:element name="salesOrder" type="tns:salesOrder" />
+			<xs:element name="updateItem" type="tns:updateItem" />
+			<xs:complexType name="updateItem">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="item" type="tns:orderItem" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="orderItem">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="orderId" type="tns:salesOrder" />
+					<xs:element minOccurs="0" name="partnum" type="xs:string" />
+					<xs:element minOccurs="0" name="price" type="xs:long" />
+					<xs:element minOccurs="0" name="productId" type="xs:long" />
+					<xs:element minOccurs="0" name="productName" type="xs:string" />
+					<xs:element minOccurs="0" name="quantity" type="xs:short" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="salesOrder">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="comments" type="xs:string" />
+					<xs:element minOccurs="0" name="custDocumentNumber"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="custDocumentType" type="xs:string" />
+					<xs:element minOccurs="0" name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="orderDate" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="price" type="xs:long" />
+					<xs:element minOccurs="0" name="status" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="createSalesOrder">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="order" type="tns:salesOrder" />
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="items"
+						type="tns:orderItem" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="createSalesOrderResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="SystemException" type="tns:SystemException" />
+			<xs:complexType name="SystemException">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="message" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="createSalesOrderResponse">
+		<wsdl:part element="tns:createSalesOrderResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="SystemException">
+		<wsdl:part element="tns:SystemException" name="SystemException">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createSalesOrder">
+		<wsdl:part element="tns:createSalesOrder" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="updateItem">
+		<wsdl:part element="tns:updateItem" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<plnk:partnerLinkType name="SalesOrderWS_PLT">
+		<plnk:role name="SalesOrderWS_Role" portType="tns:SalesOrderWS" />
+	</plnk:partnerLinkType>
+	
+	<wsdl:portType name="SalesOrderWS">
+		<wsdl:operation name="updateItem">
+			<wsdl:input message="tns:updateItem" name="updateItem">
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="createSalesOrder">
+			<wsdl:input message="tns:createSalesOrder" name="createSalesOrder">
+			</wsdl:input>
+			<wsdl:output message="tns:createSalesOrderResponse" name="createSalesOrderResponse">
+			</wsdl:output>
+			<wsdl:fault message="tns:SystemException" name="SystemException">
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SalesOrderWSServiceSoapBinding" type="tns:SalesOrderWS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="updateItem">
+			<soap:operation soapAction="updateItem" style="document" />
+			<wsdl:input name="updateItem">
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="createSalesOrder">
+			<soap:operation soapAction="createSalesOrder" style="document" />
+			<wsdl:input name="createSalesOrder">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="createSalesOrderResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="SystemException">
+				<soap:fault name="SystemException" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SalesOrderWSService">
+		<wsdl:port binding="tns:SalesOrderWSServiceSoapBinding"
+			name="SalesOrderWSPort">
+			<soap:address location="http://localhost:9090/Order-Services/SalesOrderWS" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
