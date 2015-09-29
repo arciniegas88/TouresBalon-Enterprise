@@ -7,6 +7,7 @@ package co.com.touresbalon.foundation.orders.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,43 +29,208 @@ import javax.xml.bind.annotation.XmlRootElement;
                             "ORDER BY  COUNT( oi.productId ) DESC ",
         hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "OrderItem.getOrderItems",
-                    query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.OrderItem(oi.id,oi.productId, " +
-                            "oi.productName ,oi.partnum, oi.price, oi.quantity )"+
+                    query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.OrderItem( oi.productId, oi.productName, oi.price,oi.itemNo," +
+                            "                     oi.status, oi.transportComments, oi.transportTravelDate, oi.transportSourceCity," +
+                            "                     oi.transportTargetCity, oi.transportTravelNumber, oi.transportChairNumber," +
+                            "                     oi.transportOutTime, oi.spectacleComments, oi.spectacleId, oi.spectacleTicket," +
+                            "                     oi.lodgingComments)"+
                             "FROM OrderItem oi WHERE oi.orderId.id = :ID_SALES_ORDER ",
                     hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
-
+@SequenceGenerator(name="ORDER_ITEM_GEN", sequenceName = "ORDER_ITEM_SEQ",initialValue=1, allocationSize=10)
 public class OrderItem implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ORDER_ITEM_GEN")
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;
+
     @Column(name = "PRODUCT_ID")
     private Long productId;
+
     @Column(name = "PRODUCT_NAME")
     private String productName;
-    @Column(name = "PARTNUM")
-    private String partnum;
+
     @Column(name = "PRICE")
     private Long price;
-    @Column(name = "QUANTITY")
-    private Short quantity;
+
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")
     @ManyToOne
     private SalesOrder orderId;
 
+    //[added fields]-------------------------
+
+    @Column(name = "ITEM_NO")
+    private Integer itemNo;
+
+    @Column(name = "STATUS")
+    private String status;
+
+    @Column(name = "TRANSPORT_COMMENTS")
+    private String transportComments;
+
+    @Column(name = "TRANSPORT_TRAVEL_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date transportTravelDate;
+
+    @Column(name = "TRANSPORT_SOURCE_CITY")
+    private String transportSourceCity;
+
+    @Column(name = "TRANSPORT_TARGET_CITY")
+    private String transportTargetCity;
+
+    @Column(name = "TRANSPORT_TRAVEL_NUMBER")
+    private String transportTravelNumber;
+
+    @Column(name = "TRANSPORT_CHAIR_NUMBER")
+    private String transportChairNumber;
+
+    @Column(name = "TRANSPORT_OUT_TIME")
+    private String transportOutTime;
+
+    @Column(name = "SPECTACLE_COMMENTS")
+    private String spectacleComments;
+
+    @Column(name = "SPECTACLE_ID")
+    private Long spectacleId;
+
+    @Column(name = "SPECTACLE_TICKET")
+    private Long spectacleTicket;
+
+    @Column(name = "LODGING_COMMENTS")
+    private String lodgingComments;
+
     public OrderItem() {
     }
 
-    public OrderItem(Long id, Long productId, String productName, String partnum, Long price, Short quantity) {
-        this.id = id;
+    public OrderItem(Long productId, String productName, Long price, Integer itemNo,
+                     String status, String transportComments, Date transportTravelDate, String transportSourceCity,
+                     String transportTargetCity, String transportTravelNumber, String transportChairNumber,
+                     String transportOutTime, String spectacleComments, Long spectacleId, Long spectacleTicket,
+                     String lodgingComments) {
         this.productId = productId;
         this.productName = productName;
-        this.partnum = partnum;
         this.price = price;
-        this.quantity = quantity;
+        this.itemNo = itemNo;
+        this.status = status;
+        this.transportComments = transportComments;
+        this.transportTravelDate = transportTravelDate;
+        this.transportSourceCity = transportSourceCity;
+        this.transportTargetCity = transportTargetCity;
+        this.transportTravelNumber = transportTravelNumber;
+        this.transportChairNumber = transportChairNumber;
+        this.transportOutTime = transportOutTime;
+        this.spectacleComments = spectacleComments;
+        this.spectacleId = spectacleId;
+        this.spectacleTicket = spectacleTicket;
+        this.lodgingComments = lodgingComments;
+    }
+
+    public Integer getItemNo() {
+        return itemNo;
+    }
+
+    public void setItemNo(Integer itemNo) {
+        this.itemNo = itemNo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTransportComments() {
+        return transportComments;
+    }
+
+    public void setTransportComments(String transportComments) {
+        this.transportComments = transportComments;
+    }
+
+    public Date getTransportTravelDate() {
+        return transportTravelDate;
+    }
+
+    public void setTransportTravelDate(Date transportTravelDate) {
+        this.transportTravelDate = transportTravelDate;
+    }
+
+    public String getTransportSourceCity() {
+        return transportSourceCity;
+    }
+
+    public void setTransportSourceCity(String transportSourceCity) {
+        this.transportSourceCity = transportSourceCity;
+    }
+
+    public String getTransportTargetCity() {
+        return transportTargetCity;
+    }
+
+    public void setTransportTargetCity(String transportTargetCity) {
+        this.transportTargetCity = transportTargetCity;
+    }
+
+    public String getTransportTravelNumber() {
+        return transportTravelNumber;
+    }
+
+    public void setTransportTravelNumber(String transportTravelNumber) {
+        this.transportTravelNumber = transportTravelNumber;
+    }
+
+    public String getTransportChairNumber() {
+        return transportChairNumber;
+    }
+
+    public void setTransportChairNumber(String transportChairNumber) {
+        this.transportChairNumber = transportChairNumber;
+    }
+
+    public String getTransportOutTime() {
+        return transportOutTime;
+    }
+
+    public void setTransportOutTime(String transportOutTime) {
+        this.transportOutTime = transportOutTime;
+    }
+
+    public String getSpectacleComments() {
+        return spectacleComments;
+    }
+
+    public void setSpectacleComments(String spectacleComments) {
+        this.spectacleComments = spectacleComments;
+    }
+
+    public Long getSpectacleId() {
+        return spectacleId;
+    }
+
+    public void setSpectacleId(Long spectacleId) {
+        this.spectacleId = spectacleId;
+    }
+
+    public Long getSpectacleTicket() {
+        return spectacleTicket;
+    }
+
+    public void setSpectacleTicket(Long spectacleTicket) {
+        this.spectacleTicket = spectacleTicket;
+    }
+
+    public String getLodgingComments() {
+        return lodgingComments;
+    }
+
+    public void setLodgingComments(String lodgingComments) {
+        this.lodgingComments = lodgingComments;
     }
 
     public OrderItem(Long id) {
@@ -95,13 +261,6 @@ public class OrderItem implements Serializable {
         this.productName = productName;
     }
 
-    public String getPartnum() {
-        return partnum;
-    }
-
-    public void setPartnum(String partnum) {
-        this.partnum = partnum;
-    }
 
     public Long getPrice() {
         return price;
@@ -109,14 +268,6 @@ public class OrderItem implements Serializable {
 
     public void setPrice(Long price) {
         this.price = price;
-    }
-
-    public Short getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Short quantity) {
-        this.quantity = quantity;
     }
 
     public SalesOrder getOrderId() {

@@ -25,6 +25,13 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>co.com.touresbalon.foundation.crosscutting</groupId>
+            <artifactId>Cross-Cutting-Artifacts</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>

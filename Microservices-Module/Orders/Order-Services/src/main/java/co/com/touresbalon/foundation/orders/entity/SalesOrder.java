@@ -33,28 +33,37 @@ import javax.xml.bind.annotation.XmlTransient;
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 
 })
+@SequenceGenerator(name="SALES_ORDER_GEN", sequenceName = "SALES_ORDER_SEQ",initialValue=1, allocationSize=10)
 public class SalesOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SALES_ORDER_GEN")
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;
+
     @Column(name = "ORDER_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
+
     @Column(name = "PRICE")
     private Long price;
+
     @Column(name = "STATUS")
     private String status;
+
     @Column(name = "COMMENTS")
     private String comments;
+
     @Basic(optional = false)
     @Column(name = "CUST_DOCUMENT_NUMBER")
     private String custDocumentNumber;
+
     @Basic(optional = false)
     @Column(name = "CUST_DOCUMENT_TYPE")
     private String custDocumentType;
+
     @OneToMany(mappedBy = "orderId")
     private List<OrderItem> orderItemList;
 

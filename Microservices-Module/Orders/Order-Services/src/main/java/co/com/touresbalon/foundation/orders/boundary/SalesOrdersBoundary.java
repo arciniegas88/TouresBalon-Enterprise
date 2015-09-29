@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,9 +40,22 @@ public class SalesOrdersBoundary {
     }
 
     public Long createSalesOrder( SalesOrder so, List<OrderItem> ois)throws SystemException{
-        System.out.println( so );
-        System.out.println( ois );
-        return new Long("23");
+
+        so.setOrderDate(new Date());
+        em.persist( so );
+
+        int productNumber = 1;
+
+        if( ois != null ){
+            for( OrderItem oi: ois ){
+                oi.setOrderId( so );
+                oi.setItemNo( productNumber++ );
+                em.persist( oi );
+            }
+        }
+
+        em.flush();
+        return so.getId();
     }
 
     public void updateItem( OrderItem oi ){
