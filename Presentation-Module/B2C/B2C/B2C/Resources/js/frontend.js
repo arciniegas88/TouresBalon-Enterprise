@@ -163,14 +163,14 @@ $(document).ready(function () {
         var temp = id.split("_");
         id = temp[1];
 
-        $.post("/order/cancel/" + id, function (data) {
+        $.post("order/cancel/" + id, function (data) {
             if (data.success) {
                 alert(data.message);
             }
         }, 'json');
     });
 
-    $(".buy").click(function () {
+    $(".buy").bind( "click", function () {
 
         var value = $(this).attr("id");
         var id = value.split("_")[1];
@@ -203,7 +203,7 @@ $(document).ready(function () {
             var name = $("#name_product").html();
             var cost = $("#cost_product").html();
 
-            $.post("/shoppingcart/add", { id: id, name: name, account:account, cost:cost }, function (data) {
+            $.post("shoppingcart/add", { id: id, name: name, account:account, cost:cost }, function (data) {
                 alert(data.message);
                 $("#lightbox_buy").dialog('close');
             });
@@ -224,7 +224,7 @@ $(document).ready(function () {
             value = value.split("_");
             var id = value[1];
             var pos = value[2];
-            $.post("/shoppingcart/delete", { id: id, pos: pos }, function (data) {
+            $.post("shoppingcart/delete", { id: id, pos: pos }, function (data) {
                 if (data.success)
                 {
                     $("#car_item_" + id).remove();
@@ -243,6 +243,29 @@ $(document).ready(function () {
         
         $.post(url, {}, function (data) {
             $("#list_items").html(data);
+            $(".buy").bind("click", function () {
+
+                var value = $(this).attr("id");
+                var id = value.split("_")[1];
+                var name = $(this).attr("dataname");
+                var cost = $(this).attr("datacost");
+
+                $("#account").val(1);
+
+                $("#name_product").html(name);
+                $("#name_product").attr('data-id', id);
+
+                $("#cost_product").html(cost);
+
+                $("#lightbox_buy").dialog(
+                {
+                    height: 300,
+                    width: 450,
+                    modal: true
+                });
+
+                return false;
+            });
         });
 
         $("#pagination .disable").addClass("pager");
