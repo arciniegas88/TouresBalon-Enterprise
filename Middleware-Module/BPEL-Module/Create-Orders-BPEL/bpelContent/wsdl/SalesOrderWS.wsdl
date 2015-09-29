@@ -22,12 +22,28 @@
 			<xs:complexType name="orderItem">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="itemNo" type="xs:int" />
+					<xs:element minOccurs="0" name="lodgingComments" type="xs:string" />
 					<xs:element minOccurs="0" name="orderId" type="tns:salesOrder" />
-					<xs:element minOccurs="0" name="partnum" type="xs:string" />
 					<xs:element minOccurs="0" name="price" type="xs:long" />
 					<xs:element minOccurs="0" name="productId" type="xs:long" />
 					<xs:element minOccurs="0" name="productName" type="xs:string" />
-					<xs:element minOccurs="0" name="quantity" type="xs:short" />
+					<xs:element minOccurs="0" name="spectacleComments" type="xs:string" />
+					<xs:element minOccurs="0" name="spectacleId" type="xs:long" />
+					<xs:element minOccurs="0" name="spectacleTicket" type="xs:long" />
+					<xs:element minOccurs="0" name="status" type="xs:string" />
+					<xs:element minOccurs="0" name="transportChairNumber"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="transportComments" type="xs:string" />
+					<xs:element minOccurs="0" name="transportOutTime" type="xs:string" />
+					<xs:element minOccurs="0" name="transportSourceCity"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="transportTargetCity"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="transportTravelDate"
+						type="xs:dateTime" />
+					<xs:element minOccurs="0" name="transportTravelNumber"
+						type="xs:string" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="salesOrder">
@@ -63,21 +79,16 @@
 		</xs:schema>
 	</wsdl:types>
 	<wsdl:message name="createSalesOrderResponse">
-		<wsdl:part element="tns:createSalesOrderResponse" name="parameters">
-		</wsdl:part>
+		<wsdl:part element="tns:createSalesOrderResponse" name="parameters"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="SystemException">
-		<wsdl:part element="tns:SystemException" name="SystemException">
-		</wsdl:part>
+		<wsdl:part element="tns:SystemException" name="SystemException"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="createSalesOrder">
-		<wsdl:part element="tns:createSalesOrder" name="parameters">
-		</wsdl:part>
+		<wsdl:part element="tns:createSalesOrder" name="parameters"></wsdl:part>
 	</wsdl:message>
-	
 	<wsdl:message name="updateItem">
-		<wsdl:part element="tns:updateItem" name="parameters">
-		</wsdl:part>
+		<wsdl:part element="tns:updateItem" name="parameters"></wsdl:part>
 	</wsdl:message>
 	
 	<plnk:partnerLinkType name="SalesOrderWS_PLT">
@@ -86,16 +97,12 @@
 	
 	<wsdl:portType name="SalesOrderWS">
 		<wsdl:operation name="updateItem">
-			<wsdl:input message="tns:updateItem" name="updateItem">
-			</wsdl:input>
+			<wsdl:input message="tns:updateItem" name="updateItem"></wsdl:input>
 		</wsdl:operation>
 		<wsdl:operation name="createSalesOrder">
-			<wsdl:input message="tns:createSalesOrder" name="createSalesOrder">
-			</wsdl:input>
-			<wsdl:output message="tns:createSalesOrderResponse" name="createSalesOrderResponse">
-			</wsdl:output>
-			<wsdl:fault message="tns:SystemException" name="SystemException">
-			</wsdl:fault>
+			<wsdl:input message="tns:createSalesOrder" name="createSalesOrder"></wsdl:input>
+			<wsdl:output message="tns:createSalesOrderResponse" name="createSalesOrderResponse"></wsdl:output>
+			<wsdl:fault message="tns:SystemException" name="SystemException"></wsdl:fault>
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="SalesOrderWSServiceSoapBinding" type="tns:SalesOrderWS">

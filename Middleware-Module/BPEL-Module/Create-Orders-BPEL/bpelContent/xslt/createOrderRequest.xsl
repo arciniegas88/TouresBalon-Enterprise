@@ -58,6 +58,7 @@
           <productName>
             <xsl:value-of select="productName"/>
           </productName>
+          <status>ENTERED</status>
         </items>
       </xsl:for-each>
     </tns:createSalesOrder>

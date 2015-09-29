@@ -21,6 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "ORDER_ITEM")
 @XmlRootElement
 @NamedQueries({
+        @NamedQuery(name = "OrderItem.update",
+                query = "UPDATE OrderItem o SET o.status = :STATUS, o.transportComments= :TRANSPORT_COMMENTS," +
+                        "o.transportTravelDate = :TRANSPORT_TRAVEL_DATE, o.transportSourceCity = :TRANSPORT_SOURCE_CITY," +
+                        "o.transportTargetCity = :TRANSPORT_TARGET_CITY, o.transportTravelNumber = :TRANSPORT_TRAVEL_NUMBER," +
+                        "o.transportChairNumber = :TRANSPORT_CHAIR_NUMBER, o.transportOutTime = :TRANSPORT_OUT_TIME," +
+                        "o.spectacleComments = :SPECTACLE_COMMENTS, o.spectacleId = :SPECTACLE_ID," +
+                        "o.spectacleTicket = :SPECTACLE_TICKET, o.lodgingComments = :LODGING_COMMENTS " +
+                        "WHERE o.orderId.id = :ORDER_ID AND o.itemNo = :ITEM_NO"),
         @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
         @NamedQuery(name = "OrderItem.TopFiveProductByOrder",
                     query = "SELECT oi.productId,oi.productName, COUNT( oi.productId ) FROM OrderItem oi " +
@@ -37,7 +45,7 @@ import javax.xml.bind.annotation.XmlRootElement;
                             "FROM OrderItem oi WHERE oi.orderId.id = :ID_SALES_ORDER ",
                     hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
-@SequenceGenerator(name="ORDER_ITEM_GEN", sequenceName = "ORDER_ITEM_SEQ",initialValue=1, allocationSize=10)
+@SequenceGenerator(name="ORDER_ITEM_GEN", sequenceName = "ORDER_ITEM_SEQ",initialValue=1, allocationSize=1)
 public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

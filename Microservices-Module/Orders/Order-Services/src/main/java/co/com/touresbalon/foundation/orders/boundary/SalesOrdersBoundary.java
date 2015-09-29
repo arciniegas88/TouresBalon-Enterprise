@@ -49,7 +49,7 @@ public class SalesOrdersBoundary {
         if( ois != null ){
             for( OrderItem oi: ois ){
                 oi.setOrderId( so );
-                oi.setItemNo( productNumber++ );
+                oi.setItemNo(productNumber++);
                 em.persist( oi );
             }
         }
@@ -59,7 +59,24 @@ public class SalesOrdersBoundary {
     }
 
     public void updateItem( OrderItem oi ){
-        System.out.println( oi );
+
+        em.createNamedQuery("OrderItem.update")
+                .setParameter("STATUS", oi.getStatus())
+                .setParameter("TRANSPORT_COMMENTS",oi.getTransportComments())
+                .setParameter("TRANSPORT_TRAVEL_DATE",oi.getTransportTravelDate())
+                .setParameter("TRANSPORT_SOURCE_CITY",oi.getTransportSourceCity())
+                .setParameter("TRANSPORT_TARGET_CITY",oi.getTransportTargetCity())
+                .setParameter("TRANSPORT_TRAVEL_NUMBER",oi.getTransportTravelNumber())
+                .setParameter("TRANSPORT_CHAIR_NUMBER",oi.getTransportChairNumber())
+                .setParameter("TRANSPORT_OUT_TIME",oi.getTransportOutTime())
+                .setParameter("SPECTACLE_COMMENTS",oi.getSpectacleComments())
+                .setParameter("SPECTACLE_ID",oi.getSpectacleId())
+                .setParameter("SPECTACLE_TICKET",oi.getSpectacleTicket())
+                .setParameter("LODGING_COMMENTS",oi.getLodgingComments())
+                .setParameter("ORDER_ID",oi.getOrderId().getId())
+                .setParameter("ITEM_NO",oi.getItemNo())
+                .executeUpdate();
+
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
