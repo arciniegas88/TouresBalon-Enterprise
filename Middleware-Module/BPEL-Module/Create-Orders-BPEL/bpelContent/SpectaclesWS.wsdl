@@ -92,6 +92,7 @@
 			name="parameters">
 		</wsdl:part>
 	</wsdl:message>
+	
 	<wsdl:message name="buySpectacleByTicketResponse">
 		<wsdl:part element="tns:buySpectacleByTicketResponse" name="parameters">
 		</wsdl:part>

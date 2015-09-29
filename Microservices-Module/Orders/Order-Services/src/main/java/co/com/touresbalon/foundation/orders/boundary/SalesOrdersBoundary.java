@@ -1,6 +1,5 @@
 package co.com.touresbalon.foundation.orders.boundary;
 
-import co.com.touresbalon.foundation.crosscutting.annotations.cache.CacheStore;
 import co.com.touresbalon.foundation.crosscutting.exceptions.ExceptionBuilder;
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import co.com.touresbalon.foundation.orders.dto.Product;
@@ -9,19 +8,15 @@ import co.com.touresbalon.foundation.orders.entity.SalesOrder;
 import co.com.touresbalon.foundation.orders.entity.SalesOrderStatus;
 import org.slf4j.Logger;
 
-import javax.cache.Cache;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Jenny Rodriguez on 19/08/2015.
