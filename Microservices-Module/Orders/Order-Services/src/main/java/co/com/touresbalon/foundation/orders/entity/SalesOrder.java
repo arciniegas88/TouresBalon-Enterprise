@@ -90,6 +90,7 @@ public class SalesOrder implements Serializable {
         this.price = price;
         this.status = status;
         this.comments = comments;
+        this.status = status != null ? SalesOrderStatus.valueOf( status ).getLabel() : null;
     }
 
     public SalesOrder(Long id, Date orderDate, Long price, String status, String comments, String custDocumentNumber, String custDocumentType) {
@@ -100,6 +101,7 @@ public class SalesOrder implements Serializable {
         this.comments = comments;
         this.custDocumentNumber = custDocumentNumber;
         this.custDocumentType = custDocumentType;
+        this.status = status != null ? SalesOrderStatus.valueOf( status ).getLabel() : null;
     }
 
     public Long getId() {
@@ -127,7 +129,7 @@ public class SalesOrder implements Serializable {
     }
 
     public String getStatus() {
-        return status != null ? SalesOrderStatus.valueOf( status ).getLabel() : null;
+        return status;
     }
 
     public void setStatus(String status) {

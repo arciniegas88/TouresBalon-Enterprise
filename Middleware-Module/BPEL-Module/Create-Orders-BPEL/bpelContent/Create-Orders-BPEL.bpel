@@ -1098,10 +1098,56 @@
                 </bpel:sequence>
             </bpel:while>
 
-            <bpel:sequence name="VALIDATE_CUSTOMER">
-                <bpel:empty name="Validate-almost-oneproduct-in-order"></bpel:empty>
-                <bpel:empty name="validate_rules_service">
-                </bpel:empty>
+            <bpel:sequence name="PREPARE_ORDER_TO_PROV_STAGE">
+                
+                
+                <bpel:assign validate="no" name="Assign-order-provisioning-details"><bpel:copy>
+                    <bpel:from><bpel:literal><tns:changeSalesOrderStatus xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <order>
+    <comments>comments</comments>
+    <custDocumentNumber>custDocumentNumber</custDocumentNumber>
+    <custDocumentType>custDocumentType</custDocumentType>
+    <id>0</id>
+    <orderDate>2001-12-31T12:00:00</orderDate>
+    <price>0</price>
+    <status>status</status>
+  </order>
+</tns:changeSalesOrderStatus>
+</bpel:literal></bpel:from>
+                    <bpel:to variable="updateOrderStatusInput" part="parameters"></bpel:to>
+                </bpel:copy>
+                
+                <bpel:copy>
+                    <bpel:from>
+                        <bpel:literal>IN_BOOKING</bpel:literal>
+                    </bpel:from>
+                    <bpel:to part="parameters" variable="updateOrderStatusInput">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/status]]></bpel:query>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from>
+                        <bpel:literal>SALES ORDER PREPARED TO BE PROVISIONED</bpel:literal>
+                    </bpel:from>
+                    <bpel:to part="parameters" variable="updateOrderStatusInput">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/comments]]></bpel:query>
+                    </bpel:to>
+                </bpel:copy>
+    
+    
+    
+    
+
+                    <bpel:copy>
+                        <bpel:from part="parameters" variable="createOrderOutput">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[return]]></bpel:query>
+                        </bpel:from>
+                        <bpel:to part="parameters" variable="updateOrderStatusInput">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/id]]></bpel:query>
+                        </bpel:to>
+                    </bpel:copy>
+                </bpel:assign>
+                <bpel:invoke name="Invoke-sales-order-change-status" partnerLink="SalesOrderWSPartnerLink" operation="changeSalesOrderStatus" portType="so:SalesOrderWS" inputVariable="updateOrderStatusInput"></bpel:invoke>
             </bpel:sequence>
 
         </bpel:sequence>
@@ -1323,6 +1369,52 @@
 
         </bpel:sequence>
 
+        <bpel:sequence name="NOTIFICATION_STAGE">
+            <bpel:assign validate="no" name="Assign-order-details">
+                <bpel:copy>
+                    <bpel:from><bpel:literal><tns:changeSalesOrderStatus xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <order>
+    <comments>comments</comments>
+    <custDocumentNumber>custDocumentNumber</custDocumentNumber>
+    <custDocumentType>custDocumentType</custDocumentType>
+    <id>0</id>
+    <orderDate>2001-12-31T12:00:00</orderDate>
+    <price>0</price>
+    <status>status</status>
+  </order>
+</tns:changeSalesOrderStatus>
+</bpel:literal></bpel:from>
+                    <bpel:to variable="updateOrderStatusInput" part="parameters"></bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from part="parameters" variable="createOrderOutput">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[return]]></bpel:query>
+                    </bpel:from>
+                    <bpel:to part="parameters" variable="updateOrderStatusInput">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                            <![CDATA[order/id]]>
+                        </bpel:query>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from>
+                        <bpel:literal>CLOSED</bpel:literal>
+                    </bpel:from>
+                    <bpel:to part="parameters" variable="updateOrderStatusInput">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/status]]></bpel:query>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from>
+                        <bpel:literal>SALES ORDER WAS PROCESSED SUCCESSFULLY</bpel:literal>
+                    </bpel:from>
+                    <bpel:to part="parameters" variable="updateOrderStatusInput">
+                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/comments]]></bpel:query>
+                    </bpel:to>
+                </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke name="Invoke-sales-order-change-status" partnerLink="SalesOrderWSPartnerLink" operation="changeSalesOrderStatus" portType="so:SalesOrderWS" inputVariable="updateOrderStatusInput"></bpel:invoke>
+        </bpel:sequence>
     </bpel:sequence>
 </bpel:process>
 

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://touresbalon.com.co/businessrules/service/utility/1.0.0"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="BusinessRulesWSService"
+	targetNamespace="http://touresbalon.com.co/businessrules/service/utility/1.0.0">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://touresbalon.com.co/businessrules/service/utility/1.0.0"
+			elementFormDefault="unqualified"
+			targetNamespace="http://touresbalon.com.co/businessrules/service/utility/1.0.0"
+			version="1.0">
+			<xs:element name="evaluateRule" type="tns:evaluateRule" />
+			<xs:element name="evaluateRuleResponse" type="tns:evaluateRuleResponse" />
+			<xs:complexType name="evaluateRule">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="fact" type="tns:orderFact" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="orderFact">
+				<xs:sequence>
+					<xs:element name="approval" type="xs:boolean" />
+					<xs:element minOccurs="0" name="orderAmount" type="xs:long" />
+					<xs:element minOccurs="0" name="userType" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="evaluateRuleResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="tns:orderFact" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="evaluateRuleResponse">
+		<wsdl:part element="tns:evaluateRuleResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="evaluateRule">
+		<wsdl:part element="tns:evaluateRule" name="parameters"></wsdl:part>
+	</wsdl:message>
+
+	<plnk:partnerLinkType name="BusinessRulesWS_PLT">
+		<plnk:role name="BusinessRulesWS_Role" portType="tns:BusinessRulesWS" />
+	</plnk:partnerLinkType>
+
+	<wsdl:portType name="BusinessRulesWS">
+		<wsdl:operation name="evaluateRule">
+			<wsdl:input message="tns:evaluateRule" name="evaluateRule"></wsdl:input>
+			<wsdl:output message="tns:evaluateRuleResponse" name="evaluateRuleResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BusinessRulesWSServiceSoapBinding"
+		type="tns:BusinessRulesWS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="evaluateRule">
+			<soap:operation soapAction="evaluateRule" style="document" />
+			<wsdl:input name="evaluateRule">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="evaluateRuleResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="BusinessRulesWSService">
+		<wsdl:port binding="tns:BusinessRulesWSServiceSoapBinding"
+			name="BusinessRulesWSPort">
+			<soap:address
+				location="http://localhost:9090/BusinessRule-Services/BusinessRulesWS" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
