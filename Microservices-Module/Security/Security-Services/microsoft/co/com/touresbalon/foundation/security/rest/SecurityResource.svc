@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Security_Services.microsoft.co.com.touresbalon.foundation.security.rest.SecurityResource" CodeBehind="SecurityResource.svc.cs" %>
