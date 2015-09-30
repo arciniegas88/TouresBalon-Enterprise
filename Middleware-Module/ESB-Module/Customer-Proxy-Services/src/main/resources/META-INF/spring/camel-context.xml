@@ -28,6 +28,46 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <propertyPlaceholder id="esb" location="ref:esbProps"/>
-        
+        <!-- Customer By ID-->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/{id}?restletMethod=GET"/>
+            <camel:recipientList>
+                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/id=${header.id}?restletMethod=GET</camel:simple>
+            </camel:recipientList>
+        </camel:route>
+
+        <!-- All Customers -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customers/pag={pag}/regPag={regPag}?restletMethod=GET"/>
+            <camel:recipientList>
+                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customers/pag=${header.pag};regPag=${header.regPag}?restletMethod=GET</camel:simple>
+            </camel:recipientList>
+        </camel:route>
+
+        <!-- Delete Customer -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/delete/{id}?restletMethod=GET"/>
+            <camel:recipientList>
+                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/deleteCustomer/id=${header.id}?restletMethod=DELETE</camel:simple>
+            </camel:recipientList>
+        </camel:route>
+
+        <!-- Create Customer -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/customer/create?restletMethod=POST"/>
+            <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/createCustomer?restletMethod=POST"/>
+        </camel:route>
+
+        <!-- Update Customer -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/customer/update?restletMethod=PUT"/>
+            <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/updateCustomer?restletMethod=PUT"/>
+        </camel:route>
+
+        <!-- Update Address -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/address/update?restletMethod=PUT"/>
+            <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/AddressService.svc/updateAddress?restletMethod=PUT"/>
+        </camel:route>
     </camelContext>
 </beans>
