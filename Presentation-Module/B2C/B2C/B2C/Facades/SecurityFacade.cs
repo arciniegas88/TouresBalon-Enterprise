@@ -32,9 +32,9 @@ namespace B2C.Facades
 
 
 
-        public Customer getLoginUser(Customer customer)
+        public bool getLoginUser(Customer customer)
         {
-            return this.securityService.loginUser(customer);
+            return this.securityService.loginUser(customer).authenticationResourceResult;
         }
     }
 }

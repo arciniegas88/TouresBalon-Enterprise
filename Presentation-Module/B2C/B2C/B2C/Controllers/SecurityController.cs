@@ -28,9 +28,12 @@ namespace B2C.Controllers
             else
             {
                 Customer customer = new Customer(form); 
-                customer = SecurityFacade.Instance.getLoginUser(customer);
-                if(customer != null && customer.UserID != 0)
+                bool response = SecurityFacade.Instance.getLoginUser(customer);
+                if(response)
                 {
+                    customer.Email = form.Email;
+                    customer.First_name = form.Email;
+                    customer.UserID = 1;
                     HandlerSession.setUser(customer);
                 }
             }
