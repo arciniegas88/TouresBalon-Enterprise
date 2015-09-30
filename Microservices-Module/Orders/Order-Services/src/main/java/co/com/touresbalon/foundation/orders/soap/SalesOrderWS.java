@@ -39,10 +39,4 @@ public class SalesOrderWS {
         boundary.updateItem(oi);
     }
 
-    @Oneway
-    @WebMethod(operationName = "changeItemStatus",action = "changeItemStatus")
-    public void changeItemStatus( @WebParam(name = "item") OrderItem oi ){
-        boundary.updateItem(oi);
-    }
-
 }
