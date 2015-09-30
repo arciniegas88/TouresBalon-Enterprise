@@ -17,8 +17,6 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.ent
         [DataMember]
         public virtual string email { get; set; }
         [DataMember]
-        public virtual string password { get; set; }
-        [DataMember]
         public virtual string creditcard_type { get; set; }
         [DataMember]
         public virtual string creditcard_number { get; set; }

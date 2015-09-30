@@ -1,17 +1,20 @@
 ﻿using Cross_Cutting.microsoft.co.com.touresbalon.foundation.crosscutting.exception;
 using Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao;
 using Customer_Services.microsoft.co.com.touresbalon.foundation.customer.entity;
+using System;
 using System.Collections.Generic;
 
 namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.boundary
 {
     public class CustomerBoundary
     {
+        private CustomerDAO customerDAO;
+
         public Customer getCustomer(string id)
         {
             try
             {
-                CustomerDAO customerDAO = new CustomerDAO();
+                customerDAO = new CustomerDAO();
                 Customer customer = customerDAO.getCustomer(id);
 
                 AddressDAO addressDAO = new AddressDAO();
@@ -27,13 +30,17 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
             {
                 throw e;
             }
+            catch (Exception e)
+            {
+                throw new PlatformException(e.Message);
+            }
         }
 
         public IList<Customer> getCustomers(int pagina, int regPagina)
         {
             try
             {
-                CustomerDAO customerDAO = new CustomerDAO();
+                customerDAO = new CustomerDAO();
                 return customerDAO.getCustomers(pagina, regPagina);
             }
             catch (BusinessException e)
@@ -44,13 +51,17 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
             {
                 throw e;
             }
+            catch (Exception e)
+            {
+                throw new PlatformException(e.Message);
+            }
         }
 
         public string createCustomer(Customer customer)
         {
             try
             {
-                CustomerDAO customerDAO = new CustomerDAO();
+                customerDAO = new CustomerDAO();
                 return customerDAO.createCustomer(customer);
             }
             catch (BusinessException e)
@@ -61,6 +72,10 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
             {
                 throw e;
             }
+            catch (Exception e)
+            {
+                throw new PlatformException(e.Message);
+            }
 
         }
 
@@ -68,7 +83,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
         {
             try
             {
-                CustomerDAO customerDAO = new CustomerDAO();
+                customerDAO = new CustomerDAO();
                 return customerDAO.deleteCustomer(id);
             }
             catch (BusinessException e)
@@ -79,6 +94,10 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
             {
                 throw e;
             }
+            catch (Exception e)
+            {
+                throw new PlatformException(e.Message);
+            }
 
         }
 
@@ -86,7 +105,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
         {
             try
             {
-                CustomerDAO customerDAO = new CustomerDAO();
+                customerDAO = new CustomerDAO();
                 return customerDAO.updateCustomer(customer);
             }
             catch (BusinessException e)
@@ -96,6 +115,10 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
             catch (PlatformException e)
             {
                 throw e;
+            }
+            catch (Exception e)
+            {
+                throw new PlatformException(e.Message);
             }
         }
 
@@ -113,6 +136,10 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
             catch (PlatformException e)
             {
                 throw e;
+            }
+            catch (Exception e)
+            {
+                throw new PlatformException(e.Message);
             }
         }
     }

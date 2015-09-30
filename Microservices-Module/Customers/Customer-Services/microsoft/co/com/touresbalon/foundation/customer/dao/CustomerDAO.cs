@@ -18,7 +18,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
         public Customer getCustomer(string id)
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append("SELECT Id, first_name, last_name, phone_number, email, password, ");
+            sql.Append("SELECT Id, first_name, last_name, phone_number, email, ");
             sql.Append("creditcard_number, creditcard_type, status FROM [customers].dbo.customer WHERE Id=@id");
 
             Customer customer = new Customer();
@@ -44,10 +44,9 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                                 last_name = reader.GetString(2),
                                 phone_number = reader.GetString(3),
                                 email = reader.GetString(4),
-                                password = reader.GetString(5),
-                                creditcard_number = reader.GetString(6),
-                                creditcard_type = reader.GetString(7),
-                                status = reader.GetString(8)
+                                creditcard_number = reader.GetString(5),
+                                creditcard_type = reader.GetString(6),
+                                status = reader.GetString(7)
                             };
                             return customer;
                         }
@@ -77,10 +76,10 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
         public IList<Customer> getCustomers(int pagina, int regPagina)
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append("SELECT Id, first_name, last_name, phone_number, email, password, ");
+            sql.Append("SELECT Id, first_name, last_name, phone_number, email, ");
             sql.Append("creditcard_number, creditcard_type, status FROM ");
             sql.Append("(SELECT ROW_NUMBER()Over(Order by dbo.customer.first_name ASC) As RowNum, ");
-            sql.Append("Id, first_name, last_name, phone_number, email, password,");
+            sql.Append("Id, first_name, last_name, phone_number, email, ");
             sql.Append("creditcard_number, creditcard_type, status FROM [customers].dbo.customer) AS Resultado ");
             sql.Append("WHERE RowNum BETWEEN (@pagina -1) * @regPagina + 1 AND @pagina * @regPagina");
 
@@ -112,10 +111,9 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                                     last_name = reader.GetString(2),
                                     phone_number = reader.GetString(3),
                                     email = reader.GetString(4),
-                                    password = reader.GetString(5),
-                                    creditcard_number = reader.GetString(6),
-                                    creditcard_type = reader.GetString(7),
-                                    status = reader.GetString(8)
+                                    creditcard_number = reader.GetString(5),
+                                    creditcard_type = reader.GetString(6),
+                                    status = reader.GetString(7)
                                 };
                                 customers.Add(customer);
                             }
@@ -141,8 +139,8 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("INSERT INTO [customers].dbo.customer (Id, first_name, last_name, phone_number, ");
-            sql.Append("password, email, creditcard_number, creditcard_type, status ) VALUES ( @Id, ");
-            sql.Append("@first_name, @last_name, @phone_number, @password, @email, @creditcard_number, ");
+            sql.Append("email, creditcard_number, creditcard_type, status ) VALUES ( @Id, ");
+            sql.Append("@first_name, @last_name, @phone_number, @email, @creditcard_number, ");
             sql.Append("@creditcard_type, @status)");
 
             using (SqlConnection connection = new SqlConnection())
@@ -161,7 +159,6 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                         command.Parameters.Add("@first_name", SqlDbType.NVarChar).Value = customer.first_name;
                         command.Parameters.Add("@last_name", SqlDbType.NVarChar).Value = customer.last_name;
                         command.Parameters.Add("@phone_number", SqlDbType.NVarChar).Value = customer.phone_number;
-                        command.Parameters.Add("@password", SqlDbType.NVarChar).Value = customer.password;
                         command.Parameters.Add("@email", SqlDbType.NVarChar).Value = customer.email;
                         command.Parameters.Add("@creditcard_number", SqlDbType.NVarChar).Value = customer.creditcard_number;
                         command.Parameters.Add("@creditcard_type", SqlDbType.NVarChar).Value = customer.creditcard_type;
@@ -280,7 +277,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("UPDATE [customers].dbo.customer SET first_name = @first_name, last_name = @last_name, ");
-            sql.Append("phone_number = @phone_number, password = @password, email = @email, ");
+            sql.Append("phone_number = @phone_number, email = @email, ");
             sql.Append("creditcard_number = @creditcard_number, creditcard_type = @creditcard_type, status = @status ");
             sql.Append("WHERE Id = @Id");
 
@@ -297,7 +294,6 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.dao
                         command.Parameters.Add("@first_name", SqlDbType.NVarChar).Value = customer.first_name;
                         command.Parameters.Add("@last_name", SqlDbType.NVarChar).Value = customer.last_name;
                         command.Parameters.Add("@phone_number", SqlDbType.NVarChar).Value = customer.phone_number;
-                        command.Parameters.Add("@password", SqlDbType.NVarChar).Value = customer.password;
                         command.Parameters.Add("@email", SqlDbType.NVarChar).Value = customer.email;
                         command.Parameters.Add("@creditcard_number", SqlDbType.NVarChar).Value = customer.creditcard_number;
                         command.Parameters.Add("@creditcard_type", SqlDbType.NVarChar).Value = customer.creditcard_type;
