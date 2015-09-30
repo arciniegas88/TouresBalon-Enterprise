@@ -5,8 +5,12 @@
 		xmlns:spectacle="http://spectacles.com.co/service/task/1.0.0"
 		xmlns:rules="http://touresbalon.com.co/businessrules/service/utility/1.0.0"
 		xmlns:so="http://touresbalon.com.co/salesorder/service/task/1.0.0"
-		xmlns:ws="http://redeban.com/creditcards/ws">
+		xmlns:ws="http://redeban.com/creditcards/ws"
+        xmlns:ht="http://touresbalon.com.co/salesorder/service/utility/1.0.0"
+        xmlns:b4p="http://docs.oasis-open.org/ns/bpel4people/bpel4people/200803">
+
   <process name="bpel:Create-Orders-BPEL">
+
     <active>true</active>
     <retired>false</retired>
     <process-events generate="all"/>
@@ -14,7 +18,15 @@
     <provide partnerLink="client">
       <service name="bpel:Create-Orders-BPEL" port="Create-Orders-BPELPort"/>
     </provide>
-    
+
+    <provide partnerLink="b4pPartnerLink" correlationFilter="b4p:b4pFilter">
+      <service name="ht:ClaimServiceCB" port="ClaimPortCB"/>
+    </provide>
+
+    <invoke partnerLink="b4pPartnerLink">
+      <service name="ht:ClaimService" port="ClaimPort"/>
+    </invoke>
+
     <invoke partnerLink="CreditCardPartnerLink">
       <service name="ws:CreditCardService" port="CreditCardPort"/>
     </invoke>

@@ -12,7 +12,14 @@
               xmlns:canonical="http://touresbalon.com.co/model/canonical/1.0.0"
               name="Create-Orders-BPEL"
               targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0"
-              suppressJoinFailure="yes">
+              suppressJoinFailure="yes" xmlns:b4p="http://docs.oasis-open.org/ns/bpel4people/bpel4people/200803">
+
+    <!-- BPEL4People extension activity -->
+    <extensions>
+        <extension
+                namespace="http://docs.oasis-open.org/ns/bpel4people/bpel4people/200803"
+                mustUnderstand="yes"/>
+    </extensions>
 
     <!-- Import the client WSDL -->
 
@@ -331,7 +338,12 @@
                             </bpel:copy>
                         </bpel:assign>
                         <bpel:invoke name="Invoke-update-order-comments" partnerLink="SalesOrderWSPartnerLink" operation="changeSalesOrderStatus" portType="so:SalesOrderWS" inputVariable="updateOrderStatusInput"></bpel:invoke>
-                        <bpel:empty name="Empty1"></bpel:empty>
+                        <bpel:extensionActivity>
+                            <b4p:peopleActivity name="RemoteTask">
+                                <b4p:remoteTask></b4p:remoteTask>
+                            </b4p:peopleActivity>
+                        </bpel:extensionActivity>
+                        
                     </bpel:sequence>
                     <bpel:else>
                         <bpel:empty name="Empty"></bpel:empty>
