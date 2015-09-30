@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class SalesOrdersBoundary {
         if( ois != null ){
             for( OrderItem oi: ois ){
                 oi.setOrderId( so );
-                oi.setItemNo(productNumber++);
+                oi.setItemNo(String.valueOf(productNumber++));
                 em.persist( oi );
             }
         }
@@ -59,6 +60,19 @@ public class SalesOrdersBoundary {
     }
 
     public void updateItem( OrderItem oi ){
+
+        String itemNo = String.valueOf( new Double(oi.getItemNo()).intValue() );
+
+        oi.setSpectacleId(oi.getSpectacleId() != null && oi.getSpectacleId() < 0 ? null : oi.getSpectacleId());
+        oi.setSpectacleTicket( oi.getSpectacleTicket() != null && oi.getSpectacleTicket() < 0  ? null : oi.getSpectacleTicket() );
+
+        if( oi.getTransportTravelDate() != null ){
+            Calendar c = Calendar.getInstance();
+            c.setTime( oi.getTransportTravelDate() );
+
+            if( c.get( Calendar.YEAR ) == 2000 )
+                oi.setTransportTravelDate( null );
+        }
 
         em.createNamedQuery("OrderItem.update")
                 .setParameter("STATUS", oi.getStatus())
@@ -74,7 +88,7 @@ public class SalesOrdersBoundary {
                 .setParameter("SPECTACLE_TICKET",oi.getSpectacleTicket())
                 .setParameter("LODGING_COMMENTS",oi.getLodgingComments())
                 .setParameter("ORDER_ID",oi.getOrderId().getId())
-                .setParameter("ITEM_NO",oi.getItemNo())
+                .setParameter("ITEM_NO",itemNo)
                 .executeUpdate();
 
     }

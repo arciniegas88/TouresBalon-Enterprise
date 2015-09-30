@@ -72,7 +72,7 @@ public class OrderItem implements Serializable {
     //[added fields]-------------------------
 
     @Column(name = "ITEM_NO")
-    private Integer itemNo;
+    private String itemNo;
 
     @Column(name = "STATUS")
     private String status;
@@ -114,7 +114,7 @@ public class OrderItem implements Serializable {
     public OrderItem() {
     }
 
-    public OrderItem(Long productId, String productName, Long price, Integer itemNo,
+    public OrderItem(Long productId, String productName, Long price, String itemNo,
                      String status, String transportComments, Date transportTravelDate, String transportSourceCity,
                      String transportTargetCity, String transportTravelNumber, String transportChairNumber,
                      String transportOutTime, String spectacleComments, Long spectacleId, Long spectacleTicket,
@@ -137,11 +137,11 @@ public class OrderItem implements Serializable {
         this.lodgingComments = lodgingComments;
     }
 
-    public Integer getItemNo() {
+    public String getItemNo() {
         return itemNo;
     }
 
-    public void setItemNo(Integer itemNo) {
+    public void setItemNo(String itemNo) {
         this.itemNo = itemNo;
     }
 
