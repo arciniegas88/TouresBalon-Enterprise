@@ -22,6 +22,12 @@ public class SalesOrderWS {
     @Inject
     private SalesOrdersBoundary boundary;
 
+    @Oneway
+    @WebMethod(operationName = "changeSalesOrderStatus",action = "changeSalesOrderStatus")
+    public void changeSalesOrderStatus( @WebParam(name = "order") SalesOrder so ){
+        boundary.changeSalesOrderStatus( so );
+    }
+
     @WebMethod(operationName = "createSalesOrder",action = "createSalesOrder")
     public Long createSalesOrder( @WebParam(name = "order") SalesOrder so, @WebParam(name = "items") List<OrderItem> ois)throws SystemException {
         return boundary.createSalesOrder(so,ois);
@@ -30,6 +36,12 @@ public class SalesOrderWS {
     @Oneway
     @WebMethod(operationName = "updateItem",action = "updateItem")
     public void updateItem( @WebParam(name = "item") OrderItem oi ){
+        boundary.updateItem(oi);
+    }
+
+    @Oneway
+    @WebMethod(operationName = "changeItemStatus",action = "changeItemStatus")
+    public void changeItemStatus( @WebParam(name = "item") OrderItem oi ){
         boundary.updateItem(oi);
     }
 

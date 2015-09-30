@@ -12,7 +12,7 @@ import javax.jws.WebService;
  * Created by Jenny on 23/09/2015.
  */
 
-@WebService(targetNamespace = "http://touresbalon.com.co/transport/service/task/1.0.0")
+@WebService(targetNamespace = "http://touresbalon.com.co/businessrules/service/utility/1.0.0")
 public class BusinessRulesWS {
 
     @Inject

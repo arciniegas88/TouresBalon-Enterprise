@@ -9,6 +9,7 @@
 			xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
 			attributeFormDefault="unqualified" elementFormDefault="unqualified"
 			targetNamespace="http://touresbalon.com.co/salesorder/service/task/1.0.0">
+			<xs:element name="changeSalesOrderStatus" type="tns:changeSalesOrderStatus" />
 			<xs:element name="createSalesOrder" type="tns:createSalesOrder" />
 			<xs:element name="createSalesOrderResponse" type="tns:createSalesOrderResponse" />
 			<xs:element name="orderItem" type="tns:orderItem" />
@@ -22,7 +23,7 @@
 			<xs:complexType name="orderItem">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="id" type="xs:long" />
-					<xs:element minOccurs="0" name="itemNo" type="xs:int" />
+					<xs:element minOccurs="0" name="itemNo" type="xs:string" />
 					<xs:element minOccurs="0" name="lodgingComments" type="xs:string" />
 					<xs:element minOccurs="0" name="orderId" type="tns:salesOrder" />
 					<xs:element minOccurs="0" name="price" type="xs:long" />
@@ -58,6 +59,11 @@
 					<xs:element minOccurs="0" name="status" type="xs:string" />
 				</xs:sequence>
 			</xs:complexType>
+			<xs:complexType name="changeSalesOrderStatus">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="order" type="tns:salesOrder" />
+				</xs:sequence>
+			</xs:complexType>
 			<xs:complexType name="createSalesOrder">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="order" type="tns:salesOrder" />
@@ -78,6 +84,9 @@
 			</xs:complexType>
 		</xs:schema>
 	</wsdl:types>
+	<wsdl:message name="changeSalesOrderStatus">
+		<wsdl:part element="tns:changeSalesOrderStatus" name="parameters"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="createSalesOrderResponse">
 		<wsdl:part element="tns:createSalesOrderResponse" name="parameters"></wsdl:part>
 	</wsdl:message>
@@ -99,6 +108,9 @@
 		<wsdl:operation name="updateItem">
 			<wsdl:input message="tns:updateItem" name="updateItem"></wsdl:input>
 		</wsdl:operation>
+		<wsdl:operation name="changeSalesOrderStatus">
+			<wsdl:input message="tns:changeSalesOrderStatus" name="changeSalesOrderStatus"></wsdl:input>
+		</wsdl:operation>
 		<wsdl:operation name="createSalesOrder">
 			<wsdl:input message="tns:createSalesOrder" name="createSalesOrder"></wsdl:input>
 			<wsdl:output message="tns:createSalesOrderResponse" name="createSalesOrderResponse"></wsdl:output>
@@ -111,6 +123,13 @@
 		<wsdl:operation name="updateItem">
 			<soap:operation soapAction="updateItem" style="document" />
 			<wsdl:input name="updateItem">
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="changeSalesOrderStatus">
+			<soap:operation soapAction="changeSalesOrderStatus"
+				style="document" />
+			<wsdl:input name="changeSalesOrderStatus">
 				<soap:body use="literal" />
 			</wsdl:input>
 		</wsdl:operation>

@@ -149,7 +149,7 @@ public class TransportBoundary {
 
         ReservationResponseMessage response = new ReservationResponseMessage();
         response.setAvailable(false);
-        response.setDescription("No chairs available");
+        response.setDescription("NO CHAIRS AVAILABLE");
 
         Iterator<Entry<String, Object>> iterator = cache.iterator();
 
@@ -169,7 +169,7 @@ public class TransportBoundary {
                         response.setAvailable(true);
                         response.setTravelNumber(r.getTravelNumber());
                         response.setChairNumber(r.getChairNumber());
-                        response.setDescription("Reservation executed ok");
+                        response.setDescription("RESERVATION EXECUTED SUCCESSFULLY ");
                         cache.put(entry.getKey(), data);
                         return response;
                     }

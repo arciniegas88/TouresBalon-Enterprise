@@ -15,7 +15,9 @@
 			<xs:element name="custLastName" type="xs:string" minOccurs="0" />
 			<xs:element name="custDocumentNumber" type="xs:string" minOccurs="0" />
             <xs:element name="custDocumentType" type="tns:documentType" minOccurs="0" />
+            <xs:element name="customerType" type="tns:customerType"/>
             <xs:element name="creditCardNumber" type="xs:string"/>
+            <xs:element name="price" type="xs:decimal" minOccurs="0" />
             <xs:element name="items" type="tns:OrderItem" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="custom" type="tns:SalesOrderCustomFields"/>
 		</xs:sequence>
@@ -127,6 +129,15 @@
             <xs:enumeration value="BOLIVARIANO" />
         </xs:restriction>
     </xs:simpleType>
+
+	<xs:simpleType name="customerType" final="restriction" >
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PLATINUM" />
+            <xs:enumeration value="GOLD" />
+            <xs:enumeration value="SILVER" />
+        </xs:restriction>
+    </xs:simpleType>
+
 
 	<!-- ================================================================= -->
     <!-- XML MESSAGES                                             		   -->

@@ -40,6 +40,15 @@ public class SalesOrdersBoundary {
     public SalesOrdersBoundary() {
     }
 
+    public void changeSalesOrderStatus( SalesOrder so ){
+
+        em.createNamedQuery("SalesOrder.changeStatus")
+                .setParameter("STATUS",so.getStatus())
+                .setParameter("COMMENTS", so.getComments())
+                .setParameter("ID", so.getId())
+                .executeUpdate();
+    }
+
     public Long createSalesOrder( SalesOrder so, List<OrderItem> ois)throws SystemException{
 
         so.setOrderDate(new Date());

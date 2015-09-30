@@ -46,6 +46,10 @@
         <custDocumentType>
           <xsl:value-of select="/ns0:CreateSalesOrderRequest/order/custDocumentType"/>
         </custDocumentType>
+        <price>
+        	<xsl:value-of select="/ns0:CreateSalesOrderRequest/order/price"/>
+        </price>
+        <status>IN_VALIDATION</status>
       </order>
       <xsl:for-each select="/ns0:CreateSalesOrderRequest/order/items">
         <items>

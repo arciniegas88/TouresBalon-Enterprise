@@ -5,7 +5,6 @@
  */
 package co.com.touresbalon.foundation.spectacles.persistence;
 
-import co.com.touresbalon.foundation.spectacles.dto.MensajeRespuesta;
 import co.com.touresbalon.foundation.spectacles.dto.SpectacleDTO;
 import co.com.touresbalon.foundation.spectacles.dto.TicketResponseDTO;
 import co.com.touresbalon.foundation.spectacles.entity.Spectacle;
@@ -27,6 +26,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author nrodriguez
  */
+
 @Singleton
 @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
 public class SpectaclesPersistenceService {
@@ -46,6 +46,7 @@ public class SpectaclesPersistenceService {
 
         TicketResponseDTO tickecResponseDTO = new TicketResponseDTO();
         tickecResponseDTO.setTransactionSuccess(false);
+        tickecResponseDTO.setTicket( new BigInteger("-1") );
 
         List<Spectacle> listSpectacle = new ArrayList<>();
         if (idSpectacle != null) {

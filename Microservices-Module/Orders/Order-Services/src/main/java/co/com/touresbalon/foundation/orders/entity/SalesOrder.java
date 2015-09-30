@@ -20,6 +20,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "SALES_ORDER")
 @XmlRootElement
 @NamedQueries(value = {
+        @NamedQuery(name = "SalesOrder.changeStatus",
+                query = "UPDATE SalesOrder s SET s.status = :STATUS," +
+                        "s.comments = :COMMENTS " +
+                        "WHERE s.id = :ID"),
         @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s"),
         @NamedQuery(name = "SalesOrder.ByCustomer",
                 query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +

@@ -13,7 +13,7 @@ dialect  "mvel"
 
 rule "platinum customers"
     when
-    $p : OrderFact( userType == 'platinum')
+    $p : OrderFact( userType == 'PLATINUM')
     then
      System.out.println(" ********* order pass platinum customers **********");
     $p.setApproval(true);
@@ -28,7 +28,7 @@ end
 rule "gold customers"
 salience 10
     when
-    $p : OrderFact( userType == 'gold')
+    $p : OrderFact( userType == 'GOLD')
     then
      System.out.println(" ********* order pass customer gold **********");
     $p.setApproval(true);
@@ -41,7 +41,7 @@ end
 rule "gold customer with greater amount"
 salience 5
     when
-    $p : OrderFact( userType == 'gold' &&  6000000 < orderAmount )
+    $p : OrderFact( userType == 'GOLD' &&  6000000 < orderAmount )
     then
      System.out.println(" ********* order pass customer gold with greater amount **********");
     $p.setApproval(false);
@@ -55,7 +55,7 @@ end
 
 rule "silver customer"
     when
-    $p : OrderFact( userType == 'silver')
+    $p : OrderFact( userType == 'SILVER')
     then
      System.out.println(" ********* order pass customer silver **********");
     $p.setApproval(false);
