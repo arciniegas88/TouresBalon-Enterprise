@@ -47,6 +47,8 @@ public class SalesOrdersBoundary {
                 .setParameter("COMMENTS", so.getComments())
                 .setParameter("ID", so.getId())
                 .executeUpdate();
+
+        em.flush();
     }
 
     public Long createSalesOrder( SalesOrder so, List<OrderItem> ois)throws SystemException{
