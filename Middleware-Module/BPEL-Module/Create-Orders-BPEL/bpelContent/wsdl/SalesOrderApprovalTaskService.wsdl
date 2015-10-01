@@ -50,8 +50,8 @@
 	</wsdl:message>
 
 	<plnk:partnerLinkType name="b4pPartnerLinkType">
-		<plnk:role name="hi" portType="tns:ClaimsHandlingPT" />
-		<plnk:role name="bpel" portType="tns:ClaimsHandlingCallbackPT" />
+		<plnk:role name="remoteRole" portType="tns:ClaimsHandlingPT" />
+		<plnk:role name="localRol" portType="tns:ClaimsHandlingCallbackPT" />
 	</plnk:partnerLinkType>
 
 	<wsdl:portType name="ClaimsHandlingPT">
@@ -91,13 +91,13 @@
 
 	<wsdl:service name="ClaimService">
 		<wsdl:port name="ClaimPort" binding="tns:ClaimSoapBinding">
-			<soap:address location="http://localhost:9763/services/ClaimService" />
+			<soap:address location="https://localhost:9446/services/ClaimService.ClaimServicehttpsClaimSoapBindingEndpoint/" />
 		</wsdl:port>
 	</wsdl:service>
 
     <wsdl:service name="ClaimServiceCB">
 		<wsdl:port name="ClaimPortCB" binding="tns:ClaimSoapBindingCB">
-			<soap:address location="http://localhost:9763/services/ClaimServiceCB" />
+			<soap:address location="http://localhost:9766/services/ClaimService.ClaimServicehttpClaimSoapBindingEndpoint/" />
 		</wsdl:port>
     </wsdl:service>
 
