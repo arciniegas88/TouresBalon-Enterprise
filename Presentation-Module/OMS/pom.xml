@@ -10,4 +10,8 @@
     <artifactId>OMS</artifactId>
     <packaging>pom</packaging>
     <name>OMS</name>
+    <modules>
+        <module>OMS-Studio</module>
+        <module>OMS-Theme</module>
+    </modules>
 </project>

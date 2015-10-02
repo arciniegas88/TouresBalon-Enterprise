@@ -59,6 +59,7 @@
         <processorPath useClasspath="true" />
         <module name="Create-Orders-BPEL" />
         <module name="Cross-Cutting-Artifacts" />
+        <module name="OMS-Theme" />
       </profile>
       <profile default="false" name="Annotation profile for Product-Services" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
@@ -109,6 +110,13 @@
         <processorPath useClasspath="true" />
         <module name="SpectaclesWS" />
       </profile>
+      <profile default="false" name="Annotation profile for OMS-Studio" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="OMS-Studio" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -129,6 +137,8 @@
       <module name="Microservices-Module" target="1.5" />
       <module name="Middleware-Module" target="1.5" />
       <module name="OMS" target="1.5" />
+      <module name="OMS-Studio" target="1.7" />
+      <module name="OMS-Theme" target="1.5" />
       <module name="Order-Proxy-Services" target="1.7" />
       <module name="Order-Services" target="1.7" />
       <module name="OrderProcessing-Proxy-Services" target="1.7" />

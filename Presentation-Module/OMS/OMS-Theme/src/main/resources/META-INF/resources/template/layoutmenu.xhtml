@@ -1,0 +1,25 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pm="http://primefaces.org/modena">
+
+    <div class="Animated05" id="layout-menu-cover">
+        <h:form id="menuform">
+            <pm:menu>
+                <p:menuitem id="rm_dashboard" value="Dashboard" icon="icon-dvr" outcome="/dashboard"/>
+                <p:submenu id="colors" label="Color Variations" icon="icon-color_lens">
+                    <p:menuitem id="gray_geometric" value="Gray" icon="icon-colorize" url="#" onclick="$('body').attr('class','').addClass('GrayModena Geometry');"/>
+                    <p:menuitem id="blue_geometric" value="Blue" icon="icon-colorize" url="#" onclick="$('body').attr('class','').addClass('BlueModena Geometry');"/>
+                    <p:menuitem id="indigo_geometric" value="Indigo" icon="icon-colorize" url="#" onclick="$('body').attr('class','').addClass('IndigoModena Geometry');"/>
+                    <p:menuitem id="cyan_geometric" value="Cyan" icon="icon-colorize" url="#" onclick="$('body').attr('class','').addClass('CyanModena Geometry');"/>
+                    <p:menuitem id="red_geometric" value="Red" icon="icon-colorize" url="#" onclick="$('body').attr('class','').addClass('RedModena Geometry');"/>
+                </p:submenu>
+                <p:separator />
+            </pm:menu>
+        </h:form>
+
+    </div>
+
+</ui:composition>

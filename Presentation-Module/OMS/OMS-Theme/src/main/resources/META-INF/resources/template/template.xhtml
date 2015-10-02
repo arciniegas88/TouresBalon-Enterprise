@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+
+        <title>OMS Studio</title>
+        
+        <h:outputScript name="js/ripple-effect.js" library="modena-layout" />
+        <h:outputScript name="js/perfect-scrollbar.js" library="modena-layout" />
+        <h:outputScript name="js/layout.js" library="modena-layout" />
+
+        <ui:insert name="head" />
+    </h:head>
+
+    <h:body class="GrayModena Geometry">
+        
+        <ui:include src="topbar.xhtml" />
+        
+        <div id="wrapper">
+            <div id="wrapperIndent">
+
+                <ui:include src="layoutmenu.xhtml" />
+
+                <div id="layout-portlets-cover">
+                    <div class="Container96 Fnone MarAuto">
+                        
+                        <!-- SUB TOPBAR START -->
+                        <div class="Container100 UserLinks">
+                            <div class="ContainerIndent TexAlRight">
+                                <a href="#" class="DispInlBlock Fright BoldGray HoverEffect"><i class="icon-shopping_cart Fs30"><span class="CartText White">2</span></i> </a>
+                                <a href="#" class="DispInlBlock Fright BoldGray MarRight10 HoverEffect"><span class="Fs22 FontRobotoLight">Walter White, Welcome</span> <i class="icon-account_circle Fright Fs30"></i></a>
+                            </div>   
+
+                            <div class="EmptyBox10"></div>
+                        </div>
+
+                        <div class="Container100 UserLinks">
+                            <div class="ContainerIndent">
+                                <span class="BoldGray Fs18 FontRobotoLight Fleft ShowOnDesktop"><i class="icon-arrow-right"></i> <ui:insert name="subheader" /></span>
+
+                                <a href="#" class="BoldGray Fs16 FontRobotoLight Fright HoverEffect"><i class="icon-paper"></i> Notes</a>
+                                <a href="#" class="BoldGray Fs16 FontRobotoLight Fright MarRight20 HoverEffect"><i class="icon-briefcase"></i> Tasks</a>
+                                <a href="#" class="BoldGray Fs16 FontRobotoLight Fright MarRight20 HoverEffect"><i class="icon-link"></i> Latest Links</a>
+                                <a href="#" class="BoldGray Fs16 FontRobotoLight Fright MarRight20 HoverEffect"><i class="icon-layers"></i> All Invoices</a>
+                            </div>
+
+                            <div class="EmptyBox5"></div>
+                        </div>
+                        <!-- SUB TOPBAR END -->
+                        
+                        <ui:insert name="content">
+                            Template
+                        </ui:insert>
+
+                        <!-- footer -->
+                        <div class="Container100">
+                            <div class="ContainerIndent TexAlCenter Fs14 BoldGray">
+                                PrimeFaces Modena Theme And Layout  |  All Rights Reserved.
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+                    <f:facet name="start">
+                        <p:graphicImage name="images/preloader.gif" library="modena-layout"/>
+                    </f:facet>
+
+                    <f:facet name="complete">
+                        <h:outputText value="" />
+                    </f:facet>
+                </p:ajaxStatus>
+            </div>
+        </div>
+
+        <h:outputStylesheet name="css/core-layout.css" library="modena-layout" />
+        <h:outputStylesheet name="css/animate.css" library="modena-layout" />
+        <h:outputStylesheet name="css/modena-font.css" library="modena-layout" />
+        <h:outputStylesheet name="css/ripple-effect.css" library="modena-layout" />
+        <h:outputStylesheet name="css/perfect-scrollbar.css" library="modena-layout" />
+        <h:outputStylesheet name="css/font-awesome.css" library="modena-layout" />
+        <h:outputStylesheet name="css/modena-layout.css" library="modena-layout" />
+
+    </h:body>
+
+</html>

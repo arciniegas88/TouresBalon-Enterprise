@@ -16,6 +16,7 @@
     <file type="web" url="file://$PROJECT_DIR$/Microservices-Module/Orders/Order-Services" />
     <file type="web" url="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services" />
     <file type="web" url="file://$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services" />
+    <file type="web" url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
