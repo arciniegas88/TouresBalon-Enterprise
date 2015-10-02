@@ -3,6 +3,7 @@ package co.com.touresbalon.foundation.oms.security;
 
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.context.RequestContext;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -54,9 +55,9 @@ public class LoginController {
     
     // [logout] ---------------------------------
     
-    public String logout(){
+    public void logout(){
         FacesUtil.invalidateSession();
-        return FacesUtil.redirect("/login.page");
+        RequestContext.getCurrentInstance().execute("window.location.href='http://localhost:9090/OMS-Studio/login.xhtml';");
     }
     
     

@@ -1,11 +1,12 @@
-<ui:composition 
-
+<ui:composition
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://java.sun.com/jsf/facelets">
-    
-    
+
+    <h:form>
+        <p:remoteCommand name="remoteLogout" update="@form" action="#{loginController.logout()}"/>
+
     <!-- TOPBAR START -->
     <div id="layout-topbar">
         <a id="mobile-menu-button">
@@ -60,11 +61,11 @@
                 <ul>
                     <li><a href="#"><span class="Blue"><i class="icon-airline_seat_individual_suite Fs30 DispBlock"></i> Sleep Mode</span></a></li>
                     <li><a href="#"><span class="Orange"><i class="icon-track_changes Fs30 DispBlock"></i> Restart System</span></a></li>
-                    <li><a href="#"><span class="Red"><i class="icon-vpn_key Fs30 DispBlock"></i> Logout</span></a></li>
+                    <li><a href="#"><span class="Red" onclick="remoteLogout();"><i class="icon-vpn_key Fs30 DispBlock"></i>Logout</span></a></li>
                 </ul>
             </li>
         </ul>
     </div>
     <!-- TOPBAR END -->
-    
+    </h:form>
 </ui:composition>

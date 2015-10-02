@@ -24,6 +24,7 @@ public class LoginModel implements Serializable {
     private boolean authenticated;
 
     public LoginModel() {
+        user = new User();
     }
 
     public User getUser() {
