@@ -39,7 +39,7 @@ public class LoginController {
             model.setAuthenticated(true);
             return FacesUtil.redirect("/dashboard.xhtml");
         }else{
-            FacesUtil.addErrorMessage("Login error");
+            FacesUtil.addErrorMessage("Usuario o clave incorrectas");
             return "";
         }
 

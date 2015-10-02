@@ -18,7 +18,8 @@
 
 <h:body styleClass="GrayModena Geometry" style="height:auto;">
 
-    <h:form>
+    <h:form id="loginform">
+        <p:growl showDetail="true" showSummary="false"/>
         <div class="Wid90 DispBlock MarAuto MarTopPerc5 TexAlCenter">
             <div class="Wid33 MarAuto WidAutoOnMobile">
                 <h:graphicImage name="images/logo-dark.png" library="modena-layout"
@@ -31,24 +32,33 @@
                             class="icon-security Fs60 DispBlock"></i> Enterprise Login
                     </div>
                     <div class="EmptyBox30"></div>
-                    <div class="Wid100"><p:inputText placeholder="Email" styleClass="Wid80 TexAlCenter Fs18"
-                                                     value="#{loginModel.user.login}"/></div>
-                    <div class="EmptyBox10"></div>
-                    <div class="Wid100"><p:inputText type="password" placeholder="Password"
+                    <p:outputLabel value="Email" for="txtEmail" style="display:none;"/>
+                    <div class="Wid100"><p:inputText placeholder="Email"
+                                                     id="txtEmail"
                                                      styleClass="Wid80 TexAlCenter Fs18"
-                                                     value="#{loginModel.user.password}"/></div>
+                                                     value="#{loginModel.user.login}"
+                                                     required="true"/></div>
+                    <div class="EmptyBox10"></div>
+                    <p:outputLabel value="Password" for="txtPassword" style="display:none;"/>
+                    <div class="Wid100"><p:inputText type="password"
+                                                     id="txtPassword"
+                                                     placeholder="Password"
+                                                     styleClass="Wid80 TexAlCenter Fs18"
+                                                     value="#{loginModel.user.password}"
+                                                     required="true"/></div>
 
                     <div class="EmptyBox30"></div>
                     <div class="Wid50 Fleft Responsive50"><p:commandButton value="Ingresar al portal"
-                                                                    icon="fa fa-sign-in"
-                                                                    styleClass=" Fs18 White RaisedButton Fright FloatNoneOnMobile"
-                                                                    href="dashboard.xhtml"
-                                                                    action="#{loginController.login()}"/></div>
+                                                                           icon="fa fa-sign-in"
+                                                                           styleClass=" Fs18 White RaisedButton Fright FloatNoneOnMobile"
+                                                                           update="@form"
+                                                                           process="loginform"
+                                                                           action="#{loginController.login()}"/></div>
                     <div class="EmptyBox5 ShowOnMobile"></div>
                     <div class="Wid50 Fleft Responsive50"><p:commandButton value="Olvido su password ?"
-                                                                    icon="fa fa-lock"
-                                                                    styleClass="RedButton Fs18 White RaisedButton Fleft FloatNoneOnMobile"
-                                                                    action="#{loginController.forgotPassword()}"/></div>
+                                                                           icon="fa fa-lock"
+                                                                           styleClass="RedButton Fs18 White RaisedButton Fleft FloatNoneOnMobile"
+                                                                           action="#{loginController.forgotPassword()}"/></div>
                     <div class="EmptyBox20"></div>
                     <div class="Separator"></div>
 
