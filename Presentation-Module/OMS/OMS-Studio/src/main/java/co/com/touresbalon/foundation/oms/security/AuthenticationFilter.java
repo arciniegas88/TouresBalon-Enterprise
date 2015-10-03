@@ -72,13 +72,12 @@ public class AuthenticationFilter implements Filter {
             if( StringUtils.contains(req.getRequestURI(), "/javax.faces.resource") ||
                 StringUtils.equals( req.getRequestURI(), "/OMS-Studio") ||
                 StringUtils.equals( req.getRequestURI(), "/OMS-Studio/") ||
-                StringUtils.equals( req.getRequestURI(), "/OMS-Studio/login.xhtml") ||
-                session == null){
+                StringUtils.equals( req.getRequestURI(), "/OMS-Studio/login.xhtml") ){
                 chain.doFilter(req, resp);
                 return;
             }
                 
-            if( !model.isAuthenticated() ){
+            if( session == null || model == null || !model.isAuthenticated() ){
                 resp.sendRedirect("/OMS-Studio/login.xhtml");
                 return;
             }

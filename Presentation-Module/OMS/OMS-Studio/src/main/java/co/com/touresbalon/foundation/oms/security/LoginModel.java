@@ -1,6 +1,6 @@
 package co.com.touresbalon.foundation.oms.security;
 
-import co.com.touresbalon.foundation.oms.model.User;
+import co.com.touresbalon.foundation.oms.domain.User;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
