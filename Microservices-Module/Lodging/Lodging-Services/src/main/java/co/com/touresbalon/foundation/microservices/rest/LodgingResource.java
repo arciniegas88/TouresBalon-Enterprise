@@ -52,27 +52,27 @@ public class LodgingResource {
 //        return boundary.doReservation(orderId, hotelId, room, name, checkIn, checkOut);
 //    }
 
-    @GET
-    @Path("/confirmReservation/{reservationId}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public String confirmReservation(@PathParam("reservationId") Long reservationId) throws SystemException {
+//    @GET
+//    @Path("/confirmReservation/{reservationId}")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public String confirmReservation(@PathParam("reservationId") Long reservationId) throws SystemException {
+//
+//        return boundary.updateReservation(reservationId, 1L);
+//    }
 
-        return boundary.updateReservation(reservationId, 1L);
-    }
+//    @GET
+//    @Path("/cancelReservation/{reservationId}")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public String cancelReservation(@PathParam("reservationId") Long reservationId) throws SystemException {
+//
+//        return boundary.updateReservation(reservationId, -1L);
+//    }
 
-    @GET
-    @Path("/cancelReservation/{reservationId}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public String cancelReservation(@PathParam("reservationId") Long reservationId) throws SystemException {
-
-        return boundary.updateReservation(reservationId, -1L);
-    }
-
-    @GET
-    @Path("/getReservation/{reservationId}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public TouresbalonReservations getReservation(@PathParam("reservationId") Long reservationId) throws SystemException {
-
-        return boundary.getReservation(reservationId);
-    }
+//    @GET
+//    @Path("/getReservation/{reservationId}")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public TouresbalonReservations getReservation(@PathParam("reservationId") Long reservationId) throws SystemException {
+//
+//        return boundary.getReservation(reservationId);
+//    }
 }

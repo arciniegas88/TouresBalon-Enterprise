@@ -48,6 +48,7 @@ public class LodgingService implements LodgingPort {
         return response;
     }
 
+    @Override
     @WebMethod
     @WebResult(name = "doReservationResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
     public DoReservationResType doReservation(
@@ -57,16 +58,7 @@ public class LodgingService implements LodgingPort {
         TouresbalonReservations reservation = boundary.doReservation(body.getOrderId(), body.getHotelId(), body.getRoom(), body.getGuestName(),
                 body.getCheckIn(), body.getCheckOut());
 
-        TouresBalonReservation reservationType = new TouresBalonReservation();
-        reservationType.setRoomNumber(reservation.getRoomNumber());
-        reservationType.setHotelId(reservation.getHotelId());
-        reservationType.setCheckIn(reservation.getCheckInDate());
-        reservationType.setCheckOut(reservation.getCheckOutDate());
-        reservationType.setGuestName(reservation.getGuestName());
-        reservationType.setOrderId(reservation.getOrderId());
-        reservationType.setReservationId(reservation.getReservationId());
-        reservationType.setState(reservation.getState());
-
+        TouresBalonReservation reservationType = new TouresBalonReservation(reservation);
         DoReservationResType response = new DoReservationResType();
         response.setTouresBalonReservation(reservationType);
 
@@ -74,17 +66,47 @@ public class LodgingService implements LodgingPort {
     }
 
     @Override
-    public ConfirmReservationResType confirmReservation(ConfirmReservationReqType body) throws FaultMsg {
-        return null;
+    @WebMethod
+    @WebResult(name = "confirmReservationResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+    public ConfirmReservationResType confirmReservation(
+            @WebParam(name = "confirmReservationRequest", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+            ConfirmReservationReqType body)
+            throws FaultMsg {
+
+        String result = boundary.updateReservation(body.getReservationId(), 1L);
+        ConfirmReservationResType response = new ConfirmReservationResType(result);
+
+        return response;
     }
 
     @Override
-    public CancelReservationResType cancelReservation(CancelReservationReqType body) throws FaultMsg {
-        return null;
+    @WebMethod
+    @WebResult(name = "cancelReservationResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+    public CancelReservationResType cancelReservation(
+            @WebParam(name = "cancelReservationRequest", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+            CancelReservationReqType body)
+            throws FaultMsg {
+
+        String result = boundary.updateReservation(body.getReservationId(), -1L);
+        CancelReservationResType response = new CancelReservationResType(result);
+
+        return response;
     }
 
     @Override
-    public GetReservationResType getReservation(GetReservationReqType body) throws FaultMsg {
-        return null;
+    @WebMethod
+    @WebResult(name = "getReservationResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+    public GetReservationResType getReservation(
+            @WebParam(name = "getReservationRequest", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+            GetReservationReqType body)
+            throws FaultMsg{
+
+        TouresbalonReservations reservation = boundary.getReservation(body.getReservationId());
+
+        TouresBalonReservation touresBalonReservation = new TouresBalonReservation(reservation);
+        GetReservationResType response = new GetReservationResType();
+        response.setTouresBalonReservation(touresBalonReservation);
+
+        return response;
     }
 }

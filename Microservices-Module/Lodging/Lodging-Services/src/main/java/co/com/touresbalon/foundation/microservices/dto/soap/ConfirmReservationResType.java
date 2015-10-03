@@ -35,6 +35,13 @@ public class ConfirmReservationResType {
     @XmlElement(name = "GeneralResponse", namespace = "http://touresbalon.com.co/model/lodging/schema/v1", required = true)
     protected GeneralResponse generalResponse;
 
+    public ConfirmReservationResType(){}
+
+    public ConfirmReservationResType(String message){
+        this.generalResponse = new GeneralResponse();
+        generalResponse.setMessage(message);
+    }
+
     /**
      * Gets the value of the generalResponse property.
      * 

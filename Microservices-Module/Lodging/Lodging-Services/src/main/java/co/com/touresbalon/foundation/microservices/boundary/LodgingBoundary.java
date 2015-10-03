@@ -91,7 +91,7 @@ public class LodgingBoundary {
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public String updateReservation(Long reservationId, Long status) throws SystemException {
+    public String updateReservation(Long reservationId, Long status) throws FaultMsg {
         try {
 
 
@@ -109,7 +109,11 @@ public class LodgingBoundary {
             }
 
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            SystemFault fault = new SystemFault();
+            fault.setDescription(e.getMessage());
+            fault.setCode("00");
+
+            throw new FaultMsg(e.getMessage(), fault);
         }
 
         return "Service Completed";
@@ -117,12 +121,16 @@ public class LodgingBoundary {
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public TouresbalonReservations getReservation(Long reservationId) throws SystemException {
+    public TouresbalonReservations getReservation(Long reservationId) throws FaultMsg {
 
         try {
             return em.find(TouresbalonReservations.class, reservationId);
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            SystemFault fault = new SystemFault();
+            fault.setDescription(e.getMessage());
+            fault.setCode("00");
+
+            throw new FaultMsg(e.getMessage(), fault);
         }
     }
 

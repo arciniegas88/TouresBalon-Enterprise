@@ -1,6 +1,8 @@
 
 package co.com.touresbalon.foundation.microservices.dto.soap;
 
+import co.com.touresbalon.foundation.microservices.entity.TouresbalonReservations;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -63,6 +65,18 @@ public class TouresBalonReservation {
     protected long hotelId;
     protected long roomNumber;
 
+    public TouresBalonReservation(){}
+
+    public TouresBalonReservation(TouresbalonReservations reservations){
+        this.reservationId = reservations.getReservationId();
+        this.orderId = reservations.getOrderId();
+        this.checkIn = reservations.getCheckInDate();
+        this.checkOut = reservations.getCheckOutDate();
+        this.state = reservations.getState();
+        this.guestName = reservations.getGuestName();
+        this.hotelId = reservations.getHotelId();
+        this.roomNumber = reservations.getRoomNumber();
+    }
     /**
      * Gets the value of the reservationId property.
      * 

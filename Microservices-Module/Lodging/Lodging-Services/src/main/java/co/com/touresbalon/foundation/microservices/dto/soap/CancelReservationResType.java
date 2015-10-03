@@ -35,6 +35,12 @@ public class CancelReservationResType {
     @XmlElement(name = "GeneralResponse", namespace = "http://touresbalon.com.co/model/lodging/schema/v1", required = true)
     protected GeneralResponse generalResponse;
 
+    public CancelReservationResType(){}
+
+    public CancelReservationResType(String message){
+        this.generalResponse = new GeneralResponse();
+        this.generalResponse.setMessage(message);
+    }
     /**
      * Gets the value of the generalResponse property.
      * 
