@@ -20,38 +20,12 @@
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/java/co/com/touresbalon/foundation/oms/security/LoginController.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/java/co/com/touresbalon/foundation/oms/security/LoginModel.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/java/co/com/touresbalon/foundation/oms/util/FacesUtil.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/java/org" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/404.xhtml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/WEB-INF/beans.xml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/WEB-INF/faces-config.xml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/WEB-INF/primefaces-modena.taglib.xml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/access-denied.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/css" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/dashboard.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/data.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/datatable.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/docs" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/empty-page.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/error.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/file.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/font-icons.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/forms.xhtml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/index.xhtml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/login.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/login.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/menu.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/messages.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/misc.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/overlay.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/panel.xhtml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/resources" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/java/modena/component/menu/ModenaMenu.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/java/modena/component/menu/ModenaMenuRenderer.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/java/modena/convert/ThemeConverter.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/java/modena/domain/Theme.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/java/modena/filter/CharacterEncodingFilter.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/java/modena/service/ThemeService.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/resources/META-INF/resources" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/resources/META-INF/resources/template/layoutmenu.xhtml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/resources/META-INF/resources/template/template.xhtml" charset="windows-1252" />

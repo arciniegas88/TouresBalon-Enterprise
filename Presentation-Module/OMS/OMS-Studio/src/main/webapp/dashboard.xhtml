@@ -1,5 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:custom="http://java.sun.com/jsf/composite/components"
                 template="/template/template.xhtml">
 
     <ui:define name="subheader">
@@ -10,12 +13,48 @@
 
         <div class="Container100">
             <div class="ContainerIndent">
-                <div class="Card ShadowEffect TexAlCenter">
-                    <br/>
-                    <h2>Empty Page</h2>
-                    <br/>
-                    <span class="gray">Use this page to start from scratch and place your custom content.</span>
-                    <br/><br/>
+                <div class="Card ShadowEffect">
+
+                    <custom:operationContainer label="Tablero de Operaciones">
+
+                        <custom:optionItem topClass="RedBack SoftRed" bottomClass="SoftRed" icon="icon-cloud" label="Admin. Productos"/>
+                        <custom:optionItem topClass="OrangeBack SoftOrange" bottomClass="SoftOrange" icon="icon-sun" label="Consultas Productos"/>
+                        <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray" icon="icon-drop" label="Admin. campanas"/>
+                        <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray" icon="icon-cloud-upload" label="Cancelar ordenes"/>
+                        <custom:optionItem topClass="YellowBack White" bottomClass="White" icon="icon-moon" label="Consultas ordenes"/>
+                        <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen" icon="icon-filter_vintage" label="Admin. clientes"/>
+                        <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple" icon="icon-umbrella" label="Consultas clientes"/>
+
+                    </custom:operationContainer>
+
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">AccordionPanel</h2>
+                            <h:form>
+                                <p:accordionPanel multiple="false">
+                                    <p:tab title="Tab 1">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <h:outputText
+                                                    value="Objects in material design possess similar qualities to objects in the physical world. In the physical world, objects can be stacked or affixed to one another, but cannot pass through each other. Objects cast shadows and reflect light.
+                                                These qualities form a spatial model that is familiar to users and can be applied consistently across apps. Underpinning this spatial model are the concepts of elevation and shadow." />
+                                        </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Tab 2">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <h:outputText value="The material environment is a 3D space, which means all objects have x, y, and z dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the positive z-axis extending towards the viewer. Every sheet of material occupies a single position along the z-axis and has a standard 1dp thickness.
+                                                          On the web, the z-axis is used for layering and not for perspective. The 3D world is emulated by manipulating the y-axis." />
+                                        </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Tab 3">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <h:outputText value="We challenged ourselves to create a visual language for our users that synthesizes the classic principles of good design with the innovation and possibility of technology and science.
+                                                          This is material design. This spec is a living document that will be updated as we continue to develop the tenets and specifics of material design." />
+                                        </h:panelGrid>
+                                    </p:tab>
+                                </p:accordionPanel>
+                            </h:form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
