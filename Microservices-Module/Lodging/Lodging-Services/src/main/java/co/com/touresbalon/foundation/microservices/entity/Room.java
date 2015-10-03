@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @IdClass(RoomPK.class)
 @XmlRootElement
-@NamedQueries(value = @NamedQuery(name = "Room.aviability",
+@NamedQueries(value = @NamedQuery(name = "Room.Availability",
         query = "SELECT r FROM Room r INNER JOIN r.hotelByHotelId h " +
                 "WHERE r.roomNumber NOT IN (SELECT pr.roomNumber FROM PublicReservations pr " +
                 "WHERE :checkIn BETWEEN pr.checkInDate AND pr.checkOutDate " +

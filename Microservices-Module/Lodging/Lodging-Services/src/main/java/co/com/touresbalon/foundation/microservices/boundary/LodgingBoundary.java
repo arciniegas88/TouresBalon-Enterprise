@@ -1,6 +1,9 @@
 package co.com.touresbalon.foundation.microservices.boundary;
 
+import co.com.touresbalon.foundation.crosscutting.exceptions.BusinessException;
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
+import co.com.touresbalon.foundation.microservices.dto.soap.FaultMsg;
+import co.com.touresbalon.foundation.microservices.dto.soap.SystemFault;
 import co.com.touresbalon.foundation.microservices.entity.Room;
 import co.com.touresbalon.foundation.microservices.entity.TouresbalonReservations;
 
@@ -13,6 +16,7 @@ import javax.transaction.UserTransaction;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by harcalejo on 6/09/15.
@@ -34,52 +38,55 @@ public class LodgingBoundary {
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public Room consultRoomsAviability(String hotelBrand, String city, String checkIn, String checkOut) throws SystemException {
-        Room room;
-
+    public Room consultRoomsAvailability(Date checkIn, Date checkOut, String brand, String city) throws FaultMsg {
         try {
-
-            Date in = dateFormat.parse(checkIn);
-            Date out = dateFormat.parse(checkOut);
-
-            room = (Room) em.createNamedQuery("Room.aviability")
-                    .setParameter("checkIn", in, TemporalType.DATE)
-                    .setParameter("checkOut", out, TemporalType.DATE)
-                    .setParameter("brand", hotelBrand)
+            List resultList = em.createNamedQuery("Room.Availability")
+                    .setParameter("checkIn", checkIn, TemporalType.DATE)
+                    .setParameter("checkOut", checkOut, TemporalType.DATE)
+                    .setParameter("brand", brand)
                     .setParameter("city", city)
                     .setMaxResults(1)
-                    .getResultList()
-                    .get(0);
+                    .getResultList();
 
-            return room;
+            if (resultList.isEmpty()) {
+                throw new BusinessException("The result is Empty");
+            } else {
+                return (Room) resultList.get(0);
+            }
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            SystemFault fault = new SystemFault();
+            fault.setDescription(e.getMessage());
+            fault.setCode("00");
+
+            throw new FaultMsg(e.getMessage(), fault);
         }
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Lock(LockType.WRITE)
-    public TouresbalonReservations doReservation(Long orderId, Long hotelId, Long roomNumber, String guestName, String checkIn, String checkOut)
-            throws SystemException {
+    public TouresbalonReservations doReservation(Long orderId, Long hotelId, Long roomNumber, String guestName, Date checkIn, Date checkOut)
+            throws FaultMsg {
 
         TouresbalonReservations reservation;
         try {
-
-            Date in = dateFormat.parse(checkIn);
-            Date out = dateFormat.parse(checkOut);
 
             utx.begin();
 
             Long reservationId = this.getReservationId();
 
-            reservation = new TouresbalonReservations(reservationId, orderId, in, out, guestName, hotelId, roomNumber);
+            reservation = new TouresbalonReservations(reservationId, orderId, checkIn, checkOut, guestName, hotelId,
+                    roomNumber);
 
             em.persist(reservation);
 
             utx.commit();
             return reservation;
         } catch (Exception e) {
-            throw new SystemException(e.getMessage());
+            SystemFault fault = new SystemFault();
+            fault.setDescription(e.getMessage());
+            fault.setCode("00");
+
+            throw new FaultMsg(e.getMessage(), fault);
         }
     }
 

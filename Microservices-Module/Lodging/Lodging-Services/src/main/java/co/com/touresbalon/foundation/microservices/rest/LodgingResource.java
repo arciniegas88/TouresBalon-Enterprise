@@ -28,29 +28,29 @@ public class LodgingResource {
 
     }
 
-    @GET
-    @Path("/roomsAviability")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Room consultRoomsAviability(@QueryParam("hotelBrand") String hotelBrand,
-                                       @QueryParam("checkIn") String checkIn,
-                                       @QueryParam("checkOut") String checkOut,
-                                       @QueryParam("city") String city) throws SystemException {
+//    @GET
+//    @Path("/roomsAviability")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Room consultRoomsAviability(@QueryParam("hotelBrand") String hotelBrand,
+//                                       @QueryParam("checkIn") String checkIn,
+//                                       @QueryParam("checkOut") String checkOut,
+//                                       @QueryParam("city") String city) throws SystemException {
+//
+//        return boundary.consultRoomsAviability(hotelBrand, city, checkIn, checkOut);
+//    }
 
-        return boundary.consultRoomsAviability(hotelBrand, city, checkIn, checkOut);
-    }
-
-    @GET
-    @Path("/doReservation")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public TouresbalonReservations doReservation(@QueryParam("orderId") Long orderId,
-                              @QueryParam("hotelId") Long hotelId,
-                              @QueryParam("room") Long room,
-                              @QueryParam("name") String name,
-                              @QueryParam("checkIn") String checkIn,
-                              @QueryParam("checkOut") String checkOut) throws SystemException {
-
-        return boundary.doReservation(orderId, hotelId, room, name, checkIn, checkOut);
-    }
+//    @GET
+//    @Path("/doReservation")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public TouresbalonReservations doReservation(@QueryParam("orderId") Long orderId,
+//                              @QueryParam("hotelId") Long hotelId,
+//                              @QueryParam("room") Long room,
+//                              @QueryParam("name") String name,
+//                              @QueryParam("checkIn") String checkIn,
+//                              @QueryParam("checkOut") String checkOut) throws SystemException {
+//
+//        return boundary.doReservation(orderId, hotelId, room, name, checkIn, checkOut);
+//    }
 
     @GET
     @Path("/confirmReservation/{reservationId}")

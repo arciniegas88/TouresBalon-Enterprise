@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://touresbalon.com.co/task/lodging/schema/v1"
+           xmlns:tns="http://touresbalon.com.co/task/lodging/schema/v1"
+           xmlns:sch="http://touresbalon.com.co/model/lodging/schema/v1">
+
+    <xs:import namespace="http://touresbalon.com.co/model/lodging/schema/v1"
+                schemaLocation="LodgingModel_schema.xsd" />
+
+    <xs:element name="availabilityRequest" type="tns:availabilityReq_type" />
+    <xs:complexType name="availabilityReq_type">
+        <xs:sequence>
+            <xs:element name="hotelBrand" type="xs:string" />
+            <xs:element name="checkIn" type="xs:date" />
+            <xs:element name="checkOut" type="xs:date" />
+            <xs:element name="city" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="availabilityResponse" type="tns:availabilityRes_type" />
+    <xs:complexType name="availabilityRes_type">
+        <xs:sequence>
+            <xs:element ref="sch:room" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="doReservationRequest" type="tns:doReservationReq_type" />
+    <xs:complexType name="doReservationReq_type">
+        <xs:sequence>
+            <xs:element name="orderId" type="xs:long" />
+            <xs:element name="hotelId" type="xs:long" />
+            <xs:element name="room" type="xs:long" />
+            <xs:element name="guestName" type="xs:string" />
+            <xs:element name="checkIn" type="xs:date" />
+            <xs:element name="checkOut" type="xs:date" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="doReservationResponse" type="tns:doReservationRes_type" />
+    <xs:complexType name="doReservationRes_type">
+        <xs:sequence>
+            <xs:element ref="sch:touresBalonReservation" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="confirmReservationRequest" type="tns:confirmReservationReq_type" />
+    <xs:complexType name="confirmReservationReq_type">
+        <xs:sequence>
+            <xs:element name="reservationId" type="xs:long" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="confirmReservationResponse" type="tns:confirmReservationRes_type" />
+    <xs:complexType name="confirmReservationRes_type">
+        <xs:sequence>
+            <xs:element ref="sch:GeneralResponse" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="cancelReservationRequest" type="tns:cancelReservationReq_type" />
+    <xs:complexType name="cancelReservationReq_type">
+        <xs:sequence>
+            <xs:element name="reservationId" type="xs:long" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="cancelReservationResponse" type="tns:cancelReservationRes_type" />
+    <xs:complexType name="cancelReservationRes_type">
+        <xs:sequence>
+            <xs:element ref="sch:GeneralResponse" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getReservationRequest" type="tns:getReservationReq_type" />
+    <xs:complexType name="getReservationReq_type">
+        <xs:sequence>
+            <xs:element name="reservationId" type="xs:long" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getReservationResponse" type="tns:getReservationRes_type" />
+    <xs:complexType name="getReservationRes_type">
+        <xs:sequence>
+            <xs:element ref="sch:touresBalonReservation" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
