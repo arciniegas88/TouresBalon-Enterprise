@@ -11,19 +11,34 @@
 
     <ui:define name="content">
 
+        <h:form>
         <div class="Container100">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect">
 
                     <custom:operationContainer label="Tablero de Operaciones">
 
-                        <custom:optionItem topClass="RedBack SoftRed" bottomClass="SoftRed" icon="icon-cloud" label="Admin. Productos"/>
-                        <custom:optionItem topClass="OrangeBack SoftOrange" bottomClass="SoftOrange" icon="icon-sun" label="Consultas Productos"/>
-                        <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray" icon="icon-drop" label="Admin. Campanas"/>
-                        <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray" icon="icon-cloud-upload" label="Cancelar Ordenes"/>
-                        <custom:optionItem topClass="YellowBack White" bottomClass="White" icon="icon-moon" label="Consultas Ordenes"/>
-                        <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen" icon="icon-filter_vintage" label="Admin. Clientes"/>
-                        <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple" icon="icon-umbrella" label="Consultas Clientes"/>
+                        <custom:optionItem topClass="RedBack SoftRed" bottomClass="SoftRed"
+                                           icon="icon-cloud" label="Admin. Productos"
+                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                        <custom:optionItem topClass="OrangeBack SoftOrange" bottomClass="SoftOrange"
+                                           icon="icon-sun" label="Consultas Productos"
+                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                        <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
+                                           icon="icon-drop" label="Admin. Campanas"
+                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                        <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
+                                           icon="icon-cloud-upload" label="Cancelar Ordenes"
+                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                        <custom:optionItem topClass="YellowBack White" bottomClass="White"
+                                           icon="icon-moon" label="Consultas Ordenes"
+                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                        <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen"
+                                           icon="icon-filter_vintage" label="Admin. Clientes"
+                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                        <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple"
+                                           icon="icon-umbrella" label="Consultas Clientes"
+                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
 
                     </custom:operationContainer>
 
@@ -32,10 +47,10 @@
                             <h2 class="BigTopic">Servicios de Terceros</h2>
                             <h:form>
                                 <p:accordionPanel multiple="false">
-                                    <p:tab title="Partners de Validaci髇 de Tarjeta de Cr閐ito">
+                                    <p:tab title="Partners de Validaci贸n de Tarjeta de Cr茅dito">
                                         <span style="color: black;font-size: 13px;">
-                                            <p>Los proveedores de validaci髇 de tarjeta de cr閐ito proveen servicios de
-                                                verificaci髇 sobre las transacciones realizadas en el portal, los proveedores
+                                            <p>Los proveedores de validaci贸n de tarjeta de cr茅dito proveen servicios de
+                                                verificaci贸n sobre las transacciones realizadas en el portal, los proveedores
                                                 asociados son los siguientes</p>
                                             <ul>
                                                 <li><b>Redeban Multicolor</b></li>
@@ -44,7 +59,7 @@
                                     </p:tab>
                                     <p:tab title="Partners de Alojamiento y Hoteles">
                                         <span style="color: black;font-size: 13px;">
-                                            <p>Los proveedores de alojamiento proveen servicios de ubicaci髇 a nuestros clientes
+                                            <p>Los proveedores de alojamiento proveen servicios de ubicaci贸n a nuestros clientes
                                                 en las ciudades respectivas del evento deportivo, los proveedores
                                                 asociados son los siguientes</p>
                                             <ul>
@@ -56,7 +71,7 @@
                                     <p:tab title="Partners de Transporte">
                                         <span style="color: black;font-size: 13px;">
                                             <p>Los proveedores de transporte de encargan de proveer servicios de movilidad por
-                                                v韆 aerea o terrestre, los proveedores asociados son los siguientes</p>
+                                                v铆a aerea o terrestre, los proveedores asociados son los siguientes</p>
                                             <ul>
                                                 <li><b>Flotas Bolivariano</b></li>
                                                 <li><b>Arolineas Avianca</b></li>
@@ -64,13 +79,13 @@
                                             </ul>
                                         </span>
                                     </p:tab>
-                                    <p:tab title="Partners de Espect醕ulo">
+                                    <p:tab title="Partners de Espect谩culo">
                                         <span style="color: black;font-size: 13px;">
-                                            <p>Los proveedores de espect醕ulo permiten sumistrar el producto nuclear de
-                                                la organizaci髇 presente en la forma de evento deportivo, los proveedores
+                                            <p>Los proveedores de espect谩culo permiten sumistrar el producto nuclear de
+                                                la organizaci贸n presente en la forma de evento deportivo, los proveedores
                                                 asociados son los siguientes</p>
                                             <ul>
-                                                <li><b>Proveedor espect醕ulos</b></li>
+                                                <li><b>Proveedor espect谩culos</b></li>
                                             </ul>
                                         </span>
                                     </p:tab>
@@ -81,7 +96,7 @@
                 </div>
             </div>
         </div>
-
+        </h:form>
     </ui:define>
 
 </ui:composition>
