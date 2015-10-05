@@ -38,5 +38,12 @@ namespace B2C.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            this.ini();
+
+            return View();
+        }
     }
 }

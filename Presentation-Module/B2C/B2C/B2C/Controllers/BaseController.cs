@@ -12,7 +12,7 @@ namespace B2C.Controllers
 {
     public class BaseController : Controller
     {
-        protected static int BY_PAGE = 8;
+        protected static int BY_PAGE = 9;
 
         public void ini()
         {

@@ -5,6 +5,7 @@ using System.Web;
 using B2C.Contracts;
 using B2C.Handlers;
 using System.Text;
+using System.Web.Mvc;
 
 namespace B2C.Entities
 {
@@ -21,6 +22,16 @@ namespace B2C.Entities
         private Type transport;
         private Type spectacle;
         private Type lodging;
+        private double price;
+
+        public static SelectList FILTER_OPTIONS = new SelectList(
+          new List<Object>
+        {
+                new { value = 0 , text = "Seleccione filtro de busqueda"  },
+                new { value = "code" , text = "Codigo" },
+                new { value = "name" , text = "Nombre"},
+                new { value = "description" , text = "Descripcion"}
+        }, "Value", "Text");
 
         public Product(DataContractProduct contract)
         {
@@ -46,6 +57,8 @@ namespace B2C.Entities
             this.spectacleDate = contract.spectacleDate;
             this.departureDate = contract.departureDate;
 
+            this.price = contract.price;
+
             if( contract.transportType != null)
                 this.Transport = new Type(contract.transportType);
 
@@ -65,18 +78,7 @@ namespace B2C.Entities
 
         public double getCost()
         {
-            double cost = 0;
-
-            if (this.transport != null)
-                cost += this.transport.Cost;
-
-            if (this.spectacle != null)
-                cost += this.spectacle.Cost;
-
-            if (this.lodging != null)
-                cost += this.lodging.Cost;
-
-            return cost;
+            return this.price;
         }
 
         public int Id

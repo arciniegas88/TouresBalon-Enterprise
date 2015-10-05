@@ -44,7 +44,7 @@ namespace B2C.Handlers
 
             HttpContext.Current.Session.Add(String.Concat("producto", count), new ProductCart(id, name, count, account, cost));
 
-            return (new { success = true, total = count, message = Message.CANCEL_IN_PROCESS });
+            return (new { success = true, total = count, message = Message.ADD_SUCCESS });
         }
 
         public static Object deleteProduct(int id, int pos)

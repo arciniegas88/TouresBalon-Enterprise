@@ -7,19 +7,39 @@
 
 @section campaign
 {
-    <div id="features-wrapper">
-        <div class="container">
-            <div class="header">Campa&ntilde;as</div>
-            <div class="row">
-                @foreach (var item in campaigns)
-                {
-                    @RenderPage("~/Views/Product/Campaign.cshtml", new { @name = item.Name, @image = item.Image_ref, @id = item.Id })
-                }
-            </div>
-        </div>
-    </div>
-}
 
-@section content
+    <div id="slider">
+        <div class="owl-carousel">
+                    @foreach (var item in campaigns)
+                    {
+                        <div class="slider-content">
+                                <div class="slider-content-description">
+                                    <p>Campa&ntilde;a</p>
+                                    <p class="descripcion-slider">@item.Name</p>
+                                    <p class="link-btn-slider"><a href="producto"><span class="btn-slider-desktop">Ver Producto</span><span class="btn-slider-mobile"></span></a></p>
+                                </div>
+                                <div class="slider_large desktop"><img src="@item.Image_ref" /></div>
+                                <div class="slider_small mobile"><img src="@item.Image_ref" /></div>
+                        </div>
+                    }
+
+           </div>
+      </div>
+            <script>
+                $(document).ready(function () {
+
+                    $(".owl-carousel").owlCarousel({
+                        items: 1,
+                        nav: true,
+                        margin: 10
+
+                    });
+                });
+
+            </script>
+
+    }
+
+    @section content
 {
-}
+    }

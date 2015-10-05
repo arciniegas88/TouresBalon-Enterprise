@@ -1,48 +1,42 @@
-﻿@{ 
-    var menu = (ViewData["menu"] as B2C.Utils.Menu).Items;
-
+﻿@{
+    var filter_options = B2C.Entities.Product.FILTER_OPTIONS as SelectList;
+    var total_car = B2C.Handlers.HandlerSession.getTotalOrder();
 }
 
-<!-- Header -->
-<div id="header-wrapper">
-    <header id="header" class="container">
+<div id="layout-topbar">
+    <a id="mobile-menu-button">
+        <span class="ButtonLine" id="ButtonLine1"></span>
+        <span class="ButtonLine" id="ButtonLine2"></span>
+        <span class="ButtonLine" id="ButtonLine3"></span>
+    </a>
+    <a href="/modena/dashboard.xhtml" id="logo">
+        <img src="~/Resources/modena-layout/images/logo.svg" class="Fleft">
+    </a>
 
-        <!-- Logo 
-        <div id="logo">
-            <a href="index.html"><img src="~/Resources/images/logo.png" /></a>
-        </div>
-        -->
-        <!-- Nav -->
-        <nav id="nav">
+    <a id="show-top-menu" class="ShowOnMobile ripplelink"><i class="icon-more_vert" id="active"></i><i class="icon-close DispNone" id="passive"></i> </a>
 
-            <ul>
-
-                @foreach (var item in menu)
-                {
-                    if (item.Url == "")
-                    {
-                        @Html.Raw("<li>")
-                        @Html.ActionLink(item.Text, item.ActionName, item.ControllerName, new { }, item.HtmlAttributes)
-                        @Html.Raw("</li>")
-                    }
-                    else
-                    {
-                        @Html.Raw("<li>")
-                        @Html.ActionLink(item.Text, item.Url, new { }, item.HtmlAttributes)
-                        @Html.Raw("</li>")
-                    }
-                }
+    <ul id="top-menu">
+        <li>
+            <a class="ripplelink"><i class="icon-search"></i> <span class="ShowOnMobile">Search Here</span></a>
+            <ul style="min-width:250px;">
+                <li>
+                    @RenderPage("~/Views/Product/Filter.cshtml", new { filter_options = filter_options })
+                </li>
             </ul>
-        </nav>
-
-    </header>
+        </li>
+        <li>
+            <a class="DispInlBlock Fright BoldGray HoverEffect" href="@Url.Action("Show","ShoppingCart")"><i class="icon-shopping_cart Fs30">
+                <span class="CartText White">@total_car</span></i> 
+            </a>
+        </li>
+        @if (ViewBag.userID != 0)
+        { 
+            <li>
+                <a class="ripplelink"><i class="icon-power"></i> <span class="ShowOnMobile">System</span></a>
+                <ul>
+                    <li><a href="@Url.Action("Logout","Security")"><span class="Red"><i class="icon-vpn_key Fs30 DispBlock"></i> Logout</span></a></li>
+                </ul>
+            </li>
+        }
+    </ul>
 </div>
-
-
-@if ( ViewBag.userID == 0 )
-{
-<div id="login_form"  style="display: none;">
-     @RenderPage("~/Views/Security/LoginForm.cshtml")
-     @RenderPage("~/Views/Customer/RegisterForm.cshtml")
- </div>
-}

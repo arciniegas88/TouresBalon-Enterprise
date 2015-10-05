@@ -1,13 +1,47 @@
-﻿<div class="product_small">
-    <div class="col-md-1">
-        <p class="title">@Page.name</p>
-        <div class="text-description">@Page.description</div>
-        <div class="img-responsive"><img class="image-product-small" src="@Page.image" /></div>
-        <div class="d_button">
-            @Html.ActionLink("Ver mas", "detail", "product", new { @id = Page.id }, new { @class = "button icon fa - file - text - o" })
+﻿<div class="MarTop20 Wid30 Fleft Responsive50 Responsive33 MarRight20">
+    <div style="text-align:center" class="ui-panel ui-widget ui-corner-all">
+        <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
+            <span class="ui-panel-title title FontBold Fs20">@Page.name</span>
         </div>
-        <div class="d_button">
-            @Html.ActionLink("Comprar", "#", new { }, new { @class = "buy button icon fa - file - text - o", @id = "pro_" + Page.id, @dataname = Page.name, @datacost = Page.cost })
-        </div>
+        <div>
+            <table style="width:100%">
+                <tbody>
+                    <tr>
+                        <td><span class="Fs18 FontRalewaySemiBold MarTop10">@Page.description</span></td>
+                    </tr>
+                    <tr>
+                        <td class="img-responsive">
+                            <img class="image-product-small" src="@Page.image" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <div class="EmptyBox30"></div></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="Wid100 DispBlock">
+                                <a href="@Url.Action("detail","product", new { id = Page.id})" class="ui-button-text-icon-left BlueModena BlueBack Fs18 White RaisedButton FloatNoneOnMobile pointer Wid80 PadWithBorder5 FontBold Fs18 WhiteBlue">
+                                    <span class="ui-button-icon-left ui-icon ui-c icon-slideshow"></span>
+                                    <span class="ui-button-text ui-c">Ver mas</span>
+                                </a>
+                            </div>
+                            <div class="EmptyBox10"></div>
+                            <div class="Wid100 DispBlock">
+                            <a href="#" id="pro_@Page.id" dataname="@Page.name" datacost="@Page.cost" class="buy ui-button-text-icon-left BlueModena BlueBack Fs18 White RaisedButton FloatNoneOnMobile pointer Wid80 PadWithBorder5">
+                                <span class="ui-button-icon-left ui-icon ui-c icon-add_shopping_cart"></span>
+                                <span class="ui-button-text ui-c">Comprar</span>
+                            </a>
+                          </div>
+                        </td>
+                   </tr>
+        </tbody>
+        </table>
+    </div>
+        <div class="EmptyBox20"></div>
     </div>
 </div>
+
+<div class="ShowOnMobile ClearBoth"></div>
+
+
+

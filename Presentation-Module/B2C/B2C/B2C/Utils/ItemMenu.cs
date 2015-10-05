@@ -15,9 +15,10 @@ namespace B2C.Utils
         public string Url { get; set; }
         public string ActionName { get; set; }
         public string ControllerName { get; set; }
-        // public Dictionary<string, object> HtmlAttributes;
-        //public RouteValueDictionary HtmlAttributes;
+
         public Object HtmlAttributes;
+
+        public string icon;
 
         public List<ItemMenu> submenu { get; set; }
         

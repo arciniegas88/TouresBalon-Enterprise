@@ -11,7 +11,7 @@ namespace B2C.Entities
 
         private int id;
         private double price;
-        private int status;
+        private string status;
         private string comments;
 
         public Order(DataContractOrder contract)
@@ -48,7 +48,7 @@ namespace B2C.Entities
             }
         }
 
-        public int Status
+        public string Status
         {
             get
             {

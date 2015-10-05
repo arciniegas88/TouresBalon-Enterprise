@@ -12,22 +12,10 @@ namespace B2C.Controllers
 {
     public class CustomerController : BaseController
     {
-        [HttpPost]
-        public ActionResult Register(RegisterForm form, String returnUrl)
+        public ActionResult Register()
         {
-            if (ModelState.IsValid)
-            {
-                Customer user = new Customer(form);
-                user = CustomerFacade.Instance.registerCustomer(user);
-                HandlerSession.setUser(user);
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                TempData.Add("errors", this.getErrorsModel());
-                TempData.Add("registerForm", form);
-                return Redirect(returnUrl);
-            }
+            this.ini();
+            return View();
         }
     }
 }
