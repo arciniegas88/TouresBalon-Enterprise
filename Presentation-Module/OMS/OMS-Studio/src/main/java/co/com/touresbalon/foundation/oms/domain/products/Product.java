@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Date;
+//import javax.xml.datatype.Date;
 
 
 /**
@@ -59,11 +60,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class Product {
 
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar arrivalDate;
+    //@XmlSchemaType(name = "dateTime")
+    protected Date arrivalDate;
     protected String code;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar departureDate;
+    //@XmlSchemaType(name = "dateTime")
+    protected Date departureDate;
     protected String description;
     protected Long id;
     protected byte[] imageRef;
@@ -71,8 +72,8 @@ public class Product {
     protected String name;
     protected Long price;
     protected City sourceCity;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar spectacleDate;
+    //@XmlSchemaType(name = "dateTime")
+    protected Date spectacleDate;
     protected Spectacle spectacleType;
     protected City targetCity;
     protected Transport transportType;
@@ -82,10 +83,10 @@ public class Product {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getArrivalDate() {
+    public Date getArrivalDate() {
         return arrivalDate;
     }
 
@@ -94,10 +95,10 @@ public class Product {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setArrivalDate(XMLGregorianCalendar value) {
+    public void setArrivalDate(Date value) {
         this.arrivalDate = value;
     }
 
@@ -130,10 +131,10 @@ public class Product {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getDepartureDate() {
+    public Date getDepartureDate() {
         return departureDate;
     }
 
@@ -142,10 +143,10 @@ public class Product {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setDepartureDate(XMLGregorianCalendar value) {
+    public void setDepartureDate(Date value) {
         this.departureDate = value;
     }
 
@@ -320,10 +321,10 @@ public class Product {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getSpectacleDate() {
+    public Date getSpectacleDate() {
         return spectacleDate;
     }
 
@@ -332,10 +333,10 @@ public class Product {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setSpectacleDate(XMLGregorianCalendar value) {
+    public void setSpectacleDate(Date value) {
         this.spectacleDate = value;
     }
 

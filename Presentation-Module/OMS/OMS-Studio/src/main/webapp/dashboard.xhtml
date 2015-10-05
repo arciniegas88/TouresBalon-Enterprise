@@ -12,6 +12,8 @@
     <ui:define name="content">
 
         <h:form>
+        <p:remoteCommand name="searchProductsAction" update="@form" action="#{portalController.searchProductsAction()}"/>
+
         <div class="Container100">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect">
@@ -20,25 +22,25 @@
 
                         <custom:optionItem topClass="RedBack SoftRed" bottomClass="SoftRed"
                                            icon="icon-cloud" label="Admin. Productos"
-                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                                           target="searchProductsAction"/>
                         <custom:optionItem topClass="OrangeBack SoftOrange" bottomClass="SoftOrange"
                                            icon="icon-sun" label="Consultas Productos"
-                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                                           target="searchProductsAction"/>
                         <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
                                            icon="icon-drop" label="Admin. Campanas"
-                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                                           target="searchProductsAction"/>
                         <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
                                            icon="icon-cloud-upload" label="Cancelar Ordenes"
-                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                                           target="searchProductsAction"/>
                         <custom:optionItem topClass="YellowBack White" bottomClass="White"
                                            icon="icon-moon" label="Consultas Ordenes"
-                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                                           target="searchProductsAction"/>
                         <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen"
                                            icon="icon-filter_vintage" label="Admin. Clientes"
-                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                                           target="searchProductsAction"/>
                         <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple"
                                            icon="icon-umbrella" label="Consultas Clientes"
-                                           target="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"/>
+                                           target="searchProductsAction"/>
 
                     </custom:operationContainer>
 
