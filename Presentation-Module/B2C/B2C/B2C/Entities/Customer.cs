@@ -28,6 +28,12 @@ namespace B2C.Entities
             this.Email = _email;
         }
 
+        public Customer(string _email, string _password)
+        {
+            this.Password = _password;
+            this.Email = _email;
+        }
+
         public Customer(LoginForm form)
         {
             this.Email = form.Email;

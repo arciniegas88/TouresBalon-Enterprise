@@ -12,60 +12,118 @@
 
 @section content
 {
-<div id="lightbox_buy" style="display:none;">
-    @RenderPage("~/Views/Product/Buyproduct.cshtml")
-</div>
 
-<div id="main-wrapper">
-    <div class="container">
-        <div class="row 200%">
-                <!-- Content -->
-                <div id="content">
-                    <h3 class="header">@product.Name</h3>
+@RenderPage("~/Views/Product/Buyproduct.cshtml")
 
-                    <div class="grid img_left">
-                         <img src='@product.Image' width='384' height='304' />
+<div class="Container80 MarAuto Fnone">
+    <div class="Wid100 BlueBack PadWithBorder10 FontBold Fs28 White">
+        <span class="ui-panel-title title">@product.Name</span>
+    </div>
+
+    <div class="MarTop30 Fleft MaxWid500 MarRight20">
+        <img class="MaxWid500" src='@product.Image' width='384' height='304' />
+    </div>
+
+    <div class="PadWithBorder10 MarRight20 info_product">
+        <table class="Wid80">
+            <tr>
+                <td colspan="3">
+                    <p class="TexAlCenter Fs28">@product.Description</p>
+                </td>
+            </tr>
+            <tr>
+                <td><div class="EmptyBox10"></div></td>
+            </tr>
+
+            <tr>
+                <td><p class="Fs20"><span class="FontBold">Fecha Espectaculo: </span></p> </td>
+                <td><p class="Fs20"><span class="FontBold">Fecha Vuelo: </span></p> </td>
+                <td><p class="Fs20"><span class="FontBold">Fecha Aterrizaje: </span></p> </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="Fs20">@product.SpectacleDate</p>
+                </td>
+                <td>
+                    <p class="Fs20">@product.DepartureDate</p>
+                </td>
+
+                <td>
+                    <p class="Fs20">@product.ArrivalDate</p>
+                </td>
+            </tr>
+            <tr>
+                <td><div class="EmptyBox10"></div></td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="Fs22">
+                        <span class="icon-flight"></span>
+                        @product.Transport.Name
+                    </p>
+                </td>
+                <td>
+                    <p class="Fs22">
+                        <span class="icon-pin_drop"></span>
+                        @product.Spectacle.Name
+                    </p>
+                </td>
+                <td>
+                    <p class="Fs22">
+                        <span class="icon-hotel"></span>
+                        @product.Lodging.Name   
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><div class="EmptyBox10"></div></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="Fs26"><span class="FontBold">Precio: </span><span class="BlueTextButton">@product.getCost()</span></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3">
+                    <div class="Wid30 WidAutoOnMobile">
+                        <button class="buy ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left  Fs18 White RaisedButton FloatNoneOnMobile TexAlCenter Fleft pointer Wid70" type="button" role="button" aria-disabled="false" id="pro_@product.Id" dataname="@product.Name" datacost="@product.getCost()">
+                            <span class="ui-button-icon-left ui-icon ui-c icon-add_shopping_cart"></span>
+                            <span class="ui-button-text ui-c">Comprar</span>
+                        </button>
                     </div>
-                    <div class="content_right">
-                        <section class="last">
-                            <h2 class="title">Descripcion del producto</h2>
-                            <p class="text-big">
-                                @product.Description
-                            </p>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-                            <div class="info_product">
-                                <p><span class="title">Fecha Espectaculo: </span>@product.SpectacleDate</p>
-                                <p><span class="title">Fecha Vuelo: </span>@product.DepartureDate</p>
-                                <p><span class="title">Fecha Aterrizaje: </span>@product.ArrivalDate</p>
-                                <div class="info_type">
-                                    <div class="icon-detail plane"></div><p class="left">@product.Transport.Name</p>
-                                    <div class="icon-detail spectacle"></div><p class="left">@product.Spectacle.Name</p>
-                                    <div class="icon-detail hotel"></div><p class="left">@product.Lodging.Name</p>
-                                </div>
-                            </div>
+    <!--Container de top five-->
+    <div class="Wid100 ClearBoth MarTopPerc10">
+        <div class="Wid100 BlueBack PadWithBorder10 FontBold Fs22 White">Productos relacionados</div>
+        
+        <div class="owl-carousel">
 
-                            <div class="price"><span class="title">Precio: </span>@product.getCost()</div>
-
-                            <div class="all"><a href="#" class="buy button icon fa-arrow-circle-right" id="pro_@product.Id" dataname="@product.Name" datacost="@product.getCost()">Agregar a carrito de compras</a></div>
-                        </section>
-                    </div>
+            @foreach (var item in products)
+            {
+            <div class="slider-content">
+                <div class="slider-content-description">
+                    <p class="descripcion-slider">@item.Name</p>
+                    <p class="link-btn-slider"><a href="@Url.Action("Detail", "Product", new { @id = item.Id })"><span class="btn-slider-desktop">Ver Producto</span><span class="btn-slider-mobile"></span></a></p>
                 </div>
-            <!--Container de top five-->
-            <div class="container_topfive">
-                <div class="header">Productos relacionados</div>
-                <div class="item_topfive">
-                    @foreach (var item in products)
-                    {
-                        <div class="five_items">
-                            <img src="@item.Image" />
-                            @Html.ActionLink(item.Name, "Detail", "Product", new { @id = item.Id }, new { @class = "top_five" })
-                        </div>
-                    }
-                </div>
+                <div class="slider_large desktop"><img src="@item.Image" /></div>
+                <div class="slider_small mobile"><img src="@item.Image" /></div>
             </div>
-
+            }
         </div>
-
     </div>
 </div>
+    <script>
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({
+                 items: 3,
+                 nav: true,
+                 margin: 50
+            });
+       });
+    </script>
 }

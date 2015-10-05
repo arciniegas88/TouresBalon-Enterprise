@@ -1,11 +1,26 @@
-﻿<div class="car_item" id="car_item_@Page.id">
-    <div class="info_left">
-        <p class="bold">@Page.name</p>
-        <p><span class="bold">Cantidad:  @Page.account</span></p>
-        <p><span class="bold">Total:  @Page.cost</span></p>
-        <div class="buttons">
-            @Html.ActionLink("Ver producto", "detail", "product", new { @id = @Page.id }, new { @class = "buttonsmall icon fa - file - text - o " })
-            <input value="Eliminar" id="delete_@Page.delete" type="button" class="delete_item buttonsmall" />
+﻿<div class="Wid33 Responsive100 Fleft MarTop20 MarRight20">
+    <div class="ui-panel ui-widget ui-corner-all">
+        <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
+            <span class="ui-panel-title title FontBold Fs24">@Page.name</span>
         </div>
+        <p class="Fs22 PadWithBorder5"><span class="Bold">Cantidad:  @Page.account</span></p>
+        <p class="Fs22 PadWithBorder5"><span class="Bold">Total:  @Page.cost</span></p>
+        <div class="Wid90 MarAuto">
+
+            <div class="Wid100 ClearBoth">
+                <a href="@Url.Action("detail","product", new { id = Page.id})" class="ui-button-text-icon-left BlueModena BlueBack Fs18 White RaisedButton FloatNoneOnMobile pointer Wid80 FontBold Fs20 WhiteBlue">
+                    <span class="ui-button-icon-left ui-icon ui-c icon-slideshow"></span>
+                    <span class="ui-button-text ui-c">Ver mas</span>
+                </a>
+            </div>
+            <div class="EmptyBox10"></div>
+            <div class="Wid100 ClearBoth">
+                <a id="delete_@Page.delete" datacost="@Page.cost" href="#" class="delete_item ui-button-text-icon-left BlueModena RedButton Fs18 White RaisedButton FloatNoneOnMobile pointer Wid80 FontBold Fs20 WhiteBlue">
+                    <span class="ui-button-icon-left ui-icon ui-c  icon-delete"></span>
+                    <span class="ui-button-text ui-c">Eliminar</span>
+                </a>
+            </div>
+        </div>
+        <div class="EmptyBox30"></div>
     </div>
 </div>

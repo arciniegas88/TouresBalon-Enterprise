@@ -8,33 +8,32 @@
 
 @section content
 {
-    <div class="container">
-        <div class="bigcart"></div>
-        <h1 class="header">Tu carrito de compras</h1>
+
+@RenderPage("~/Views/ShoppingCart/CreditCard.cshtml")
+
+<div class="Container80 MarAuto Fnone">
+        <h1 class="BigTopic">Tu carrito de compras</h1>
 
 
-        <div class="container_cart">
-        @foreach (var item in products)
-        {
-            @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, @account = item.Account, @cost = item.Cost, pos = item.Pos, delete = String.Concat(item.Id, "_", item.Pos) })
-            cost = cost + (item.Cost * item.Account);
-        }
+        <div class="ui-datagrid-content ui-grid ui-grid-responsive MarTop40">
+            <div class="ui-grid-row">
+            @foreach (var item in products)
+            {
+                @RenderPage("~/Views/ShoppingCart/Item.cshtml", new { @id = item.Id, @name = item.Name, @account = item.Account, @cost = item.Cost, pos = item.Pos, delete = String.Concat(item.Id, "_", item.Pos) })
+                cost = cost + (item.Cost * item.Account);
+            }
+            </div>
         </div>
-        
-        <div class="clear">
-            <div class="total">
-                <span class="title">Total: </span> @cost
+
+        <div class="Wid100 ClearBoth">
+            <div class="EmptyBox40"></div>
+            <div class="Fs40">
+                <span class="bold">Total: </span> <span id="total_car">@cost</span>
             </div>
             <div class="clear center-block">
-                <a id="proccess_button" href="#" class="buy button icon fa - file - text - o">Procesar Orden</a>
+                <a id="proccess_button" href="#" class="buy ui-button-text-icon-left BlueModena RedButton Fs30 White RaisedButton FloatNoneOnMobile pointer Wid100 FontBold Fs20 OrangeButton PadWithBorder10">Procesar Orden</a>
             </div>
         </div>
 
-    </div>
-
-
-    
-    <div id="form_proccess" style="display:none;">
-        @RenderPage("~/Views/ShoppingCart/CreditCard.cshtml")
     </div>
 }

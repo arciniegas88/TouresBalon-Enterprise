@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Layout/Empty.cshtml";
+    ViewBag.Title = "Login";
+}
+
+@section content
+{
+        <div class="Wid90 DispBlock MarAuto MarTopPerc5 TexAlCenter">
+            <div class="Wid33 MarAuto WidAutoOnMobile">
+                <img style="width:40%; max-width:200px;" src="~/Resources/modena-layout/images/logo-dark.svg">
+                <div class="EmptyBox30"></div>
+                <div class="Card ShadowEffect">
+                    <div class="EmptyBox20"></div>
+                    <div class="Wid100 OvHidden BigTopic Fs30"><i class="icon-security Fs60 DispBlock"></i> Login</div>
+                    <div class="EmptyBox30"></div>
+                    <div class="Wid100">
+                            <input type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid80 TexAlCenter Fs18" placeholder="Email" name="inputEmail" id="inputEmail" role="textbox" aria-disabled="false" aria-readonly="false">
+                    </div>
+                    <div class="EmptyBox10"></div>
+                    <div class="Wid100">
+                            <input type="password" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid80 TexAlCenter Fs18" placeholder="Password" name="inputPassword" id="inputPassword" role="textbox" aria-disabled="false" aria-readonly="false">
+                    </div>
+                    <div class="EmptyBox30"></div>
+                    <div class="Wid100 ClearBoth">
+                        <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left  Fs18 White RaisedButton FloatNoneOnMobile TexAlCenter pointer Wid80"  type="button" name="login" id="login" role="button" aria-disabled="false">
+                                <span class="ui-button-icon-left ui-icon ui-c icon-power"></span>
+                                <span class="ui-button-text ui-c">Sign In / Sign Up</span>
+                        </button>
+                    </div>
+                    <div class="EmptyBox10"></div>
+                    <div class="Wid100 ClearBoth">
+                        <button dataurl="@Url.Action("register","Customer")" class="btn_action ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left RedButton Fs18 White RaisedButton FloatNoneOnMobile pointer Wid80" type="button" name="j_idt17" id="j_idt17" role="button" aria-disabled="false">
+                            <span class="ui-button-icon-left ui-icon ui-c icon-create"></span>
+                            <span class="ui-button-text ui-c">Registrarse</span>
+                        </button>
+                    </div>
+                    <div class="EmptyBox20"></div>
+
+                    <div class="Separator"></div>
+                </div>
+           </div>
+        </div>
+}

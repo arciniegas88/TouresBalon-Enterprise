@@ -13,26 +13,25 @@
 
 @section content
 {
-    <div id="lightbox_buy" style="display:none;">
-        @RenderPage("~/Views/Product/Buyproduct.cshtml")
-    </div>
-    <div id="main-wrapper">
-        <div class="container">
+    @RenderPage("~/Views/Product/Buyproduct.cshtml")
 
-            @RenderPage("~/Views/Product/Filter.cshtml", new { filter_options = filter_options })
+    <div class="Container80 MarAuto Fnone">
+        <div class="ui-datagrid ui-widget">
+            <div class="ui-datagrid-header ui-widget-header ui-corner-top">
+                Productos<span>(@actual_page of @total_page)</span>
 
-            <div class="row" id="list_items">
-                @foreach (var item in products)
-                {
-                    @RenderPage("~/Views/Product/ProductSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image, cost = item.getCost() })
-                }
             </div>
-
-            @RenderPage("~/Views/Shared/paginator.cshtml", new { @action = "GetPage", @controller = "Product" , @total_page = total_page, @actual_page = actual_page, @search = search, @search_by = search_by })
-        </div>
-    </div>
-
-
-
-
+            <div role="navigation" class="ui-paginator ui-paginator-top ui-widget-header MarRight20">
+                @RenderPage("~/Views/Shared/paginator.cshtml", new { @action = "GetPage", @controller = "Product", @total_page = total_page, @actual_page = actual_page, @search = search, @search_by = search_by })
+            </div> 
+        </div>  
+            <div class="ui-datagrid-content ui-grid ui-grid-responsive MarTop40">
+                <div class="ui-grid-row" id="list_items">
+                     @foreach (var item in products)
+                     {
+                            @RenderPage("~/Views/Product/ProductSmall.cshtml", new { @name = item.Name, @id = item.Id, description = item.Description, image = item.Image, cost = item.getCost() })
+                     }
+                </div>
+           </div>
+      </div>
 }

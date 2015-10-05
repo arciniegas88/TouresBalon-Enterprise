@@ -8,55 +8,35 @@ using B2C.Forms;
 using B2C.Facades;
 using B2C.Entities;
 using B2C.Handlers;
+using B2C.Utils;
 
 namespace B2C.Controllers
 {
     public class SecurityController : BaseController
     {
-        
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginForm form, string returnUrl)
+
+        public JsonResult Login()
         {
-            if (!ModelState.IsValid)
+            if (Request.HttpMethod == "POST")
             {
-                TempData.Add("errors", this.getErrorsModel());
-                TempData.Add("loginForm", form);
-                return RedirectToLocal(returnUrl);
-            }
-            else
-            {
-                Customer customer = new Customer(form); 
+                String password = Request.Params.Get("password");
+                String email = Request.Params.Get("email");
+
+                Customer customer = new Customer(email, password);
                 bool response = SecurityFacade.Instance.getLoginUser(customer);
-                if(response)
+                if (response)
                 {
-                    customer.Email = form.Email;
-                    customer.First_name = form.Email;
-                    customer.UserID = 1;
+                    customer = CustomerFacade.Instance.getCustomer(customer);
                     HandlerSession.setUser(customer);
+                    return Json(new { success = true, url = Url.Action("Index", "Home") });
+                }
+                else
+                {
+                    return Json(new { success = false, message =  Message.ACCESS_DENIED });
                 }
             }
-            return RedirectToLocal(returnUrl);
+            return Json(new { success = false, message = Message.METHOD_DENIED });
 
-            //return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            /*
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }*/
         }
 
         public ActionResult Register()

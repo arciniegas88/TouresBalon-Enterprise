@@ -14,5 +14,12 @@ namespace B2C.AgentsService
             customer.UserID = rnd.Next(1, 500);
             return customer;
         }
+
+        public Customer getCustomer(Customer customer)
+        {
+            Random rnd = new Random();
+            customer.UserID = rnd.Next(1, 500);
+            return customer;
+        }
     }
 }

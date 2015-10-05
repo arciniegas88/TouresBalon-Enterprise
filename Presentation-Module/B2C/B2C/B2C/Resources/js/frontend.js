@@ -1,34 +1,219 @@
-﻿$.validator.setDefaults({
+﻿/*$.validator.setDefaults({
     submitHandler: function () {
         submit();
     }
-});
+});*/
+
+function showMessage(title, message)
+{
+    $('body').css('overflow-y', 'hidden');
+    $("#lightbox_message").fadeIn();
+    $("#overlay_message").fadeIn();
+    $("#message_alert").html(message);
+    $("#title_alert").html(title);
+}
+
+function showLoading()
+{
+    $("#loading").show();
+    $('body').css('overflow-y', 'hidden');
+}
+
+function hideLoading() {
+    $("#loading").fadeOut('slow');
+    $('body').css('overflow-y', '');
+}
+
 
 $(document).ready(function () {
-    $("#login").click(function (event) {
 
-        if ($("#navPanel").css('display') == 'block')
-        {
-            $('#navToggle').click();
+    $("#login").click(function () {
+        var inputEmail = $("#inputEmail").val();
+        var inputPassword = $("#inputPassword").val();
+        showLoading();
+        $.post("/security/login/", { email: inputEmail, password: inputPassword }, function (response) {
+            hideLoading();
+            if (response.success)
+            {
+                document.location.href = response.url;
+            } else {
+                showMessage("Logueo", response.message);
+            }
+
+        }, 'json');
+
+    });
+
+    $(".buy").bind("click", function () {
+        var value = $(this).attr("id");
+        var id = value.split("_")[1];
+        var name = $(this).attr("dataname");
+        var cost = $(this).attr("datacost");
+
+        $("#account").val(1);
+
+        $("#name_product").html(name);
+        $("#name_product").attr('data-id', id);
+
+        $("#cost_product").html(cost);
+
+        $(".overlay").show();
+        $(".lightbox").show();
+        $('body').css('overflow-y', 'hidden');
+        $(document).scrollTop(0);
+
+        return false;
+    });
+
+    $('#buyproduct').click(function () {
+        var account = $("#account").val();
+
+        if (account > 0) {
+            var id = $("#name_product").attr('data-id');
+            var name = $("#name_product").html();
+            var cost = $("#cost_product").html();
+            showMessage();
+            $.post("/shoppingcart/add", { id: id, name: name, account: account, cost: cost }, function (data) {
+                hideLoading();
+                $("#close_lightbox").click();
+                showMessage('Carrito de compras', data.message);
+
+            });
+        } else {
+            alert("No se aceptan valores negativos.");
         }
 
-        $("#login_form").dialog(
-           {
-               height: 600,
-               width: 450,
-               modal: true
-           });
+        return false;
+    });
+
+    $('.delete_item').click(function () {
+        var r = true;//confirm("Esta seguro que desea eliminar este item?");
+
+        if (r) {
+            //delete_ID_POS
+            var value = $(this).attr("id");
+            value = value.split("_");
+            var id = value[1];
+            var pos = value[2];
+
+            var cost = $(this).attr("datacost");
+
+            showLoading();
+            $.post("/shoppingcart/delete", { id: id, pos: pos }, function (data) {
+                hideLoading();
+                if (data.success) {
+                    $("#car_item_" + id).remove();
+                    var total = $("#total_car").html() - cost;
+                    $("#total_car").html(total);
+                    showMessage("Elemento eliminado", data.message);
+                } else {
+                    showMessage("Error", data.message);
+                }
+            });
+            return false;
+        }
+
+    });
+
+    $('.get_pager').click(function () {
+        var url = $(this).attr("href");
+        showLoading();
+        $.post(url, {}, function (data) {
+            hideLoading();
+            $("#list_items").html(data);
+            $(".buy").bind("click", function () {
+
+                var value = $(this).attr("id");
+                var id = value.split("_")[1];
+                var name = $(this).attr("dataname");
+                var cost = $(this).attr("datacost");
+
+                $("#account").val(1);
+
+                $("#name_product").html(name);
+                $("#name_product").attr('data-id', id);
+
+                $("#cost_product").html(cost);
+
+                $("#lightbox_buy").dialog(
+                {
+                    height: 300,
+                    width: 450,
+                    modal: true
+                });
+
+                return false;
+            });
+        });
+
+        $("#pagination .disable").addClass("pager");
+        $("#pagination .disable").removeClass("disable");
+        $(this).addClass("disable");
+        return false;
+    });
+
+    $(".get_order").click(function () {
+
+        var id = $(this).attr("id");
+        var temp = id.split("_");
+        id = temp[1];
+
+        $.get("/order/get/" + id, function (data) {
+            $("#order_detail").html(data);
+            $('body').css('overflow-y', 'none');
+            $(".lightbox_big").show();
+            $(".overlay").show();
+        });
+        return false;
     });
 
     $("#proccess_button").click(function () {
-        $("#form_proccess").dialog(
-        {
-               height: 600,
-               width: 600,
-               modal: true
+        $(".overlay").show();
+        $(".lightbox_big").show();
+        $('body').css('overflow-y', 'hidden');
+        $(document).scrollTop(0);
+    });
+
+    $('.cancel_order').click(function () {
+        var id = $(this).attr("id");
+        var temp = id.split("_");
+        id = temp[1];
+
+        $.post("order/cancel/" + id, function (data) {
+            if (data.success) {
+                showMessage("Cancelacion orden", data.message);
+            }
+        }, 'json');
+    });
+
+
+
+    $("#close_lightbox").click(function () {
+        $('.overlay, .lightbox').fadeOut('slow', function () {
+            $('body').css('overflow-y', 'auto');
         });
     });
 
+    $("#close_lightbox_big").click(function () {
+        $('.overlay, .lightbox_big').fadeOut('slow', function () {
+            $('body').css('overflow-y', 'auto');
+        });
+    });
+    
+
+    $("#close_message").click(function () {
+        $('#lightbox_message, #overlay_message').fadeOut('slow', function () {
+            $('body').css('overflow-y', 'auto');
+        });
+    });
+
+    $(".btn_action").click(function()
+    {
+        showLoading();
+        document.location.href = $(this).attr("dataurl");
+    });
+
+    /*
     $("#btn_register").click(function () {
         $("#login_div").hide();
         $("#register_div").show();
@@ -158,125 +343,18 @@ $(document).ready(function () {
         });
     });
 
-    $('.cancel_order').click(function () {
-        var id = $(this).attr("id");
-        var temp = id.split("_");
-        id = temp[1];
+   
 
-        $.post("order/cancel/" + id, function (data) {
-            if (data.success) {
-                alert(data.message);
-            }
-        }, 'json');
-    });
 
-    $(".buy").bind( "click", function () {
 
-        var value = $(this).attr("id");
-        var id = value.split("_")[1];
-        var name = $(this).attr("dataname");
-        var cost = $(this).attr("datacost");
+   
 
-        $("#account").val(1);
 
-        $("#name_product").html(name);
-        $("#name_product").attr('data-id', id);
-        
-        $("#cost_product").html(cost);
-
-        $("#lightbox_buy").dialog(
-        {
-           height: 300,
-           width: 450,
-           modal: true
-        });
-
-        return false;
-    });
-
-    $('#buyproduct').click(function () {
-        var account = $("#account").val();
-
-        if (account > 0)
-        {
-            var id = $("#name_product").attr('data-id');
-            var name = $("#name_product").html();
-            var cost = $("#cost_product").html();
-
-            $.post("shoppingcart/add", { id: id, name: name, account:account, cost:cost }, function (data) {
-                alert(data.message);
-                $("#lightbox_buy").dialog('close');
-            });
-        } else {
-            alert("No se aceptan valores negativos.");
-        }
-
-        return false;
-    });
-
-    $('.delete_item').click(function () {
-        var r = confirm("Esta seguro que desea eliminar este item?");
-
-        if( r )
-        {
-            //delete_ID_POS
-            var value = $(this).attr("id");
-            value = value.split("_");
-            var id = value[1];
-            var pos = value[2];
-            $.post("shoppingcart/delete", { id: id, pos: pos }, function (data) {
-                if (data.success)
-                {
-                    $("#car_item_" + id).remove();
-                    alert(data.message);
-                } else {
-                    alert(data.message);
-                }
-            });
-            return false;
-        }
-
-    });
-
-    $('.pager').click(function () {
-        var url = $(this).attr("href");
-        
-        $.post(url, {}, function (data) {
-            $("#list_items").html(data);
-            $(".buy").bind("click", function () {
-
-                var value = $(this).attr("id");
-                var id = value.split("_")[1];
-                var name = $(this).attr("dataname");
-                var cost = $(this).attr("datacost");
-
-                $("#account").val(1);
-
-                $("#name_product").html(name);
-                $("#name_product").attr('data-id', id);
-
-                $("#cost_product").html(cost);
-
-                $("#lightbox_buy").dialog(
-                {
-                    height: 300,
-                    width: 450,
-                    modal: true
-                });
-
-                return false;
-            });
-        });
-
-        $("#pagination .disable").addClass("pager");
-        $("#pagination .disable").removeClass("disable");
-        $(this).addClass("disable");
-        return false;
-    });
+   
 
     $('.disable').click(function () {
         return false;
     });
-
+    */
     
 });

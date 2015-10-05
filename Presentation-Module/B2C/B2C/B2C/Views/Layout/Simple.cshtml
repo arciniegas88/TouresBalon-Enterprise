@@ -7,38 +7,59 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="~/Resources/css/general.css" rel="stylesheet" type="text/css" />
-    <link href="~/Resources/css/xlarge.css" media="(max-width: 1921px)" rel="stylesheet" type="text/css" />
-    <link href="~/Resources/css/large.css" media="(max-width: 1280px)" rel="stylesheet" type="text/css" />
-    <link href="~/Resources/css/medium.css" media="(max-width: 980px)" rel="stylesheet" type="text/css" />
-    <link href="~/Resources/css/small.css" media="(max-width: 736px)" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="~/Resources/images/favicon.ico" type="image/x-icon" />
 
-    <script src="~/Resources//js/jquery.min.js"></script>
-    <script src="~/Resources//js/jquery.dropotron.min.js"></script>
-    <script src="~/Resources//js/skel.min.js"></script>
+
+    <link href="~/Resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="~/Resources/modena-layout/css/core-layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/modena-layout/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/modena-layout/css/modena-font.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/modena-layout/css/ripple-effect.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/modena-layout/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/modena-layout/css/modena-layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/modena-layout/css/theme.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/css/site.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Resources/css/site.css" rel="stylesheet" type="text/css" />
     
-    <!-- Scripts del template-->
-    <script src="~/Resources//js/util.js"></script>
-    <!--[if lte IE 8]><script src="~/Resources/js/ie/respond.min.js"></script><![endif]-->
-    <script src="~/Resources//js/main.js"></script>
+    <script src="~/Resources/modena-layout/lib/jquery.js"></script>
+    <script src="~/Resources/modena-layout/lib/jquery-plugins.js"></script>
+    <script src="~/Resources/js/bootstrap.js"></script>
+    
+    <script src="~/Resources/modena-layout/js/layout.js"></script>
+    <script src="~/Resources/modena-layout/js/perfect-scrollbar.js"></script>
+    <script src="~/Resources/modena-layout/js/ripple-effect.js"></script>
 
-    <script type="text/javascript" src="~/Resources/lib/jquery-ui-1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="~/Resources/lib/jquery-ui-1.11.4/jquery.validate.js"></script>
-    <link rel="stylesheet" type="text/css" href="~/Resources/lib/jquery-ui-1.11.4/jquery-ui.css" media="screen" />
 
-    <!-- Script de la navegacion del B2C-->
+    <link href="~/Resources/lib/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/lib/owl-carousel/owl.theme.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Resources/lib/owl-carousel/owl.carousel.js"></script>
+
+
+    <!-- Script de la navegacion del B2C
     <script src="~/Resources/js/frontend.js"></script>
-
+        -->
 
     <title>Toures Balon</title>
     
 </head>
-<body class="homepage">
-    <div id="page-wrapper">
+<body class="BlueModena Geometry">
+    @RenderPage("~/Views/Shared/alert.cshtml")
+    @RenderPage("~/Views/Shared/loader.cshtml")
 
-        @RenderPage("~/Views/Shared/header.cshtml")
-        @RenderPage("~/Views/Shared/carrousel.cshtml")
 
+    @RenderPage("~/Views/Shared/header.cshtml")
+
+    <div id="wrapper">
+        <div id="wrapperIndent">
+            @RenderPage("~/Views/Shared/menu.cshtml")
+        </div>
+    </div>
+
+    <div class="container">
 
         @if (!IsSectionDefined("campaign"))
         {
@@ -46,26 +67,32 @@
         }
         else
         {
-            // render the code that was overridden in the child view
             @RenderSection("campaign")
         }
 
-        <div id="main">
-            @if (!IsSectionDefined("content"))
-            {
-                // some default code
-            }
-            else
-            {
-                // render the code that was overridden in the child view
-                @RenderSection("content")
-            }
+        <div id="page-wrapper">
+
+            @RenderPage("~/Views/Shared/carrousel.cshtml")
+
+
+
+
+            <div id="main">
+                @if (!IsSectionDefined("content"))
+                {
+                    // some default code
+                }
+                else
+                {
+                    // render the code that was overridden in the child view
+                    @RenderSection("content")
+                }
+            </div>
+
+
+            @RenderBody();
         </div>
-
-
-        @RenderBody();
-
-        @RenderPage("~/Views/Shared/footer.cshtml")
     </div>
+    @RenderPage("~/Views/Shared/footer.cshtml")
 </body>
 </html>

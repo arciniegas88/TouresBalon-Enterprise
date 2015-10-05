@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "~/Views/Layout/Empty.cshtml";
+    ViewBag.Title = "Register";
+}
+@using B2C.Forms
+@{ var form = ViewData["registerForm"] as RegisterForm; }
+
+
+@section content
+{
+<div id="register_div" class="MarAuto Form">
+    <div class="EmptyBox80"></div>
+
+     <div class="Wid100 OvHidden BigTopic Fs30 TexAlCenter">
+         <i class="fa fa-user Fs60 DispBlock"></i> 
+          Registrar Usuario
+     </div>
+
+
+        @using (Html.BeginForm("Register", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "registerForm" }))
+        {
+            if (TempData["errors"] != null)
+            {
+                @RenderPage("~/Views/Shared/errors.cshtml", new { errors = TempData["errors"] })
+            }
+
+            @Html.AntiForgeryToken()
+            @Html.Hidden("returnUrl", this.Request.RawUrl)
+
+            <table class="Wid100">
+                <tr>
+                    <td class="Wid40"><label for="form_FirstName" class="Fs24 PadWithBorder5 BoldGray">Nombre</label></td>
+                    <td class="Wid60">@Html.TextBoxFor(m => form.FirstName, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
+                </tr>
+
+                <tr>
+                    <td><label for="form_LastName" class="Fs24 PadWithBorder5 BoldGray">Apellido</label></td>
+                    <td>@Html.TextBoxFor(m => form.LastName, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
+                </tr>
+
+                <tr>
+                    <td><label for="form_PhoneNumber" class="Fs24 PadWithBorder5 BoldGray">Telefono</label></td>
+                    <td>@Html.TextBoxFor(m => form.PhoneNumber, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
+                </tr>
+
+                <tr>
+                    <td><label for="form_Email" class="Fs24 PadWithBorder5 BoldGray">Email</label></td>
+                    <td>@Html.TextBoxFor(m => form.Email, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
+                </tr>
+
+                <tr>
+                    <td><label for="form_Password" class="Fs24 PadWithBorder5 BoldGray">Password</label></td>
+                    <td>@Html.PasswordFor(m => form.Password, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
+                </tr>
+
+            </table>
+
+            <div class="EmptyBox40"></div>
+
+            <div class="Wid100 Fleft Responsive50 TexAlCenter">
+                <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left  Fs18 White RaisedButton FloatNoneOnMobile TexAlCenter pointer Wid70" type="button" name="login" id="login" role="button" aria-disabled="false">
+                    <span class="ui-button-icon-left ui-icon ui-c icon-create"></span>
+                    <span class="ui-button-text ui-c">Registrarse</span>
+                </button>
+            </div>
+            <div class="EmptyBox10"></div>
+            <div class="Wid100 Fleft Responsive50 TexAlCenter">
+              <button dataurl="@Url.Action("Login","Home")" class="btn_action ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left RedButton Fs18 White RaisedButton FloatNoneOnMobile pointer Wid70" type="button" name="j_idt17" id="j_idt17" role="button" aria-disabled="false">
+                 <span class="ui-button-icon-left ui-icon ui-c icon-person"></span>
+                 <span class="ui-button-text ui-c">Inicir Sesion</span>
+              </button>
+            </div>
+        }
+</div>
+}
