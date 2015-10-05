@@ -19,5 +19,8 @@ public class ProductsController {
     @Inject
     private ProductsFacade facade;
 
+    public String searchProducts(){
+        return "";
+    }
 
 }

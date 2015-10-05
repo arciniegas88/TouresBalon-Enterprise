@@ -10,12 +10,34 @@
     </ui:define>
     
     <ui:define name="content">
-        
+        <h:form id="form">
+
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">Filtros</h2>
+                            <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
+                                <p:inputText styleClass="Wid90" placeholder="Nombre" value="#{productsModel.name}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Código" value="#{productsModel.code}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Descripción" value="#{productsModel.description}"/>
+                            </p:panelGrid>
+                            <br/>
+                            <p:commandButton value="buscar" styleClass="OrangeButton"/>
+                            <p:commandButton value="limpiar" styleClass="OrangeButton"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
         <div class="Container100">
             <div class="ContainerIndent">
 
-
-                <h:form id="form">
                     <p:dataTable id="productsTable" var="p" value="#{productsModel}"
                                  rows="10" paginator="true"
                                  emptyMessage="No products found with given criteria"
@@ -47,11 +69,9 @@
 
                     </p:dataTable>
 
-                </h:form>
-
             </div>
         </div>
-        
+        </h:form>
     </ui:define>
 
 </ui:composition>
