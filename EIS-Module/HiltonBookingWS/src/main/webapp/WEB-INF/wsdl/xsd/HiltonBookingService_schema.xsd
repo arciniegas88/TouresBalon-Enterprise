@@ -4,7 +4,7 @@
            xmlns:tns="http://hilton.com/enterprise/booking/schema/v1"
            xmlns:sch="http://hilton.com/model/booking/schema/v1">
 
-    <xs:import namespace="http://touresbalon.com.co/model/lodging/schema/v1"
+    <xs:import namespace="http://hilton.com/model/booking/schema/v1"
                 schemaLocation="HiltonBookingModel_schema.xsd" />
 
     <xs:element name="consultAvailabilityRequest" type="tns:consultAvailabilityReq_type" />
