@@ -25,13 +25,15 @@
                                              value="#{productsModel.code}" id="txtCoode"/>
                                 <p:inputText styleClass="Wid90" placeholder="Descripción"
                                              value="#{productsModel.description}" id="txtDescription"/>
+                                <p:inputText styleClass="Wid90" placeholder="Espetáculo"
+                                             value="#{productsModel.spectacleName}" id="txtSpectacle"/>
                             </p:panelGrid>
                             <br/>
                             <p:commandButton value="buscar" styleClass="OrangeButton"
                                              update="form:productsTable"/>
                             <p:commandButton value="limpiar" styleClass="OrangeButton"
                                              action="#{productsController.cleanFormAction()}"
-                                             update="form:txtName, form:txtCoode, form:txtDescription"/>
+                                             update="form:txtName, form:txtCoode, form:txtDescription, form:txtSpectacle"/>
                         </div>
                     </div>
 
@@ -67,6 +69,10 @@
                             <h:outputText value="#{p.arrivalDate}">
                                 <f:convertDateTime pattern="dd-MM-yyyy" />
                             </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Espectáculo" footerText="Espectáculo" style="text-align: center;">
+                            <h:outputText value="$#{p.spectacleType.name}"/>
                         </p:column>
 
                         <p:column headerText="Precio" footerText="Precio" style="text-align: center;">

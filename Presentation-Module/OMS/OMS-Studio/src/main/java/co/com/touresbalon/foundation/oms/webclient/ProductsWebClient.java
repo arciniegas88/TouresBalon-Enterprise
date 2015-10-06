@@ -29,6 +29,7 @@ public interface ProductsWebClient {
     List<Product> searchProducts( @QueryParam("code") String code,
                                          @QueryParam("name") String name,
                                          @QueryParam("description") String description,
+                                         @QueryParam("spectacleName")String spectacleName,
                                          @QueryParam("pageIndex") int pageIndex,
                                          @QueryParam("pageSize") int pageSize);
 
@@ -41,7 +42,8 @@ public interface ProductsWebClient {
     @Consumes(MediaType.APPLICATION_XML)
     String getTotalPagesByProductSearch( @QueryParam("code") String code,
                                          @QueryParam("name") String name,
-                                         @QueryParam("description") String description);
+                                         @QueryParam("description") String description,
+                                         @QueryParam("spectacleName")String spectacleName);
 
 
 }

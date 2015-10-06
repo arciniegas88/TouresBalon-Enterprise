@@ -24,13 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findAll",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
-                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate ,p.imageRef, p.price) FROM Product p ",
+                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate ,p.imageRef, p.price, p.spectacleType.name) FROM Product p ",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findAllByCriteria",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
-                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate, p.imageRef, p.price) FROM Product p WHERE " +
+                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate, p.imageRef, p.price,p.spectacleType.name) FROM Product p WHERE " +
                         "TRIM(p.code) = TRIM(:CODE) OR LOWER(p.name) LIKE TRIM(LOWER(:NAME)) OR " +
-                        "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION))",
+                        "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION)) OR " +
+                        "LOWER( p.spectacleType.name ) LIKE TRIM( LOWER(:SPECT_NAME) )",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findAllCount",
                 query = "SELECT count(p) FROM Product p ",
@@ -38,7 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
         @NamedQuery(name = "Product.findAllByCriteriaCount",
                 query = "SELECT count(p) FROM Product p WHERE " +
                         "TRIM(p.code) = TRIM(:CODE) OR LOWER(p.name) LIKE TRIM(LOWER(:NAME)) OR " +
-                        "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION))",
+                        "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION)) OR " +
+                        "LOWER( p.spectacleType.name ) LIKE TRIM( LOWER(:SPECT_NAME) )",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
 public class Product implements Serializable {
@@ -101,7 +103,9 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, String code, Date spectacleDate, Date arrivalDate, Date departureDate , byte[] imageRef, Long price) {
+    public Product(Long id, String name, String description, String code, Date spectacleDate,
+                   Date arrivalDate, Date departureDate , byte[] imageRef, Long price,
+                   String spectacleName) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -111,6 +115,8 @@ public class Product implements Serializable {
         this.departureDate = departureDate;
         this.imageRef = imageRef;
         this.price = price;
+        this.spectacleType = new Spectacle();
+        this.spectacleType.setName( spectacleName );
     }
 
     public Product(Long id) {

@@ -49,10 +49,11 @@ public class ProductResource {
     public List<Product> searchProducts( @QueryParam("code") String code,
                                          @QueryParam("name") String name,
                                          @QueryParam("description") String description,
+                                         @QueryParam("spectacleName")String spectacleName,
                                          @QueryParam("pageIndex") int pageIndex,
                                          @QueryParam("pageSize") int pageSize)throws SystemException  {
 
-        return boundary.searchProducts(code, name, description,pageIndex,pageSize);
+        return boundary.searchProducts(code, name, description,spectacleName,pageIndex,pageSize);
     }
 
 
@@ -63,10 +64,11 @@ public class ProductResource {
     @Path("/count")
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response getTotalPagesByProductSearch( @QueryParam("code") String code,
-                                         @QueryParam("name") String name,
-                                         @QueryParam("description") String description) throws SystemException {
+                                                  @QueryParam("name") String name,
+                                                  @QueryParam("description") String description,
+                                                  @QueryParam("spectacleName")String spectacleName) throws SystemException {
 
-        int totalPages = boundary.countProducts(code, name, description);
+        int totalPages = boundary.countProducts(code, name, description, spectacleName);
         String content = RESTUtil.getNegotiatedContent(headers,totalPages,"total");
         return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
     }

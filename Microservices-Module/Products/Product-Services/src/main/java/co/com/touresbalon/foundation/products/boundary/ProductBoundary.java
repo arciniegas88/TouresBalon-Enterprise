@@ -59,15 +59,17 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Product> searchProducts(String code, String name, String description, int pageIndex, int pageSize) throws SystemException {
+    public List<Product> searchProducts(String code, String name, String description,String spectacleName,
+                                        int pageIndex, int pageSize) throws SystemException {
 
         try {
 
             code = (code != null && code.trim().equals("")) ? null : code;
             name = (name != null && name.trim().equals("")) ? null : name;
             description = (description != null && description.trim().equals("")) ? null : description;
+            spectacleName = (spectacleName != null && spectacleName.trim().equals("")) ? null : spectacleName;
 
-            if (isEmpty(code) && isEmpty(name) && isEmpty(description)) {
+            if (isEmpty(code) && isEmpty(name) && isEmpty(description) && isEmpty(spectacleName)) {
                 return em.createNamedQuery("Product.findAll", Product.class)
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
@@ -77,6 +79,7 @@ public class ProductBoundary {
                         .setParameter("CODE", code)
                         .setParameter("NAME", "%" + name + "%")
                         .setParameter("DESCRIPTION", "%" + description + "%")
+                        .setParameter("SPECT_NAME","%"+spectacleName+"%")
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
                         .getResultList();
@@ -92,15 +95,16 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public int countProducts(String code, String name, String description ) throws SystemException {
+    public int countProducts(String code, String name, String description, String spectacleName ) throws SystemException {
 
         try{
 
             code = (code != null && code.trim().equals("")) ? null : code;
             name = (name != null && name.trim().equals("")) ? null : name;
             description = (description != null && description.trim().equals("")) ? null : description;
+            spectacleName = (spectacleName != null && spectacleName.trim().equals("")) ? null : spectacleName;
 
-            if (isEmpty(code) && isEmpty(name) && isEmpty(description)) {
+            if (isEmpty(code) && isEmpty(name) && isEmpty(description) && isEmpty(spectacleName)) {
                 return em.createNamedQuery("Product.findAllCount", Long.class)
                         .getSingleResult().intValue();
             } else {
@@ -108,6 +112,7 @@ public class ProductBoundary {
                         .setParameter("CODE", code)
                         .setParameter("NAME", "%" + name + "%")
                         .setParameter("DESCRIPTION", "%" + description + "%")
+                        .setParameter("SPECT_NAME","%"+spectacleName+"%")
                         .getSingleResult().intValue();
             }
 

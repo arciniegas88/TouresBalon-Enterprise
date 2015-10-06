@@ -24,6 +24,7 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
     private String code;
     private String name;
     private String description;
+    private String spectacleName;
 
     // model fields ------------------------
     private Product product;
@@ -42,14 +43,15 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
     public List<Product> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 
         ProductsFacade facade = BeanLocator.getBean( ProductsFacade.class );
-        setRowCount( facade.getTotalPagesByProductSearch( code,name,description ) );
-        return facade.searchProducts(code,name,description,first,pageSize);
+        setRowCount( facade.getTotalPagesByProductSearch( code,name,description,spectacleName ) );
+        return facade.searchProducts(code,name,description,spectacleName,first,pageSize);
     }
 
     public void cleanForm(){
         code = null;
         name = null;
         description = null;
+        spectacleName = null;
     }
 
     public String getCode() {
@@ -84,4 +86,11 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
         this.product = product;
     }
 
+    public String getSpectacleName() {
+        return spectacleName;
+    }
+
+    public void setSpectacleName(String spectacleName) {
+        this.spectacleName = spectacleName;
+    }
 }

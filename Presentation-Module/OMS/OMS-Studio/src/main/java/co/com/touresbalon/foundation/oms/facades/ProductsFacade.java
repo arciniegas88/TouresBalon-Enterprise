@@ -28,15 +28,15 @@ public class ProductsFacade {
 
     // ------------------------------
 
-    public List<Product> searchProducts( String code, String name,String description,
+    public List<Product> searchProducts( String code, String name,String description,String spectacleName,
                                          int pageIndex,int pageSize){
-        return productsWC.searchProducts(code,name,description,pageIndex,pageSize);
+        return productsWC.searchProducts(code,name,description,spectacleName,pageIndex,pageSize);
     }
 
 
-    public int getTotalPagesByProductSearch( String code, String name,String description){
+    public int getTotalPagesByProductSearch( String code, String name,String description,String spectacleName){
 
-        String total = productsWC.getTotalPagesByProductSearch(code, name, description);
+        String total = productsWC.getTotalPagesByProductSearch(code, name, description,spectacleName);
         return Integer.parseInt( total.replaceAll("<total>","").replaceAll("</total>","") );
     }
 
