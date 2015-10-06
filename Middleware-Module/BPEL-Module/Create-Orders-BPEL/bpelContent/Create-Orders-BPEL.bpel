@@ -27,7 +27,7 @@
 
     <bpel:import namespace="http://touresbalon.com.co/salesorder/service/utility/1.0.0"
                  location="wsdl/SalesOrderApprovalTaskService.wsdl"
-                 importType="http://schemas.xmlsoap.org/wsdl/"></bpel:import>
+                 importType="http://schemas.xmlsoap.org/wsdl/"/>
     <bpel:import namespace="http://touresbalon.com.co/model/canonical/1.0.0"
                  location="canonical_schema.xsd"
                  importType="http://www.w3.org/2001/XMLSchema"/>
