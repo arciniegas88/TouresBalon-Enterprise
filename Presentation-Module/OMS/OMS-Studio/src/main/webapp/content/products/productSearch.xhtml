@@ -19,13 +19,19 @@
                         <div class="ContainerIndent">
                             <h2 class="BigTopic">Filtros</h2>
                             <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
-                                <p:inputText styleClass="Wid90" placeholder="Nombre" value="#{productsModel.name}"/>
-                                <p:inputText styleClass="Wid90" placeholder="Código" value="#{productsModel.code}"/>
-                                <p:inputText styleClass="Wid90" placeholder="Descripción" value="#{productsModel.description}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Nombre"
+                                             value="#{productsModel.name}" id="txtName"/>
+                                <p:inputText styleClass="Wid90" placeholder="Código"
+                                             value="#{productsModel.code}" id="txtCoode"/>
+                                <p:inputText styleClass="Wid90" placeholder="Descripción"
+                                             value="#{productsModel.description}" id="txtDescription"/>
                             </p:panelGrid>
                             <br/>
-                            <p:commandButton value="buscar" styleClass="OrangeButton"/>
-                            <p:commandButton value="limpiar" styleClass="OrangeButton"/>
+                            <p:commandButton value="buscar" styleClass="OrangeButton"
+                                             update="form:productsTable"/>
+                            <p:commandButton value="limpiar" styleClass="OrangeButton"
+                                             action="#{productsController.cleanFormAction()}"
+                                             update="form:txtName, form:txtCoode, form:txtDescription"/>
                         </div>
                     </div>
 

@@ -63,6 +63,10 @@ public class ProductBoundary {
 
         try {
 
+            code = (code != null && code.trim().equals("")) ? null : code;
+            name = (name != null && name.trim().equals("")) ? null : name;
+            description = (description != null && description.trim().equals("")) ? null : description;
+
             if (isEmpty(code) && isEmpty(name) && isEmpty(description)) {
                 return em.createNamedQuery("Product.findAll", Product.class)
                         .setMaxResults(pageSize)
@@ -91,6 +95,10 @@ public class ProductBoundary {
     public int countProducts(String code, String name, String description ) throws SystemException {
 
         try{
+
+            code = (code != null && code.trim().equals("")) ? null : code;
+            name = (name != null && name.trim().equals("")) ? null : name;
+            description = (description != null && description.trim().equals("")) ? null : description;
 
             if (isEmpty(code) && isEmpty(name) && isEmpty(description)) {
                 return em.createNamedQuery("Product.findAllCount", Long.class)

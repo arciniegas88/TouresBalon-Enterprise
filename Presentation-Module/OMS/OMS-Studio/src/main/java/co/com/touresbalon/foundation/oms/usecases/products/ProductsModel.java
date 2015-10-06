@@ -46,6 +46,12 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
         return facade.searchProducts(code,name,description,first,pageSize);
     }
 
+    public void cleanForm(){
+        code = null;
+        name = null;
+        description = null;
+    }
+
     public String getCode() {
         return code;
     }

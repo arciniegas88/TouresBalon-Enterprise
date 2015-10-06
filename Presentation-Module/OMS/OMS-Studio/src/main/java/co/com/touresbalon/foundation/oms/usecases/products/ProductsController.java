@@ -19,8 +19,14 @@ public class ProductsController {
     @Inject
     private ProductsFacade facade;
 
-    public String searchProducts(){
+    //[action] ------------------
+    public String searchProductsAction(){
         return "";
+    }
+
+    //[action] ------------------
+    public void cleanFormAction(){
+        model.cleanForm();
     }
 
 }
