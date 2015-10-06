@@ -64,10 +64,9 @@ public class ProductResource {
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response getTotalPagesByProductSearch( @QueryParam("code") String code,
                                          @QueryParam("name") String name,
-                                         @QueryParam("description") String description,
-                                         @QueryParam("pageSize") int pageSize) throws SystemException {
+                                         @QueryParam("description") String description) throws SystemException {
 
-        int totalPages = boundary.countProducts(code, name, description, pageSize);
+        int totalPages = boundary.countProducts(code, name, description);
         String content = RESTUtil.getNegotiatedContent(headers,totalPages,"total");
         return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
     }

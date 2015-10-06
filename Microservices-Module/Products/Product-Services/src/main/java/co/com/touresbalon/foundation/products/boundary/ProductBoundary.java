@@ -59,11 +59,11 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Product> searchProducts(String code, String name, String descripttion, int pageIndex, int pageSize) throws SystemException {
+    public List<Product> searchProducts(String code, String name, String description, int pageIndex, int pageSize) throws SystemException {
 
         try {
 
-            if (isEmpty(code) && isEmpty(name) && isEmpty(descripttion)) {
+            if (isEmpty(code) && isEmpty(name) && isEmpty(description)) {
                 return em.createNamedQuery("Product.findAll", Product.class)
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
@@ -72,7 +72,7 @@ public class ProductBoundary {
                 return em.createNamedQuery("Product.findAllByCriteria", Product.class)
                         .setParameter("CODE", code)
                         .setParameter("NAME", "%" + name + "%")
-                        .setParameter("DESCRIPTION", "%" + descripttion + "%")
+                        .setParameter("DESCRIPTION", "%" + description + "%")
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
                         .getResultList();
@@ -88,20 +88,18 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public int countProducts(String code, String name, String descripttion, int pageSize) throws SystemException {
+    public int countProducts(String code, String name, String description ) throws SystemException {
 
         try{
 
-            if (isEmpty(code) && isEmpty(name) && isEmpty(descripttion)) {
+            if (isEmpty(code) && isEmpty(name) && isEmpty(description)) {
                 return em.createNamedQuery("Product.findAllCount", Long.class)
-                        .setMaxResults(pageSize)
                         .getSingleResult().intValue();
             } else {
                 return em.createNamedQuery("Product.findAllByCriteriaCount", Long.class)
                         .setParameter("CODE", code)
                         .setParameter("NAME", "%" + name + "%")
-                        .setParameter("DESCRIPTION", "%" + descripttion + "%")
-                        .setMaxResults(pageSize)
+                        .setParameter("DESCRIPTION", "%" + description + "%")
                         .getSingleResult().intValue();
             }
 

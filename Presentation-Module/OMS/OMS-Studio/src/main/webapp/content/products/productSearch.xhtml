@@ -1,25 +1,77 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
                 template="/template/template.xhtml">
 
     <ui:define name="subheader">
-        Page Header
+        <b>Consultas especiales sopre productos</b>
     </ui:define>
     
     <ui:define name="content">
-        
+        <h:form id="form">
+
         <div class="Container100">
             <div class="ContainerIndent">
-                <div class="Card ShadowEffect TexAlCenter">
-                    <br/>
-                    <h2>Empty Page</h2>
-                    <br/>
-                    <span class="gray">Use this page to start from scratch and place your custom content.</span>
-                    <br/><br/>
+                <div class="Card ShadowEffect  ">
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">Filtros</h2>
+                            <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
+                                <p:inputText styleClass="Wid90" placeholder="Nombre" value="#{productsModel.name}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Código" value="#{productsModel.code}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Descripción" value="#{productsModel.description}"/>
+                            </p:panelGrid>
+                            <br/>
+                            <p:commandButton value="buscar" styleClass="OrangeButton"/>
+                            <p:commandButton value="limpiar" styleClass="OrangeButton"/>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
+
         </div>
-        
+
+        <div class="Container100">
+            <div class="ContainerIndent">
+
+                    <p:dataTable id="productsTable" var="p" value="#{productsModel}"
+                                 rows="10" paginator="true"
+                                 emptyMessage="No products found with given criteria"
+                                 lazy="true">
+
+                        <p:column headerText="Nombre" footerText="Nombre">
+                            <h:outputText value="#{p.name}" />
+                        </p:column>
+
+                        <p:column headerText="Código" footerText="Código" style="text-align: center;">
+                            <h:outputText value="#{p.code}" />
+                        </p:column>
+
+                        <p:column headerText="Fecha Salida" footerText="Fecha Salida" style="text-align: center;">
+                            <h:outputText value="#{p.departureDate}">
+                                <f:convertDateTime pattern="dd-MM-yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Fecha Regreso" footerText="Fecha Regreso" style="text-align: center;">
+                            <h:outputText value="#{p.arrivalDate}">
+                                <f:convertDateTime pattern="dd-MM-yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Precio" footerText="Precio" style="text-align: center;">
+                            <h:outputText value="$#{p.price}"/>
+                        </p:column>
+
+                    </p:dataTable>
+
+            </div>
+        </div>
+        </h:form>
     </ui:define>
 
 </ui:composition>

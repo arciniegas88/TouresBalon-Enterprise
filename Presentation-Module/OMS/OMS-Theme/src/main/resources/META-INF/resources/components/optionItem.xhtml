@@ -2,9 +2,9 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:composite="http://java.sun.com/jsf/composite"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:composite="http://java.sun.com/jsf/composite">
 
     <!-- INTERFACE -->
     <composite:interface>
@@ -30,8 +30,12 @@
                     <i class="#{cc.attrs.icon} Fs50"></i>
                     <div class="EmptyBox5"></div>
                     <div class="FontRobotoLight Fs16 #{cc.attrs.bottomClass} DispBlock ClearBoth">
+                        <!--
                         <h:link value="#{cc.attrs.label}" style="color: white;"
                                 outcome="#{cc.attrs.target}" />
+                        <p:commandLink value="#{cc.attrs.label}" action="#{cc.attrs.actionTarget}"/>
+                         -->
+                        <a style="color: white;" onclick="#{cc.attrs.target}();">#{cc.attrs.label}</a>
                     </div>
                 </div>
             </div>

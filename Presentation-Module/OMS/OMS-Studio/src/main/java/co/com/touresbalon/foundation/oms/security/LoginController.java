@@ -60,7 +60,7 @@ public class LoginController {
     
     public void logout(){
         util.invalidateSession();
-        RequestContext.getCurrentInstance().execute("window.location.href='http://localhost:9090/OMS-Studio/login.xhtml';");
+        RequestContext.getCurrentInstance().execute("window.location.href='/OMS-Studio/login.xhtml';");
     }
     
     
