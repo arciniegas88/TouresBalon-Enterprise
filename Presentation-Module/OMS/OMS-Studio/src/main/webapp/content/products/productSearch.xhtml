@@ -2,87 +2,36 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
+
                 template="/template/template.xhtml">
 
     <ui:define name="subheader">
         <b>Consultas especiales sopre productos</b>
     </ui:define>
-    
+
     <ui:define name="content">
         <h:form id="form">
 
-        <div class="Container100">
-            <div class="ContainerIndent">
-                <div class="Card ShadowEffect  ">
-                    <div class="Container50 Responsive50">
-                        <div class="ContainerIndent">
-                            <h2 class="BigTopic">Filtros</h2>
-                            <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
-                                <p:inputText styleClass="Wid90" placeholder="Nombre"
-                                             value="#{productsModel.name}" id="txtName"/>
-                                <p:inputText styleClass="Wid90" placeholder="Código"
-                                             value="#{productsModel.code}" id="txtCoode"/>
-                                <p:inputText styleClass="Wid90" placeholder="Descripción"
-                                             value="#{productsModel.description}" id="txtDescription"/>
-                                <p:inputText styleClass="Wid90" placeholder="Espetáculo"
-                                             value="#{productsModel.spectacleName}" id="txtSpectacle"/>
-                            </p:panelGrid>
-                            <br/>
-                            <p:commandButton value="buscar" styleClass="OrangeButton"
-                                             update="form:productsTable"/>
-                            <p:commandButton value="limpiar" styleClass="OrangeButton"
-                                             action="#{productsController.cleanFormAction()}"
-                                             update="form:txtName, form:txtCoode, form:txtDescription, form:txtSpectacle"/>
-                        </div>
-                    </div>
+            <div class="Container100">
+                <div class="ContainerIndent">
+                    <div class="Card ShadowEffect HeiAutoOnMobile" style="min-height:275px;">
+                        <p:tabView style="margin:-20px; border:none 0px;" id="tabProducts">
+                            <p:tab title="Productoss">
+                                <ui:include src="productsSearchFragment.xhtml" />
+                            </p:tab>
+                            <p:tab title="Ranking de productos">
 
+                            </p:tab>
+                            <p:tab title="Ranking de órdenes">
+
+                            </p:tab>
+                        </p:tabView>
+                    </div>
                 </div>
             </div>
 
 
-        </div>
 
-        <div class="Container100">
-            <div class="ContainerIndent">
-
-                    <p:dataTable id="productsTable" var="p" value="#{productsModel}"
-                                 rows="10" paginator="true"
-                                 emptyMessage="No products found with given criteria"
-                                 lazy="true">
-
-                        <p:column headerText="Nombre" footerText="Nombre">
-                            <h:outputText value="#{p.name}" />
-                        </p:column>
-
-                        <p:column headerText="Código" footerText="Código" style="text-align: center;">
-                            <h:outputText value="#{p.code}" />
-                        </p:column>
-
-                        <p:column headerText="Fecha Salida" footerText="Fecha Salida" style="text-align: center;">
-                            <h:outputText value="#{p.departureDate}">
-                                <f:convertDateTime pattern="dd-MM-yyyy" />
-                            </h:outputText>
-                        </p:column>
-
-                        <p:column headerText="Fecha Regreso" footerText="Fecha Regreso" style="text-align: center;">
-                            <h:outputText value="#{p.arrivalDate}">
-                                <f:convertDateTime pattern="dd-MM-yyyy" />
-                            </h:outputText>
-                        </p:column>
-
-                        <p:column headerText="Espectáculo" footerText="Espectáculo" style="text-align: center;">
-                            <h:outputText value="$#{p.spectacleType.name}"/>
-                        </p:column>
-
-                        <p:column headerText="Precio" footerText="Precio" style="text-align: center;">
-                            <h:outputText value="$#{p.price}"/>
-                        </p:column>
-
-                    </p:dataTable>
-
-            </div>
-        </div>
         </h:form>
     </ui:define>
 
