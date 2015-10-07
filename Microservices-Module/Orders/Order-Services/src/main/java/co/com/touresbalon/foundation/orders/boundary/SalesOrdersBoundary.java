@@ -14,7 +14,9 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +34,8 @@ public class SalesOrdersBoundary {
 
     @Inject
     private ExceptionBuilder exceptionBuilder;
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     @PersistenceContext
     private EntityManager em;
@@ -75,7 +79,7 @@ public class SalesOrdersBoundary {
         String itemNo = String.valueOf( new Double(oi.getItemNo()).intValue() );
 
         oi.setSpectacleId(oi.getSpectacleId() != null && oi.getSpectacleId() < 0 ? null : oi.getSpectacleId());
-        oi.setSpectacleTicket( oi.getSpectacleTicket() != null && oi.getSpectacleTicket() < 0  ? null : oi.getSpectacleTicket() );
+        oi.setSpectacleTicket(oi.getSpectacleTicket() != null && oi.getSpectacleTicket() < 0 ? null : oi.getSpectacleTicket());
 
         if( oi.getTransportTravelDate() != null ){
             Calendar c = Calendar.getInstance();
@@ -179,6 +183,30 @@ public class SalesOrdersBoundary {
             return em.createNamedQuery("SalesOrder.getDetail", SalesOrder.class)
                     .setParameter("ID_SALES_ORDER", idSalesOrder)
                     .getResultList();
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<String> getRankingSoldProducts( String startOrderDate, String endOrderDate )throws SystemException{
+
+        try{
+
+            List<Object[]> data = em.createNamedQuery("OrderItem.getProductRanking")
+                                    .setParameter("ORDER_START_DATE", sdf.parse(startOrderDate), TemporalType.DATE)
+                                    .setParameter("ORDER_END_DATE",  sdf.parse(endOrderDate), TemporalType.DATE)
+                                    .getResultList();
+
+            List<String> ranking = new ArrayList<>();
+
+            for( Object[] row : data ){
+                ranking.add( row[0] .toString());
+            }
+
+            return ranking;
+
         } catch (Throwable enf) {
             logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
             throw exceptionBuilder.buildSystemException();

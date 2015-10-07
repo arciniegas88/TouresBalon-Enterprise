@@ -1,0 +1,26 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <p:overlayPanel id="productRankingPanel" for="form:btnProductRanking" hideEffect="clip" dynamic="true"
+                    style="width:600px"
+                    appendToBody="true" dismissable="false">
+
+
+
+        <br/><br/>
+
+        <p:dataList value="#{productsModel.productsRanking}" var="prod" type="unordered"
+                    itemType="none" paginator="true" rows="7" styleClass="paginated" id="dataListProductRanking">
+            <f:facet name="header">
+                Ranking Productos Mas Vendidos
+            </f:facet>
+            <i class="fa fa-table gray Fs18" style="margin-top:5px;"/>
+            <h:outputText value="#{prod}" style="display:inline-block"/>
+        </p:dataList>
+
+    </p:overlayPanel>
+</ui:composition>

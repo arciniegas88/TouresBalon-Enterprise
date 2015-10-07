@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="orderItem" type="orderItem"/>
+
+  <xs:element name="salesOrder" type="salesOrder"/>
+
+  <xs:complexType name="orderItem">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="itemNo" type="xs:string" minOccurs="0"/>
+      <xs:element name="lodgingComments" type="xs:string" minOccurs="0"/>
+      <xs:element name="orderId" type="salesOrder" minOccurs="0"/>
+      <xs:element name="price" type="xs:long" minOccurs="0"/>
+      <xs:element name="productId" type="xs:long" minOccurs="0"/>
+      <xs:element name="productName" type="xs:string" minOccurs="0"/>
+      <xs:element name="spectacleComments" type="xs:string" minOccurs="0"/>
+      <xs:element name="spectacleId" type="xs:long" minOccurs="0"/>
+      <xs:element name="spectacleTicket" type="xs:long" minOccurs="0"/>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="transportChairNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="transportComments" type="xs:string" minOccurs="0"/>
+      <xs:element name="transportOutTime" type="xs:string" minOccurs="0"/>
+      <xs:element name="transportSourceCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="transportTargetCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="transportTravelDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="transportTravelNumber" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="salesOrder">
+    <xs:sequence>
+      <xs:element name="comments" type="xs:string" minOccurs="0"/>
+      <xs:element name="custDocumentNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="custDocumentType" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="orderDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="price" type="xs:long" minOccurs="0"/>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="salesOrderStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IN_VALIDATION"/>
+      <xs:enumeration value="IN_BOOKING"/>
+      <xs:enumeration value="CLOSED"/>
+      <xs:enumeration value="REJECTED"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

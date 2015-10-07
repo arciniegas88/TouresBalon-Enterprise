@@ -1,5 +1,6 @@
 package co.com.touresbalon.foundation.oms.usecases.products;
 
+import co.com.touresbalon.foundation.oms.facades.OrdersFacade;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,10 +19,14 @@ public class ProductsController {
     private ProductsModel model;
     @Inject
     private ProductsFacade facade;
+    @Inject
+    private OrdersFacade ordersFacade;
 
     //[action] ------------------
-    public String searchProductsAction(){
-        return "";
+    public void productsRankingAction()
+    {
+        model.setProductsRanking( ordersFacade.getRankingSoldProducts( model.getProductRankingSD(),model.getProductRankingED() ) );
+        System.out.println("------------------- productsRankingAction");
     }
 
     //[action] ------------------

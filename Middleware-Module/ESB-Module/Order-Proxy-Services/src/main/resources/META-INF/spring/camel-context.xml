@@ -69,6 +69,13 @@
             </camel:recipientList>
         </camel:route>
 
-        
+        <!-- get product ranking -->
+
+        <!-- search products -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/soldProducts/ranking?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/soldProducts/ranking?restletMethod=GET"/>
+        </camel:route>
+
     </camelContext>
 </beans>

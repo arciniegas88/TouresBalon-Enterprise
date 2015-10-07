@@ -1,8 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
-
                 template="/template/template.xhtml">
 
     <ui:define name="subheader">
@@ -10,29 +8,16 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form id="form">
-
-            <div class="Container100">
-                <div class="ContainerIndent">
-                    <div class="Card ShadowEffect HeiAutoOnMobile" style="min-height:275px;">
-                        <p:tabView style="margin:-20px; border:none 0px;" id="tabProducts">
-                            <p:tab title="Productoss">
-                                <ui:include src="productsSearchFragment.xhtml" />
-                            </p:tab>
-                            <p:tab title="Ranking de productos">
-
-                            </p:tab>
-                            <p:tab title="Ranking de órdenes">
-
-                            </p:tab>
-                        </p:tabView>
-                    </div>
-                </div>
-            </div>
 
 
+        <div class="Container100 Responsive100">
+            <h:form id="form">
+                <ui:include src="productsRankingFragment.xhtml" />
+                <ui:include src="productsSearchFragment.xhtml" />
+            </h:form>
+        </div>
 
-        </h:form>
+
     </ui:define>
 
 </ui:composition>

@@ -9,6 +9,8 @@ import org.primefaces.model.SortOrder;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +28,19 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
     private String description;
     private String spectacleName;
 
+    //product ranking fields --------------------
+
+    private Date productRankingSD;
+    private Date productRankingED;
+    private List<String> productsRanking;
+
     // model fields ------------------------
     private Product product;
 
     public ProductsModel() {
+        productsRanking = new ArrayList<>();
+        productRankingSD = new Date();
+        productRankingED = new Date();
     }
 
     /**
@@ -52,6 +63,30 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
         name = null;
         description = null;
         spectacleName = null;
+    }
+
+    public List<String> getProductsRanking() {
+        return productsRanking;
+    }
+
+    public void setProductsRanking(List<String> productsRanking) {
+        this.productsRanking = productsRanking;
+    }
+
+    public Date getProductRankingSD() {
+        return productRankingSD;
+    }
+
+    public void setProductRankingSD(Date productRankingSD) {
+        this.productRankingSD = productRankingSD;
+    }
+
+    public Date getProductRankingED() {
+        return productRankingED;
+    }
+
+    public void setProductRankingED(Date productRankingED) {
+        this.productRankingED = productRankingED;
     }
 
     public String getCode() {
