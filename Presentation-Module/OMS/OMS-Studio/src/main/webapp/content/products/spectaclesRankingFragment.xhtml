@@ -11,12 +11,12 @@
                 <p:toolbar>
                     <f:facet name="right">
                         <p:commandButton value="buscar" styleClass="OrangeButton"
-                                         update="form:TVProducts:dataListProductRanking"
-                                         action="#{productsController.productsRankingAction()}"
+                                         update="form:TVProducts:dataListSpectacleRanking"
+                                         action="#{productsController.spectaclesRankingAction()}"
                                          icon="fa fa-check-square-o"/>
                         <p:commandButton value="limpiar" styleClass="OrangeButton"
-                                         update="form:TVProducts:cldStartDate, form:TVProducts:cldEndDate,"
-                                         action="#{productsController.cleanFormProductRankingAction()}"
+                                         update="form:TVProducts:cldSPStartDate, form:TVProducts:cldSPEndDate,"
+                                         action="#{productsController.cleanFormSpectacleRankingAction()}"
                                          icon="fa fa-ban"/>
                     </f:facet>
                 </p:toolbar>
@@ -24,14 +24,12 @@
                 <div class="Container50 Responsive50">
                     <div class="ContainerIndent">
 
-
                         <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
                                      styleClass="FormContent">
-                            <p:outputLabel for="cldStartDate" value="Fecha Inicio"/>
-                            <p:outputLabel for="cldEndDate" value="Fecha fin"/>
-                            <p:calendar value="#{productsModel.productRankingSD}" id="cldStartDate"/>
-
-                            <p:calendar value="#{productsModel.productRankingED}" id="cldEndDate"/>
+                            <p:outputLabel for="cldSPStartDate" value="Fecha Inicio"/>
+                            <p:outputLabel for="cldSPEndDate" value="Fecha fin"/>
+                            <p:calendar value="#{productsModel.spectacleRankingSD}" id="cldSPStartDate"/>
+                            <p:calendar value="#{productsModel.spectacleRankingED}" id="cldSPEndDate"/>
                         </p:panelGrid>
 
                     </div>
@@ -39,14 +37,14 @@
 
                 <p:spacer height="120"/>
 
-                <p:dataList value="#{productsModel.productsRanking}" var="prod" type="unordered"
+                <p:dataList value="#{productsModel.spectaclesRanking}" var="item" type="unordered"
                             itemType="none" paginator="true" rows="7" styleClass="paginated"
-                            id="dataListProductRanking">
+                            id="dataListSpectacleRanking">
                     <f:facet name="header">
-                        Ranking Productos Más Vendidos
+                        Ranking Espectáculos Más Vendidos
                     </f:facet>
                     <i class="fa fa-table gray Fs18" style="margin-top:5px;"/>
-                    <h:outputText value="#{prod}" style="display:inline-block"/>
+                    <h:outputText value="#{item}" style="display:inline-block"/>
                 </p:dataList>
             </div>
         </div>

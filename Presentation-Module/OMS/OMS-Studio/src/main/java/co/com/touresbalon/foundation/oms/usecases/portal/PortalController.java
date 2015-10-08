@@ -27,6 +27,7 @@ public class PortalController {
     private ProductsFacade productFacade;
 
     public void searchProductsAction() {
+        productModel.cleanModel();
         RequestContext.getCurrentInstance().execute( "window.location.href='"+PRODUCT_SEARCH_PAGE+"';" );
     }
 

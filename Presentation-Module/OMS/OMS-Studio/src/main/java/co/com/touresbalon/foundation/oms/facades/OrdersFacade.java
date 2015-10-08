@@ -15,7 +15,6 @@ import java.util.List;
 @ApplicationScoped
 public class OrdersFacade {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     //[fields] injected service client fields -----------------------
 
@@ -25,7 +24,9 @@ public class OrdersFacade {
     
     // ------------------------------
 
-    public List<String> getRankingSoldProducts( Date startOrderDate, Date endOrderDate ){
+    public List<String> getRankingSoldProducts( Date startOrderDate, Date endOrderDate )
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return ordersWC.getRankingSoldProducts( sdf.format(startOrderDate),sdf.format(endOrderDate)).getData();
     }
 

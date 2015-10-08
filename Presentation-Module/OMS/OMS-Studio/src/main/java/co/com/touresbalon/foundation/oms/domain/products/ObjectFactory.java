@@ -24,6 +24,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _CollectionWrapper_QNAME = new QName("", "wrapper");
     private final static QName _ProductaWrapper_QNAME = new QName("", "collection");
     private final static QName _Product_QNAME = new QName("", "product");
     private final static QName _Transport_QNAME = new QName("", "transport");
@@ -38,6 +39,10 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    public CollectionWrapper createCollectionWrapper() {
+        return new CollectionWrapper();
     }
 
     public ProductsWrapper createProductsWrapper() {
@@ -98,6 +103,12 @@ public class ObjectFactory {
      */
     public City createCity() {
         return new City();
+    }
+
+
+    @XmlElementDecl(namespace = "", name = "wrapper")
+    public JAXBElement<CollectionWrapper> createCollectionWrapper(CollectionWrapper value) {
+        return new JAXBElement<CollectionWrapper>(_CollectionWrapper_QNAME, CollectionWrapper.class, null, value);
     }
 
     @XmlElementDecl(namespace = "", name = "collection")

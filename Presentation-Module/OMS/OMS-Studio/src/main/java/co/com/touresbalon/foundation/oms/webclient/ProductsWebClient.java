@@ -1,10 +1,10 @@
 package co.com.touresbalon.foundation.oms.webclient;
 
+import co.com.touresbalon.foundation.oms.domain.products.CollectionWrapper;
 import co.com.touresbalon.foundation.oms.domain.products.Product;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -45,5 +45,11 @@ public interface ProductsWebClient {
                                          @QueryParam("description") String description,
                                          @QueryParam("spectacleName")String spectacleName);
 
+
+    @GET
+    @Path("/soldSpectacles/ranking")
+    @Consumes({MediaType.APPLICATION_XML})
+    CollectionWrapper getRankingSoldOrders( @QueryParam("startOrderDate") String startOrderDate,
+                                            @QueryParam("endOrderDate")  String endOrderDate );
 
 }

@@ -34,6 +34,13 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
     private Date productRankingED;
     private List<String> productsRanking;
 
+    //spectacle ranking fields --------------------
+
+    private Date spectacleRankingSD;
+    private Date spectacleRankingED;
+    private List<String> spectaclesRanking;
+
+
     // model fields ------------------------
     private Product product;
 
@@ -41,6 +48,9 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
         productsRanking = new ArrayList<>();
         productRankingSD = new Date();
         productRankingED = new Date();
+        spectacleRankingSD = new Date();
+        spectacleRankingED = new Date();
+        spectaclesRanking = new ArrayList<>();
     }
 
     /**
@@ -63,6 +73,43 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
         name = null;
         description = null;
         spectacleName = null;
+    }
+
+    public void cleanModel(){
+
+        cleanForm();
+
+        productRankingSD = new Date();
+        productRankingED = new Date();
+        productsRanking.clear();
+
+        spectacleRankingSD = new Date();
+        spectacleRankingED = new Date();
+        spectaclesRanking.clear();
+    }
+
+    public Date getSpectacleRankingSD() {
+        return spectacleRankingSD;
+    }
+
+    public void setSpectacleRankingSD(Date spectacleRankingSD) {
+        this.spectacleRankingSD = spectacleRankingSD;
+    }
+
+    public Date getSpectacleRankingED() {
+        return spectacleRankingED;
+    }
+
+    public void setSpectacleRankingED(Date spectacleRankingED) {
+        this.spectacleRankingED = spectacleRankingED;
+    }
+
+    public List<String> getSpectaclesRanking() {
+        return spectaclesRanking;
+    }
+
+    public void setSpectaclesRanking(List<String> spectaclesRanking) {
+        this.spectaclesRanking = spectaclesRanking;
     }
 
     public List<String> getProductsRanking() {

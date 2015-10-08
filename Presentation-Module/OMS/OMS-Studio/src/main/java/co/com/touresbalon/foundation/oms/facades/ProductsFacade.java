@@ -5,6 +5,8 @@ import co.com.touresbalon.foundation.oms.webclient.ProductsWebClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +39,14 @@ public class ProductsFacade {
     public int getTotalPagesByProductSearch( String code, String name,String description,String spectacleName){
 
         String total = productsWC.getTotalPagesByProductSearch(code, name, description,spectacleName);
-        return Integer.parseInt( total.replaceAll("<total>","").replaceAll("</total>","") );
+        return Integer.parseInt(total.replaceAll("<total>", "").replaceAll("</total>", ""));
+    }
+
+    // ------------------------------
+
+    public List<String> getRankingSoldOrders( Date startOrderDate, Date endOrderDate ){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return productsWC.getRankingSoldOrders( sdf.format(startOrderDate),sdf.format(endOrderDate)).getData();
     }
 
 }

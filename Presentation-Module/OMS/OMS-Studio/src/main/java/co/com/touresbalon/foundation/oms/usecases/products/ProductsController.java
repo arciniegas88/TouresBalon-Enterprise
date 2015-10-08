@@ -24,6 +24,13 @@ public class ProductsController {
     private OrdersFacade ordersFacade;
 
     //[action] ------------------
+    public void spectaclesRankingAction()
+    {
+        model.setSpectaclesRanking( facade.getRankingSoldOrders( model.getSpectacleRankingSD(),model.getSpectacleRankingED() ) );
+    }
+
+
+    //[action] ------------------
     public void productsRankingAction()
     {
         model.setProductsRanking( ordersFacade.getRankingSoldProducts( model.getProductRankingSD(),model.getProductRankingED() ) );
@@ -39,5 +46,12 @@ public class ProductsController {
         model.setProductRankingED(new Date());
         model.setProductRankingSD(new Date());
     }
+
+    //[action] ------------------
+    public void cleanFormSpectacleRankingAction(){
+        model.setSpectacleRankingED(new Date());
+        model.setSpectacleRankingSD(new Date());
+    }
+
 
 }
