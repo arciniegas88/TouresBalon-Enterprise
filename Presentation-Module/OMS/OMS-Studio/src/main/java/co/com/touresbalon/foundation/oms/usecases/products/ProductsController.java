@@ -6,6 +6,7 @@ import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Date;
 
 /**
  * Created by garciniegas on 04/10/2015.
@@ -32,6 +33,12 @@ public class ProductsController {
     //[action] ------------------
     public void cleanFormAction(){
         model.cleanForm();
+    }
+
+    //[action] ------------------
+    public void cleanFormProductRankingAction(){
+        model.setProductRankingED(new Date());
+        model.setProductRankingSD(new Date());
     }
 
 }

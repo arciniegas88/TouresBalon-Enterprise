@@ -5,22 +5,51 @@
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui">
 
-    <p:overlayPanel id="productRankingPanel" for="form:btnProductRanking" hideEffect="clip" dynamic="true"
-                    style="width:600px"
-                    appendToBody="true" dismissable="false">
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card HeiAutoOnMobile" style="min-height:275px;">
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:commandButton value="buscar" styleClass="OrangeButton"
+                                         update="form:TVProducts:dataListProductRanking"
+                                         action="#{productsController.productsRankingAction()}"
+                                         icon="fa fa-check-square-o"/>
+                        <p:commandButton value="limpiar" styleClass="OrangeButton"
+                                         update="form:TVProducts:cldStartDate, form:TVProducts:cldEndDate,"
+                                         action="#{productsController.cleanFormProductRankingAction()}"
+                                         icon="fa fa-ban"/>
+                    </f:facet>
+                </p:toolbar>
+
+                <div class="Container50 Responsive50">
+                    <div class="ContainerIndent">
 
 
+                        <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                                     styleClass="FormContent">
+                            <p:outputLabel for="cldStartDate" value="Fecha Inicio"/>
+                            <p:outputLabel for="cldEndDate" value="Fecha fin"/>
+                            <p:calendar value="#{productsModel.productRankingSD}" id="cldStartDate"/>
 
-        <br/><br/>
+                            <p:calendar value="#{productsModel.productRankingED}" id="cldEndDate"/>
+                        </p:panelGrid>
 
-        <p:dataList value="#{productsModel.productsRanking}" var="prod" type="unordered"
-                    itemType="none" paginator="true" rows="7" styleClass="paginated" id="dataListProductRanking">
-            <f:facet name="header">
-                Ranking Productos Mas Vendidos
-            </f:facet>
-            <i class="fa fa-table gray Fs18" style="margin-top:5px;"/>
-            <h:outputText value="#{prod}" style="display:inline-block"/>
-        </p:dataList>
+                    </div>
+                </div>
 
-    </p:overlayPanel>
+                <p:spacer height="120"/>
+
+                <p:dataList value="#{productsModel.productsRanking}" var="prod" type="unordered"
+                            itemType="none" paginator="true" rows="7" styleClass="paginated"
+                            id="dataListProductRanking">
+                    <f:facet name="header">
+                        Ranking Productos Mas Vendidos
+                    </f:facet>
+                    <i class="fa fa-table gray Fs18" style="margin-top:5px;"/>
+                    <h:outputText value="#{prod}" style="display:inline-block"/>
+                </p:dataList>
+            </div>
+        </div>
+    </div>
+
 </ui:composition>

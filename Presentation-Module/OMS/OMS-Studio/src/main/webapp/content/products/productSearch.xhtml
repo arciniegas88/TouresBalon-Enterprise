@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
                 template="/template/template.xhtml">
 
     <ui:define name="subheader">
@@ -9,11 +10,49 @@
 
     <ui:define name="content">
 
+        <style>
+            .ui-tabs-left > .ui-tabs-nav {
+                float: left;
+                width: 15%;
+                height: 300px;
+                background-image: none;
+                padding-top: 1px;
+            }
+
+            .ui-tabs-left > .ui-tabs-panels {
+                float: right;
+                width: 84%;
+            }
+        </style>
 
         <div class="Container100 Responsive100">
             <h:form id="form">
-                <ui:include src="productsRankingFragment.xhtml" />
-                <ui:include src="productsSearchFragment.xhtml" />
+                <br/>
+
+                <p:tabView orientation="left" id="TVProducts">
+
+                    <p:tab title="Productos">
+                        <ui:include src="productsSearchFragment.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Ranking productos">
+                        <ui:include src="productsRankingFragment.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Ranking espectaculos">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <i class="icon-dvr Fs50 Purple"></i>
+
+                            <div class="EmptyBox40"></div>
+                            <i class="icon-headset Fs50 Orange"></i>
+
+                            <div class="EmptyBox40"></div>
+                            <i class="icon-alarm Fs50 Blue"></i>
+                            <h:outputText
+                                    value="Material design is guided by print-based design elements—such as typography, grids, space, scale, color, and imagery—to create hierarchy, meaning, and focus that immerse the user in the experience.
+                                                Material design adopts tools from the field of print design, like baseline grids and structural templates, encouraging consistency across environments by repeating visual elements, structural grids, and spacing across platforms and screen sizes. These layouts scale to fit any screen size, which simplifies the process of creating scalable apps."/>
+                        </h:panelGrid>
+                    </p:tab>
+                </p:tabView>
+
             </h:form>
         </div>
 
