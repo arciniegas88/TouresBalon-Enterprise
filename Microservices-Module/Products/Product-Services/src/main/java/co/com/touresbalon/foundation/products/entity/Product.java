@@ -19,6 +19,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
+        @NamedQuery(name = "Product.findEspectaclesRelatedToProducts",
+                query = "SELECT p.spectacleType.name FROM Product p WHERE p.name IN :NAMES",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findById",
                 query = "SELECT p FROM Product p WHERE p.id = :ID",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),

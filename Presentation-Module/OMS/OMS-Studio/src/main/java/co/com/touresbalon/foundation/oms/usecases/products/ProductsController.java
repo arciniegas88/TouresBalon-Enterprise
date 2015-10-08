@@ -27,7 +27,6 @@ public class ProductsController {
     public void productsRankingAction()
     {
         model.setProductsRanking( ordersFacade.getRankingSoldProducts( model.getProductRankingSD(),model.getProductRankingED() ) );
-        System.out.println("------------------- productsRankingAction");
     }
 
     //[action] ------------------

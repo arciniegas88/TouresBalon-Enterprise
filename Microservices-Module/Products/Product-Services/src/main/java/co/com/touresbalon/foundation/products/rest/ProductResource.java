@@ -11,6 +11,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+
+import co.com.touresbalon.foundation.products.dto.CollectionWrapper;
 import co.com.touresbalon.foundation.products.entity.Product;
 
 /**
@@ -53,7 +55,7 @@ public class ProductResource {
                                          @QueryParam("pageIndex") int pageIndex,
                                          @QueryParam("pageSize") int pageSize)throws SystemException  {
 
-        return boundary.searchProducts(code, name, description,spectacleName,pageIndex,pageSize);
+        return boundary.searchProducts(code, name, description, spectacleName, pageIndex, pageSize);
     }
 
 
@@ -71,6 +73,19 @@ public class ProductResource {
         int totalPages = boundary.countProducts(code, name, description, spectacleName);
         String content = RESTUtil.getNegotiatedContent(headers,totalPages,"total");
         return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
+    }
+
+
+    @POST
+    @Path("/soldSpectacles/ranking")
+    @Produces({MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_XML})
+    public CollectionWrapper getRankingSoldOrders( CollectionWrapper request ) throws SystemException {
+
+        CollectionWrapper wrapper = new CollectionWrapper();
+        wrapper.setData( boundary.findEspectaclesRealedToProducts( request.getData() ) );
+
+        return wrapper;
     }
 
 

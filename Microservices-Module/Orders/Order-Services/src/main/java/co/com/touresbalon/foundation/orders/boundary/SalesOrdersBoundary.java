@@ -35,8 +35,6 @@ public class SalesOrdersBoundary {
     @Inject
     private ExceptionBuilder exceptionBuilder;
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
     @PersistenceContext
     private EntityManager em;
 
@@ -193,6 +191,8 @@ public class SalesOrdersBoundary {
     public List<String> getRankingSoldProducts( String startOrderDate, String endOrderDate )throws SystemException{
 
         try{
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
             List<Object[]> data = em.createNamedQuery("OrderItem.getProductRanking")
                                     .setParameter("ORDER_START_DATE", sdf.parse(startOrderDate), TemporalType.DATE)

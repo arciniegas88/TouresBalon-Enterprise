@@ -46,7 +46,7 @@ public class ProductBoundary {
         try {
 
             return em.createNamedQuery("Product.findById", Product.class)
-                    .setParameter("ID",id)
+                    .setParameter("ID", id)
                     .getSingleResult();
 
         } catch (Throwable enf) {
@@ -59,7 +59,7 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Product> searchProducts(String code, String name, String description,String spectacleName,
+    public List<Product> searchProducts(String code, String name, String description, String spectacleName,
                                         int pageIndex, int pageSize) throws SystemException {
 
         try {
@@ -79,7 +79,7 @@ public class ProductBoundary {
                         .setParameter("CODE", code)
                         .setParameter("NAME", "%" + name + "%")
                         .setParameter("DESCRIPTION", "%" + description + "%")
-                        .setParameter("SPECT_NAME","%"+spectacleName+"%")
+                        .setParameter("SPECT_NAME", "%" + spectacleName + "%")
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
                         .getResultList();
@@ -95,9 +95,9 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public int countProducts(String code, String name, String description, String spectacleName ) throws SystemException {
+    public int countProducts(String code, String name, String description, String spectacleName) throws SystemException {
 
-        try{
+        try {
 
             code = (code != null && code.trim().equals("")) ? null : code;
             name = (name != null && name.trim().equals("")) ? null : name;
@@ -112,9 +112,24 @@ public class ProductBoundary {
                         .setParameter("CODE", code)
                         .setParameter("NAME", "%" + name + "%")
                         .setParameter("DESCRIPTION", "%" + description + "%")
-                        .setParameter("SPECT_NAME","%"+spectacleName+"%")
+                        .setParameter("SPECT_NAME", "%" + spectacleName + "%")
                         .getSingleResult().intValue();
             }
+
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<String> findEspectaclesRealedToProducts( List<String> products ) throws SystemException {
+
+        try {
+            return em.createNamedQuery("Product.findEspectaclesRelatedToProducts")
+                    .setParameter("NAMES", products)
+                    .getResultList();
 
         } catch (Throwable enf) {
             logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
