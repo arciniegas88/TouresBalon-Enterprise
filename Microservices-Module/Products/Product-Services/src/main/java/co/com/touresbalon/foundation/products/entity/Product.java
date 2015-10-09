@@ -19,6 +19,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
+        @NamedQuery(name = "Product.findByName",
+                query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
+                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate ,p.imageRef, p.price, p.spectacleType.name) FROM Product p " +
+                        "WHERE TRIM(p.name) = TRIM(:NAME) ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findEspectaclesRelatedToProducts",
                 query = "SELECT p.spectacleType.name FROM Product p WHERE p.name IN :NAMES",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),

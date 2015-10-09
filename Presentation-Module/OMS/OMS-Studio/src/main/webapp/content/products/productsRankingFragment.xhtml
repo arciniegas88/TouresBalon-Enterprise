@@ -45,7 +45,10 @@
                     <f:facet name="header">
                         Ranking Productos Más Vendidos
                     </f:facet>
-                    <i class="fa fa-table gray Fs18" style="margin-top:5px;"/>
+                    <p:commandLink update="form:productDetail" title="Detalle producto" styleClass="" style="margin-right:10px;"
+                                   action="#{productsController.showProductLinkDetail( prod )}">
+                        <i class="fa fa-table gray Fs18" style="margin-top:5px;"></i>
+                    </p:commandLink>
                     <h:outputText value="#{prod}" style="display:inline-block"/>
                 </p:dataList>
             </div>

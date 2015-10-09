@@ -3,12 +3,14 @@ package co.com.touresbalon.foundation.oms.usecases.products;
 import co.com.touresbalon.foundation.oms.domain.products.Product;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
 import co.com.touresbalon.foundation.oms.infrastructure.BeanLocator;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+import org.primefaces.model.StreamedContent;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,10 +41,11 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
     private Date spectacleRankingSD;
     private Date spectacleRankingED;
     private List<String> spectaclesRanking;
-
+    private StreamedContent productImage;
 
     // model fields ------------------------
     private Product product;
+    private List<Product> cacheProducts;
 
     public ProductsModel() {
         productsRanking = new ArrayList<>();
@@ -63,19 +66,31 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
     @Override
     public List<Product> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 
-        ProductsFacade facade = BeanLocator.getBean( ProductsFacade.class );
-        setRowCount( facade.getTotalPagesByProductSearch( code,name,description,spectacleName ) );
-        return facade.searchProducts(code,name,description,spectacleName,first,pageSize);
+        ProductsFacade facade = BeanLocator.getBean(ProductsFacade.class);
+        setRowCount(facade.getTotalPagesByProductSearch(code, name, description, spectacleName));
+        cacheProducts = facade.searchProducts(code, name, description, spectacleName, first, pageSize);
+        return cacheProducts;
     }
 
-    public void cleanForm(){
+    @Override
+    public Product getRowData(String rowKey) {
+
+        for (Product p : cacheProducts) {
+            if (p.getId().toString().equals(rowKey))
+                return p;
+        }
+
+        return null;
+    }
+
+    public void cleanForm() {
         code = null;
         name = null;
         description = null;
         spectacleName = null;
     }
 
-    public void cleanModel(){
+    public void cleanModel() {
 
         cleanForm();
 
@@ -86,6 +101,14 @@ public class ProductsModel extends LazyDataModel<Product> implements Serializabl
         spectacleRankingSD = new Date();
         spectacleRankingED = new Date();
         spectaclesRanking.clear();
+    }
+
+    public StreamedContent getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(StreamedContent productImage) {
+        this.productImage = productImage;
     }
 
     public Date getSpectacleRankingSD() {

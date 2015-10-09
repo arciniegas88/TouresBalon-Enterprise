@@ -36,6 +36,17 @@ public class ProductResource {
     // [return product detail] -------------------------------
 
     @GET
+    @Path("/byName")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Product searchProductByName( @QueryParam("name") String name ) throws SystemException {
+
+        return boundary.getProductByName(name);
+    }
+
+
+    // [return product detail] -------------------------------
+
+    @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Product searchProduct( @PathParam("id") Long id ) throws SystemException {

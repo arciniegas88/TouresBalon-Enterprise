@@ -41,6 +41,26 @@ public class ProductBoundary {
     // [method] -----------------------------
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public Product getProductByName(String name) throws SystemException {
+
+        try {
+
+            name = name.replaceAll("(\r\n|\n)", "");
+            return em.createNamedQuery("Product.findByName", Product.class)
+                    .setParameter("NAME", name)
+                    .getSingleResult();
+
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+
+
+    // [method] -----------------------------
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Product getProductDetail(Long id) throws SystemException {
 
         try {

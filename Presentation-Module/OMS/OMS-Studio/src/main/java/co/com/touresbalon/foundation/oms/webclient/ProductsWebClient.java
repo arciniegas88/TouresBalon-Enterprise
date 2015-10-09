@@ -14,6 +14,13 @@ import java.util.List;
 @Path("/products")
 public interface ProductsWebClient {
 
+
+    @GET
+    @Path("/byName")
+    @Consumes(MediaType.APPLICATION_XML)
+    Product searchProductByName( @QueryParam("name") String name );
+
+
     // [return product detail] -------------------------------
 
     @GET

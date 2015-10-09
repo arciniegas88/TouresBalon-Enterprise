@@ -2,6 +2,7 @@ package co.com.touresbalon.foundation.oms.facades;
 
 import co.com.touresbalon.foundation.oms.domain.products.Product;
 import co.com.touresbalon.foundation.oms.webclient.ProductsWebClient;
+import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -23,6 +24,12 @@ public class ProductsFacade {
 
     // ------------------------------
 
+    public Product searchProductByName(String name ){
+        return productsWC.searchProductByName(name);
+    }
+
+    // ------------------------------
+
     public Product searchProduct( Long id ){
         return productsWC.searchProduct(id);
     }
@@ -35,6 +42,8 @@ public class ProductsFacade {
         return productsWC.searchProducts(code,name,description,spectacleName,pageIndex,pageSize);
     }
 
+
+    // ------------------------------
 
     public int getTotalPagesByProductSearch( String code, String name,String description,String spectacleName){
 

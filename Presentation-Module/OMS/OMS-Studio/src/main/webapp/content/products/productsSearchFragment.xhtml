@@ -46,8 +46,13 @@
 
                         <p:dataTable id="productsTable" var="p" value="#{productsModel}"
                                      rows="5" paginator="true"
+                                     selectionMode="single" selection="#{productsModel.product}"
+                                     rowKey="#{p.id}"
                                      emptyMessage="No products found with given criteria"
                                      lazy="true">
+
+                            <p:ajax event="rowSelect" update="form:productDetail"
+                                    listener="#{productsController.showProductDetail()}"/>
 
                             <p:column headerText="Nombre" footerText="Nombre">
                                 <h:outputText value="#{p.name}"/>
@@ -55,18 +60,6 @@
 
                             <p:column headerText="Código" footerText="Código" style="text-align: center;">
                                 <h:outputText value="#{p.code}"/>
-                            </p:column>
-
-                            <p:column headerText="Fecha Salida" footerText="Fecha Salida" style="text-align: center;">
-                                <h:outputText value="#{p.departureDate}">
-                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                </h:outputText>
-                            </p:column>
-
-                            <p:column headerText="Fecha Regreso" footerText="Fecha Regreso" style="text-align: center;">
-                                <h:outputText value="#{p.arrivalDate}">
-                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                </h:outputText>
                             </p:column>
 
                             <p:column headerText="Espectáculo" footerText="Espectáculo" style="text-align: center;">
