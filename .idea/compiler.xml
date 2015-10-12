@@ -57,6 +57,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="Cancel-Orders-BPEL" />
         <module name="Create-Orders-BPEL" />
         <module name="Cross-Cutting-Artifacts" />
         <module name="OMS-Theme" />
@@ -123,6 +124,7 @@
       <module name="BPEL-Module" target="1.5" />
       <module name="BusinessRule-Services" target="1.7" />
       <module name="BusinessRules" target="1.5" />
+      <module name="Cancel-Orders-BPEL" target="1.5" />
       <module name="Create-Orders-BPEL" target="1.5" />
       <module name="CreditCard-Adapter" target="1.7" />
       <module name="CreditCardWS" target="1.7" />

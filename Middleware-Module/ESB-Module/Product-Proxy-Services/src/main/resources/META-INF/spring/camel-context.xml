@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Configures the Camel Context -->
 
+<!--suppress SpringFacetInspection -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:camel="http://camel.apache.org/schema/spring"
@@ -56,7 +57,6 @@
         </camel:route>
 
         <!-- get orders ranking -->
-
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products/soldSpectacles/ranking?restletMethod=GET"/>
             <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/soldProducts/ranking?restletMethod=GET"/>
@@ -67,6 +67,42 @@
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products/byName?restletMethod=GET"/>
             <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products/byName?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- get transports -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/partnerServices/transports?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/partnerServices/transports?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- get spectacles -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/partnerServices/spectacles?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/partnerServices/spectacles?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- get lodging -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/partnerServices/lodging?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/partnerServices/lodging?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- get countries -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/partnerServices/countries?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/partnerServices/countries?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- get transports -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/partnerServices/cities?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/partnerServices/cities?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- create products -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products?restletMethod=POST"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products?restletMethod=POST"/>
         </camel:route>
 
     </camelContext>

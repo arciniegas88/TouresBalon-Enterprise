@@ -514,10 +514,9 @@
                                 </bpel:assign>
                                 <bpel:invoke name="Invoke-cancel-order" partnerLink="SalesOrderWSPartnerLink" operation="changeSalesOrderStatus" portType="so:SalesOrderWS" inputVariable="completeOrderStatusInput"></bpel:invoke>
                                 <bpel:exit name="Exit-cancel-order"></bpel:exit>
-                            </bpel:sequence>
-                        <bpel:elseif>
+                            </bpel:sequence><bpel:else>
                                 <bpel:empty name="Empty"></bpel:empty>
-                            </bpel:elseif></bpel:if>
+                            </bpel:else></bpel:if>
                     </bpel:sequence>
                     <bpel:else>
                         <bpel:empty name="Empty"></bpel:empty>

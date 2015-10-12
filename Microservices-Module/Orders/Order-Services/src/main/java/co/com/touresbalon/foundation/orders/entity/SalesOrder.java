@@ -6,12 +6,10 @@
 package co.com.touresbalon.foundation.orders.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Jenny Rodriguez
@@ -26,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
                         "WHERE s.id = :ID"),
         @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s"),
         @NamedQuery(name = "SalesOrder.ByCustomer",
-                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
+                query = "SELECT  NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
                         "s.comments) FROM SalesOrder s " +
                         "WHERE s.custDocumentType =:TYPE_DOCUMENT AND s.custDocumentNumber =:NUMBER_DOCUMENT AND s.status = :STATUS",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
@@ -34,7 +32,13 @@ import javax.xml.bind.annotation.XmlTransient;
                 query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
                         "s.comments, s.custDocumentNumber ,s.custDocumentType) FROM SalesOrder s " +
                         "WHERE s.id=:ID_SALES_ORDER",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name ="SalesOrder.ById",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder( s.id, s.orderDate, s.price, s.status," +
+                        "s.comments ) FROM SalesOrder s " +
+                        "WHERE s.id =:ID_SALES_ORDER ",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
+
 
 })
 @SequenceGenerator(name="SALES_ORDER_GEN", sequenceName = "SALES_ORDER_SEQ",initialValue=1, allocationSize=1)
@@ -90,7 +94,7 @@ public class SalesOrder implements Serializable {
         this.price = price;
         this.status = status;
         this.comments = comments;
-        this.status = status != null ? SalesOrderStatus.valueOf( status ).getLabel() : null;
+        this.status = status;
     }
 
     public SalesOrder(Long id, Date orderDate, Long price, String status, String comments, String custDocumentNumber, String custDocumentType) {
@@ -101,7 +105,7 @@ public class SalesOrder implements Serializable {
         this.comments = comments;
         this.custDocumentNumber = custDocumentNumber;
         this.custDocumentType = custDocumentType;
-        this.status = status != null ? SalesOrderStatus.valueOf( status ).getLabel() : null;
+        this.status = status;
     }
 
     public Long getId() {
@@ -160,7 +164,6 @@ public class SalesOrder implements Serializable {
         this.custDocumentType = custDocumentType;
     }
 
-    @XmlTransient
     public List<OrderItem> getOrderItemList() {
         return orderItemList;
     }

@@ -213,4 +213,20 @@ public class SalesOrdersBoundary {
         }
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public SalesOrder searchSalesOrderById (Long salesOrderId) throws SystemException{
+        try {
+            SalesOrder salesOrder= em.createNamedQuery("SalesOrder.ById", SalesOrder.class)
+                    .setParameter("ID_SALES_ORDER", salesOrderId)
+                    .getSingleResult();
+            salesOrder.setOrderItemList(em.createNamedQuery("OrderItem.getOrderItems",OrderItem.class)
+                                          .setParameter("ID_SALES_ORDER", salesOrderId)
+                                          .getResultList());
+            return  salesOrder;
+
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
 }
