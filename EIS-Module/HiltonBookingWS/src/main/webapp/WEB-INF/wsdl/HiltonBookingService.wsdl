@@ -1,0 +1,131 @@
+<wsdl:definitions name="BookingService"
+                  targetNamespace="http://hilton.com/enterprise/booking/v1"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:sch="http://hilton.com/enterprise/booking/schema/v1"
+                  xmlns:mdl="http://hilton.com/model/booking/schema/v1"
+                  xmlns:tns="http://hilton.com/enterprise/booking/v1"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://hilton.com/enterprise/booking/v1"
+                    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import
+                    namespace="http://hilton.com/enterprise/booking/schema/v1"
+                    schemaLocation="xsd/HiltonBookingService_schema.xsd"/>
+            <xsd:import namespace="http://hilton.com/model/booking/schema/v1"
+                        schemaLocation="xsd/HiltonBookingModel_schema.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <!-- MESSAGES -->
+    <wsdl:message name="consultAvailabilityRequest_msg">
+        <wsdl:part element="sch:consultAvailabilityRequest" name="body"/>
+    </wsdl:message>
+    <wsdl:message name="consultAvailabilityResponse_msg">
+        <wsdl:part element="sch:consultAvailabilityResponse" name="body"/>
+    </wsdl:message>
+    <wsdl:message name="confirmRoomRequest_msg">
+        <wsdl:part element="sch:confirmRoomRequest" name="body"/>
+    </wsdl:message>
+    <wsdl:message name="confirmRoomResponse_msg">
+        <wsdl:part element="sch:confirmRoomResponse" name="body"/>
+    </wsdl:message>
+    <wsdl:message name="cancelRoomRequest_msg">
+        <wsdl:part element="sch:cancelRoomRequest" name="body"/>
+    </wsdl:message>
+    <wsdl:message name="cancelRoomResponse_msg">
+        <wsdl:part element="sch:cancelRoomResponse" name="body"/>
+    </wsdl:message>
+    <wsdl:message name="getReservationRequest_msg">
+        <wsdl:part element="sch:getReservationRequest" name="body"/>
+    </wsdl:message>
+    <wsdl:message name="getReservationResponse_msg">
+        <wsdl:part element="sch:getReservationResponse" name="body"/>
+    </wsdl:message>
+    <wsdl:message name="Fault_msg">
+        <wsdl:part element="mdl:SystemFault" name="fault"/>
+    </wsdl:message>
+
+    <!-- PORT -->
+    <wsdl:portType name="BookingPort">
+        <wsdl:operation name="consultAvailability">
+            <wsdl:input message="tns:consultAvailabilityRequest_msg" name="consultAvailabilityPortRequest"/>
+            <wsdl:output message="tns:consultAvailabilityResponse_msg" name="consultAvailabilityPortResponse"/>
+            <wsdl:fault message="tns:Fault_msg" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="confirmRoom">
+            <wsdl:input message="tns:confirmRoomRequest_msg" name="confirmRoomPortRequest"/>
+            <wsdl:output message="tns:confirmRoomResponse_msg" name="confirmRoomPortResponse"/>
+            <wsdl:fault message="tns:Fault_msg" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="cancelRoom">
+            <wsdl:input message="tns:cancelRoomRequest_msg" name="cancelRoomPortRequest"/>
+            <wsdl:output message="tns:cancelRoomResponse_msg" name="cancelRoomPortResponse"/>
+            <wsdl:fault message="tns:Fault_msg" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getReservation">
+            <wsdl:input message="tns:getReservationRequest_msg" name="getReservationPortRequest"/>
+            <wsdl:output message="tns:getReservationResponse_msg" name="getReservationPortResponse"/>
+            <wsdl:fault message="tns:Fault_msg" name="fault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- BINDING -->
+    <wsdl:binding name="Booking_wsSOAP" type="tns:BookingPort">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="consultAvailability">
+            <soap:operation/>
+            <wsdl:input name="consultAvailabilityPortRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="consultAvailabilityPortResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="confirmRoom">
+            <soap:operation/>
+            <wsdl:input name="confirmRoomPortRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="confirmRoomPortResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelRoom">
+            <soap:operation/>
+            <wsdl:input name="cancelRoomPortRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="cancelRoomPortResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getReservation">
+            <soap:operation/>
+            <wsdl:input name="getReservationPortRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getReservationPortResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="BookingService">
+        <wsdl:port binding="tns:Booking_wsSOAP" name="BookingPort">
+            <soap:address location="http://localhost/booking/v1"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
