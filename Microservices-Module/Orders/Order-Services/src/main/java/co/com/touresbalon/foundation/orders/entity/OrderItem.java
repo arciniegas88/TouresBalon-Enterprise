@@ -21,6 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "ORDER_ITEM")
 @XmlRootElement
 @NamedQueries({
+        @NamedQuery(name = "OrderItem.getProductRanking",
+                query = "SELECT o.productName, COUNT(o) AS TOTAL FROM OrderItem o " +
+                        "WHERE o.status = 'PROVISIONED' AND " +
+                        "(o.orderId.orderDate >= :ORDER_START_DATE AND o.orderId.orderDate <= :ORDER_END_DATE) " +
+                        "GROUP BY o.productName " +
+                        "ORDER BY TOTAL DESC",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
         @NamedQuery(name = "OrderItem.update",
                 query = "UPDATE OrderItem o SET o.status = :STATUS, o.transportComments= :TRANSPORT_COMMENTS," +
                         "o.transportTravelDate = :TRANSPORT_TRAVEL_DATE, o.transportSourceCity = :TRANSPORT_SOURCE_CITY," +
@@ -38,10 +46,10 @@ import javax.xml.bind.annotation.XmlRootElement;
         hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "OrderItem.getOrderItems",
                     query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.OrderItem( oi.productId, oi.productName, oi.price,oi.itemNo," +
-                            "                     oi.status, oi.transportComments, oi.transportTravelDate, oi.transportSourceCity," +
-                            "                     oi.transportTargetCity, oi.transportTravelNumber, oi.transportChairNumber," +
-                            "                     oi.transportOutTime, oi.spectacleComments, oi.spectacleId, oi.spectacleTicket," +
-                            "                     oi.lodgingComments)"+
+                            "oi.status, oi.transportComments, oi.transportTravelDate, oi.transportSourceCity," +
+                            "oi.transportTargetCity, oi.transportTravelNumber, oi.transportChairNumber," +
+                            "oi.transportOutTime, oi.spectacleComments, oi.spectacleId, oi.spectacleTicket," +
+                            "oi.lodgingComments)"+
                             "FROM OrderItem oi WHERE oi.orderId.id = :ID_SALES_ORDER ",
                     hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })

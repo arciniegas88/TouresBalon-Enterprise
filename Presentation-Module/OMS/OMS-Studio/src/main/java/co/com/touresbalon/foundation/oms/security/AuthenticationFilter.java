@@ -68,10 +68,8 @@ public class AuthenticationFilter implements Filter {
         doBeforeProcessing(req, resp);
         
         try {
-            
+
             if( StringUtils.contains(req.getRequestURI(), "/javax.faces.resource") ||
-                StringUtils.equals( req.getRequestURI(), "/OMS-Studio") ||
-                StringUtils.equals( req.getRequestURI(), "/OMS-Studio/") ||
                 StringUtils.equals( req.getRequestURI(), "/OMS-Studio/login.xhtml") ){
                 chain.doFilter(req, resp);
                 return;

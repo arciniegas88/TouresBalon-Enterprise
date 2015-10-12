@@ -20,7 +20,10 @@ import javax.inject.Named;
 public class LoginController {
     
 	//-----------------------------------
-	
+
+    @Inject
+    private FacesUtil util;
+
     @Inject
     private LoginModel model;
 
@@ -37,9 +40,9 @@ public class LoginController {
 
         if(StringUtils.equals( model.getUser().getLogin(),"admin" ) && StringUtils.equals( model.getUser().getPassword(),"admin" )){
             model.setAuthenticated(true);
-            return FacesUtil.redirect("/dashboard.xhtml");
+            return util.redirect("/dashboard.xhtml");
         }else{
-            FacesUtil.addErrorMessage("Usuario o clave incorrectas");
+            util.addErrorMessage("Usuario o clave incorrectas");
             return "";
         }
 
@@ -48,7 +51,7 @@ public class LoginController {
     // [login] ---------------------------------
 
     public String forgotPassword(){
-        FacesUtil.addErrorMessage("forgot password");
+        util.addErrorMessage("forgot password");
         return "";
     }
     
@@ -56,8 +59,8 @@ public class LoginController {
     // [logout] ---------------------------------
     
     public void logout(){
-        FacesUtil.invalidateSession();
-        RequestContext.getCurrentInstance().execute("window.location.href='http://localhost:9090/OMS-Studio/login.xhtml';");
+        util.invalidateSession();
+        RequestContext.getCurrentInstance().execute("window.location.href='/OMS-Studio/login.xhtml';");
     }
     
     

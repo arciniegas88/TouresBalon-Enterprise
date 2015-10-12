@@ -36,5 +36,11 @@ namespace B2C.Facades
             return customer;
         }
 
+        public Customer getCustomer(Customer customer)
+        {
+            customer = this.agentService.registerCustomer(customer);
+            return customer;
+        }
+
     }
 }

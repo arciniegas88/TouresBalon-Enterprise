@@ -1,0 +1,79 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card HeiAutoOnMobile" style="min-height:275px;">
+
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:commandButton value="buscar" styleClass="OrangeButton"
+                                         update="form:TVProducts:productsTable"
+                                         icon="fa fa-check-square-o"/>
+                        <p:commandButton value="limpiar" styleClass="OrangeButton"
+                                         update="form:TVProducts:txtName, form:TVProducts:txtCoode, form:TVProducts:txtDescription, form:TVProducts:txtSpectacle"
+                                         action="#{productsController.cleanFormAction()}"
+                                         icon="fa fa-ban"/>
+                    </f:facet>
+                </p:toolbar>
+
+
+                <div class="Container70 Responsive70">
+                    <div class="ContainerIndent">
+
+                        <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                                     styleClass="FormContent">
+                            <p:inputText styleClass="Wid90" placeholder="Nombre"
+                                         value="#{productsModel.name}" id="txtName"/>
+                            <p:inputText styleClass="Wid90" placeholder="Código"
+                                         value="#{productsModel.code}" id="txtCoode"/>
+                            <p:inputText styleClass="Wid90" placeholder="Descripción"
+                                         value="#{productsModel.description}" id="txtDescription"/>
+                            <p:inputText styleClass="Wid90" placeholder="Espetáculo"
+                                         value="#{productsModel.spectacleName}" id="txtSpectacle"/>
+                        </p:panelGrid>
+                        <br/>
+                    </div>
+                </div>
+
+
+                <div class="Container100">
+                    <div class="ContainerIndent">
+
+                        <p:dataTable id="productsTable" var="p" value="#{productsModel}"
+                                     rows="5" paginator="true"
+                                     selectionMode="single" selection="#{productsModel.product}"
+                                     rowKey="#{p.id}"
+                                     emptyMessage="No products found with given criteria"
+                                     lazy="true">
+
+                            <p:ajax event="rowSelect" update="form:productDetail"
+                                    listener="#{productsController.showProductDetail()}"/>
+
+                            <p:column headerText="Nombre" footerText="Nombre">
+                                <h:outputText value="#{p.name}"/>
+                            </p:column>
+
+                            <p:column headerText="Código" footerText="Código" style="text-align: center;">
+                                <h:outputText value="#{p.code}"/>
+                            </p:column>
+
+                            <p:column headerText="Espectáculo" footerText="Espectáculo" style="text-align: center;">
+                                <h:outputText value="$#{p.spectacleType.name}"/>
+                            </p:column>
+
+                            <p:column headerText="Precio" footerText="Precio" style="text-align: center;">
+                                <h:outputText value="$#{p.price}"/>
+                            </p:column>
+
+                        </p:dataTable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>

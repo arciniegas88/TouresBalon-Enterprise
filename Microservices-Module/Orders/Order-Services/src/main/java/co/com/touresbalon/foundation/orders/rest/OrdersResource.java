@@ -2,6 +2,7 @@ package co.com.touresbalon.foundation.orders.rest;
 
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import co.com.touresbalon.foundation.orders.boundary.SalesOrdersBoundary;
+import co.com.touresbalon.foundation.orders.dto.CollectionWrapper;
 import co.com.touresbalon.foundation.orders.dto.Product;
 import co.com.touresbalon.foundation.orders.entity.OrderItem;
 import co.com.touresbalon.foundation.orders.entity.SalesOrder;
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,6 +63,19 @@ public class OrdersResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<SalesOrder> getSalesOrderDetail(@PathParam("idSalesOrder") Long idSalesOrder) throws SystemException {
         return boundary.getSalesOrderDetail(idSalesOrder);
+    }
+
+
+    @GET
+    @Path("/soldProducts/ranking")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public CollectionWrapper getRankingSoldProducts( @QueryParam("startOrderDate") String startOrderDate,
+                                                     @QueryParam("endOrderDate")  String endOrderDate ) throws SystemException {
+
+        CollectionWrapper wrapper = new CollectionWrapper();
+        wrapper.setData( boundary.getRankingSoldProducts(startOrderDate,endOrderDate) );
+
+        return wrapper;
     }
 
 }

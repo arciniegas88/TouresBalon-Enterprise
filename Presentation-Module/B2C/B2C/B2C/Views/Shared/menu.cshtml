@@ -1,0 +1,23 @@
+﻿@{
+    var menu = (ViewData["menu"] as B2C.Utils.Menu).Items;
+
+}
+
+<div id="layout-menu-cover" class="Animated05 ps-container">
+    <form enctype="application/x-www-form-urlencoded" action="/modena-1.0.2/panel.xhtml" method="post" name="menuform" id="menuform">
+        <input type="hidden" value="menuform" name="menuform">
+        <ul class="layout-menu ShadowEffect modena-menu" id="menuform:j_idt14">
+
+        @foreach (var item in menu)
+        {
+            <li role="menuitem" id="menuform:icon-shopping_cart">
+                <a href="@Url.Action(@item.ActionName, @item.ControllerName)" class="menulink ripplelink">
+                    <i class="@item.icon"></i>@item.Text
+                </a>
+            </li>
+        }
+        </ul>
+        <script type="text/javascript">Modena.restoreMenuState();</script>
+    </form>
+    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px;"><div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div></div>
+</div>

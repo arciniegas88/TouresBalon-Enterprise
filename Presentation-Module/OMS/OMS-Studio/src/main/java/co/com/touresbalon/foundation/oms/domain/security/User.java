@@ -1,4 +1,4 @@
-package co.com.touresbalon.foundation.oms.domain;
+package co.com.touresbalon.foundation.oms.domain.security;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

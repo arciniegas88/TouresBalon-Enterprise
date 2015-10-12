@@ -1,10 +1,31 @@
-﻿<div class="product_small">
-    <p class="title">Orden #@Page.id</p>
-    <p>Comentarios: @Page.comments</p>
-    <p>Estado: @Page.status</p>
-    <p>Precio: @Page.price</p>
-    <input type="button" value="Ver mas" id="or_@Page.id" class="button button_small icon fa - file - text - o get_order full-width" />
-    <input type="button" value="Cancelar" id="can_@Page.id" class="button button_small icon fa - file - text - o cancel_order full-width" />
+﻿<div class="Wid30 Fleft MarTop20 MarRight20 Responsive100">
+    <div class="ui-panel">
+        <div class="ui-panel-titlebar">
+            <span class="ui-panel-title title FontBold Fs20">Orden #@Page.id</span>
+        </div>
+        <div class="EmptyBox10"></div>
+        <p><span class="FontBold">Comentarios:</span> @Page.comments</p>
+        <p><span class="FontBold">Estado:</span> @Page.status</p>
+        <p><span class="FontBold">Precio:</span> @Page.price</p>
+
+        <div class="Wid90 MarAuto">
+
+            <div class="Wid100 ClearBoth">
+                <a id="or_@Page.id" href="#" class="get_order ui-button-text-icon-left BlueModena BlueBack Fs18 White RaisedButton FloatNoneOnMobile pointer Wid80 FontBold Fs20 WhiteBlue">
+                    <span class="ui-button-icon-left ui-icon ui-c icon-slideshow"></span>
+                    <span class="ui-button-text ui-c">Ver mas</span>
+                </a>
+            </div>
+            <div class="EmptyBox10"></div>
+            <div class="Wid100 ClearBoth">
+                <a id="can_@Page.id" href="#" class="cancel_order ui-button-text-icon-left BlueModena RedButton Fs18 White RaisedButton FloatNoneOnMobile pointer Wid80 FontBold Fs20 WhiteBlue">
+                    <span class="ui-button-icon-left ui-icon ui-c  icon-delete"></span>
+                    <span class="ui-button-text ui-c">Cancelar</span>
+                </a>
+            </div>
+        </div>
+        <div class="EmptyBox10"></div>
+    </div>
 </div>
 
 

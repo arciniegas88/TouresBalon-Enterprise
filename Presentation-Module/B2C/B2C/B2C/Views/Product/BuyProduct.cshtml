@@ -1,8 +1,23 @@
-﻿<p id="name_product"></p>
-<p>
-   <span class="title">Precio: </span>
-   <span id="cost_product"></span>
-</p>
+﻿<div class="overlay DispNone">
+</div>
 
-<input id="account" name="account" type="number" />
-@Html.ActionLink("Comprar", "#", new { }, new { @class = "button icon fa - file - text - o", @id = "buyproduct"})
+<div class="lightbox Responsive100 DispNone">
+        <span class="icon-close pointer PosAbsolute Fright Fs50 DispTableCell close_lightbox White" id="close_lightbox"></span>
+        <p class="Wid100 Opac100 BlueBack FontBold Fs20 White TexAlCenter" id="name_product">NOMBRE DEL PRODUCTO</p>
+        <p class="MarAuto PadWithBorder10">
+            <span class="BoldGray Fs28">Precio: <span id="cost_product">15000</span></span>
+            <span class="Fs28" id="cost_product"></span>
+        </p>
+        
+        <p class="MarAuto PadWithBorder10">
+            <span class="BoldGray Fs28">Cantidad: </span>
+            <input class="ui-spinner-input ui-inputfield ui-state-default ui-corner-all" id="account" name="account" type="number" />
+        </p>
+        
+    <div class="Wid80 WidAutoOnMobile PadWithBorder10">
+        <button id ="buyproduct" class="buy ui-button-text-icon-left  Fs18 White RaisedButton FloatNoneOnMobile TexAlCenter Fleft pointer Wid100 PadWithBorder5 BlueBack White" type="button" role="button" aria-disabled="false">
+            <span class="ui-button-icon-left ui-icon ui-c icon-add_shopping_cart"></span>
+            <span class="ui-button-text ui-c">Comprar</span>
+        </button>
+    </div>
+</div>

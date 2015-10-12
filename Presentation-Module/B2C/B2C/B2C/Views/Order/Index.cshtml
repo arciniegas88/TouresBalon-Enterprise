@@ -10,24 +10,21 @@
 
 @section content
 {
-    <div id="order_detail" style="display:none;">
+    @RenderPage("~/Views/Order/Detail.cshtml");
 
-    </div>
+    <div class="Container80 MarAuto Fnone">
 
-    <div id="features-wrapper">
-        <div class="container" id="list_items">
-            <div class="row">
-                @foreach (var item in orders)
-                {
-                    @RenderPage("~/Views/Order/OrderSmall.cshtml", new { @price = item.Price, @id = item.Id, comments = item.Comments, status = item.Status })
-                }
-            </div>
+        <h1 class="BigTopic">Tus Ordenes</h1>
+
+        <div class="ui-datagrid-content ui-grid ui-grid-responsive MarTop40">
+             <div class="MarTop20 Wid100">
+             @foreach (var item in orders)
+             {
+                 @RenderPage("~/Views/Order/OrderSmall.cshtml", new { @price = item.Price, @id = item.Id, comments = item.Comments, status = item.Status })
+             }
+             </div>
         </div>
-    </div>
-
-
-
-
+  </div>
 }
 
 

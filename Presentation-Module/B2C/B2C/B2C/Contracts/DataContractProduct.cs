@@ -18,7 +18,7 @@ namespace B2C.Contracts
         public double price { get; set; }
 
         [JsonProperty("status")]
-        public int status { get; set; }
+        public string status { get; set; }
 
         [JsonProperty("comments")]
         public string comments { get; set; }
@@ -60,6 +60,8 @@ namespace B2C.Contracts
         [JsonProperty("code")]
         public String code { get; set; }
 
+        [JsonProperty("price")]
+        public double price { get; set; }
 
         [JsonProperty("spectacleDate")]
         public DateTime spectacleDate { get; set; }

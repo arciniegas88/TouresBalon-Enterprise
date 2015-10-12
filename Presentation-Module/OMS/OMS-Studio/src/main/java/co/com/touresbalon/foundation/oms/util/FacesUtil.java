@@ -1,7 +1,9 @@
 package co.com.touresbalon.foundation.oms.util;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -9,11 +11,13 @@ import javax.servlet.http.HttpSession;
  * @author javeriana
  */
 
+@Named
+@ApplicationScoped
 public class FacesUtil {
     
 	//[utility] -----------------------------------
 	
-    public static void invalidateSession(){
+    public void invalidateSession(){
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session =  (HttpSession) fc.getExternalContext().getSession(false);
         session.invalidate();
@@ -22,14 +26,14 @@ public class FacesUtil {
     
     //[utility] -----------------------------------
     
-    public static final String redirect( String action ){
+    public String redirect( String action ){
         return action+"?faces-redirect=true";
     }
     
     
     //[utility] -----------------------------------
     
-    public static final void addInfoMessage( String message ){
+    public void addInfoMessage( String message ){
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
         FacesContext.getCurrentInstance().addMessage(null,fm);
     }
@@ -37,7 +41,7 @@ public class FacesUtil {
     
     //[utility] -----------------------------------
     
-    public static final void addErrorMessage( String message ){
+    public void addErrorMessage( String message ){
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
         FacesContext.getCurrentInstance().addMessage(null,fm);
     }
@@ -46,7 +50,7 @@ public class FacesUtil {
     
     //[utility] -----------------------------------
     
-    public static final void addWarningMessage( String message ){
+    public void addWarningMessage( String message ){
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, message, message);
         FacesContext.getCurrentInstance().addMessage(null,fm);
     }

@@ -1,22 +1,19 @@
-﻿<div class="paginator">
-    <nav class="n_pagination">
-        <ul class="pagination" id="pagination">
-            @for (var i = 1; i <= @Page.total_page; i++)
-            {
-                if (i != @Page.actual_page)
-                {
-                    <li>
-                        @Html.ActionLink(i.ToString(), @Page.action as String, @Page.controller as String, new { @page = i, search = @Page.search, search_by = @Page.search_by }, new { @class = "pager" })
-                    </li>
-                }
-                else
-                {
-                    <li>
-                        @Html.ActionLink(i.ToString(), @Page.action as String, @Page.controller as String, new { @page = i, search = @Page.search, search_by = @Page.search_by }, new { @class = "pager disable" })
-                    </li>
-                }
-            }
-        </ul>
-    </nav>
-</div>
+﻿<nav>
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
 
+        @for (var i = 1; i <= @Page.total_page; i++)
+        {
+            <li>@Html.ActionLink(i.ToString(), @Page.action as String, @Page.controller as String, new { @page = i, search = @Page.search, search_by = @Page.search_by }, new { @class = "get_pager" })</li>
+        }
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
