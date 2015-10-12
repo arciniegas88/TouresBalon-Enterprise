@@ -39,4 +39,10 @@ public class SalesOrderWS {
         boundary.updateItem(oi);
     }
 
+
+    @WebMethod(operationName = "searchSalesOrderById",action = "searchSalesOrderById")
+    public SalesOrder searchSalesOrderById (@WebParam(name = "salesOrderId") Long salesOrderId) throws SystemException {
+       return boundary.searchSalesOrderById(salesOrderId);
+    }
+
 }

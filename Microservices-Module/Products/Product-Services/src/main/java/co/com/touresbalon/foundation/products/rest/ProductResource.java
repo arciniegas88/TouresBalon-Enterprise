@@ -1,5 +1,6 @@
 package co.com.touresbalon.foundation.products.rest;
 
+import co.com.touresbalon.foundation.crosscutting.exceptions.BusinessException;
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import co.com.touresbalon.foundation.crosscutting.util.RESTUtil;
 import co.com.touresbalon.foundation.products.boundary.ProductBoundary;
@@ -99,5 +100,10 @@ public class ProductResource {
         return wrapper;
     }
 
+    @POST
+    @Consumes({MediaType.APPLICATION_XML})
+    public void createProduct( Product product )throws SystemException,BusinessException{
+
+    }
 
 }

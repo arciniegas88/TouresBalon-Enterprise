@@ -6,13 +6,7 @@
 package co.com.touresbalon.foundation.products.entity;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -23,7 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "spectacle")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Spectacle.findAll", query = "SELECT s FROM Spectacle s"),
+        @NamedQuery(name = "Spectacle.findAll",
+                    query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Spectacle(" +
+                            "s.id, s.name, s.cost) " +
+                            "FROM Spectacle s",
+                    hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Spectacle.findById", query = "SELECT s FROM Spectacle s WHERE s.id = :id"),
         @NamedQuery(name = "Spectacle.findByName", query = "SELECT s FROM Spectacle s WHERE s.name = :name"),
         @NamedQuery(name = "Spectacle.findByCost", query = "SELECT s FROM Spectacle s WHERE s.cost = :cost")})
@@ -39,6 +37,12 @@ public class Spectacle implements Serializable {
     private Long cost;
 
     public Spectacle() {
+    }
+
+    public Spectacle(Integer id, String name, Long cost) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
     }
 
     public Spectacle(Integer id) {

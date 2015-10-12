@@ -1,6 +1,7 @@
 package co.com.touresbalon.foundation.products.rest.infrastructure;
 
 import co.com.touresbalon.foundation.products.rest.CampaignResource;
+import co.com.touresbalon.foundation.products.rest.PartnerServicesResource;
 import co.com.touresbalon.foundation.products.rest.ProductResource;
 
 import javax.ws.rs.ApplicationPath;
@@ -13,6 +14,7 @@ import java.util.Set;
 public class ApplicationConfig extends Application {
 
     public Set<Class<?>> getClasses() {
-        return new HashSet<Class<?>>(Arrays.asList( ProductResource.class ,CampaignResource.class));
+        return new HashSet<Class<?>>(Arrays.asList( ProductResource.class ,CampaignResource.class,
+                                                    PartnerServicesResource.class));
     }
 }

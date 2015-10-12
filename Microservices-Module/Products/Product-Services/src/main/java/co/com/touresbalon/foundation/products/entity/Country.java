@@ -7,14 +7,7 @@ package co.com.touresbalon.foundation.products.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,7 +19,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "country")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c"),
+        @NamedQuery(name = "Country.findAll",
+                    query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Country(" +
+                            "c.id, c.name) " +
+                            "FROM Country c",
+                    hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Country.findById", query = "SELECT c FROM Country c WHERE c.id = :id"),
         @NamedQuery(name = "Country.findByName", query = "SELECT c FROM Country c WHERE c.name = :name")})
 public class Country implements Serializable {
@@ -41,6 +38,11 @@ public class Country implements Serializable {
     private String name;
 
     public Country() {
+    }
+
+    public Country(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Country(Integer id) {

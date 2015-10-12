@@ -6,13 +6,7 @@
 package co.com.touresbalon.foundation.products.entity;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -24,7 +18,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "lodging")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Lodging.findAll", query = "SELECT l FROM Lodging l"),
+        @NamedQuery(name = "Lodging.findAll",
+                    query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Lodging(" +
+                            "l.id, l.name,l.cost) " +
+                            "FROM Lodging l",
+                    hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Lodging.findById", query = "SELECT l FROM Lodging l WHERE l.id = :id"),
         @NamedQuery(name = "Lodging.findByName", query = "SELECT l FROM Lodging l WHERE l.name = :name"),
         @NamedQuery(name = "Lodging.findByCost", query = "SELECT l FROM Lodging l WHERE l.cost = :cost")})
@@ -40,6 +38,12 @@ public class Lodging implements Serializable {
     private Long cost;
 
     public Lodging() {
+    }
+
+    public Lodging(Integer id, String name, Long cost) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
     }
 
     public Lodging(Integer id) {

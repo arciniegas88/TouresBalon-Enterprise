@@ -16,11 +16,16 @@ import java.util.List;
  *
  * @author garciniegas
  */
+
 @Entity
 @Table(name = "transport")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Transport.findAll", query = "SELECT t FROM Transport t"),
+        @NamedQuery(name = "Transport.findAll",
+                    query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Transport(" +
+                            "t.id, t.name, t.cost, t.travelDate, t.travelOutTime, t.businessProvider) " +
+                            "FROM Transport t",
+                    hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Transport.findById", query = "SELECT t FROM Transport t WHERE t.id = :id"),
         @NamedQuery(name = "Transport.findByName", query = "SELECT t FROM Transport t WHERE t.name = :name"),
         @NamedQuery(name = "Transport.findByCost", query = "SELECT t FROM Transport t WHERE t.cost = :cost")})
@@ -50,6 +55,16 @@ public class Transport implements Serializable {
     private String businessProvider;
 
     public Transport() {
+    }
+
+    public Transport(Integer id, String name, Long cost, Date travelDate,
+                     String travelOutTime, String businessProvider) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
+        this.travelDate = travelDate;
+        this.travelOutTime = travelOutTime;
+        this.businessProvider = businessProvider;
     }
 
     public Transport(Integer id) {

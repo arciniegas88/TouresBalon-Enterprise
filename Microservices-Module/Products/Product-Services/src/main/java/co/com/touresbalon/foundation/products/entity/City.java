@@ -6,15 +6,7 @@
 package co.com.touresbalon.foundation.products.entity;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -26,10 +18,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "city")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
+        @NamedQuery(name = "City.findAllByCountry",
+                    query = "SELECT NEW co.com.touresbalon.foundation.products.entity.City(" +
+                            "c.id, c.name) " +
+                            "FROM City c " +
+                            "WHERE c.country.id = :COUNTRY",
+                    hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
-        @NamedQuery(name = "City.findByName", query = "SELECT c FROM City c WHERE c.name = :name"),
-        @NamedQuery(name = "City.findByCost", query = "SELECT c FROM City c WHERE c.cost = :cost")})
+        @NamedQuery(name = "City.findByName", query = "SELECT c FROM City c WHERE c.name = :name")})
 public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -41,14 +37,16 @@ public class City implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "cost")
-    private Long cost;
-
     @JoinColumn(name = "country", referencedColumnName = "Id")
     @ManyToOne
     private Country country;
 
     public City() {
+    }
+
+    public City(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public City(Integer id) {
@@ -69,14 +67,6 @@ public class City implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getCost() {
-        return cost;
-    }
-
-    public void setCost(Long cost) {
-        this.cost = cost;
     }
 
     public Country getCountry() {
