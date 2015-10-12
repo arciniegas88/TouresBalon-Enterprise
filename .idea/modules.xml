@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/BPEL-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/BPEL-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/BusinessRule-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/BusinessRule-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRules.iml" filepath="$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/Create-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/Create-Orders-BPEL.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter/CreditCard-Adapter.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter/CreditCard-Adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/CreditCardWS/CreditCardWS.iml" filepath="$PROJECT_DIR$/EIS-Module/CreditCardWS/CreditCardWS.iml" />
