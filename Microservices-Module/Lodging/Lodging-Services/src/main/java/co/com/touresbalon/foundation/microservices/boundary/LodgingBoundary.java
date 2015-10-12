@@ -49,7 +49,14 @@ public class LodgingBoundary {
                     .getResultList();
 
             if (resultList.isEmpty()) {
-                throw new BusinessException("The result is Empty");
+                //throw new BusinessException("The result is Empty");
+                Room room = new Room();
+                room.setRoomNumber(-1L);
+                room.setHotelId(-1L);
+                room.setPrice("0");
+                room.setType("Empty");
+
+                return room;
             } else {
                 return (Room) resultList.get(0);
             }
