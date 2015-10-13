@@ -6,6 +6,7 @@
 package co.com.touresbalon.foundation.products.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -19,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
         @NamedQuery(name = "Spectacle.findAll",
                     query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Spectacle(" +
-                            "s.id, s.name, s.cost) " +
+                            "s.id, s.name, s.cost, s.spectacleDate) " +
                             "FROM Spectacle s",
                     hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Spectacle.findById", query = "SELECT s FROM Spectacle s WHERE s.id = :id"),
@@ -35,14 +36,26 @@ public class Spectacle implements Serializable {
     private String name;
     @Column(name = "cost")
     private Long cost;
+    @Column(name = "spectacle_date")
+    @Temporal(TemporalType.DATE)
+    private Date spectacleDate;
 
     public Spectacle() {
     }
 
-    public Spectacle(Integer id, String name, Long cost) {
+    public Spectacle(Integer id, String name, Long cost, Date spectacleDate) {
         this.id = id;
         this.name = name;
         this.cost = cost;
+        this.spectacleDate = spectacleDate;
+    }
+
+    public Date getSpectacleDate() {
+        return spectacleDate;
+    }
+
+    public void setSpectacleDate(Date spectacleDate) {
+        this.spectacleDate = spectacleDate;
     }
 
     public Spectacle(Integer id) {

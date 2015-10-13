@@ -1,4 +1,4 @@
-package co.com.touresbalon.foundation.oms.usecases.products;
+package co.com.touresbalon.foundation.oms.usecases.productssearch;
 
 import co.com.touresbalon.foundation.oms.domain.products.Product;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;

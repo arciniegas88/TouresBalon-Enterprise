@@ -118,6 +118,13 @@
         <processorPath useClasspath="true" />
         <module name="OMS-Studio" />
       </profile>
+      <profile default="false" name="Annotation profile for HiltonBookingWS" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="HiltonBookingWS" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -134,6 +141,7 @@
       <module name="Customers" target="1.5" />
       <module name="EIS-Module" target="1.5" />
       <module name="ESB-Module" target="1.5" />
+      <module name="HiltonBookingWS" target="1.6" />
       <module name="Lodging" target="1.5" />
       <module name="Lodging-Services" target="1.6" />
       <module name="Microservices-Module" target="1.5" />
