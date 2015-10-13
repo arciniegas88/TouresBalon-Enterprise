@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/EIS-Module/CreditCardWS" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/EIS-Module/HiltonBookingWS" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/EIS-Module/SpectaclesWS" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services" charset="UTF-8" />
@@ -23,7 +24,6 @@
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/content/products/productSearch.xhtml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/dashboard.xhtml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/login.xhtml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/webapp/resources" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/resources/META-INF/resources" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/src/main/resources/META-INF/resources/modena-layout/images/favicon.ico" charset="UTF-8" />

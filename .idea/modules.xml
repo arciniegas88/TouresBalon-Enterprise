@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/BusinessRule-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/BusinessRule-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRules.iml" filepath="$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRules.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/Create-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/Create-Orders-BPEL.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter/CreditCard-Adapter.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter/CreditCard-Adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/CreditCardWS/CreditCardWS.iml" filepath="$PROJECT_DIR$/EIS-Module/CreditCardWS/CreditCardWS.iml" />
@@ -16,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Customers/Customers.iml" filepath="$PROJECT_DIR$/Microservices-Module/Customers/Customers.iml" />
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/EIS-Module.iml" filepath="$PROJECT_DIR$/EIS-Module/EIS-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/ESB-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/ESB-Module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EIS-Module/HiltonBookingWS/HiltonBookingWS.iml" filepath="$PROJECT_DIR$/EIS-Module/HiltonBookingWS/HiltonBookingWS.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging.iml" filepath="$PROJECT_DIR$/Microservices-Module/Lodging/Lodging.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services/Lodging-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services/Lodging-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" filepath="$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" />

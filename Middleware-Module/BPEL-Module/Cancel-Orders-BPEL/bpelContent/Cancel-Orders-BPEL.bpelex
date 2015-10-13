@@ -37,36 +37,36 @@
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0"/>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activities.0"/>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="8" y="8"/>
   </extensions>
   <extensions>
-    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activities.0/@activities.0"/>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.2"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activities.1"/>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.1"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="266" y="8"/>
   </extensions>
   <extensions>
-    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activities.1/@activities.0"/>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.1/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
-    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activities.2"/>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.2"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension" x="525" y="8"/>
   </extensions>
   <extensions>
-    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activities.2/@activities.0"/>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.2/@activities.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
   <extensions>
     <extendedObject href="Cancel-Orders-BPEL.bpel#/"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1444608164004"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1444701763291"/>
   </extensions>
   <extensions>
     <extendedObject href="Cancel-Orders-BPEL.bpel#//@variables/@children.3"/>
@@ -131,5 +131,53 @@
   <extensions>
     <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.1/@copy.0"/>
     <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@variables/@children.5"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:VariableExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0/@copy.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0/@copy.2"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0/@copy.3"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0/@copy.4"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0/@copy.5"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0/@copy.6"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0/@copy.7"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.0/@copy.0"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:CopyExtension"/>
+  </extensions>
+  <extensions>
+    <extendedObject href="Cancel-Orders-BPEL.bpel#//@activity/@activities.4/@activity/@activities.0/@activity/@activities.0/@activities.1"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ActivityExtension"/>
   </extensions>
 </extensionmodel:ExtensionMap>
