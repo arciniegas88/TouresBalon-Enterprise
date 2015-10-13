@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
- *
  * @author Jenny Rodriguez
  */
 
@@ -38,28 +37,29 @@ import javax.xml.bind.annotation.XmlRootElement;
                         "o.spectacleTicket = :SPECTACLE_TICKET, o.lodgingComments = :LODGING_COMMENTS " +
                         "WHERE o.orderId.id = :ORDER_ID AND o.itemNo = :ITEM_NO"),
         @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
+
         @NamedQuery(name = "OrderItem.TopFiveProductByOrder",
-                    query = "SELECT oi.productId,oi.productName, COUNT( oi.productId ) FROM OrderItem oi " +
-                            "WHERE oi.orderId.id IN( SELECT oii.orderId.id FROM OrderItem oii WHERE oii.productId = :PRODUCT_ID )" +
-                            "GROUP BY oi.productId,oi.productName " +
-                            "ORDER BY  COUNT( oi.productId ) DESC ",
-        hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+                query = "SELECT oi.productId,oi.productName, COUNT( oi.productId ) FROM OrderItem oi " +
+                        "WHERE oi.orderId.id IN( SELECT oii.orderId.id FROM OrderItem oii WHERE oii.productId = :PRODUCT_ID )" +
+                        "GROUP BY oi.productId,oi.productName " +
+                        "ORDER BY  COUNT( oi.productId ) DESC ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "OrderItem.getOrderItems",
-                    query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.OrderItem( oi.productId, oi.productName, oi.price,oi.itemNo," +
-                            "oi.status, oi.transportComments, oi.transportTravelDate, oi.transportSourceCity," +
-                            "oi.transportTargetCity, oi.transportTravelNumber, oi.transportChairNumber," +
-                            "oi.transportOutTime, oi.spectacleComments, oi.spectacleId, oi.spectacleTicket," +
-                            "oi.lodgingComments)"+
-                            "FROM OrderItem oi WHERE oi.orderId.id = :ID_SALES_ORDER ",
-                    hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.OrderItem( oi.productId, oi.productName, oi.price,oi.itemNo," +
+                        "oi.status, oi.transportComments, oi.transportTravelDate, oi.transportSourceCity," +
+                        "oi.transportTargetCity, oi.transportTravelNumber, oi.transportChairNumber," +
+                        "oi.transportOutTime, oi.spectacleComments, oi.spectacleId, oi.spectacleTicket," +
+                        "oi.lodgingComments, oi.transportTravelProvider)" +
+                        "FROM OrderItem oi WHERE oi.orderId.id = :ID_SALES_ORDER ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
-@SequenceGenerator(name="ORDER_ITEM_GEN", sequenceName = "ORDER_ITEM_SEQ",initialValue=1, allocationSize=1)
+@SequenceGenerator(name = "ORDER_ITEM_GEN", sequenceName = "ORDER_ITEM_SEQ", initialValue = 1, allocationSize = 1)
 public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ORDER_ITEM_GEN")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_ITEM_GEN")
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;
@@ -107,6 +107,9 @@ public class OrderItem implements Serializable {
     @Column(name = "TRANSPORT_OUT_TIME")
     private String transportOutTime;
 
+    @Column(name = "TRANSPORT_TRAVEL_PROVIDER")
+    private String transportTravelProvider;
+
     @Column(name = "SPECTACLE_COMMENTS")
     private String spectacleComments;
 
@@ -126,7 +129,7 @@ public class OrderItem implements Serializable {
                      String status, String transportComments, Date transportTravelDate, String transportSourceCity,
                      String transportTargetCity, String transportTravelNumber, String transportChairNumber,
                      String transportOutTime, String spectacleComments, Long spectacleId, Long spectacleTicket,
-                     String lodgingComments) {
+                     String lodgingComments, String transportTravelProvider) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
@@ -143,6 +146,7 @@ public class OrderItem implements Serializable {
         this.spectacleId = spectacleId;
         this.spectacleTicket = spectacleTicket;
         this.lodgingComments = lodgingComments;
+        this.transportTravelProvider =transportTravelProvider;
     }
 
     public String getItemNo() {
@@ -216,6 +220,9 @@ public class OrderItem implements Serializable {
     public void setTransportOutTime(String transportOutTime) {
         this.transportOutTime = transportOutTime;
     }
+
+    public String getTransportTravelProvider() {return transportTravelProvider;}
+    public void setTransportTravelProvider(String transportTravelProvider) {this.transportTravelProvider = transportTravelProvider;}
 
     public String getSpectacleComments() {
         return spectacleComments;
@@ -318,5 +325,5 @@ public class OrderItem implements Serializable {
     public String toString() {
         return "co.com.touresbalon.foundation.orders.entity.OrderItem[ id=" + id + " ]";
     }
-    
+
 }

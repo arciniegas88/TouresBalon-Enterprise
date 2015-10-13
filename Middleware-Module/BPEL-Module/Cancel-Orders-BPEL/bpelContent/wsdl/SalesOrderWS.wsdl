@@ -46,6 +46,7 @@
 						type="xs:dateTime" />
 					<xs:element minOccurs="0" name="transportTravelNumber"
 						type="xs:string" />
+					<xs:element minOccurs="0" name="transportTravelProvider" type="xs:string"/>	
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="salesOrder">

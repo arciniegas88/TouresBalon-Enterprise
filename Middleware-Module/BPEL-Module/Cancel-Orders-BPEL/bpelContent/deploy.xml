@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:sample="http://touresbalon.com.co/orders/service/task/1.0.0" xmlns:task_1.0.0="http://touresbalon.com.co/salesorder/service/task/1.0.0">
-  <process name="sample:Cancel-Orders-BPEL">
-    <active>true</active>
-    <retired>false</retired>
-    <process-events generate="all"/>
-    <provide partnerLink="client">
-      <service name="sample:Cancel-Orders-BPEL" port="Cancel-Orders-BPELPort"/>
-    </provide>
-    <invoke partnerLink="PartnerLinkSalesOrderWS">
-      <service name="task_1.0.0:SalesOrderWSService" port="SalesOrderWSPort"/>
-    </invoke>
-  </process>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03"
+	xmlns:sample="http://touresbalon.com.co/orders/service/task/1.0.0"
+	xmlns:task_1.0.0="http://touresbalon.com.co/salesorder/service/task/1.0.0"
+	xmlns:ns2="http://touresbalon.com.co/transport/service/task/1.0.0">
+	<process name="sample:Cancel-Orders-BPEL">
+		<active>true</active>
+		<retired>false</retired>
+		<process-events generate="all" />
+		<provide partnerLink="client">
+			<service name="sample:Cancel-Orders-BPEL" port="Cancel-Orders-BPELPort" />
+		</provide>
+		<invoke partnerLink="PartnerLinkSalesOrderWS">
+			<service name="task_1.0.0:SalesOrderWSService" port="SalesOrderWSPort" />
+		</invoke>
+		<invoke partnerLink="PartnerLinkTransportWS">
+			<service name="ns2:TransportWSService" port="TransportWSPort" />
+		</invoke>
+	</process>
 </deploy>
