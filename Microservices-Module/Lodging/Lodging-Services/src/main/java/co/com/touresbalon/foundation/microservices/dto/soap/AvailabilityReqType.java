@@ -37,7 +37,8 @@ import java.util.Date;
     "hotelBrand",
     "checkIn",
     "checkOut",
-    "city"
+    "city",
+        "guestName"
 })
 public class AvailabilityReqType {
 
@@ -51,6 +52,9 @@ public class AvailabilityReqType {
     protected Date checkOut;
     @XmlElement(required = true)
     protected String city;
+    @XmlElement(required = true)
+    private String guestName;
+
 
     /**
      * Gets the value of the hotelBrand property.
@@ -148,4 +152,11 @@ public class AvailabilityReqType {
         this.city = value;
     }
 
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
+    }
 }

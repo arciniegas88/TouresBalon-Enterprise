@@ -34,12 +34,14 @@ import javax.xml.bind.annotation.XmlType;
     "roomNumber",
     "hotelId",
     "type",
-    "price"
+    "price",
+     "reservationId"
 })
 public class Room {
 
     protected long roomNumber;
     protected long hotelId;
+    protected long reservationId;
     @XmlElement(required = true)
     protected String type;
     @XmlElement(required = true)
@@ -65,13 +67,29 @@ public class Room {
      * Gets the value of the hotelId property.
      * 
      */
+    public long getReservationId() {
+        return reservationId;
+    }
+
+    /**
+     * Sets the value of the hotelId property.
+     * 
+     */
+    public void setReservationId(long value) {
+        this.reservationId = value;
+    }
+
+    /**
+     * Gets the value of the hotelId property.
+     *
+     */
     public long getHotelId() {
         return hotelId;
     }
 
     /**
      * Sets the value of the hotelId property.
-     * 
+     *
      */
     public void setHotelId(long value) {
         this.hotelId = value;
