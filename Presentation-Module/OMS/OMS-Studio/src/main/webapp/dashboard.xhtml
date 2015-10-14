@@ -13,6 +13,7 @@
 
         <h:form>
         <p:remoteCommand name="searchProductsAction" update="@form" action="#{portalController.searchProductsAction()}"/>
+        <p:remoteCommand name="productsAdminAction" update="@form" action="#{portalController.productsAdminAction}"/>
 
         <div class="Container100">
             <div class="ContainerIndent">
@@ -22,7 +23,7 @@
 
                         <custom:optionItem topClass="RedBack SoftRed" bottomClass="SoftRed"
                                            icon="icon-cloud" label="Admin. Productos"
-                                           target="searchProductsAction"/>
+                                           target="productsAdminAction"/>
                         <custom:optionItem topClass="OrangeBack SoftOrange" bottomClass="SoftOrange"
                                            icon="icon-sun" label="Consultas Productos"
                                            target="searchProductsAction"/>

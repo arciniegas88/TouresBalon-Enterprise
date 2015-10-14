@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Date;
 
 
 /**
@@ -47,8 +48,7 @@ public class Transport {
     protected Long cost;
     protected Integer id;
     protected String name;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar travelDate;
+    protected Date travelDate;
     protected String travelOutTime;
 
     /**
@@ -155,7 +155,7 @@ public class Transport {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getTravelDate() {
+    public Date getTravelDate() {
         return travelDate;
     }
 
@@ -167,7 +167,7 @@ public class Transport {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setTravelDate(XMLGregorianCalendar value) {
+    public void setTravelDate(Date value) {
         this.travelDate = value;
     }
 

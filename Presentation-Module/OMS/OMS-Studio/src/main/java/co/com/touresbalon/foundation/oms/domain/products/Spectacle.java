@@ -4,6 +4,7 @@ package co.com.touresbalon.foundation.oms.domain.products;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Date;
 
 
 /**
@@ -31,13 +32,23 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "spectacle", propOrder = {
     "cost",
     "id",
-    "name"
+    "name",
+    "spectacleDate"
 })
 public class Spectacle {
 
     protected Long cost;
     protected Integer id;
     protected String name;
+    protected Date spectacleDate;
+
+    public Date getSpectacleDate() {
+        return spectacleDate;
+    }
+
+    public void setSpectacleDate(Date spectacleDate) {
+        this.spectacleDate = spectacleDate;
+    }
 
     /**
      * Gets the value of the cost property.

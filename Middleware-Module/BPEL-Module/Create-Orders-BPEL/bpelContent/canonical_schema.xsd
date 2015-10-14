@@ -33,6 +33,7 @@
             <xs:element name="productName" type="xs:string" minOccurs="0" />
             <xs:element name="transport" type="tns:Transport" minOccurs="0" />
             <xs:element name="spectacle" type="tns:Spectacle" minOccurs="0" />
+            <xs:element name="lodging" type="tns:Lodging" minOccurs="0" />
             <xs:element name="price" type="xs:decimal" minOccurs="0" />
             <xs:element name="custom" type="tns:OrderItemCustomFields"/>
         </xs:sequence>
@@ -61,6 +62,9 @@
     <xs:complexType name="Lodging">
         <xs:sequence>
             <xs:element name="lodgingBusinessProvider" type="xs:string"/>
+            <xs:element name="targetCity" type="xs:string"/>
+            <xs:element name="dateCheckIn" type="xs:string"/>
+            <xs:element name="dateCheckOut" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -88,6 +92,7 @@
             <xs:element name="hotel" type="xs:string"/>
             <xs:element name="roomNumber" type="xs:string"/>
             <xs:element name="observations" type="xs:string"/>
+            <xs:element name="reservationId" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
     

@@ -53,17 +53,14 @@ import java.util.Date;
     "name",
     "price",
     "sourceCity",
-    "spectacleDate",
     "spectacleType",
     "targetCity",
     "transportType"
 })
 public class Product {
 
-    //@XmlSchemaType(name = "dateTime")
     protected Date arrivalDate;
     protected String code;
-    //@XmlSchemaType(name = "dateTime")
     protected Date departureDate;
     protected String description;
     protected Long id;
@@ -72,8 +69,6 @@ public class Product {
     protected String name;
     protected Long price;
     protected City sourceCity;
-    //@XmlSchemaType(name = "dateTime")
-    protected Date spectacleDate;
     protected Spectacle spectacleType;
     protected City targetCity;
     protected Transport transportType;
@@ -314,30 +309,6 @@ public class Product {
      */
     public void setSourceCity(City value) {
         this.sourceCity = value;
-    }
-
-    /**
-     * Gets the value of the spectacleDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Date }
-     *     
-     */
-    public Date getSpectacleDate() {
-        return spectacleDate;
-    }
-
-    /**
-     * Sets the value of the spectacleDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Date }
-     *     
-     */
-    public void setSpectacleDate(Date value) {
-        this.spectacleDate = value;
     }
 
     /**

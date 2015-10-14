@@ -1,9 +1,8 @@
-package co.com.touresbalon.foundation.oms.usecases.products;
+package co.com.touresbalon.foundation.oms.usecases.productssearch;
 
 import co.com.touresbalon.foundation.oms.facades.OrdersFacade;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
-import org.omnifaces.util.Faces;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 

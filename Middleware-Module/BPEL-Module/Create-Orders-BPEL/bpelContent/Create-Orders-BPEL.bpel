@@ -6,6 +6,9 @@
               xmlns:credit="http://redeban.com/creditcards/ws"
               xmlns:transport="http://touresbalon.com.co/transport/service/task/1.0.0"
               xmlns:spectacle="http://spectacles.com.co/service/task/1.0.0"
+              xmlns:lodging="http://touresbalon.com.co/task/lodging/v1"
+              xmlns:lodging1="http://touresbalon.com.co/task/lodging/schema/v1"
+              xmlns:lodging2="http://touresbalon.com.co/model/lodging/schema/v1"
               xmlns:so="http://touresbalon.com.co/salesorder/service/task/1.0.0"
               xmlns:rules="http://touresbalon.com.co/businessrules/service/utility/1.0.0"
               xmlns:ht="http://touresbalon.com.co/salesorder/service/utility/1.0.0"
@@ -14,7 +17,7 @@
               name="Create-Orders-BPEL"
               targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0"
               suppressJoinFailure="yes" xmlns:b4p="http://docs.oasis-open.org/ns/bpel4people/bpel4people/200803"
-              xmlns:htschema="http://touresbalon.com.co/salesorder/schema/utility/1.0.0">
+              xmlns:htschema="http://touresbalon.com.co/salesorder/schema/utility/1.0.0" xmlns:ns="http://touresbalon.com.co/task/lodging/schema/v1">
 
     <!-- BPEL4People extension activity -->
     <bpel:extensions>
@@ -47,7 +50,12 @@
     <bpel:import location="wsdl/SpectaclesWS.wsdl"
                  namespace="http://spectacles.com.co/service/task/1.0.0"
                  importType="http://schemas.xmlsoap.org/wsdl/"/>
-
+                 
+                 
+    <bpel:import location="wsdl/LodgingService.wsdl"
+                 namespace="http://touresbalon.com.co/task/lodging/v1"
+                 importType="http://schemas.xmlsoap.org/wsdl/"/>
+     
     <bpel:import location="wsdl/SalesOrderWS.wsdl"
                  namespace="http://touresbalon.com.co/salesorder/service/task/1.0.0"
                  importType="http://schemas.xmlsoap.org/wsdl/"/>
@@ -86,6 +94,11 @@
                           partnerLinkType="spectacle:SpectaclesWS_PLT"
                           partnerRole="SpectaclesWS_Role"
                           initializePartnerRole="yes"/>
+                          
+    	<bpel:partnerLink name="LodgingWSPartnerLink"
+                          partnerLinkType="lodging:LodgingWS_PLT"
+                          partnerRole="LodgingWS_Role"
+                          initializePartnerRole="yes"/>
 
         <bpel:partnerLink name="SalesOrderWSPartnerLink"
                           partnerLinkType="so:SalesOrderWS_PLT"
@@ -122,8 +135,7 @@
                        messageType="transport:generateReservation"/>
         <bpel:variable name="validateTransportOutput"
                        messageType="transport:generateReservationResponse"/>
-
-        <bpel:variable name="counter"
+		<bpel:variable name="counter"
                        element="canonical:IteratorCounter"/>
         <bpel:variable name="evaluation"
                        element="canonical:EvaluationResponse"/>
@@ -166,6 +178,15 @@
                        messageType="ht:ClaimApprovalRequest"/>
         <bpel:variable name="claimOutput"
                        messageType="ht:ClaimApprovalResponse"/>
+                       
+        <bpel:variable name="validateLodgingInput" messageType="lodging:consultRoomsAvailability"></bpel:variable>
+        <bpel:variable name="validateLodgingOutput" messageType="lodging:consultRoomsAvailabilityResponse"></bpel:variable>
+        
+        <bpel:variable name="compLodgingInput" messageType="lodging:cancelReservation"></bpel:variable>
+        <bpel:variable name="compLodgingOutput" messageType="lodging:cancelReservationResponse"></bpel:variable>
+        
+        
+        
     </bpel:variables>
 
     <!-- ================================================================= -->
@@ -268,7 +289,7 @@
                              operation="validateCreditCard" portType="credit:CreditCard" inputVariable="validateCCInput"
                              outputVariable="validateCCOutput"/>
 
-                <bpel:if name="If-credit-card-is-valid">
+                <bpel:if name="If-credit-card-is-not-valid">
                     <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                         <![CDATA[$validateCCOutput.parameters/return = 'false']]></bpel:condition>
                     <bpel:sequence name="Sequence-cancel-order">
@@ -514,9 +535,10 @@
                                 </bpel:assign>
                                 <bpel:invoke name="Invoke-cancel-order" partnerLink="SalesOrderWSPartnerLink" operation="changeSalesOrderStatus" portType="so:SalesOrderWS" inputVariable="completeOrderStatusInput"></bpel:invoke>
                                 <bpel:exit name="Exit-cancel-order"></bpel:exit>
-                            </bpel:sequence><bpel:else>
+                            </bpel:sequence>
+                        <bpel:elseif>
                                 <bpel:empty name="Empty"></bpel:empty>
-                            </bpel:else></bpel:if>
+                            </bpel:elseif></bpel:if>
                     </bpel:sequence>
                     <bpel:else>
                         <bpel:empty name="Empty"></bpel:empty>
@@ -566,33 +588,33 @@
 
                     <bpel:assign validate="no" name="Initialize-stock">
 
+                        
                         <bpel:copy>
-                            <bpel:from>
-                                <bpel:literal>
-                                    <stock xmlns:tns="http://touresbalon.com.co/model/canonical/1.0.0">
-                                        <completed></completed>
-                                        <transport>
-                                            <available></available>
-                                            <travelNumber></travelNumber>
-                                            <chairNumber></chairNumber>
-                                            <observations></observations>
-                                        </transport>
-                                        <lodging>
-                                            <available></available>
-                                            <hotel></hotel>
-                                            <roomNumber></roomNumber>
-                                            <observations></observations>
-                                        </lodging>
-                                        <spectacle>
-                                            <available></available>
-                                            <ticket></ticket>
-                                            <observations></observations>
-                                        </spectacle>
-                                    </stock>
-                                </bpel:literal>
-                            </bpel:from>
+                            <bpel:from><bpel:literal><tns:stock xmlns:tns="http://touresbalon.com.co/model/canonical/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <completed>true</completed>
+  <transport>
+    <available>true</available>
+    <travelNumber>travelNumber</travelNumber>
+    <chairNumber>chairNumber</chairNumber>
+    <observations>observations</observations>
+  </transport>
+  <lodging>
+    <available>true</available>
+    <hotel>hotel</hotel>
+    <roomNumber>roomNumber</roomNumber>
+    <observations>observations</observations>
+    <reservationId>reservationId</reservationId>
+  </lodging>
+  <spectacle>
+    <available>true</available>
+    <ticket>ticket</ticket>
+    <observations>observations</observations>
+  </spectacle>
+</tns:stock>
+</bpel:literal></bpel:from>
                             <bpel:to variable="stock"></bpel:to>
                         </bpel:copy>
+                        
                     </bpel:assign>
 
 
@@ -714,6 +736,8 @@
                                             <![CDATA[return/travelNumber]]></bpel:query>
                                     </bpel:from>
                                     <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
                                         <![CDATA[$stock/transport/travelNumber]]>
                                     </bpel:to>
                                 </bpel:copy>
@@ -723,7 +747,200 @@
                         <bpel:sequence name="VALIDATE_LODGING">
 
 
-                            <bpel:empty name="validate_lodging_services"></bpel:empty>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <bpel:assign validate="no" name="Assign-input">
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <bpel:copy>
+                                    <bpel:from><bpel:literal><tns:consultRoomsAvailability xmlns:tns="http://touresbalon.com.co/task/lodging/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <availabilityRequest>
+    <hotelBrand>hotelBrand</hotelBrand>
+    <checkIn>2001-01-01</checkIn>
+    <checkOut>2001-01-01</checkOut>
+    <city>city</city>
+    <guestName>guestName</guestName>
+  </availabilityRequest>
+</tns:consultRoomsAvailability>
+</bpel:literal></bpel:from>
+                                    <bpel:to variable="validateLodgingInput" part="parameters"></bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$input.payload/order/custFirstName]]>
+                                    </bpel:from>
+                                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$validateLodgingInput.parameters/availabilityRequest/guestName]]>
+                                    </bpel:to>
+                                
+                                
+                                
+                                </bpel:copy>
+                                <bpel:copy><bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/lodging/lodgingBusinessProvider]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateLodgingInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[availabilityRequest/hotelBrand]]></bpel:query>
+                                    </bpel:to>
+                                
+                                </bpel:copy>
+                                <bpel:copy><bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/lodging/dateCheckIn]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateLodgingInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[availabilityRequest/checkIn]]></bpel:query>
+                                    </bpel:to>
+                                
+                                </bpel:copy>
+                                <bpel:copy><bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/lodging/dateCheckOut]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateLodgingInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[availabilityRequest/checkOut]]></bpel:query>
+                                    </bpel:to>
+                                
+                                </bpel:copy>
+                                <bpel:copy><bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$input.payload/order/items[round($counter/counter)]/lodging/targetCity]]>
+                                    </bpel:from>
+                                    <bpel:to part="parameters" variable="validateLodgingInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[availabilityRequest/city]]></bpel:query>
+                                    </bpel:to>
+                                
+                                </bpel:copy>
+                            </bpel:assign>
+                            <bpel:invoke name="InvokeLodgingValidation" partnerLink="LodgingWSPartnerLink" operation="consultRoomsAvailability" portType="lodging:LodgingPort" inputVariable="validateLodgingInput" outputVariable="validateLodgingOutput"></bpel:invoke>
+                            
+                            
+                            <bpel:assign validate="no" name="Assign-output">
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$validateLodgingOutput.parameters/return/lodging2:room/roomNumber]]>
+                                    </bpel:from>
+                                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$stock/lodging/roomNumber]]>
+                                    </bpel:to>
+                                </bpel:copy>
+                                <bpel:copy>
+                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$validateLodgingOutput.parameters/return/lodging2:room/reservationId]]>
+                                    </bpel:from>
+                                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[$stock/lodging/reservationId]]>
+                                    </bpel:to>
+                                </bpel:copy>
+                                
+                            </bpel:assign>
                         </bpel:sequence>
                         <bpel:sequence name="VALIDATE_SPECTACLE">
 
@@ -782,8 +999,7 @@
 
                             </bpel:assign>
                         </bpel:sequence>
-
-                    </bpel:flow>
+</bpel:flow>
 
 
                     <!-- ================================================================= -->
@@ -938,6 +1154,7 @@
                             </bpel:to>
                         </bpel:copy>
 
+                        
                     </bpel:assign>
                     <bpel:assign validate="no" name="Assign-validated-spectacle-info">
                         <bpel:copy ignoreMissingFromData="yes">
@@ -964,8 +1181,7 @@
 
                     </bpel:assign>
                     <bpel:if name="If-compensation-required">
-                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                            <![CDATA[$validateTransportOutput.parameters/return/available = 'false' or $searchTicketOutput.parameters/return/transactionSuccess = 'false']]></bpel:condition>
+                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateTransportOutput.parameters/return/available = 'false' or $searchTicketOutput.parameters/return/transactionSuccess = 'false' or $validateLodgingOutput.parameters/return/lodging2:room/reservationId != 0]]></bpel:condition>
                         <bpel:sequence name="COMPENSATION-FLOW">
 
                             <bpel:flow name="Flow2">
@@ -1121,7 +1337,48 @@
                                 </bpel:sequence>
 
                                 <bpel:sequence name="COMPENSATE_LODGING">
-                                    <bpel:empty name="Empty-compensate"></bpel:empty>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <bpel:if name="If-compensate-lodging">
+                                        <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$validateLodgingOutput.parameters/return/lodging2:room/reservationId != 0]]></bpel:condition>
+                                        <bpel:sequence name="Sequence">
+                                            <bpel:assign validate="no" name="Assign-input">
+                                                <bpel:copy>
+                                                    <bpel:from><bpel:literal><tns:cancelReservation xmlns:tns="http://touresbalon.com.co/task/lodging/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <cancelReservationRequest>
+    <reservationId>0</reservationId>
+  </cancelReservationRequest>
+</tns:cancelReservation>
+</bpel:literal></bpel:from>
+                                                    <bpel:to variable="compLodgingInput" part="parameters"></bpel:to>
+                                                </bpel:copy>
+                                                <bpel:copy>
+                                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        <![CDATA[$validateLodgingOutput.parameters/return/lodging2:room/reservationId]]>
+                                                    </bpel:from>
+                                                    <bpel:to part="parameters" variable="compLodgingInput">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[cancelReservationRequest/reservationId]]></bpel:query>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                            </bpel:assign>
+                                            <bpel:invoke name="InvokeCancelLodging" partnerLink="LodgingWSPartnerLink" operation="cancelReservation" portType="lodging:LodgingPort" inputVariable="compLodgingInput" outputVariable="compLodgingOutput"></bpel:invoke>
+                                        </bpel:sequence>
+                                    </bpel:if>
                                 </bpel:sequence>
                                 <bpel:sequence name="COMPENSATE_SPECTACLE">
 
@@ -1280,36 +1537,36 @@
 
                             <bpel:flow name="PROVISIONING_FLOW">
                                 <bpel:sequence name="PROVISIONING_TRANSPORT">
-                                    <bpel:sequence>
-                                        <bpel:assign validate="no" name="Assign-transport-base">
+                                    
+
+
+                                    <bpel:sequence><bpel:assign validate="no" name="Assign-transport-base">
 
                                             <bpel:copy>
                                                 <bpel:from>
                                                     <bpel:literal>
                                                         <transport:confirmTravel>
-                                                            <orderId/>
+                                                            <orderId />
                                                             <confirmations>
-                                                                <chairNumber/>
-                                                                <firstName/>
-                                                                <lastName/>
-                                                                <outDate/>
-                                                                <provider/>
-                                                                <travelNumber/>
+                                                                <chairNumber />
+                                                                <firstName />
+                                                                <lastName />
+                                                                <outDate />
+                                                                <provider />
+                                                                <travelNumber />
                                                             </confirmations>
                                                         </transport:confirmTravel>
                                                     </bpel:literal>
                                                 </bpel:from>
-                                                <bpel:to variable="confirmTransportInput" part="parameters"/>
+                                                <bpel:to variable="confirmTransportInput" part="parameters" />
                                             </bpel:copy>
 
                                             <bpel:copy>
-                                                <bpel:from
-                                                        expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                     <![CDATA[1000]]>
                                                 </bpel:from>
                                                 <bpel:to part="parameters" variable="confirmTransportInput">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[orderId]]></bpel:query>
                                                 </bpel:to>
                                             </bpel:copy>
@@ -1317,36 +1574,30 @@
                                         </bpel:assign>
                                         <bpel:assign validate="no" name="Assign">
                                             <bpel:copy>
-                                                <bpel:from
-                                                        expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                     <![CDATA[$journal/canonical:stock[ round($counter/counter) ]/transport/chairNumber]]>
                                                 </bpel:from>
                                                 <bpel:to part="parameters" variable="confirmTransportInput">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[confirmations/chairNumber]]></bpel:query>
                                                 </bpel:to>
                                             </bpel:copy>
                                             <bpel:copy>
-                                                <bpel:from
-                                                        expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                     <![CDATA[$journal/canonical:stock[ round($counter/counter) ]/transport/travelNumber]]>
                                                 </bpel:from>
                                                 <bpel:to part="parameters" variable="confirmTransportInput">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[confirmations/travelNumber]]></bpel:query>
                                                 </bpel:to>
                                             </bpel:copy>
                                             <bpel:copy>
                                                 <bpel:from part="payload" variable="input">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[order/custFirstName]]></bpel:query>
                                                 </bpel:from>
                                                 <bpel:to part="parameters" variable="confirmTransportInput">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[confirmations/firstName]]></bpel:query>
                                                 </bpel:to>
                                             </bpel:copy>
@@ -1354,51 +1605,41 @@
 
                                             <bpel:copy>
                                                 <bpel:from part="payload" variable="input">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[order/custLastName]]></bpel:query>
                                                 </bpel:from>
                                                 <bpel:to part="parameters" variable="confirmTransportInput">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[confirmations/lastName]]></bpel:query>
                                                 </bpel:to>
 
                                             </bpel:copy>
                                             <bpel:copy>
-                                                <bpel:from
-                                                        expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                     <![CDATA[$input.payload/order/items[round($counter/counter)]/transport/travelDate]]>
                                                 </bpel:from>
                                                 <bpel:to part="parameters" variable="confirmTransportInput">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[confirmations/outDate]]>
                                                     </bpel:query>
                                                 </bpel:to>
 
                                             </bpel:copy>
                                             <bpel:copy>
-                                                <bpel:from
-                                                        expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                     <![CDATA[$input.payload/order/items[round($counter/counter)]/transport/travelBusinessProvider]]>
                                                 </bpel:from>
                                                 <bpel:to part="parameters" variable="confirmTransportInput">
-                                                    <bpel:query
-                                                            queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                                         <![CDATA[confirmations/provider]]>
                                                     </bpel:query>
                                                 </bpel:to>
                                             </bpel:copy>
                                         </bpel:assign>
-                                        <bpel:invoke name="Invoke-transport-confirmation-package"
-                                                     partnerLink="TransportWSPartnerLink" operation="confirmTravel"
-                                                     portType="transport:TransportWS"
-                                                     inputVariable="confirmTransportInput"></bpel:invoke>
+                                        <bpel:invoke name="Invoke-transport-confirmation-package" partnerLink="TransportWSPartnerLink" operation="confirmTravel" portType="transport:TransportWS" inputVariable="confirmTransportInput"></bpel:invoke>
 
+                                    
                                     </bpel:sequence>
-
-
                                 </bpel:sequence>
 
                                 <bpel:sequence name="PROVISIONING_LODGING">
