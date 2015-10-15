@@ -12,7 +12,6 @@ import java.util.Date;
 @XmlRootElement
 public class TouresbalonReservations {
     private Long reservationId;
-    private Long orderId;
     private Date checkInDate;
     private Date checkOutDate;
     private Long state;
@@ -20,10 +19,9 @@ public class TouresbalonReservations {
     private Long hotelId;
     private Long roomNumber;
 
-    public TouresbalonReservations(Long reservationId, Long orderId, Date checkInDate, Date checkOutDate,
+    public TouresbalonReservations(Long reservationId, Date checkInDate, Date checkOutDate,
                                    String guestName, Long hotelId, Long roomNumber) {
         this.reservationId = reservationId;
-        this.orderId = orderId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.guestName = guestName;
@@ -44,16 +42,6 @@ public class TouresbalonReservations {
 
     public void setReservationId(Long reservationId) {
         this.reservationId = reservationId;
-    }
-
-    @Basic
-    @Column(name = "ORDER_ID")
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
     }
 
     @Basic
@@ -105,7 +93,6 @@ public class TouresbalonReservations {
 
         if (reservationId != null ? !reservationId.equals(that.reservationId) : that.reservationId != null)
             return false;
-        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
         if (checkInDate != null ? !checkInDate.equals(that.checkInDate) : that.checkInDate != null) return false;
         if (checkOutDate != null ? !checkOutDate.equals(that.checkOutDate) : that.checkOutDate != null) return false;
         if (state != null ? !state.equals(that.state) : that.state != null) return false;
@@ -116,7 +103,6 @@ public class TouresbalonReservations {
     @Override
     public int hashCode() {
         int result = reservationId != null ? reservationId.hashCode() : 0;
-        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
         result = 31 * result + (checkInDate != null ? checkInDate.hashCode() : 0);
         result = 31 * result + (checkOutDate != null ? checkOutDate.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);

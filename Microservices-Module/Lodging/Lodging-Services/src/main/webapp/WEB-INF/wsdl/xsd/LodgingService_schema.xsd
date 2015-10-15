@@ -14,6 +14,7 @@
             <xs:element name="checkIn" type="xs:date" />
             <xs:element name="checkOut" type="xs:date" />
             <xs:element name="city" type="xs:string" />
+            <xs:element name="guestName" type="xs:string" />
         </xs:sequence>
     </xs:complexType>
 

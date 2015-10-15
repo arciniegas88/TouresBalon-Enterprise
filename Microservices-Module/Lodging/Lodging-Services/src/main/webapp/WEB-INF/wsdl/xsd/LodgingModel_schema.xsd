@@ -27,6 +27,7 @@
         <xs:sequence>
             <xs:element name="roomNumber" type="xs:long" />
             <xs:element name="hotelId" type="xs:long" />
+            <xs:element name="reservationId" type="xs:long" />
             <xs:element name="type" type="xs:string" />
             <xs:element name="price" type="xs:string" />
         </xs:sequence>
@@ -36,7 +37,6 @@
     <xs:complexType name="TouresBalonReservation">
         <xs:sequence>
             <xs:element name="reservationId" type="xs:long" />
-            <xs:element name="orderId" type="xs:long" />
             <xs:element name="checkIn" type="xs:date" />
             <xs:element name="checkOut" type="xs:date" />
             <xs:element name="state" type="xs:long" />
