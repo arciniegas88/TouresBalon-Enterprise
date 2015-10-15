@@ -41,7 +41,6 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TouresBalonReservation", namespace = "http://touresbalon.com.co/model/lodging/schema/v1", propOrder = {
     "reservationId",
-    "orderId",
     "checkIn",
     "checkOut",
     "state",
@@ -52,7 +51,6 @@ import java.util.Date;
 public class TouresBalonReservation {
 
     protected long reservationId;
-    protected long orderId;
     @XmlElement(required = true)
     @XmlSchemaType(name = "date")
     protected Date checkIn;
@@ -69,7 +67,6 @@ public class TouresBalonReservation {
 
     public TouresBalonReservation(TouresbalonReservations reservations){
         this.reservationId = reservations.getReservationId();
-        this.orderId = reservations.getOrderId();
         this.checkIn = reservations.getCheckInDate();
         this.checkOut = reservations.getCheckOutDate();
         this.state = reservations.getState();
@@ -91,22 +88,6 @@ public class TouresBalonReservation {
      */
     public void setReservationId(long value) {
         this.reservationId = value;
-    }
-
-    /**
-     * Gets the value of the orderId property.
-     * 
-     */
-    public long getOrderId() {
-        return orderId;
-    }
-
-    /**
-     * Sets the value of the orderId property.
-     * 
-     */
-    public void setOrderId(long value) {
-        this.orderId = value;
     }
 
     /**

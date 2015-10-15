@@ -71,7 +71,7 @@ public class LodgingBoundary {
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Lock(LockType.WRITE)
-    public TouresbalonReservations doReservation(Long orderId, Long hotelId, Long roomNumber, String guestName, Date checkIn, Date checkOut)
+    public TouresbalonReservations doReservation(Long hotelId, Long roomNumber, String guestName, Date checkIn, Date checkOut)
             throws FaultMsg {
 
         TouresbalonReservations reservation;
@@ -81,7 +81,7 @@ public class LodgingBoundary {
 
             Long reservationId = this.getReservationId();
 
-            reservation = new TouresbalonReservations(reservationId, orderId, checkIn, checkOut, guestName, hotelId,
+            reservation = new TouresbalonReservations(reservationId, checkIn, checkOut, guestName, hotelId,
                     roomNumber);
 
             em.persist(reservation);

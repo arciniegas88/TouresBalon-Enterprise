@@ -18,6 +18,8 @@
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/EIS-Module.iml" filepath="$PROJECT_DIR$/EIS-Module/EIS-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/ESB-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/ESB-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging.iml" filepath="$PROJECT_DIR$/Microservices-Module/Lodging/Lodging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Lodging-Proxy-Service.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Lodging-Proxy-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Lodging-Proxy-Services/Lodging-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Lodging-Proxy-Services/Lodging-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services/Lodging-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services/Lodging-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" filepath="$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/Middleware-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/Middleware-Module.iml" />

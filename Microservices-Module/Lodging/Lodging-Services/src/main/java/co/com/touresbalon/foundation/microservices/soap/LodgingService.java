@@ -31,7 +31,7 @@ public class LodgingService{
         co.com.touresbalon.foundation.microservices.entity.Room room = boundary.consultRoomsAvailability(body.getCheckIn(),
                 body.getCheckOut(), body.getHotelBrand(), body.getCity());
 
-        TouresbalonReservations reservation = boundary.doReservation(new Long(0), room.getHotelId(), room.getRoomNumber(), body.getGuestName(), body.getCheckIn(), body.getCheckOut());
+        TouresbalonReservations reservation = boundary.doReservation(room.getHotelId(), room.getRoomNumber(), body.getGuestName(), body.getCheckIn(), body.getCheckOut());
 
         Room roomType = new Room();
         roomType.setHotelId(room.getHotelId());
@@ -50,7 +50,7 @@ public class LodgingService{
             @WebParam(name = "doReservationRequest")
             DoReservationReqType body) throws FaultMsg {
 
-        TouresbalonReservations reservation = boundary.doReservation(body.getOrderId(), body.getHotelId(), body.getRoom(), body.getGuestName(),
+        TouresbalonReservations reservation = boundary.doReservation(body.getHotelId(), body.getRoom(), body.getGuestName(),
                 body.getCheckIn(), body.getCheckOut());
 
         TouresBalonReservation reservationType = new TouresBalonReservation(reservation);
