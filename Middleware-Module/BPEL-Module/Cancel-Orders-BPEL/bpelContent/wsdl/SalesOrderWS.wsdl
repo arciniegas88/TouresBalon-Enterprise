@@ -1,8 +1,8 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
-	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
-	name="SalesOrderWSService" targetNamespace="http://touresbalon.com.co/salesorder/service/task/1.0.0">
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="SalesOrderWSService"
+	targetNamespace="http://touresbalon.com.co/salesorder/service/task/1.0.0">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 			xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
@@ -46,7 +46,8 @@
 						type="xs:dateTime" />
 					<xs:element minOccurs="0" name="transportTravelNumber"
 						type="xs:string" />
-					<xs:element minOccurs="0" name="transportTravelProvider" type="xs:string"/>	
+					<xs:element minOccurs="0" name="transportTravelProvider"
+						type="xs:string" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="salesOrder">
@@ -119,12 +120,12 @@
 	<wsdl:message name="searchSalesOrderById">
 		<wsdl:part element="tns:searchSalesOrderById" name="parameters"></wsdl:part>
 	</wsdl:message>
-	
-	<!-- Definicion de partnerLinkType  -->
+
+	<!-- Definicion de partnerLinkType -->
 	<plnk:partnerLinkType name="SalesOrderWS_PLT">
 		<plnk:role name="SalesOrderWS_Role" portType="tns:SalesOrderWS" />
 	</plnk:partnerLinkType>
-	
+
 	<wsdl:portType name="SalesOrderWS">
 		<wsdl:operation name="updateItem">
 			<wsdl:input message="tns:updateItem" name="updateItem"></wsdl:input>

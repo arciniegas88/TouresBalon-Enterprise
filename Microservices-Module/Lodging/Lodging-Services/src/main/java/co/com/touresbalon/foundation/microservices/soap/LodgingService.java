@@ -18,41 +18,36 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * Created by harcalejo on 2/10/15.
  */
 @WebService(name = "LodgingPort", targetNamespace = "http://touresbalon.com.co/task/lodging/v1")
-@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
-@XmlSeeAlso({
-        ObjectFactory.class
-})
-public class LodgingService implements LodgingPort {
+public class LodgingService{
 
     @Inject
     private LodgingBoundary boundary;
 
-    @Override
-    @WebMethod
-    @WebResult(name = "availabilityResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
-    public AvailabilityResType consultRoomsAvailability(@WebParam(name = "availabilityRequest",
-            targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+    @WebMethod(operationName = "consultRoomsAvailability", action = "consultRoomsAvailability")
+    public AvailabilityResType consultRoomsAvailability(@WebParam(name = "availabilityRequest")
                                                         AvailabilityReqType body) throws FaultMsg {
         AvailabilityResType response = new AvailabilityResType();
 
         co.com.touresbalon.foundation.microservices.entity.Room room = boundary.consultRoomsAvailability(body.getCheckIn(),
                 body.getCheckOut(), body.getHotelBrand(), body.getCity());
+
+        TouresbalonReservations reservation = boundary.doReservation(new Long(0), room.getHotelId(), room.getRoomNumber(), body.getGuestName(), body.getCheckIn(), body.getCheckOut());
+
         Room roomType = new Room();
         roomType.setHotelId(room.getHotelId());
         roomType.setPrice(room.getPrice());
         roomType.setRoomNumber(room.getRoomNumber());
         roomType.setType(room.getType());
+        roomType.setReservationId(reservation.getReservationId());
 
         response.setRoom(roomType);
 
         return response;
     }
 
-    @Override
-    @WebMethod
-    @WebResult(name = "doReservationResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+    @WebMethod(operationName = "doReservation", action = "doReservation")
     public DoReservationResType doReservation(
-            @WebParam(name = "doReservationRequest", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+            @WebParam(name = "doReservationRequest")
             DoReservationReqType body) throws FaultMsg {
 
         TouresbalonReservations reservation = boundary.doReservation(body.getOrderId(), body.getHotelId(), body.getRoom(), body.getGuestName(),
@@ -65,11 +60,9 @@ public class LodgingService implements LodgingPort {
         return response;
     }
 
-    @Override
-    @WebMethod
-    @WebResult(name = "confirmReservationResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+    @WebMethod(operationName = "confirmReservation", action = "confirmReservation")
     public ConfirmReservationResType confirmReservation(
-            @WebParam(name = "confirmReservationRequest", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+            @WebParam(name = "confirmReservationRequest")
             ConfirmReservationReqType body)
             throws FaultMsg {
 
@@ -79,11 +72,9 @@ public class LodgingService implements LodgingPort {
         return response;
     }
 
-    @Override
-    @WebMethod
-    @WebResult(name = "cancelReservationResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+    @WebMethod(operationName = "cancelReservation", action = "cancelReservation")
     public CancelReservationResType cancelReservation(
-            @WebParam(name = "cancelReservationRequest", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+            @WebParam(name = "cancelReservationRequest")
             CancelReservationReqType body)
             throws FaultMsg {
 
@@ -93,11 +84,9 @@ public class LodgingService implements LodgingPort {
         return response;
     }
 
-    @Override
-    @WebMethod
-    @WebResult(name = "getReservationResponse", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+    @WebMethod(operationName = "getReservation", action = "getReservation")
     public GetReservationResType getReservation(
-            @WebParam(name = "getReservationRequest", targetNamespace = "http://touresbalon.com.co/task/lodging/schema/v1", partName = "body")
+            @WebParam(name = "getReservationRequest")
             GetReservationReqType body)
             throws FaultMsg{
 

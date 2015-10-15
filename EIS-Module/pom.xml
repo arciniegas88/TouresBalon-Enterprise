@@ -15,6 +15,5 @@
     <modules>
         <module>CreditCardWS</module>
         <module>SpectaclesWS</module>
-        <module>HiltonBookingWS</module>
     </modules>
 </project>

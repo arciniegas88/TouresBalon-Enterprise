@@ -144,7 +144,7 @@ public class ProductBoundary {
 
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<String> findEspectaclesRealedToProducts( List<String> products ) throws SystemException {
+    public List<String> findSpectaclesRealedToProducts( List<String> products ) throws SystemException {
 
         try {
             return em.createNamedQuery("Product.findEspectaclesRelatedToProducts")

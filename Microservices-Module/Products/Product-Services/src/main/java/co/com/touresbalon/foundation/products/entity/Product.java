@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
         @NamedQuery(name = "Product.findByName",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
-                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate ,p.imageRef, p.price, p.spectacleType.name) FROM Product p " +
+                        "p.code, p.arrivalDate, p.departureDate ,p.imageRef, p.price, p.spectacleType.name) FROM Product p " +
                         "WHERE TRIM(p.name) = TRIM(:NAME) ",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findEspectaclesRelatedToProducts",
@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlRootElement;
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findAll",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
-                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate ,p.imageRef, p.price, p.spectacleType.name) FROM Product p ",
+                        "p.code, p.arrivalDate, p.departureDate ,p.imageRef, p.price, p.spectacleType.name) FROM Product p ",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findAllByCriteria",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
-                        "p.code, p.spectacleDate, p.arrivalDate, p.departureDate, p.imageRef, p.price,p.spectacleType.name) FROM Product p WHERE " +
+                        "p.code, p.arrivalDate, p.departureDate, p.imageRef, p.price,p.spectacleType.name) FROM Product p WHERE " +
                         "TRIM(p.code) = TRIM(:CODE) OR LOWER(p.name) LIKE TRIM(LOWER(:NAME)) OR " +
                         "LOWER(p.description) LIKE TRIM(LOWER(:DESCRIPTION)) OR " +
                         "LOWER( p.spectacleType.name ) LIKE TRIM( LOWER(:SPECT_NAME) )",
@@ -68,10 +68,6 @@ public class Product implements Serializable {
 
     @Column(name = "code")
     private String code;
-
-    @Column(name = "spectacle_date")
-    @Temporal(TemporalType.DATE)
-    private Date spectacleDate;
 
     @Column(name = "arrival_date")
     @Temporal(TemporalType.DATE)
@@ -111,14 +107,13 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, String code, Date spectacleDate,
+    public Product(Long id, String name, String description, String code,
                    Date arrivalDate, Date departureDate , byte[] imageRef, Long price,
                    String spectacleName) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.code = code;
-        this.spectacleDate = spectacleDate;
         this.arrivalDate = arrivalDate;
         this.departureDate = departureDate;
         this.imageRef = imageRef;
@@ -153,14 +148,6 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getSpectacleDate() {
-        return spectacleDate;
-    }
-
-    public void setSpectacleDate(Date spectacleDate) {
-        this.spectacleDate = spectacleDate;
     }
 
     public Date getArrivalDate() {

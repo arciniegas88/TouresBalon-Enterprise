@@ -95,7 +95,7 @@ public class ProductResource {
     public CollectionWrapper getRankingSoldOrders( CollectionWrapper request ) throws SystemException {
 
         CollectionWrapper wrapper = new CollectionWrapper();
-        wrapper.setData( boundary.findEspectaclesRealedToProducts( request.getData() ) );
+        wrapper.setData( boundary.findSpectaclesRealedToProducts( request.getData() ) );
 
         return wrapper;
     }

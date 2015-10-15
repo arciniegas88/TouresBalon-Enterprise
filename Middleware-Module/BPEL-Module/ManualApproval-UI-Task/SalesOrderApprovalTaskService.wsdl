@@ -92,7 +92,7 @@
 
     <wsdl:service name="ClaimServiceCB">
 		<wsdl:port name="ClaimPortCB" binding="tns:ClaimSoapBindingCB">
-			<soap:address location="http://localhost:9766/services/ClaimServiceCB" />
+			<soap:address location="http://localhost:9763/services/ClaimServiceCB" />
 		</wsdl:port>
     </wsdl:service>
 
