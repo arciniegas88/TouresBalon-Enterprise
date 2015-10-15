@@ -102,7 +102,7 @@
         <!-- create products -->
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products?restletMethod=POST"/>
-            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products?restletMethod=POST"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products?restletMethod=POST&amp;throwExceptionOnFailure=false"/>
         </camel:route>
 
     </camelContext>

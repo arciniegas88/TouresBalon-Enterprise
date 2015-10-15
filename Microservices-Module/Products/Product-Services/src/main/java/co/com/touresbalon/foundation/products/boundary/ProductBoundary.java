@@ -2,6 +2,7 @@ package co.com.touresbalon.foundation.products.boundary;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+import co.com.touresbalon.foundation.crosscutting.exceptions.BusinessException;
 import co.com.touresbalon.foundation.crosscutting.exceptions.ExceptionBuilder;
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import org.slf4j.Logger;
@@ -36,6 +37,31 @@ public class ProductBoundary {
     private EntityManager em;
 
     public ProductBoundary() {
+    }
+
+
+    // [method] -----------------------------
+
+    public void createProduct( Product product )throws BusinessException, SystemException{
+
+        try {
+            Long total = em.createNamedQuery("Product.countProductsByCode", Long.class)
+                    .setParameter("CODE", product.getCode())
+                    .getSingleResult();
+
+            if (total > 0) {
+                logger.error(exceptionBuilder.getMessage("microservices.products.duplicatedcode") + ": " + product.getCode());
+                throw exceptionBuilder.buildBusinessException("microservices.products.duplicatedcode");
+            }
+
+            em.persist(product);
+
+        }catch (BusinessException b){
+            throw b;
+        }catch (Throwable enf){
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
     }
 
     // [method] -----------------------------

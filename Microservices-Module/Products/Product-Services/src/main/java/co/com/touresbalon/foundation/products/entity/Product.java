@@ -19,6 +19,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
+        @NamedQuery(name = "Product.countProductsByCode",
+                query = "SELECT count(p) FROM Product p WHERE p.code = :CODE",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "Product.findByName",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Product(p.id, p.name, p.description," +
                         "p.code, p.arrivalDate, p.departureDate ,p.imageRef, p.price, p.spectacleType.name) FROM Product p " +
@@ -51,6 +54,8 @@ import javax.xml.bind.annotation.XmlRootElement;
                         "LOWER( p.spectacleType.name ) LIKE TRIM( LOWER(:SPECT_NAME) )",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
+@TableGenerator(name="PRODUCT_SEQ_GEN",table="virtual_sequences", pkColumnName="gen_key", valueColumnName="gen_value",
+                pkColumnValue="PRODUCT_SEQ",allocationSize=1)
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,6 +63,7 @@ public class Product implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "Id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCT_SEQ_GEN")
     private Long id;
 
     @Column(name = "name")

@@ -102,8 +102,8 @@ public class ProductResource {
 
     @POST
     @Consumes({MediaType.APPLICATION_XML})
-    public void createProduct( Product product )throws SystemException,BusinessException{
-
+    public void createProduct( Product product )throws BusinessException, SystemException{
+        boundary.createProduct( product );
     }
 
 }

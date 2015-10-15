@@ -111,6 +111,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
       </profile>
+      <profile default="false" name="Annotation profile for Security-Proxy-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Security-Proxy-Services" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -143,6 +150,7 @@
       <module name="Product-Proxy-Services" target="1.7" />
       <module name="Product-Services" target="1.7" />
       <module name="Products" target="1.5" />
+      <module name="Security-Proxy-Services" target="1.7" />
       <module name="SpectaclesWS" target="1.7" />
       <module name="TouresBalon-Enterprise" target="1.5" />
       <module name="Transport-Services" target="1.7" />

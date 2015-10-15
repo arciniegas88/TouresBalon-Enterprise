@@ -5,6 +5,7 @@ import co.com.touresbalon.foundation.oms.domain.products.*;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +36,8 @@ public class AdminProductsModel implements Serializable{
 
     public void cleanModel(){
         product = new Product();
+        product.setArrivalDate( new Date());
+        product.setDepartureDate( new Date());
         product.setLodgingType(new Lodging());
         product.setSourceCity(new City());
         product.setTargetCity(new City());

@@ -32,6 +32,7 @@
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services/Product-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services/Product-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services/Product-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Products/Product-Services/Product-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Products/Products.iml" filepath="$PROJECT_DIR$/Microservices-Module/Products/Products.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Security-Proxy-Services/Security-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Security-Proxy-Services/Security-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/SpectaclesWS/SpectaclesWS.iml" filepath="$PROJECT_DIR$/EIS-Module/SpectaclesWS/SpectaclesWS.iml" />
       <module fileurl="file://$PROJECT_DIR$/TouresBalon-Enterprise.iml" filepath="$PROJECT_DIR$/TouresBalon-Enterprise.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services/Transport-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services/Transport-Services.iml" />
