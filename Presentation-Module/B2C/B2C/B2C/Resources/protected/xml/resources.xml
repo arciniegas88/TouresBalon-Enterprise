@@ -8,13 +8,13 @@
       </serviceAgent>
       <serviceAgent name="getOrdersCustomer" location="http://localhost:9495/esb/services/web-api/orders/customerOrders?">
       </serviceAgent>
-      <serviceAgent name="getProduct" location="http://localhost:9494/esb/services/web-api/products/">
+      <serviceAgent name="getProduct" location="http://localhost:9496/esb/services/web-api/products/">
       </serviceAgent>
-      <serviceAgent name="getProducts" location="http://localhost:9494/esb/services/web-api/products?">
+      <serviceAgent name="getProducts" location="http://localhost:9496/esb/services/web-api/products?">
       </serviceAgent>
-      <serviceAgent name="getTotalProducts" location="http://localhost:9494/esb/services/web-api/products/count?">
+      <serviceAgent name="getTotalProducts" location="http://localhost:9496/esb/services/web-api/products/count?">
       </serviceAgent>
-      <serviceAgent name="getCampigns" location="http://localhost:9494/esb/services/web-api/campaigns">
+      <serviceAgent name="getCampigns" location="http://localhost:9496/esb/services/web-api/campaigns">
       </serviceAgent>
       <serviceAgent name="getTopFive" location="http://localhost:9495/esb/services/web-api/orders/topItems/">
       </serviceAgent>
