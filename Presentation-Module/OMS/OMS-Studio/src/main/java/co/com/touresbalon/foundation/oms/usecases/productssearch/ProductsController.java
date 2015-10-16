@@ -1,7 +1,13 @@
 package co.com.touresbalon.foundation.oms.usecases.productssearch;
 
+import co.com.touresbalon.foundation.oms.domain.products.City;
+import co.com.touresbalon.foundation.oms.domain.products.Product;
+import co.com.touresbalon.foundation.oms.exceptions.BusinessException;
+import co.com.touresbalon.foundation.oms.exceptions.SystemException;
 import co.com.touresbalon.foundation.oms.facades.OrdersFacade;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
+import co.com.touresbalon.foundation.oms.usecases.portal.PortalController;
+import co.com.touresbalon.foundation.oms.usecases.productadmin.AdminProductsModel;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
@@ -13,6 +19,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -28,23 +35,65 @@ public class ProductsController {
     @Inject
     private ProductsModel model;
     @Inject
+    private AdminProductsModel adminProductsModel;
+    @Inject
     private ProductsFacade facade;
     @Inject
     private OrdersFacade ordersFacade;
 
     //[action] ------------------
+
     public void showProductLinkDetail( String product  ) {
         model.setProduct( facade.searchProductByName( product ) );
-        showProductDetail();
+        showProductDetail( model.getProduct() );
+    }
+
+    //[action] ------------------
+
+    public void updateProduct( Product product ){
+
+        adminProductsModel.setCreationFlow(false);
+        adminProductsModel.cleanModel();
+        adminProductsModel.setCountries(facade.getCountries());
+        List<City> cityList = facade.getCitiesByContry( adminProductsModel.getCountries().get(0).getId() );
+        adminProductsModel.setSourceCities(cityList);
+        adminProductsModel.setTargetCities(cityList);
+        adminProductsModel.setTransports(facade.getTransports());
+        adminProductsModel.setLodgings(facade.getLodging());
+        adminProductsModel.setSpectacles(facade.getSpectacles());
+
+        adminProductsModel.setProduct( facade.searchProduct( product.getId() ) );
+
+        RequestContext.getCurrentInstance().execute( "window.location.href='"+ PortalController.PRODUCTS_ADMIN_PAGE+"';" );
     }
 
 
     //[action] ------------------
-    public void showProductDetail() {
+
+    public String deleteProduct( Product product ){
 
         try {
 
-            BufferedInputStream in = new BufferedInputStream(new ByteArrayInputStream(model.getProduct().getImageRef()));
+            facade.deleteProduct( product.getId() );
+            util.addInfoMessage("El producto se ha eliminado con éxito");
+
+        } catch (SystemException e) {
+            util.addErrorMessage( e.getMessage() );
+        } catch (BusinessException e) {
+            util.addErrorMessage(e.getMessage());
+        }
+
+        return "";
+    }
+
+    //[action] ------------------
+
+    public void showProductDetail( Product product ) {
+
+        try {
+
+            model.setProduct( facade.searchProduct( product.getId() ) );
+            BufferedInputStream in = new BufferedInputStream(new ByteArrayInputStream(product.getImageRef()));
             ByteArrayOutputStream out = new ByteArrayOutputStream();
 
             int val = -1;

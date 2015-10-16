@@ -100,10 +100,31 @@ public class ProductResource {
         return wrapper;
     }
 
+
+    // [creation service] -------------------------------
+
     @POST
     @Consumes({MediaType.APPLICATION_XML})
-    public void createProduct( Product product )throws BusinessException, SystemException{
-        boundary.createProduct( product );
+    public void createProduct( Product product ) throws BusinessException, SystemException{
+        boundary.createProduct(product);
+    }
+
+
+    // [delete service] -------------------------------
+
+    @DELETE
+    @Path("/{id}")
+    public void deleteProduct( @PathParam("id") Long id ) throws SystemException{
+        boundary.deleteProduct(id);
+    }
+
+
+    // [update service] -------------------------------
+
+    @PUT
+    @Consumes({MediaType.APPLICATION_XML})
+    public void updateProduct( Product product ) throws SystemException{
+        boundary.updateProduct( product );
     }
 
 }

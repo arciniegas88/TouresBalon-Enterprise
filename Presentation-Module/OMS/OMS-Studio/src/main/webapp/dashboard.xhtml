@@ -12,6 +12,8 @@
     <ui:define name="content">
 
         <h:form>
+
+        <p:growl showDetail="true" showSummary="false"/>
         <p:remoteCommand name="searchProductsAction" update="@form" action="#{portalController.searchProductsAction()}"/>
         <p:remoteCommand name="productsAdminAction" update="@form" action="#{portalController.productsAdminAction}"/>
 

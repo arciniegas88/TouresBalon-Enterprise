@@ -108,4 +108,22 @@ public class ProductsFacade {
         }
     }
 
+    public void updateProduct( Product p ) throws SystemException, BusinessException{
+
+        try {
+            productsWC.updateProduct( p );
+        } catch (WebApplicationException ex) {
+            ExceptionMapper.mapRemoteException(ex);
+        }
+    }
+
+    public void deleteProduct( Long productId ) throws SystemException, BusinessException{
+
+        try {
+            productsWC.deleteProduct( productId );
+        } catch (WebApplicationException ex) {
+            ExceptionMapper.mapRemoteException(ex);
+        }
+    }
+
 }

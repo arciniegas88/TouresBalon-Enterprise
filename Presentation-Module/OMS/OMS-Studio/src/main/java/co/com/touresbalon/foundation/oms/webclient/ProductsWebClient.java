@@ -67,4 +67,16 @@ public interface ProductsWebClient {
     @Produces({MediaType.APPLICATION_XML})
     void createProduct( Product product ) throws BusinessException, SystemException;
 
+
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes({MediaType.APPLICATION_XML})
+    void deleteProduct( @PathParam("id") Long id )throws BusinessException,SystemException;
+
+
+    @PUT
+    @Produces({MediaType.APPLICATION_XML})
+    void updateProduct( Product product ) throws SystemException;
+
 }

@@ -19,6 +19,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
+        @NamedQuery(name = "Product.update",
+                query = "UPDATE Product p SET p.arrivalDate = :ARRIVAL_DATE, p.departureDate = :DEPARTURE_DATE, " +
+                        "p.description = :DESCRIPTION, p.imageRef = :IMAGE_REF, p.lodgingType = :LODGING, p.spectacleType = :SPECTACLE," +
+                        "p.transportType = :TRANSPORT, p.sourceCity = :SOURCE_CITY, p.targetCity = :TARGET_CITY, " +
+                        "p.price = :PRICE WHERE p.id = :ID"),
+        @NamedQuery(name = "Product.countProductsByName",
+                    query = "SELECT count(p) FROM Product p WHERE LOWER( TRIM(p.name) ) = LOWER(TRIM(:NAME))"),
+        @NamedQuery(name = "Product.delete",
+                query = "DELETE FROM Product p WHERE p.id = :ID"),
         @NamedQuery(name = "Product.countProductsByCode",
                 query = "SELECT count(p) FROM Product p WHERE p.code = :CODE",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),

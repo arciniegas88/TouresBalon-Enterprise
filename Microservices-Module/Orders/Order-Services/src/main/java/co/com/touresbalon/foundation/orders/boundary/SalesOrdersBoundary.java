@@ -42,10 +42,25 @@ public class SalesOrdersBoundary {
     public SalesOrdersBoundary() {
     }
 
-    public void changeSalesOrderStatus( SalesOrder so ){
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public Long countTotalProductOccurrences(Long productId)throws SystemException{
+
+        try {
+
+            return em.createNamedQuery("OrderItem.getProductTotalOcurrences", Long.class)
+                    .setParameter("PRODUCT", productId)
+                    .getSingleResult();
+
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    public void changeSalesOrderStatus(SalesOrder so) {
 
         em.createNamedQuery("SalesOrder.changeStatus")
-                .setParameter("STATUS",so.getStatus())
+                .setParameter("STATUS", so.getStatus())
                 .setParameter("COMMENTS", so.getComments())
                 .setParameter("ID", so.getId())
                 .executeUpdate();
@@ -53,18 +68,18 @@ public class SalesOrdersBoundary {
         em.flush();
     }
 
-    public Long createSalesOrder( SalesOrder so, List<OrderItem> ois)throws SystemException{
+    public Long createSalesOrder(SalesOrder so, List<OrderItem> ois) throws SystemException {
 
         so.setOrderDate(new Date());
-        em.persist( so );
+        em.persist(so);
 
         int productNumber = 1;
 
-        if( ois != null ){
-            for( OrderItem oi: ois ){
-                oi.setOrderId( so );
+        if (ois != null) {
+            for (OrderItem oi : ois) {
+                oi.setOrderId(so);
                 oi.setItemNo(String.valueOf(productNumber++));
-                em.persist( oi );
+                em.persist(oi);
             }
         }
 
@@ -72,36 +87,36 @@ public class SalesOrdersBoundary {
         return so.getId();
     }
 
-    public void updateItem( OrderItem oi ){
+    public void updateItem(OrderItem oi) {
 
-        String itemNo = String.valueOf( new Double(oi.getItemNo()).intValue() );
+        String itemNo = String.valueOf(new Double(oi.getItemNo()).intValue());
 
         oi.setSpectacleId(oi.getSpectacleId() != null && oi.getSpectacleId() < 0 ? null : oi.getSpectacleId());
         oi.setSpectacleTicket(oi.getSpectacleTicket() != null && oi.getSpectacleTicket() < 0 ? null : oi.getSpectacleTicket());
 
-        if( oi.getTransportTravelDate() != null ){
+        if (oi.getTransportTravelDate() != null) {
             Calendar c = Calendar.getInstance();
-            c.setTime( oi.getTransportTravelDate() );
+            c.setTime(oi.getTransportTravelDate());
 
-            if( c.get( Calendar.YEAR ) == 2000 )
-                oi.setTransportTravelDate( null );
+            if (c.get(Calendar.YEAR) == 2000)
+                oi.setTransportTravelDate(null);
         }
 
         em.createNamedQuery("OrderItem.update")
                 .setParameter("STATUS", oi.getStatus())
-                .setParameter("TRANSPORT_COMMENTS",oi.getTransportComments())
-                .setParameter("TRANSPORT_TRAVEL_DATE",oi.getTransportTravelDate())
-                .setParameter("TRANSPORT_SOURCE_CITY",oi.getTransportSourceCity())
-                .setParameter("TRANSPORT_TARGET_CITY",oi.getTransportTargetCity())
-                .setParameter("TRANSPORT_TRAVEL_NUMBER",oi.getTransportTravelNumber())
-                .setParameter("TRANSPORT_CHAIR_NUMBER",oi.getTransportChairNumber())
-                .setParameter("TRANSPORT_OUT_TIME",oi.getTransportOutTime())
-                .setParameter("SPECTACLE_COMMENTS",oi.getSpectacleComments())
-                .setParameter("SPECTACLE_ID",oi.getSpectacleId())
-                .setParameter("SPECTACLE_TICKET",oi.getSpectacleTicket())
-                .setParameter("LODGING_COMMENTS",oi.getLodgingComments())
-                .setParameter("ORDER_ID",oi.getOrderId().getId())
-                .setParameter("ITEM_NO",itemNo)
+                .setParameter("TRANSPORT_COMMENTS", oi.getTransportComments())
+                .setParameter("TRANSPORT_TRAVEL_DATE", oi.getTransportTravelDate())
+                .setParameter("TRANSPORT_SOURCE_CITY", oi.getTransportSourceCity())
+                .setParameter("TRANSPORT_TARGET_CITY", oi.getTransportTargetCity())
+                .setParameter("TRANSPORT_TRAVEL_NUMBER", oi.getTransportTravelNumber())
+                .setParameter("TRANSPORT_CHAIR_NUMBER", oi.getTransportChairNumber())
+                .setParameter("TRANSPORT_OUT_TIME", oi.getTransportOutTime())
+                .setParameter("SPECTACLE_COMMENTS", oi.getSpectacleComments())
+                .setParameter("SPECTACLE_ID", oi.getSpectacleId())
+                .setParameter("SPECTACLE_TICKET", oi.getSpectacleTicket())
+                .setParameter("LODGING_COMMENTS", oi.getLodgingComments())
+                .setParameter("ORDER_ID", oi.getOrderId().getId())
+                .setParameter("ITEM_NO", itemNo)
                 .executeUpdate();
 
     }
@@ -142,7 +157,7 @@ public class SalesOrdersBoundary {
             return em.createNamedQuery("SalesOrder.ByCustomer", SalesOrder.class)
                     .setParameter("TYPE_DOCUMENT", typeDocument)
                     .setParameter("NUMBER_DOCUMENT", numberDocument)
-                    .setParameter("STATUS", SalesOrderStatus.IN_VALIDATION.toString() )
+                    .setParameter("STATUS", SalesOrderStatus.IN_VALIDATION.toString())
                     .getResultList();
 
         } catch (Throwable enf) {
@@ -188,21 +203,21 @@ public class SalesOrdersBoundary {
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<String> getRankingSoldProducts( String startOrderDate, String endOrderDate )throws SystemException{
+    public List<String> getRankingSoldProducts(String startOrderDate, String endOrderDate) throws SystemException {
 
-        try{
+        try {
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
             List<Object[]> data = em.createNamedQuery("OrderItem.getProductRanking")
-                                    .setParameter("ORDER_START_DATE", sdf.parse(startOrderDate), TemporalType.DATE)
-                                    .setParameter("ORDER_END_DATE",  sdf.parse(endOrderDate), TemporalType.DATE)
-                                    .getResultList();
+                    .setParameter("ORDER_START_DATE", sdf.parse(startOrderDate), TemporalType.DATE)
+                    .setParameter("ORDER_END_DATE", sdf.parse(endOrderDate), TemporalType.DATE)
+                    .getResultList();
 
             List<String> ranking = new ArrayList<>();
 
-            for( Object[] row : data ){
-                ranking.add( row[0] .toString());
+            for (Object[] row : data) {
+                ranking.add(row[0].toString());
             }
 
             return ranking;
@@ -214,15 +229,15 @@ public class SalesOrdersBoundary {
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public SalesOrder searchSalesOrderById (Long salesOrderId) throws SystemException{
+    public SalesOrder searchSalesOrderById(Long salesOrderId) throws SystemException {
         try {
-            SalesOrder salesOrder= em.createNamedQuery("SalesOrder.ById", SalesOrder.class)
+            SalesOrder salesOrder = em.createNamedQuery("SalesOrder.ById", SalesOrder.class)
                     .setParameter("ID_SALES_ORDER", salesOrderId)
                     .getSingleResult();
-            salesOrder.setOrderItemList(em.createNamedQuery("OrderItem.getOrderItems",OrderItem.class)
-                                          .setParameter("ID_SALES_ORDER", salesOrderId)
-                                          .getResultList());
-            return  salesOrder;
+            salesOrder.setOrderItemList(em.createNamedQuery("OrderItem.getOrderItems", OrderItem.class)
+                    .setParameter("ID_SALES_ORDER", salesOrderId)
+                    .getResultList());
+            return salesOrder;
 
         } catch (Throwable enf) {
             logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);

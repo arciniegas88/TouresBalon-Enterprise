@@ -4,7 +4,9 @@ import co.com.touresbalon.foundation.oms.domain.products.Product;
 import co.com.touresbalon.foundation.oms.exceptions.BusinessException;
 import co.com.touresbalon.foundation.oms.exceptions.SystemException;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
+import co.com.touresbalon.foundation.oms.usecases.portal.PortalController;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 
 import javax.enterprise.context.RequestScoped;
@@ -73,17 +75,30 @@ public class AdminProductsController {
             productOk = false;
         }
 
+        String target = "";
+
         if (productOk) {
             try {
-                facade.createProduct(p);
-                util.addInfoMessage("El producto ha sido creado exitosamente");
+
+                if( model.isCreationFlow() )
+                {
+                    facade.createProduct(p);
+                    util.addInfoMessage("El producto ha sido creado exitosamente");
+                    target = util.redirect("/dashboard.xhtml");
+                }else
+                {
+                    facade.updateProduct(p);
+                    util.addInfoMessage("El producto ha sido actualizado exitosamente");
+                    target = util.redirect("/content/products/productSearch.xhtml");
+                }
+
                 cleanForm();
             } catch (SystemException | BusinessException e) {
                 util.addErrorMessage(e.getMessage());
             }
         }
 
-        return "";
+        return target;
     }
 
     public void cleanForm() {

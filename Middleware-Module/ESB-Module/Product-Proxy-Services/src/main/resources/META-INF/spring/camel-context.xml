@@ -45,7 +45,7 @@
         </camel:route>
 
         <!-- count products -->
-        <camel:route>
+        <camel:route streamCache="true">
             <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products/count?restletMethod=GET"/>
             <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products/count?restletMethod=GET"/>
         </camel:route>
@@ -103,6 +103,46 @@
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products?restletMethod=POST"/>
             <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products?restletMethod=POST&amp;throwExceptionOnFailure=false"/>
+        </camel:route>
+
+
+        <!-- get product detail -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products/{id}?restletMethod=DELETE"/>
+
+            <camel:recipientList>
+                <camel:simple>restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/soldProducts/occurrences/${header.id}?restletMethod=GET</camel:simple>
+            </camel:recipientList>
+
+            <camel:choice>
+                <camel:when>
+                    <camel:xpath>//response/occurrences = 'true'</camel:xpath>
+
+                    <camel:to uri="language:constant:resource:classpath:/static/product-used-error.xml"/>
+                    <camel:setHeader headerName="CamelHttpResponseCode">
+                        <camel:constant>500</camel:constant>
+                    </camel:setHeader>
+                </camel:when>
+
+                <camel:otherwise>
+
+                    <camel:setBody>
+                        <camel:simple>null</camel:simple>
+                    </camel:setBody>
+                    <camel:recipientList>
+                        <camel:simple>restlet:http://{{target.jboss.location}}/Product-Services/web-api/products/${header.id}?restletMethod=DELETE</camel:simple>
+                    </camel:recipientList>
+
+                </camel:otherwise>
+            </camel:choice>
+
+        </camel:route>
+
+
+        <!-- update products -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/products?restletMethod=PUT"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products?restletMethod=PUT&amp;throwExceptionOnFailure=false"/>
         </camel:route>
 
     </camelContext>

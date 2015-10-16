@@ -20,8 +20,8 @@ import java.util.List;
 @RequestScoped
 public class PortalController {
 
-    private static final String PRODUCT_SEARCH_PAGE = "/OMS-Studio/content/products/productSearch.xhtml";
-    private static final String PRODUCTS_ADMIN_PAGE = "/OMS-Studio/content/productsAdmin/productAdmin.xhtml";
+    public static final String PRODUCT_SEARCH_PAGE = "/OMS-Studio/content/products/productSearch.xhtml";
+    public static final String PRODUCTS_ADMIN_PAGE = "/OMS-Studio/content/productsAdmin/productAdmin.xhtml";
 
     @Inject
     private FacesUtil util;
@@ -39,6 +39,7 @@ public class PortalController {
 
     public void productsAdminAction() {
 
+        adminProductsModel.setCreationFlow( true );
         adminProductsModel.cleanModel();
         adminProductsModel.setCountries(productFacade.getCountries());
         List<City> cityList = productFacade.getCitiesByContry( adminProductsModel.getCountries().get(0).getId() );

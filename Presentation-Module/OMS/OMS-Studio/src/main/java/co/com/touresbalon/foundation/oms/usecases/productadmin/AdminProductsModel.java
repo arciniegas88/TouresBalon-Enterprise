@@ -16,6 +16,7 @@ import java.util.List;
 @SessionScoped
 public class AdminProductsModel implements Serializable{
 
+    private boolean creationFlow;
     private Product product;
     private List<Country> countries;
     private List<City> sourceCities;
@@ -32,6 +33,7 @@ public class AdminProductsModel implements Serializable{
     public AdminProductsModel()
     {
         cleanModel();
+        creationFlow = true;
     }
 
     public void cleanModel(){
@@ -43,6 +45,14 @@ public class AdminProductsModel implements Serializable{
         product.setTargetCity(new City());
         product.setSpectacleType(new Spectacle());
         product.setTransportType( new Transport() );
+    }
+
+    public boolean isCreationFlow() {
+        return creationFlow;
+    }
+
+    public void setCreationFlow(boolean creationFlow) {
+        this.creationFlow = creationFlow;
     }
 
     public Integer getCountrySource() {
