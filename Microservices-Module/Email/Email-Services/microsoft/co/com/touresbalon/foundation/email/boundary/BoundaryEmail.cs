@@ -18,6 +18,81 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
         MailMessage m = new MailMessage();
         SmtpClient smtp = new SmtpClient();
 
+        public bool sendMailCustomer(string from, string password, Email email)
+        {
+            try
+            {
+                m.From = new MailAddress(from);
+                m.To.Add(new MailAddress(email.email));
+                //m.Body = message;
+                m.Subject = email.subject;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.Credentials = new NetworkCredential(from, password);
+                smtp.EnableSsl = true;
+                string text = email.messageSend;
+
+                AlternateView plainView = AlternateView.CreateAlternateViewFromString(text, Encoding.UTF8, MediaTypeNames.Text.Plain);
+
+
+                string html = templateBody(email);
+
+                AlternateView htmlView =
+                    AlternateView.CreateAlternateViewFromString(html,
+                                            Encoding.UTF8,
+                                            MediaTypeNames.Text.Html);
+
+                LinkedResource img = new LinkedResource(@"C:\touresBalon.jpg",
+                                        MediaTypeNames.Image.Jpeg);
+                img.ContentId = "imagen";
+
+                htmlView.LinkedResources.Add(img);
+                m.AlternateViews.Add(plainView);
+                m.AlternateViews.Add(htmlView);
+                
+                Console.WriteLine(" funcion y metodo body" + m.Body);
+                m.IsBodyHtml = true;
+
+                smtp.Send(m);
+
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return false;
+            }
+
+        }
+
+        private string templateBody(Email email)
+        {
+            string body = string.Empty;
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("<html>");
+            sb.Append("<head>");
+            sb.Append("<title></title>");
+            sb.Append("</head>");
+            sb.Append("<body>");
+            sb.Append("<img src='cid:imagen' /><br/><br/>");
+            sb.Append("<div style=\"border-top:3px solid #22BCE5\"> &nbsp;</div>");
+            sb.Append("<span style=\"font-family:Arial;font-size:10pt\">");
+            sb.Append("Hola <b>" + email.first_name + " " + email.last_name + "</b>,<br/><br/>");
+            sb.Append(email.body + "<br/><br/>");
+            sb.Append("<br/><br/>");
+            sb.Append("Saludos cordiales <br/>");
+            sb.Append(email.footer);
+            sb.Append("</span>");
+            sb.Append("</body>");
+            sb.Append("</html>");
+
+            body = sb.ToString();
+
+            return body;
+        }
+
 
         public bool sendMail(string from, string password, Customer customer)
         {
@@ -76,6 +151,9 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
             }
 
         }
+
+
+        
 
 
 

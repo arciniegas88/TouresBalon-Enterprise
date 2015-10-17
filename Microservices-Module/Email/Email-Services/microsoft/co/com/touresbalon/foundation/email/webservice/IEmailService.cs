@@ -13,6 +13,6 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.webservic
     public interface IEmailService
     {
         [OperationContract]
-        string sendMailToCustomer(Customer customer);
+        string sendMailToCustomer(Email email);
     }
 }

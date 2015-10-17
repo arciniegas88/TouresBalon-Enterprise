@@ -65,12 +65,12 @@
     <Content Include="microsoft\co\com\touresbalon\foundation\email\rest\EmailService.svc" />
     <Content Include="microsoft\co\com\touresbalon\foundation\email\template\EmailTemplate.html" />
     <Content Include="microsoft\co\com\touresbalon\foundation\email\webservice\EmailService.svc" />
-    <Content Include="microsoft\co\com\touresbalon\foundation\email\ws\SendMailWS.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="microsoft\co\com\touresbalon\foundation\email\boundary\BoundaryEmail.cs" />
     <Compile Include="microsoft\co\com\touresbalon\foundation\email\entity\Customer.cs" />
+    <Compile Include="microsoft\co\com\touresbalon\foundation\email\entity\Email.cs" />
     <Compile Include="microsoft\co\com\touresbalon\foundation\email\rest\EmailService.svc.cs">
       <DependentUpon>EmailService.svc</DependentUpon>
     </Compile>
@@ -79,11 +79,6 @@
       <DependentUpon>EmailService.svc</DependentUpon>
     </Compile>
     <Compile Include="microsoft\co\com\touresbalon\foundation\email\webservice\IEmailService.cs" />
-    <Compile Include="microsoft\co\com\touresbalon\foundation\email\ws\ISendMailWS.cs" />
-    <Compile Include="microsoft\co\com\touresbalon\foundation\email\ws\SendMailWS.svc.cs">
-      <DependentUpon>SendMailWS.svc</DependentUpon>
-    </Compile>
-    <Compile Include="microsoft\co\com\touresbalon\foundation\email\ws\WebMethotAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
