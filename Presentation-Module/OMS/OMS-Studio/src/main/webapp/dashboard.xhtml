@@ -13,46 +13,56 @@
 
         <h:form>
 
-        <p:growl showDetail="true" showSummary="false"/>
-        <p:remoteCommand name="searchProductsAction" update="@form" action="#{portalController.searchProductsAction()}"/>
-        <p:remoteCommand name="productsAdminAction" update="@form" action="#{portalController.productsAdminAction}"/>
+            <p:growl showDetail="true" showSummary="false"/>
+            <p:remoteCommand name="searchProductsAction" update="@form" action="#{portalController.searchProductsAction()}"/>
+            <p:remoteCommand name="productsAdminAction" update="@form" action="#{portalController.productsAdminAction}"/>
+            <p:remoteCommand name="ratesAdminAction" update="@form" action="#{portalController.ratessAdminAction}"/>
 
-        <div class="Container100">
-            <div class="ContainerIndent">
-                <div class="Card ShadowEffect">
+            <div class="Container100">
+                <div class="ContainerIndent">
+                    <div class="Card ShadowEffect">
 
-                    <custom:operationContainer label="Tablero de Operaciones">
+                        <custom:operationContainer label="Tablero de Operaciones">
 
-                        <custom:optionItem topClass="RedBack SoftRed" bottomClass="SoftRed"
-                                           icon="icon-cloud" label="Admin. Productos"
-                                           target="productsAdminAction"/>
-                        <custom:optionItem topClass="OrangeBack SoftOrange" bottomClass="SoftOrange"
-                                           icon="icon-sun" label="Consultas Productos"
-                                           target="searchProductsAction"/>
-                        <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
-                                           icon="icon-drop" label="Admin. Campanas"
-                                           target="searchProductsAction"/>
-                        <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
-                                           icon="icon-cloud-upload" label="Cancelar Ordenes"
-                                           target="searchProductsAction"/>
-                        <custom:optionItem topClass="YellowBack White" bottomClass="White"
-                                           icon="icon-moon" label="Consultas Ordenes"
-                                           target="searchProductsAction"/>
-                        <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen"
-                                           icon="icon-filter_vintage" label="Admin. Clientes"
-                                           target="searchProductsAction"/>
-                        <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple"
-                                           icon="icon-umbrella" label="Consultas Clientes"
-                                           target="searchProductsAction"/>
+                            <custom:optionItem topClass="RedBack SoftRed" bottomClass="SoftRed"
+                                               icon="icon-build" label="Admin. Productos"
+                                               target="productsAdminAction"/>
 
-                    </custom:operationContainer>
+                            <custom:optionItem topClass="YellowBack White" bottomClass="White"
+                                               icon="icon-attach_money" label="Admin. Tarifas"
+                                               target="ratesAdminAction"/>
 
-                    <div class="Container50 Responsive50">
-                        <div class="ContainerIndent">
-                            <h2 class="BigTopic">Servicios de Terceros</h2>
-                            <h:form>
-                                <p:accordionPanel multiple="false">
-                                    <p:tab title="Partners de Validación de Tarjeta de Crédito">
+                            <custom:optionItem topClass="OrangeBack SoftOrange" bottomClass="SoftOrange"
+                                               icon="icon-assignment" label="Consultas Productos"
+                                               target="searchProductsAction"/>
+
+                            <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
+                                               icon="icon-camera" label="Admin. Campanas"
+                                               target="searchProductsAction"/>
+
+                            <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen"
+                                               icon="icon-group_add" label="Admin. Clientes"
+                                               target="searchProductsAction"/>
+                            <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple"
+                                               icon="icon-contacts" label="Consultas Clientes"
+                                               target="searchProductsAction"/>
+
+                            <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
+                                               icon="icon-cancel" label="Cancelar Ordenes"
+                                               target="searchProductsAction"/>
+                            <custom:optionItem topClass="YellowBack White" bottomClass="White"
+                                               icon="icon-server" label="Consultas Ordenes"
+                                               target="searchProductsAction"/>
+
+
+                        </custom:operationContainer>
+
+                        <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <h2 class="BigTopic">Servicios de Terceros</h2>
+                                <h:form>
+                                    <p:accordionPanel multiple="false">
+                                        <p:tab title="Partners de Validación de Tarjeta de Crédito">
                                         <span style="color: black;font-size: 13px;">
                                             <p>Los proveedores de validación de tarjeta de crédito proveen servicios de
                                                 verificación sobre las transacciones realizadas en el portal, los proveedores
@@ -61,8 +71,8 @@
                                                 <li><b>Redeban Multicolor</b></li>
                                             </ul>
                                         </span>
-                                    </p:tab>
-                                    <p:tab title="Partners de Alojamiento y Hoteles">
+                                        </p:tab>
+                                        <p:tab title="Partners de Alojamiento y Hoteles">
                                         <span style="color: black;font-size: 13px;">
                                             <p>Los proveedores de alojamiento proveen servicios de ubicación a nuestros clientes
                                                 en las ciudades respectivas del evento deportivo, los proveedores
@@ -72,8 +82,8 @@
                                                 <li><b>Hoteles DanCarlton</b></li>
                                             </ul>
                                         </span>
-                                    </p:tab>
-                                    <p:tab title="Partners de Transporte">
+                                        </p:tab>
+                                        <p:tab title="Partners de Transporte">
                                         <span style="color: black;font-size: 13px;">
                                             <p>Los proveedores de transporte de encargan de proveer servicios de movilidad por
                                                 vía aerea o terrestre, los proveedores asociados son los siguientes</p>
@@ -83,8 +93,8 @@
                                                 <li><b>Arolineas American Airlines</b></li>
                                             </ul>
                                         </span>
-                                    </p:tab>
-                                    <p:tab title="Partners de Espectáculo">
+                                        </p:tab>
+                                        <p:tab title="Partners de Espectáculo">
                                         <span style="color: black;font-size: 13px;">
                                             <p>Los proveedores de espectáculo permiten sumistrar el producto nuclear de
                                                 la organización presente en la forma de evento deportivo, los proveedores
@@ -93,14 +103,14 @@
                                                 <li><b>Proveedor espectáculos</b></li>
                                             </ul>
                                         </span>
-                                    </p:tab>
-                                </p:accordionPanel>
-                            </h:form>
+                                        </p:tab>
+                                    </p:accordionPanel>
+                                </h:form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </h:form>
     </ui:define>
 

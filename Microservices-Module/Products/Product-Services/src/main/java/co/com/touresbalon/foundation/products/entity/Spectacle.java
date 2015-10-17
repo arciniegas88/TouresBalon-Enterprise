@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
                             "s.id, s.name, s.cost, s.spectacleDate) " +
                             "FROM Spectacle s",
                     hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "Spectacle.updateRate", query = "UPDATE Spectacle t SET t.cost = :COST WHERE t.id = :ID"),
         @NamedQuery(name = "Spectacle.findById", query = "SELECT s FROM Spectacle s WHERE s.id = :id"),
         @NamedQuery(name = "Spectacle.findByName", query = "SELECT s FROM Spectacle s WHERE s.name = :name"),
         @NamedQuery(name = "Spectacle.findByCost", query = "SELECT s FROM Spectacle s WHERE s.cost = :cost")})

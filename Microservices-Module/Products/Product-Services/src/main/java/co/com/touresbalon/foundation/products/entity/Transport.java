@@ -26,6 +26,7 @@ import java.util.List;
                             "t.id, t.name, t.cost, t.travelDate, t.travelOutTime, t.businessProvider) " +
                             "FROM Transport t",
                     hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "Transport.updateRate", query = "UPDATE Transport t SET t.cost = :COST WHERE t.id = :ID"),
         @NamedQuery(name = "Transport.findById", query = "SELECT t FROM Transport t WHERE t.id = :id"),
         @NamedQuery(name = "Transport.findByName", query = "SELECT t FROM Transport t WHERE t.name = :name"),
         @NamedQuery(name = "Transport.findByCost", query = "SELECT t FROM Transport t WHERE t.cost = :cost")})

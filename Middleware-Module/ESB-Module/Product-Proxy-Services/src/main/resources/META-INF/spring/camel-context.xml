@@ -69,6 +69,13 @@
             <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/products/byName?restletMethod=GET"/>
         </camel:route>
 
+        <!-- update partner rates -->
+
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/partnerServices/rates?restletMethod=PUT"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/partnerServices/rates?restletMethod=PUT"/>
+        </camel:route>
+
         <!-- get transports -->
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/partnerServices/transports?restletMethod=GET"/>

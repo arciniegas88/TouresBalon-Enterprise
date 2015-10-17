@@ -6,15 +6,10 @@ import co.com.touresbalon.foundation.oms.exceptions.ExceptionMapper;
 import co.com.touresbalon.foundation.oms.exceptions.SystemException;
 import co.com.touresbalon.foundation.oms.webclient.PartnerServicesWebClient;
 import co.com.touresbalon.foundation.oms.webclient.ProductsWebClient;
-import org.apache.commons.io.IOUtils;
-import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
-import java.io.InputStream;
-import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -111,7 +106,7 @@ public class ProductsFacade {
     public void updateProduct( Product p ) throws SystemException, BusinessException{
 
         try {
-            productsWC.updateProduct( p );
+            productsWC.updateProduct(p);
         } catch (WebApplicationException ex) {
             ExceptionMapper.mapRemoteException(ex);
         }
@@ -120,7 +115,16 @@ public class ProductsFacade {
     public void deleteProduct( Long productId ) throws SystemException, BusinessException{
 
         try {
-            productsWC.deleteProduct( productId );
+            productsWC.deleteProduct(productId);
+        } catch (WebApplicationException ex) {
+            ExceptionMapper.mapRemoteException(ex);
+        }
+    }
+
+    public void updatePartnerRates( PartnerServiceWrapper wrapper )throws SystemException, BusinessException {
+
+        try {
+            partnersWC.updateRates( wrapper );
         } catch (WebApplicationException ex) {
             ExceptionMapper.mapRemoteException(ex);
         }
