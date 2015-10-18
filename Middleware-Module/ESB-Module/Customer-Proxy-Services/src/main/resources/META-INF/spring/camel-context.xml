@@ -54,19 +54,19 @@
 
         <!-- Create Customer -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/customer/create?restletMethod=POST"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/create?restletMethod=POST"/>
             <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/createCustomer?restletMethod=POST"/>
         </camel:route>
 
         <!-- Update Customer -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/customer/update?restletMethod=PUT"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/update?restletMethod=PUT"/>
             <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/updateCustomer?restletMethod=PUT"/>
         </camel:route>
 
         <!-- Update Address -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/address/update?restletMethod=PUT"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/address/update?restletMethod=PUT"/>
             <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/AddressService.svc/updateAddress?restletMethod=PUT"/>
         </camel:route>
     </camelContext>
