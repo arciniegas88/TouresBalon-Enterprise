@@ -28,7 +28,7 @@ public class LodgingService {
 
         TouresbalonReservations reservation;
         Room roomType = new Room();
-        if (room.getRoomNumber() == -1L) {
+        if (room.getRoomNumber() != -1L) {
             reservation = boundary.doReservation(room.getHotelId(), room.getRoomNumber(), body.getGuestName(), body.getCheckIn(), body.getCheckOut());
             roomType.setReservationId(reservation.getReservationId());
         }
