@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns:tns="http://OrderProcessingError.com"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" name="OrderProcessingError"
+	targetNamespace="http://OrderProcessingError.com">
+	<types>
+		<schema xmlns:tns="http://OrderProcessingError.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+			xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns="http://www.w3.org/2001/XMLSchema"
+			attributeFormDefault="unqualified" elementFormDefault="qualified"
+			targetNamespace="http://OrderProcessingError.com">
+
+
+			<element name="orderProcessingErrorRequest">
+
+				<complexType>
+
+					<sequence>
+
+						<element name="oderId" type="int" />
+
+						<element name="orderRequest" type="string" />
+
+					</sequence>
+
+				</complexType>
+
+			</element>
+
+		</schema>
+	</types>
+	<message name="orderProcessingErrorRequestMessage">
+		<part element="tns:orderProcessingErrorRequest" name="payload">
+		</part>
+	</message>
+	
+	<plnk:partnerLinkType name="OrderProcessingErrorWS_PLT">
+		<plnk:role name="OrderProcessingErrorWS_Role" portType="tns:orderProcessingErrorPort" />
+	</plnk:partnerLinkType>
+	
+	<portType name="orderProcessingErrorPort">
+		<operation name="pushOrder">
+			<input message="tns:orderProcessingErrorRequestMessage">
+			</input>
+		</operation>
+	</portType>
+	<binding name="orderProcessingErrorBinding" type="tns:orderProcessingErrorPort">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="pushOrder">
+			<soap:operation soapAction="http://OrderProcessingError.com/pushOrder" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+	</binding>
+	<service name="orderProcessingErrorService">
+		<port binding="tns:orderProcessingErrorBinding" name="orderProcessingErrorPortPort">
+			<soap:address
+				location="http://localhost:9498/esb/OrderProccessingError/OrderProccessingError?wsdl" />
+		</port>
+	</service>
+</definitions>

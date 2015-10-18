@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<definitions name="OrderProcessingError"
+        targetNamespace="http://OrderProcessingError.com"
+        xmlns:tns="http://OrderProcessingError.com"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        >
+		
+	<types>
+        <schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+                targetNamespace="http://OrderProcessingError.com" 
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <element name="orderProcessingErrorRequest">
+                <complexType>
+                    <sequence>
+                        <element name="oderId" type="int"/>
+                        <element name="orderRequest" type="string"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+           </schema>
+    </types>
+	
+	<message name="orderProcessingErrorRequestMessage">
+        <part name="payload" element="tns:orderProcessingErrorRequest"/>
+    </message>
+
+	<portType name="orderProcessingErrorPort">
+        <operation name="pushOrder">
+            <input  message="tns:orderProcessingErrorRequestMessage" />
+        </operation>
+    </portType> 
+	
+	<binding name="orderProcessingErrorBinding" type="tns:orderProcessingErrorPort">
+    	<soap:binding style="document"
+    		transport="http://schemas.xmlsoap.org/soap/http" />
+    	<operation name="pushOrder">
+    		<soap:operation
+    			soapAction="http://OrderProcessingError.com/pushOrder" />
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    	</operation>
+    </binding>	
+	
+	<service name="orderProcessingErrorService">
+    	<port name="orderProcessingErrorPortPort" binding="tns:orderProcessingErrorBinding">
+    		<soap:address location="http://localhost:9080/orderProcessingError" />
+    	</port>
+    </service>
+</definitions>	
+	
