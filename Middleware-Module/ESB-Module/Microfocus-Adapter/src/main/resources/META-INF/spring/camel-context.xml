@@ -19,13 +19,50 @@
     <!-- ================================================================= -->
 
     <!--Configuration of connection to activeMQ -->
-    <!-- infraestructura del broker (message bus) -->
 
     <osgix:cm-properties id="esbProps" persistent-id="esbadmin"/>
     <ctx:property-placeholder properties-ref="esbProps"/>
 
+    <bean id="middleProcessor" class="co.com.foundation.middleware.processor.MiddleProcessor"/>
+
+    <cxf:cxfEndpoint
+            address="http://localhost:${http.esb.gateway.soap.service.port}/esb/services/entity/MicrofocusAdapterWS/1.0.0"
+            serviceName="s:MicrofocusAdapterWS"
+            endpointName="s:MicrofocusAdapterPort"
+            wsdlURL="service_contracts/MicrofocusContract.wsdl"
+            id="MicrofocusAdapterWS"
+            xmlns:s="http://touresbalon.com.co/accounting/service/entity/1.0.0"/>
+
     <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
 
+        <camel:dataFormats>
+            <camel:bindy id="bindyDataformat" type="Fixed"
+                         classType="co.com.foundation.middleware.model.AccountTransactionCobol"/>
+        </camel:dataFormats>
+
+        <camel:route streamCache="true">
+
+            <camel:from uri="cxf:bean:MicrofocusAdapterWS?dataFormat=PAYLOAD"/>
+            <camel:convertBodyTo type="java.lang.String"/>
+            <camel:process ref="middleProcessor"/>
+            <camel:marshal ref="bindyDataformat"/>
+
+            <camel:choice>
+                <camel:when>
+                    <simple>${in.header.operationName} == 'createCompletedOrder'</simple>
+                    <camel:to uri="file://C:/touresbalon/microfocus?fileName=TRANSACTIONS_ORDERS.DAT&amp;fileExist=Append"/>
+                </camel:when>
+                <camel:when>
+                    <simple>${in.header.operationName} == 'createExecutedPayment'</simple>
+                    <camel:to uri="file://C:/touresbalon/microfocus?fileName=TRANSACTIONS_PAYMENT.DAT&amp;fileExist=Append"/>
+                </camel:when>
+                <camel:when>
+                    <simple>${in.header.operationName} == 'createCancelledPayment'</simple>
+                    <camel:to uri="file://C:/touresbalon/microfocus?fileName=TRANSACTIONS_CANCELLED_PAYMENTS.DAT&amp;fileExist=Append"/>
+                </camel:when>
+            </camel:choice>
+
+        </camel:route>
 
     </camel:camelContext>
 

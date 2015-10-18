@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <definitions name="MicrofocusAdapterWS"
-             targetNamespace="http://touresbalon.com.co/accounting/service/task/1.0.0"
-             xmlns:tns="http://touresbalon.com.co/accounting/service/task/1.0.0"
+             targetNamespace="http://touresbalon.com.co/accounting/service/entity/1.0.0"
+             xmlns:tns="http://touresbalon.com.co/accounting/service/entity/1.0.0"
              xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
 
     <types>
         <schema attributeFormDefault="unqualified" elementFormDefault="qualified"
-                targetNamespace="http://touresbalon.com.co/accounting/service/task/1.0.0"
+                targetNamespace="http://touresbalon.com.co/accounting/service/entity/1.0.0"
                 xmlns="http://www.w3.org/2001/XMLSchema">
 
             <element name="AccountTransaction">
@@ -18,7 +18,8 @@
                         <element name="TransactionYear" type="integer"/>
                         <element name="TransactionMonth" type="integer"/>
                         <element name="TransactionDay" type="integer"/>
-                        <element name="AccountId" type="string"/>
+                        <element name="TransportProvider" type="string"/>
+                        <element name="LodgingProvider" type="string"/>
                         <element name="WithdrawalAmount" type="double"/>
                         <element name="DepositAmount" type="double"/>
                     </sequence>
@@ -36,12 +37,19 @@
         <part name="payload" element="tns:AccountTransaction"/>
     </message>
 
+    <message name="createCancelledPayment">
+        <part name="payload" element="tns:AccountTransaction"/>
+    </message>
+
     <portType name="MicrofocusAdapterPortType">
         <operation name="createCompletedOrder">
             <input message="tns:createCompletedOrder"/>
         </operation>
         <operation name="createExecutedPayment">
             <input message="tns:createExecutedPayment"/>
+        </operation>
+        <operation name="createCancelledPayment">
+            <input message="tns:createCancelledPayment"/>
         </operation>
     </portType>
 
@@ -56,6 +64,12 @@
         </operation>
         <operation name="createExecutedPayment">
             <soap:operation soapAction="createExecutedPayment"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+        </operation>
+        <operation name="createCancelledPayment">
+            <soap:operation soapAction="createCancelledPayment"/>
             <input>
                 <soap:body use="literal"/>
             </input>

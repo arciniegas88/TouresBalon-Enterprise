@@ -30,7 +30,7 @@
                      id="CreditCardService"
                      xmlns:s="http://redeban.com/creditcards/ws" />
 
-    <cxf:cxfEndpoint address="http://localhost:${http.esb.adapter.service.port}/esb/services/entity/CreditCardWS/1.0.0"
+    <cxf:cxfEndpoint address="http://localhost:${http.esb.gateway.soap.service.port}/esb/services/entity/CreditCardWS/1.0.0"
                      serviceName="s:CreditCardService"
                      endpointName="s:CreditCardPort"
                      wsdlURL="service_contracts/CreditCard.wsdl"
