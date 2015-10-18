@@ -78,4 +78,13 @@ public class OrdersResource {
         return wrapper;
     }
 
+    @GET
+    @Path("/soldProducts/occurrences/{productId}")
+    @Produces({MediaType.APPLICATION_XML})
+    public Response countProductTotalOccurrences( @PathParam("productId") Long productId )throws SystemException{
+
+        Long total = boundary.countTotalProductOccurrences( productId );
+        return Response.status(200).entity("<response><occurrences>"+ (total == 0 ? false : true) +"</occurrences></response>").build();
+    }
+
 }

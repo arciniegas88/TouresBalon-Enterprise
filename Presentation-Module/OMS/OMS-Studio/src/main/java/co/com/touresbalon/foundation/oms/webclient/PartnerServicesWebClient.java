@@ -1,6 +1,7 @@
 package co.com.touresbalon.foundation.oms.webclient;
 
 import co.com.touresbalon.foundation.oms.domain.products.*;
+import co.com.touresbalon.foundation.oms.exceptions.SystemException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,6 +14,11 @@ import java.util.List;
 @Path("/partnerServices")
 public interface PartnerServicesWebClient {
 
+
+    @PUT
+    @Path("/rates")
+    @Produces(MediaType.APPLICATION_XML)
+    void updateRates( PartnerServiceWrapper wrapper ) throws SystemException;
 
     @GET
     @Path("/transports")

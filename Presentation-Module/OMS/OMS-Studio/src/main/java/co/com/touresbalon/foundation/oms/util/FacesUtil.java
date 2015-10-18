@@ -34,6 +34,7 @@ public class FacesUtil {
     //[utility] -----------------------------------
     
     public void addInfoMessage( String message ){
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
         FacesContext.getCurrentInstance().addMessage(null,fm);
     }

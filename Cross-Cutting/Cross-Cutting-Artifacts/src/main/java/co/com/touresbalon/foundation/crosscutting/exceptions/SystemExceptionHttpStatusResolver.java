@@ -16,8 +16,8 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class SystemExceptionHttpStatusResolver implements ExceptionMapper<SystemException> {
 
-    private static final String JSON_MESSAGE = "{\"system_exception\":{\"detail\": \"#message\"}}";
-    private static final String XML_MESSAGE  = "<system_exception><detail>#message</detail></system_exception>";
+    private static final String JSON_MESSAGE = "{\"systemException\":{\"message\": \"#message\"}}";
+    private static final String XML_MESSAGE  = "<systemException><message>#message</message></systemException>";
 
     @Context
     private HttpHeaders headers;

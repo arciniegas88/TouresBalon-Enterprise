@@ -1,0 +1,6 @@
+C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\bin\Email-Services.dll.config
+C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\bin\Email-Services.dll
+C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\bin\Email-Services.pdb
+C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\obj\Debug\Email-Services.csprojResolveAssemblyReference.cache
+C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\obj\Debug\Email-Services.dll
+C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\obj\Debug\Email-Services.pdb

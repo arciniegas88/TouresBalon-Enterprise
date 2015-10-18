@@ -29,6 +29,7 @@
         <div class="Container100 Responsive100">
             <h:form id="form">
                 <br/>
+                <p:growl showDetail="true" showSummary="false"/>
 
                 <p:tabView orientation="left" id="TVProducts">
 
@@ -70,6 +71,12 @@
 
                                         <h:outputText value="Descripción" style="font-weight: bold"/>
                                         <h:outputText value="#{productsModel.product.description}"/>
+
+                                        <h:outputText value="Ciudad origen" style="font-weight: bold"/>
+                                        <h:outputText value="#{productsModel.product.sourceCity.name}"/>
+
+                                        <h:outputText value="Ciudad destino" style="font-weight: bold"/>
+                                        <h:outputText value="#{productsModel.product.targetCity.name}"/>
 
                                         <h:outputText value="Espectáculo" style="font-weight: bold"/>
                                         <h:outputText value="#{productsModel.product.spectacleType.name}"/>

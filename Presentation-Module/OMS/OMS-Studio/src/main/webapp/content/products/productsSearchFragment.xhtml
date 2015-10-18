@@ -46,13 +46,8 @@
 
                         <p:dataTable id="productsTable" var="p" value="#{productsModel}"
                                      rows="5" paginator="true"
-                                     selectionMode="single" selection="#{productsModel.product}"
-                                     rowKey="#{p.id}"
                                      emptyMessage="No products found with given criteria"
                                      lazy="true">
-
-                            <p:ajax event="rowSelect" update="form:productDetail"
-                                    listener="#{productsController.showProductDetail()}"/>
 
                             <p:column headerText="Nombre" footerText="Nombre">
                                 <h:outputText value="#{p.name}"/>
@@ -70,7 +65,22 @@
                                 <h:outputText value="$#{p.price}"/>
                             </p:column>
 
+                            <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
+                                                 title="Detalles" update="form:productDetail"
+                                                 action="#{productsController.showProductDetail(p)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
+                                                 title="Editar" update="@form"
+                                                 action="#{productsController.updateProduct(p)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                 title="Eliminar" update="@form"
+                                                 action="#{productsController.deleteProduct(p)}"/>
+                            </p:column>
+
                         </p:dataTable>
+
                     </div>
                 </div>
             </div>

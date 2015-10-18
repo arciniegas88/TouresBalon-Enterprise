@@ -5,6 +5,7 @@ import co.com.touresbalon.foundation.oms.domain.products.*;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
 @SessionScoped
 public class AdminProductsModel implements Serializable{
 
+    private boolean creationFlow;
     private Product product;
     private List<Country> countries;
     private List<City> sourceCities;
@@ -31,15 +33,26 @@ public class AdminProductsModel implements Serializable{
     public AdminProductsModel()
     {
         cleanModel();
+        creationFlow = true;
     }
 
     public void cleanModel(){
         product = new Product();
+        product.setArrivalDate( new Date());
+        product.setDepartureDate( new Date());
         product.setLodgingType(new Lodging());
         product.setSourceCity(new City());
         product.setTargetCity(new City());
         product.setSpectacleType(new Spectacle());
         product.setTransportType( new Transport() );
+    }
+
+    public boolean isCreationFlow() {
+        return creationFlow;
+    }
+
+    public void setCreationFlow(boolean creationFlow) {
+        this.creationFlow = creationFlow;
     }
 
     public Integer getCountrySource() {

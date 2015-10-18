@@ -2,13 +2,11 @@ package co.com.touresbalon.foundation.products.rest;
 
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import co.com.touresbalon.foundation.products.boundary.PartnerServicesBoundary;
+import co.com.touresbalon.foundation.products.dto.PartnerServiceWrapper;
 import co.com.touresbalon.foundation.products.entity.*;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -59,6 +57,14 @@ public class PartnerServicesResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<City> getCitiesByContry( @QueryParam("country") Integer country ) throws SystemException{
         return boundary.getCitiesByContry(country);
+    }
+
+
+    @PUT
+    @Path("/rates")
+    @Consumes(MediaType.APPLICATION_XML)
+    public void updateRates( PartnerServiceWrapper wrapper )throws SystemException{
+        boundary.updateRates( wrapper );
     }
 
 

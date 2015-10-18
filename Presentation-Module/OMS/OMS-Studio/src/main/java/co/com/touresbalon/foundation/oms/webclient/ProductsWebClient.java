@@ -2,6 +2,8 @@ package co.com.touresbalon.foundation.oms.webclient;
 
 import co.com.touresbalon.foundation.oms.domain.products.CollectionWrapper;
 import co.com.touresbalon.foundation.oms.domain.products.Product;
+import co.com.touresbalon.foundation.oms.exceptions.BusinessException;
+import co.com.touresbalon.foundation.oms.exceptions.SystemException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -58,5 +60,23 @@ public interface ProductsWebClient {
     @Consumes({MediaType.APPLICATION_XML})
     CollectionWrapper getRankingSoldOrders( @QueryParam("startOrderDate") String startOrderDate,
                                             @QueryParam("endOrderDate")  String endOrderDate );
+
+
+
+    @POST
+    @Produces({MediaType.APPLICATION_XML})
+    void createProduct( Product product ) throws BusinessException, SystemException;
+
+
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes({MediaType.APPLICATION_XML})
+    void deleteProduct( @PathParam("id") Long id )throws BusinessException,SystemException;
+
+
+    @PUT
+    @Produces({MediaType.APPLICATION_XML})
+    void updateProduct( Product product ) throws SystemException;
 
 }

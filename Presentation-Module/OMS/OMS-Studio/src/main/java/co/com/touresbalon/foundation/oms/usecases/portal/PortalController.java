@@ -4,6 +4,7 @@ import co.com.touresbalon.foundation.oms.domain.products.City;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
 import co.com.touresbalon.foundation.oms.usecases.productadmin.AdminProductsModel;
 import co.com.touresbalon.foundation.oms.usecases.productssearch.ProductsModel;
+import co.com.touresbalon.foundation.oms.usecases.ratesadmin.RatesModel;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
 import org.primefaces.context.RequestContext;
 
@@ -20,17 +21,30 @@ import java.util.List;
 @RequestScoped
 public class PortalController {
 
-    private static final String PRODUCT_SEARCH_PAGE = "/OMS-Studio/content/products/productSearch.xhtml";
-    private static final String PRODUCTS_ADMIN_PAGE = "/OMS-Studio/content/productsAdmin/productAdmin.xhtml";
+    public static final String RATES_ADMIN_PAGE    = "/OMS-Studio/content/rates/ratesAdmin.xhtml";
+    public static final String PRODUCT_SEARCH_PAGE = "/OMS-Studio/content/products/productSearch.xhtml";
+    public static final String PRODUCTS_ADMIN_PAGE = "/OMS-Studio/content/productsAdmin/productAdmin.xhtml";
 
     @Inject
     private FacesUtil util;
     @Inject
     private ProductsModel productModel;
     @Inject
+    private RatesModel ratesModel;
+    @Inject
     private AdminProductsModel adminProductsModel;
     @Inject
     private ProductsFacade productFacade;
+
+    public void ratessAdminAction() {
+
+        ratesModel.setTransports( productFacade.getTransports() );
+        ratesModel.setLodgings( productFacade.getLodging() );
+        ratesModel.setSpectacles( productFacade.getSpectacles() );
+
+        RequestContext.getCurrentInstance().execute( "window.location.href='"+RATES_ADMIN_PAGE+"';" );
+    }
+
 
     public void searchProductsAction() {
         productModel.cleanModel();
@@ -39,6 +53,7 @@ public class PortalController {
 
     public void productsAdminAction() {
 
+        adminProductsModel.setCreationFlow( true );
         adminProductsModel.cleanModel();
         adminProductsModel.setCountries(productFacade.getCountries());
         List<City> cityList = productFacade.getCitiesByContry( adminProductsModel.getCountries().get(0).getId() );

@@ -2,6 +2,7 @@ package co.com.touresbalon.foundation.products.boundary;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+import co.com.touresbalon.foundation.crosscutting.exceptions.BusinessException;
 import co.com.touresbalon.foundation.crosscutting.exceptions.ExceptionBuilder;
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import org.slf4j.Logger;
@@ -36,6 +37,83 @@ public class ProductBoundary {
     private EntityManager em;
 
     public ProductBoundary() {
+    }
+
+
+    // [method] -----------------------------
+
+    public void updateProduct( Product product )throws SystemException{
+
+        try {
+
+            em.createNamedQuery("Product.update")
+                    .setParameter("ARRIVAL_DATE", product.getArrivalDate())
+                    .setParameter("DEPARTURE_DATE", product.getDepartureDate())
+                    .setParameter("DESCRIPTION", product.getDescription())
+                    .setParameter("IMAGE_REF", product.getImageRef())
+                    .setParameter("LODGING", product.getLodgingType())
+                    .setParameter("SPECTACLE", product.getSpectacleType())
+                    .setParameter("TRANSPORT", product.getTransportType())
+                    .setParameter("SOURCE_CITY", product.getSourceCity())
+                    .setParameter("TARGET_CITY", product.getTargetCity())
+                    .setParameter("PRICE", product.getPrice())
+                    .setParameter("ID", product.getId())
+                    .executeUpdate();
+
+        }catch (Throwable enf){
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    // [method] -----------------------------
+
+    public void deleteProduct( Long productId )throws SystemException{
+
+        try {
+                em.createNamedQuery("Product.delete")
+                  .setParameter("ID", productId)
+                  .executeUpdate();
+
+        }catch (Throwable enf){
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+
+    // [method] -----------------------------
+
+    public void createProduct( Product product )throws BusinessException, SystemException{
+
+        try {
+            Long total = em.createNamedQuery("Product.countProductsByCode", Long.class)
+                    .setParameter("CODE", product.getCode())
+                    .getSingleResult();
+
+            if (total > 0) {
+                logger.error(exceptionBuilder.getMessage("microservices.products.duplicatedcode") + ": " + product.getCode());
+                throw exceptionBuilder.buildBusinessException("microservices.products.duplicatedcode");
+            }
+
+
+            total = em.createNamedQuery("Product.countProductsByName", Long.class)
+                    .setParameter("NAME", product.getName())
+                    .getSingleResult();
+
+            if (total > 0) {
+                logger.error(exceptionBuilder.getMessage("microservices.products.duplicatedname") + ": " + product.getName());
+                throw exceptionBuilder.buildBusinessException("microservices.products.duplicatedname");
+            }
+
+            em.persist(product);
+
+        }catch (BusinessException b){
+            throw b;
+        }catch (Throwable enf){
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
     }
 
     // [method] -----------------------------

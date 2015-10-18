@@ -20,6 +20,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "ORDER_ITEM")
 @XmlRootElement
 @NamedQueries({
+
+        @NamedQuery(name = "OrderItem.getProductTotalOcurrences",
+                query = "SELECT COUNT(o) FROM OrderItem o " +
+                        "WHERE o.productId = :PRODUCT " ,
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
         @NamedQuery(name = "OrderItem.getProductRanking",
                 query = "SELECT o.productName, COUNT(o) AS TOTAL FROM OrderItem o " +
                         "WHERE o.status = 'PROVISIONED' AND " +

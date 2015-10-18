@@ -2,6 +2,7 @@ package co.com.touresbalon.foundation.products.boundary;
 
 import co.com.touresbalon.foundation.crosscutting.exceptions.ExceptionBuilder;
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
+import co.com.touresbalon.foundation.products.dto.PartnerServiceWrapper;
 import co.com.touresbalon.foundation.products.entity.*;
 import org.slf4j.Logger;
 
@@ -29,6 +30,50 @@ public class PartnerServicesBoundary {
 
     @PersistenceContext
     private EntityManager em;
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public void updateRates(PartnerServiceWrapper wrapper)throws SystemException{
+
+        try {
+
+            if (wrapper.getTransports() != null) {
+
+                for (Transport t : wrapper.getTransports()) {
+                    em.createNamedQuery("Transport.updateRate")
+                            .setParameter("COST", t.getCost())
+                            .setParameter("ID", t.getId())
+                            .executeUpdate();
+                    em.flush();
+                }
+            }
+
+            if (wrapper.getLodgings() != null) {
+
+                for (Lodging t : wrapper.getLodgings()) {
+                    em.createNamedQuery("Lodging.updateRate")
+                            .setParameter("COST", t.getCost())
+                            .setParameter("ID", t.getId())
+                            .executeUpdate();
+                    em.flush();
+                }
+            }
+
+            if (wrapper.getSpectacles() != null) {
+
+                for (Spectacle t : wrapper.getSpectacles()) {
+                    em.createNamedQuery("Spectacle.updateRate")
+                            .setParameter("COST", t.getCost())
+                            .setParameter("ID", t.getId())
+                            .executeUpdate();
+                    em.flush();
+                }
+            }
+
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
 
     public List<Transport> getTransports() throws SystemException {
         try {

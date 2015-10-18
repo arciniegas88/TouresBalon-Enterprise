@@ -16,8 +16,8 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class BusinessExceptionHttpStatusResolver implements ExceptionMapper<BusinessException> {
 
-    private static final String JSON_MESSAGE = "{\"business_exception\":{\"detail\": \"#message\"}}";
-    private static final String XML_MESSAGE  = "<business_exception><detail>#message</detail></business_exception>";
+    private static final String JSON_MESSAGE = "{\"businessException\":{\"message\": \"#message\"}}";
+    private static final String XML_MESSAGE  = "<businessException><message>#message</message></businessException>";
 
     @Context
     private HttpHeaders headers;

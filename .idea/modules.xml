@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/BusinessRule-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRule-Services/BusinessRule-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRules.iml" filepath="$PROJECT_DIR$/Microservices-Module/BusinessRules/BusinessRules.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Cancel-Orders-BPEL/Cancel-Orders-BPEL.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/Create-Orders-BPEL.iml" filepath="$PROJECT_DIR$/Middleware-Module/BPEL-Module/Create-Orders-BPEL/Create-Orders-BPEL.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter/CreditCard-Adapter.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter/CreditCard-Adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/CreditCardWS/CreditCardWS.iml" filepath="$PROJECT_DIR$/EIS-Module/CreditCardWS/CreditCardWS.iml" />
@@ -18,7 +17,6 @@
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/EIS-Module.iml" filepath="$PROJECT_DIR$/EIS-Module/EIS-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/ESB-Module.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/ESB-Module.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging.iml" filepath="$PROJECT_DIR$/Microservices-Module/Lodging/Lodging.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Lodging-Proxy-Service.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Lodging-Proxy-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Lodging-Proxy-Services/Lodging-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Lodging-Proxy-Services/Lodging-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services/Lodging-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Lodging/Lodging-Services/Lodging-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" filepath="$PROJECT_DIR$/Microservices-Module/Microservices-Module.iml" />
@@ -34,6 +32,7 @@
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services/Product-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services/Product-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Products/Product-Services/Product-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Products/Product-Services/Product-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Products/Products.iml" filepath="$PROJECT_DIR$/Microservices-Module/Products/Products.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Security-Proxy-Services/Security-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Security-Proxy-Services/Security-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/EIS-Module/SpectaclesWS/SpectaclesWS.iml" filepath="$PROJECT_DIR$/EIS-Module/SpectaclesWS/SpectaclesWS.iml" />
       <module fileurl="file://$PROJECT_DIR$/TouresBalon-Enterprise.iml" filepath="$PROJECT_DIR$/TouresBalon-Enterprise.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services/Transport-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Transports/Transport-Services/Transport-Services.iml" />
