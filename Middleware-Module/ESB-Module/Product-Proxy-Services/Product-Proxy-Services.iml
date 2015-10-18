@@ -5,7 +5,7 @@
       <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="Product-Proxy-Services-1.0.0-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="co.com.touresbalon.foundation.middleware.Product-Proxy-Services" bundleVersion="1.0.0.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
         <additionalProperties>
           <property key="Bundle-Name" value="Product-Proxy-Services" />
-          <property key="Include-Resource" value="canonical/canonical_schema.xsd=$MODULE_DIR$/src/main/resources/canonical/canonical_schema.xsd,log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,META-INF/spring/service-infrastructure.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/service-infrastructure.xml" />
+          <property key="Include-Resource" value="canonical/canonical_schema.xsd=$MODULE_DIR$/src/main/resources/canonical/canonical_schema.xsd,log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,META-INF/spring/service-infrastructure.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/service-infrastructure.xml,static/product-used-error.xml=$MODULE_DIR$/src/main/resources/static/product-used-error.xml" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>
