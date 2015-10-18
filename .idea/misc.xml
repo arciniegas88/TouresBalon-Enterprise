@@ -6,6 +6,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/CreditCard-Adapter" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Customer-Proxy-Services" />
+    <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Microfocus-Adapter" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderAuditor-Proxy-Services" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderProcessing-Proxy-Services" />

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<definitions name="MicrofocusAdapterWS"
+             targetNamespace="http://touresbalon.com.co/accounting/service/task/1.0.0"
+             xmlns:tns="http://touresbalon.com.co/accounting/service/task/1.0.0"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+    <types>
+        <schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+                targetNamespace="http://touresbalon.com.co/accounting/service/task/1.0.0"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <element name="AccountTransaction">
+                <complexType>
+                    <sequence>
+                        <element name="TransactionId" type="string"/>
+                        <element name="TransactionNumber" type="string"/>
+                        <element name="TransactionYear" type="integer"/>
+                        <element name="TransactionMonth" type="integer"/>
+                        <element name="TransactionDay" type="integer"/>
+                        <element name="AccountId" type="string"/>
+                        <element name="WithdrawalAmount" type="double"/>
+                        <element name="DepositAmount" type="double"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+        </schema>
+    </types>
+
+    <message name="createCompletedOrder">
+        <part name="payload" element="tns:AccountTransaction"/>
+    </message>
+
+    <message name="createExecutedPayment">
+        <part name="payload" element="tns:AccountTransaction"/>
+    </message>
+
+    <portType name="MicrofocusAdapterPortType">
+        <operation name="createCompletedOrder">
+            <input message="tns:createCompletedOrder"/>
+        </operation>
+        <operation name="createExecutedPayment">
+            <input message="tns:createExecutedPayment"/>
+        </operation>
+    </portType>
+
+    <binding name="MicrofocusAdapterSoapBinding" type="tns:MicrofocusAdapterPortType">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="createCompletedOrder">
+            <soap:operation soapAction="createCompletedOrder"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+        </operation>
+        <operation name="createExecutedPayment">
+            <soap:operation soapAction="createExecutedPayment"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+        </operation>
+    </binding>
+
+    <service name="MicrofocusAdapterWS">
+        <port name="MicrofocusAdapterPort" binding="tns:MicrofocusAdapterSoapBinding">
+            <soap:address location="http://localhost:9080/MicrofocusAdapterWS"/>
+        </port>
+    </service>
+</definitions>	
+	

@@ -118,6 +118,20 @@
         <processorPath useClasspath="true" />
         <module name="OrderProcessingError-Proxy-Services" />
       </profile>
+      <profile default="false" name="Annotation profile for OrderAuditor-Proxy-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="OrderAuditor-Proxy-Services" />
+      </profile>
+      <profile default="false" name="Annotation profile for Microfocus-Adapter" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Microfocus-Adapter" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -137,6 +151,7 @@
       <module name="HiltonBookingWS" target="1.6" />
       <module name="Lodging" target="1.5" />
       <module name="Lodging-Services" target="1.6" />
+      <module name="Microfocus-Adapter" target="1.7" />
       <module name="Microservices-Module" target="1.5" />
       <module name="Middleware-Module" target="1.5" />
       <module name="OMS" target="1.5" />
