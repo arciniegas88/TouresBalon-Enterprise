@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Date;
 
 
@@ -20,7 +19,6 @@ import java.util.Date;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="orderId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="hotelId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="room" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="guestName" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -36,7 +34,6 @@ import java.util.Date;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "doReservationReq_type", propOrder = {
-        "orderId",
         "hotelId",
     "room",
     "guestName",
@@ -44,8 +41,6 @@ import java.util.Date;
     "checkOut"
 })
 public class DoReservationReqType {
-
-    protected long orderId;
     protected long hotelId;
     protected long room;
     @XmlElement(required = true)
@@ -56,22 +51,6 @@ public class DoReservationReqType {
     @XmlElement(required = true)
     @XmlSchemaType(name = "date")
     protected Date checkOut;
-
-    /**
-     * Gets the value of the orderId property.
-     *
-     */
-    public long getOrderId() {
-        return orderId;
-    }
-
-    /**
-     * Sets the value of the orderId property.
-     *
-     */
-    public void setOrderId(long value) {
-        this.orderId = value;
-    }
 
     /**
      * Gets the value of the hotelId property.

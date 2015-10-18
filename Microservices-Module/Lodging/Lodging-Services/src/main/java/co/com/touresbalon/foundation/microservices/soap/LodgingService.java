@@ -3,22 +3,17 @@ package co.com.touresbalon.foundation.microservices.soap;
 import co.com.touresbalon.foundation.microservices.boundary.LodgingBoundary;
 import co.com.touresbalon.foundation.microservices.dto.soap.*;
 import co.com.touresbalon.foundation.microservices.entity.TouresbalonReservations;
-import co.com.touresbalon.foundation.microservices.soap.infrastructure.LodgingPort;
-import co.com.touresbalon.foundation.microservices.soap.infrastructure.ObjectFactory;
 
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * Created by harcalejo on 2/10/15.
  */
 @WebService(name = "LodgingPort", targetNamespace = "http://touresbalon.com.co/task/lodging/v1")
-public class LodgingService{
+public class LodgingService {
 
     @Inject
     private LodgingBoundary boundary;
@@ -31,14 +26,17 @@ public class LodgingService{
         co.com.touresbalon.foundation.microservices.entity.Room room = boundary.consultRoomsAvailability(body.getCheckIn(),
                 body.getCheckOut(), body.getHotelBrand(), body.getCity());
 
-        TouresbalonReservations reservation = boundary.doReservation(room.getHotelId(), room.getRoomNumber(), body.getGuestName(), body.getCheckIn(), body.getCheckOut());
-
+        TouresbalonReservations reservation;
         Room roomType = new Room();
+        if (room.getRoomNumber() == -1L) {
+            reservation = boundary.doReservation(room.getHotelId(), room.getRoomNumber(), body.getGuestName(), body.getCheckIn(), body.getCheckOut());
+            roomType.setReservationId(reservation.getReservationId());
+        }
+
         roomType.setHotelId(room.getHotelId());
         roomType.setPrice(room.getPrice());
         roomType.setRoomNumber(room.getRoomNumber());
         roomType.setType(room.getType());
-        roomType.setReservationId(reservation.getReservationId());
 
         response.setRoom(roomType);
 
@@ -88,7 +86,7 @@ public class LodgingService{
     public GetReservationResType getReservation(
             @WebParam(name = "getReservationRequest")
             GetReservationReqType body)
-            throws FaultMsg{
+            throws FaultMsg {
 
         TouresbalonReservations reservation = boundary.getReservation(body.getReservationId());
 

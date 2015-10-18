@@ -1,6 +1,5 @@
 package co.com.touresbalon.foundation.microservices.boundary;
 
-import co.com.touresbalon.foundation.crosscutting.exceptions.BusinessException;
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
 import co.com.touresbalon.foundation.microservices.dto.soap.FaultMsg;
 import co.com.touresbalon.foundation.microservices.dto.soap.SystemFault;
