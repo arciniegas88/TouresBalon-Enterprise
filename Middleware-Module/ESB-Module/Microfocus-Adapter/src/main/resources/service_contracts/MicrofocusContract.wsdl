@@ -13,11 +13,7 @@
             <element name="AccountTransaction">
                 <complexType>
                     <sequence>
-                        <element name="TransactionId" type="string"/>
                         <element name="TransactionNumber" type="string"/>
-                        <element name="TransactionYear" type="integer"/>
-                        <element name="TransactionMonth" type="integer"/>
-                        <element name="TransactionDay" type="integer"/>
                         <element name="TransportProvider" type="string"/>
                         <element name="LodgingProvider" type="string"/>
                         <element name="WithdrawalAmount" type="double"/>
