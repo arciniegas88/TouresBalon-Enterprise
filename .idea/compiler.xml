@@ -132,6 +132,13 @@
         <processorPath useClasspath="true" />
         <module name="Microfocus-Adapter" />
       </profile>
+      <profile default="false" name="Annotation profile for CreditCard-Adapter" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="CreditCard-Adapter" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
