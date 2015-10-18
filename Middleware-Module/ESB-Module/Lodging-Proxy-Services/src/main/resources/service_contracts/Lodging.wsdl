@@ -53,7 +53,6 @@
 
             <xs:complexType name="doReservationReq_type">
                 <xs:sequence>
-                    <xs:element name="orderId" type="xs:long"/>
                     <xs:element name="hotelId" type="xs:long"/>
                     <xs:element name="room" type="xs:long"/>
                     <xs:element name="guestName" type="xs:string"/>
