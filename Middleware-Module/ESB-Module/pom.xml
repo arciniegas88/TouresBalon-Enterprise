@@ -18,6 +18,7 @@
 		<module>Customer-Proxy-Services</module>
         <module>CreditCard-Adapter</module>
         <module>OrderProcessing-Proxy-Services</module>
+        <module>OrderProcessingError-Proxy-Services</module>
         <module>Security-Proxy-Services</module>
     </modules>
 
