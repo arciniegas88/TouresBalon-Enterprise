@@ -3,38 +3,43 @@ package co.com.foundation.middleware.model;
 import org.apache.camel.dataformat.bindy.annotation.DataField;
 import org.apache.camel.dataformat.bindy.annotation.FixedLengthRecord;
 
+import java.util.Calendar;
+import java.util.UUID;
+
 /**
  * Created by garciniegas on 18/10/2015.
  */
 
 
-@FixedLengthRecord(length = 70)
+@FixedLengthRecord(length = 100)
 public class AccountTransactionCobol {
 
-    @DataField(pos = 1, length=10,align = "L")
+    @DataField(pos = 1, length=40,align = "L")
     private String TransactionId;
-    @DataField(pos = 11, length=10,align = "L")
+    @DataField(pos = 41, length=10,align = "L")
     private String TransactionNumber;
-    @DataField(pos = 21, length=6,align = "L")
+    @DataField(pos = 51, length=6,align = "L")
     private String TransactionYear;
-    @DataField(pos = 27, length=4,align = "L")
+    @DataField(pos = 57, length=4,align = "L")
     private String TransactionMonth;
-    @DataField(pos = 31, length=4,align = "L")
+    @DataField(pos = 61, length=4,align = "L")
     private String TransactionDay;
-    @DataField(pos = 35, length=10,align = "L")
+    @DataField(pos = 65, length=10,align = "L")
     private String AccountId;
-    @DataField(pos = 45, length=10,align = "L")
+    @DataField(pos = 75, length=10,align = "L")
     private String WithdrawalAmount;
-    @DataField(pos = 55, length=10,align = "L")
+    @DataField(pos = 85, length=10,align = "L")
     private String DepositAmount;
 
     public AccountTransactionCobol( AccountTransaction at ){
 
-        TransactionId = at.getTransactionId();
+        Calendar c = Calendar.getInstance();
+
+        TransactionId = UUID.randomUUID().toString();
         TransactionNumber = at.getTransactionNumber();
-        TransactionYear = at.getTransactionYear();
-        TransactionMonth = at.getTransactionMonth();
-        TransactionDay = at.getTransactionDay();
+        TransactionYear = String.valueOf( c.get( Calendar.YEAR ));
+        TransactionMonth = String.valueOf( c.get( Calendar.MONTH ));
+        TransactionDay = String.valueOf( c.get( Calendar.DAY_OF_MONTH ));
 
         String transportCode = "1000";
 
@@ -69,6 +74,10 @@ public class AccountTransactionCobol {
         AccountId = transportCode+lodigingCode;
         WithdrawalAmount = at.getWithdrawalAmount();
         DepositAmount = at.getDepositAmount();
+    }
+
+    public static void main( String []a ){
+        System.out.println(UUID.randomUUID().toString());
     }
 
     public String getTransactionId() {

@@ -3,7 +3,9 @@
 	xmlns:sample="http://touresbalon.com.co/orders/service/task/1.0.0"
 	xmlns:task_1.0.0="http://touresbalon.com.co/salesorder/service/task/1.0.0"
 	xmlns:ns2="http://touresbalon.com.co/transport/service/task/1.0.0"
-	xmlns:ns3="http://spectacles.com.co/service/task/1.0.0" >
+	xmlns:ns3="http://spectacles.com.co/service/task/1.0.0" 
+	xmlns:lg4="http://touresbalon.com.co/task/lodging/v1" >
+	
 	<process name="sample:Cancel-Orders-BPEL">
 		<active>true</active>
 		<retired>false</retired>
@@ -19,6 +21,10 @@
 		</invoke>
 		<invoke partnerLink="PartnerLinkSpectaclesWS">
 			<service name="ns3:SpectaclesWSService" port="SpectaclesWSPort" />
+		</invoke>
+		
+		<invoke partnerLink="PartnerLinkLodgingWS">
+			<service name="lg4:LodgingServiceService" port="LodgingPortPort" />
 		</invoke>
 	</process>
 </deploy>
