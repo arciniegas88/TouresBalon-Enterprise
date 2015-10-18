@@ -21,6 +21,7 @@
         <module>OrderProcessing-Proxy-Services</module>
         <module>OrderAuditor-Proxy-Services</module>
         <module>Security-Proxy-Services</module>
+        <module>Security-Adapter</module>
     </modules>
 
 </project>
