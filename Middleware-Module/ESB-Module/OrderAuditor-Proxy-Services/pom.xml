@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>co.com.touresbalon.foundation.middleware</groupId>
-	<artifactId>OrderProcessingError-Proxy-Services</artifactId>
+	<artifactId>OrderAuditor-Proxy-Services</artifactId>
 	<packaging>bundle</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>OrderProcessingError-Proxy-Services</name>
+	<name>OrderAuditor-Proxy-Services</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

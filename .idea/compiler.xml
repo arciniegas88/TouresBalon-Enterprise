@@ -111,6 +111,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
       </profile>
+      <profile default="false" name="Annotation profile for OrderProcessingError-Proxy-Services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="OrderProcessingError-Proxy-Services" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -137,7 +144,9 @@
       <module name="OMS-Theme" target="1.5" />
       <module name="Order-Proxy-Services" target="1.7" />
       <module name="Order-Services" target="1.7" />
+      <module name="OrderAuditor-Proxy-Services" target="1.7" />
       <module name="OrderProcessing-Proxy-Services" target="1.7" />
+      <module name="OrderProcessingError-Proxy-Services" target="1.7" />
       <module name="Orders" target="1.5" />
       <module name="Presentation-Module" target="1.5" />
       <module name="Product-Proxy-Services" target="1.7" />

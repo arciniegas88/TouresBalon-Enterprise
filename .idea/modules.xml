@@ -26,6 +26,7 @@
       <module fileurl="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/OMS-Theme.iml" filepath="$PROJECT_DIR$/Presentation-Module/OMS/OMS-Theme/OMS-Theme.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services/Order-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services/Order-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Orders/Order-Services/Order-Services.iml" filepath="$PROJECT_DIR$/Microservices-Module/Orders/Order-Services/Order-Services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderAuditor-Proxy-Services/OrderAuditor-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderAuditor-Proxy-Services/OrderAuditor-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderProcessing-Proxy-Services/OrderProcessing-Proxy-Services.iml" filepath="$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderProcessing-Proxy-Services/OrderProcessing-Proxy-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microservices-Module/Orders/Orders.iml" filepath="$PROJECT_DIR$/Microservices-Module/Orders/Orders.iml" />
       <module fileurl="file://$PROJECT_DIR$/Presentation-Module/Presentation-Module.iml" filepath="$PROJECT_DIR$/Presentation-Module/Presentation-Module.iml" />
