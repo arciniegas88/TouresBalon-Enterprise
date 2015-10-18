@@ -7,15 +7,22 @@
 	xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
 	xmlns:ns1="http://touresbalon.com.co/salesorder/service/task/1.0.0"
 	xmlns:ns2="http://touresbalon.com.co/transport/service/task/1.0.0"
-	xmlns:ns3="http://spectacles.com.co/service/task/1.0.0">
+	xmlns:ns3="http://spectacles.com.co/service/task/1.0.0" xmlns:xsd="http://touresbalon.com.co/model/lodging/schema/v1"
+	xmlns:lg4="http://touresbalon.com.co/task/lodging/v1">
 
 	<!-- Import the client WSDL -->
+
+	<bpel:import namespace="http://touresbalon.com.co/task/lodging/v1"
+		location="wsdl/LodgingServiceWS.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"></bpel:import>
 	<bpel:import namespace="http://spectacles.com.co/service/task/1.0.0"
-		location="wsdl/SpectaclesWS.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"></bpel:import>
+		location="wsdl/SpectaclesWS.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" />
+
 	<bpel:import namespace="http://touresbalon.com.co/transport/service/task/1.0.0"
-		location="wsdl/TransportWS.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"></bpel:import>
+		location="wsdl/TransportWS.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" />
+
 	<bpel:import namespace="http://touresbalon.com.co/salesorder/service/task/1.0.0"
-		location="wsdl/SalesOrderWS.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"></bpel:import>
+		location="wsdl/SalesOrderWS.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" />
+
 	<bpel:import location="Cancel-Orders-BPELArtifacts.wsdl"
 		namespace="http://touresbalon.com.co/orders/service/task/1.0.0"
 		importType="http://schemas.xmlsoap.org/wsdl/" />
@@ -36,11 +43,14 @@
 		<bpel:partnerLink name="PartnerLinkTransportWS"
 			partnerLinkType="ns2:TransportWS_PLT" partnerRole="TransportWS_Role"
 			initializePartnerRole="yes" />
-			
+
 		<bpel:partnerLink name="PartnerLinkSpectaclesWS"
-			partnerLinkType="ns3:SpectaclesWS_PLT" partnerRole="SpectaclesWS_Role" 
+			partnerLinkType="ns3:SpectaclesWS_PLT" partnerRole="SpectaclesWS_Role"
 			initializePartnerRole="yes" />
-			
+
+		<bpel:partnerLink name="PartnerLinkLodgingWS"
+			partnerLinkType="lg4:LodgingServiceWS_PLT" partnerRole="LodgingServiceWS_Role"
+			initializePartnerRole="yes" />
 	</bpel:partnerLinks>
 
 	<!-- ================================================================= -->
@@ -59,106 +69,123 @@
 		<bpel:variable name="counter" element="tns:IteratorCounter"></bpel:variable>
 		<bpel:variable name="cancelTransportInput" messageType="ns2:cancelReservation"></bpel:variable>
 		<bpel:variable name="cancelSpectacleInput" messageType="ns3:cancelSpectacleReservation"></bpel:variable>
-        <bpel:variable name="cancelSpectacleOutput" messageType="ns3:cancelSpectacleReservationResponse"></bpel:variable>
-    </bpel:variables>
+		<bpel:variable name="cancelSpectacleOutput"
+			messageType="ns3:cancelSpectacleReservationResponse"></bpel:variable>
+
+
+		<bpel:variable name="cancelLodgInput" messageType="lg4:cancelReservation"></bpel:variable>
+		<bpel:variable name="cancelLodgOutput" messageType="lg4:cancelReservationResponse"></bpel:variable>
+	</bpel:variables>
 
 	<!-- ================================================================= -->
 	<!-- ORCHESTRATION LOGIC -->
 	<!-- Set of activities coordinating the flow of messages across the -->
 	<!-- services integrated within this business process -->
-	<!-- ================================================================= -->         
-    <bpel:sequence name="main">
-        <!-- Receive input from requester. 
-             Note: This maps to operation defined in Cancel-Orders-BPEL.wsdl 
-             --><bpel:receive name="receiveInput" partnerLink="client" portType="tns:Cancel-Orders-BPEL" operation="process" variable="input" createInstance="yes" />
-    
-        <bpel:assign validate="no" name="Assign-get-order-input">
-            <bpel:copy>
-                <bpel:from><bpel:literal><tns:searchSalesOrderById xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <salesOrderId>0</salesOrderId>
-</tns:searchSalesOrderById>
-</bpel:literal></bpel:from>
-                <bpel:to variable="getOrderInput" part="parameters"></bpel:to>
-            </bpel:copy>
-            <bpel:copy>
-                <bpel:from part="payload" variable="input">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:orderId]]></bpel:query>
-                </bpel:from>
-                <bpel:to part="parameters" variable="getOrderInput">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+	<!-- ================================================================= -->
+	<bpel:sequence name="main">
+		<!-- Receive input from requester. Note: This maps to operation defined 
+			in Cancel-Orders-BPEL.wsdl -->
+		<bpel:receive name="receiveInput" partnerLink="client"
+			portType="tns:Cancel-Orders-BPEL" operation="process" variable="input"
+			createInstance="yes" />
+
+		<bpel:assign validate="no" name="Assign-get-order-input">
+			<bpel:copy>
+				<bpel:from>
+					<bpel:literal>
+						<tns:searchSalesOrderById
+							xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+							<salesOrderId>0</salesOrderId>
+						</tns:searchSalesOrderById>
+					</bpel:literal>
+				</bpel:from>
+				<bpel:to variable="getOrderInput" part="parameters"></bpel:to>
+			</bpel:copy>
+			<bpel:copy>
+				<bpel:from part="payload" variable="input">
+					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:orderId]]></bpel:query>
+				</bpel:from>
+				<bpel:to part="parameters" variable="getOrderInput">
+					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                         <![CDATA[salesOrderId]]>
-                    </bpel:query>
-                </bpel:to>
-            </bpel:copy>
-        </bpel:assign>
-        
-        
-        <bpel:invoke name="Invoke-get-order" partnerLink="PartnerLinkSalesOrderWS" operation="searchSalesOrderById" portType="ns1:SalesOrderWS" inputVariable="getOrderInput" outputVariable="getOrderOutput"></bpel:invoke>
-        
-        <!-- Generate reply to synchronous request -->
-        
-        <bpel:assign validate="no" name="Assign-counter">
-            <bpel:copy>
-                <bpel:from><bpel:literal><tns:IteratorCounter xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:counter>0</tns:counter>
-  <tns:iterations>0</tns:iterations>
-</tns:IteratorCounter>
-</bpel:literal></bpel:from>
-                <bpel:to variable="counter"></bpel:to>
-            </bpel:copy>
-            <bpel:copy>
-                <bpel:from>
-                    <bpel:literal>1</bpel:literal>
-                </bpel:from>
-                <bpel:to variable="counter">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+					</bpel:query>
+				</bpel:to>
+			</bpel:copy>
+		</bpel:assign>
+
+
+		<bpel:invoke name="Invoke-get-order" partnerLink="PartnerLinkSalesOrderWS"
+			operation="searchSalesOrderById" portType="ns1:SalesOrderWS"
+			inputVariable="getOrderInput" outputVariable="getOrderOutput"></bpel:invoke>
+
+		<!-- Generate reply to synchronous request -->
+
+		<bpel:assign validate="no" name="Assign-counter">
+			<bpel:copy>
+				<bpel:from>
+					<bpel:literal>
+						<tns:IteratorCounter
+							xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+							<tns:counter>0</tns:counter>
+							<tns:iterations>0</tns:iterations>
+						</tns:IteratorCounter>
+					</bpel:literal>
+				</bpel:from>
+				<bpel:to variable="counter"></bpel:to>
+			</bpel:copy>
+			<bpel:copy>
+				<bpel:from>
+					<bpel:literal>1</bpel:literal>
+				</bpel:from>
+				<bpel:to variable="counter">
+					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                         <![CDATA[tns:counter]]>
-                    </bpel:query>
-                </bpel:to>
-            </bpel:copy>
-            <bpel:copy>
-                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+					</bpel:query>
+				</bpel:to>
+			</bpel:copy>
+			<bpel:copy>
+				<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+      
                     <![CDATA[count($getOrderOutput.parameters/return/orderItemList)]]>
-                </bpel:from>
-                <bpel:to variable="counter">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:iterations]]></bpel:query>
-                </bpel:to>
-            </bpel:copy>
-        </bpel:assign>
-        <bpel:while name="While-iterate-over-products">
-            <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$counter/tns:counter <= $counter/tns:iterations]]></bpel:condition>
-            <bpel:sequence>
-                <bpel:if name="If-status-is-provisioned">
-                    <bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$getOrderOutput.parameters/return/orderItemList[ round( $counter/tns:counter) ]/status = 'PROVISIONED']]></bpel:condition>
-                    <bpel:flow name="Flow">
-                <bpel:sequence name="CANCEL-TRANSPORT">
-                            <bpel:assign validate="no" name="Assign-message-transport">
-                                <bpel:copy>
-                                    <bpel:from><bpel:literal><tns:cancelReservation xmlns:tns="http://touresbalon.com.co/transport/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <reservation>
-    <chairNumber>chairNumber</chairNumber>
-    <outTime>outTime</outTime>
-    <sourceCity>sourceCity</sourceCity>
-    <targetCity>targetCity</targetCity>
-    <travelNumber>travelNumber</travelNumber>
-  </reservation>
-  <travelDate>2001-12-31T12:00:00</travelDate>
-  <provider>BOLIVARIANO</provider>
-</tns:cancelReservation>
-</bpel:literal></bpel:from>
-                                    <bpel:to variable="cancelTransportInput" part="parameters"></bpel:to>
-                                </bpel:copy>
-                                
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+				</bpel:from>
+				<bpel:to variable="counter">
+					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:iterations]]></bpel:query>
+				</bpel:to>
+			</bpel:copy>
+		</bpel:assign>
+		<bpel:while name="While-iterate-over-products">
+			<bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$counter/tns:counter <= $counter/tns:iterations]]></bpel:condition>
+			<bpel:sequence>
+				<bpel:if name="If-status-is-provisioned">
+					<bpel:condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$getOrderOutput.parameters/return/orderItemList[ round( $counter/tns:counter) ]/status = 'PROVISIONED']]></bpel:condition>
+					<bpel:flow name="Flow">
+						<bpel:sequence name="CANCEL-TRANSPORT">
+							<bpel:assign validate="no" name="Assign-message-transport">
+								<bpel:copy>
+									<bpel:from>
+										<bpel:literal>
+											<tns:cancelReservation
+												xmlns:tns="http://touresbalon.com.co/transport/service/task/1.0.0"
+												xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+												<reservation>
+													<chairNumber>chairNumber</chairNumber>
+													<outTime>outTime</outTime>
+													<sourceCity>sourceCity</sourceCity>
+													<targetCity>targetCity</targetCity>
+													<travelNumber>travelNumber</travelNumber>
+												</reservation>
+												<travelDate>2001-12-31T12:00:00</travelDate>
+												<provider>BOLIVARIANO</provider>
+											</tns:cancelReservation>
+										</bpel:literal>
+									</bpel:from>
+									<bpel:to variable="cancelTransportInput" part="parameters"></bpel:to>
+								</bpel:copy>
+
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -222,15 +249,15 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/transportChairNumber]]>
-                                    </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelTransportInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelTransportInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                             <![CDATA[reservation/chairNumber]]>
-                                        </bpel:query>
-                                    </bpel:to>
-                                </bpel:copy>
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+										</bpel:query>
+									</bpel:to>
+								</bpel:copy>
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -247,13 +274,13 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/transportOutTime]]>
-                                    </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelTransportInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[reservation/outTime]]></bpel:query>
-                                    </bpel:to>
-                                </bpel:copy>
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelTransportInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[reservation/outTime]]></bpel:query>
+									</bpel:to>
+								</bpel:copy>
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -279,13 +306,13 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/transportSourceCity]]>
-                                    </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelTransportInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[reservation/sourceCity]]></bpel:query>
-                                    </bpel:to>
-                                </bpel:copy>
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelTransportInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[reservation/sourceCity]]></bpel:query>
+									</bpel:to>
+								</bpel:copy>
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -298,13 +325,13 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/transportTargetCity]]>
-                                    </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelTransportInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[reservation/targetCity]]></bpel:query>
-                                    </bpel:to>
-                                </bpel:copy>
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelTransportInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[reservation/targetCity]]></bpel:query>
+									</bpel:to>
+								</bpel:copy>
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -346,15 +373,15 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/transportTravelNumber]]>
-                                    </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelTransportInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelTransportInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                             <![CDATA[reservation/travelNumber]]>
-                                        </bpel:query>
-                                    </bpel:to>
-                                </bpel:copy>
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+										</bpel:query>
+									</bpel:to>
+								</bpel:copy>
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -387,17 +414,17 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/transportTravelDate]]>
-                                    </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelTransportInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelTransportInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                             <![CDATA[travelDate]]>
-                                        </bpel:query>
-                                    </bpel:to>
-                                </bpel:copy>
-                                
-                                
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+										</bpel:query>
+									</bpel:to>
+								</bpel:copy>
+
+
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -413,37 +440,38 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/transportTravelProvider]]>
-                                    </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelTransportInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[provider]]></bpel:query>
-                                    </bpel:to>
-                                </bpel:copy>
-                                
-                            </bpel:assign>
-                            <bpel:invoke name="Invoke-cancel-transport" partnerLink="PartnerLinkTransportWS" operation="cancelReservation" portType="ns2:TransportWS" inputVariable="cancelTransportInput"></bpel:invoke>
-                            <bpel:empty name="cancel-transport-activity"></bpel:empty>
-            
-                </bpel:sequence>
-                <bpel:sequence name="CANCEL-SPECTACLE">
-                
-                            <bpel:assign validate="no" name="Assign-spectacle-activity">
-                                <bpel:copy>
-                                    <bpel:from><bpel:literal><tns:cancelSpectacleReservationResponse xmlns:tns="http://spectacles.com.co/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <return>true</return>
-</tns:cancelSpectacleReservationResponse>
-</bpel:literal></bpel:from>
-                                    <bpel:to variable="cancelSpectacleOutput" part="parameters"></bpel:to>
-                                </bpel:copy>
-                                <bpel:copy>
-                                    <bpel:from><bpel:literal><tns:cancelSpectacleReservation xmlns:tns="http://spectacles.com.co/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <idSpectacle>0</idSpectacle>
-  <idTicket>0</idTicket>
-</tns:cancelSpectacleReservation>
-</bpel:literal></bpel:from>
-                                    <bpel:to variable="cancelSpectacleInput" part="parameters"></bpel:to>
-                                </bpel:copy>
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelTransportInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[provider]]></bpel:query>
+									</bpel:to>
+								</bpel:copy>
+
+							</bpel:assign>
+							<bpel:invoke name="Invoke-cancel-transport"
+								partnerLink="PartnerLinkTransportWS" operation="cancelReservation"
+								portType="ns2:TransportWS" inputVariable="cancelTransportInput"></bpel:invoke>
+							<bpel:empty name="cancel-transport-activity"></bpel:empty>
+
+						</bpel:sequence>
+						<bpel:sequence name="CANCEL-SPECTACLE">
+
+							<bpel:assign validate="no" name="Assign-spectacle-activity">
+								
+								<bpel:copy>
+									<bpel:from>
+										<bpel:literal>
+											<tns:cancelSpectacleReservation
+												xmlns:tns="http://spectacles.com.co/service/task/1.0.0"
+												xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+												<idSpectacle>0</idSpectacle>
+												<idTicket>0</idTicket>
+											</tns:cancelSpectacleReservation>
+										</bpel:literal>
+									</bpel:from>
+									<bpel:to variable="cancelSpectacleInput" part="parameters"></bpel:to>
+								</bpel:copy>
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -459,13 +487,13 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/spectacleId]]>
-                                    </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelSpectacleInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[idSpectacle]]></bpel:query>
-                                    </bpel:to>
-                                </bpel:copy>
-                                <bpel:copy>
-                                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelSpectacleInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[idSpectacle]]></bpel:query>
+									</bpel:to>
+								</bpel:copy>
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         
                                         
                                         
@@ -481,25 +509,69 @@
                                         
                                         
                                         <![CDATA[$getOrderOutput.parameters/return/orderItemList[round($counter/tns:counter)]/spectacleTicket]]>
+									</bpel:from>
+									<bpel:to part="parameters" variable="cancelSpectacleInput">
+										<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[idTicket]]></bpel:query>
+									</bpel:to>
+								</bpel:copy>
+
+							</bpel:assign>
+							<bpel:invoke name="Invoke-spectacle-activity"
+								partnerLink="PartnerLinkSpectaclesWS" operation="cancelSpectacleReservation"
+								portType="ns3:SpectaclesWS" inputVariable="cancelSpectacleInput"
+								outputVariable="cancelSpectacleOutput"></bpel:invoke>
+							<bpel:empty name="cancel-spectacle-activity"></bpel:empty>
+						</bpel:sequence>
+						<bpel:sequence name="CANCEL-LODGING">
+
+							<bpel:assign validate="no" name="Assign-lodging-activity">
+								<bpel:copy>
+									<bpel:from>
+										<bpel:literal>
+											<tns:cancelReservation
+												xmlns:tns="http://touresbalon.com.co/task/lodging/v1"
+												xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+												<cancelReservationRequest>
+													<reservationId>0</reservationId>
+												</cancelReservationRequest>
+											</tns:cancelReservation>
+										</bpel:literal>
+									</bpel:from>
+									<bpel:to variable="cancelLodgInput" part="parameters"></bpel:to>
+								</bpel:copy>
+								<bpel:copy>
+									<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <![CDATA[$cancelLodgInput.parameters/cancelReservationRequest[$counter/tns:counter]/reservationId]]>
                                     </bpel:from>
-                                    <bpel:to part="parameters" variable="cancelSpectacleInput">
-                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[idTicket]]></bpel:query>
+                                    <bpel:to part="parameters" variable="cancelLodgInput">
+                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[cancelReservationRequest/reservationId]]></bpel:query>
                                     </bpel:to>
                                 </bpel:copy>
                                 
                             </bpel:assign>
-                            <bpel:invoke name="Invoke-spectacle-activity" partnerLink="PartnerLinkSpectaclesWS" operation="cancelSpectacleReservation" portType="ns3:SpectaclesWS" inputVariable="cancelSpectacleInput" outputVariable="cancelSpectacleOutput"></bpel:invoke>
-                            <bpel:empty name="cancel-spectacle-activity"></bpel:empty>
-            </bpel:sequence>
-                <bpel:sequence name="CANCEL-LODGING">
-                <bpel:empty name="cancel-lodging-activity"></bpel:empty>
-            </bpel:sequence></bpel:flow>
-                </bpel:if>
-                
-                <bpel:assign validate="no" name="Assign-increment">
-                    
-                    <bpel:copy>
-                        <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                            <bpel:invoke name="Invoke-lodging-activity" partnerLink="PartnerLinkLodgingWS" operation="cancelReservation" portType="lg4:LodgingPort" inputVariable="cancelLodgInput" outputVariable="cancelLodgOutput"></bpel:invoke>
+                            <bpel:empty name="cancel-lodging-activity"></bpel:empty>
+						</bpel:sequence>
+					</bpel:flow>
+				</bpel:if>
+
+				<bpel:assign validate="no" name="Assign-increment">
+
+					<bpel:copy>
+						<bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                             
                             
                             
@@ -508,84 +580,93 @@
                             
                             
                             <![CDATA[$counter/tns:counter +1]]>
-                        </bpel:from>
-                        <bpel:to variable="counter">
-                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+						</bpel:from>
+						<bpel:to variable="counter">
+							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                 <![CDATA[tns:counter]]>
-                            </bpel:query>
-                        </bpel:to>
-                    </bpel:copy>
-                </bpel:assign>
-            </bpel:sequence>
-        </bpel:while>
-        
-        <bpel:assign validate="no" name="Assign-order-details">
-            <bpel:copy>
-                <bpel:from><bpel:literal><tns:changeSalesOrderStatus xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <order>
-    <comments>comments</comments>
-    <custDocumentNumber>custDocumentNumber</custDocumentNumber>
-    <custDocumentType>custDocumentType</custDocumentType>
-    <id>0</id>
-    <orderDate>2001-12-31T12:00:00</orderDate>
-    <orderItemList>
-      <id>0</id>
-      <itemNo>itemNo</itemNo>
-      <lodgingComments>lodgingComments</lodgingComments>
-      <orderId></orderId>
-      <price>0</price>
-      <productId>0</productId>
-      <productName>productName</productName>
-      <spectacleComments>spectacleComments</spectacleComments>
-      <spectacleId>0</spectacleId>
-      <spectacleTicket>0</spectacleTicket>
-      <status>status</status>
-      <transportChairNumber>transportChairNumber</transportChairNumber>
-      <transportComments>transportComments</transportComments>
-      <transportOutTime>transportOutTime</transportOutTime>
-      <transportSourceCity>transportSourceCity</transportSourceCity>
-      <transportTargetCity>transportTargetCity</transportTargetCity>
-      <transportTravelDate>2001-12-31T12:00:00</transportTravelDate>
-      <transportTravelNumber>transportTravelNumber</transportTravelNumber>
-    </orderItemList>
-    <price>0</price>
-    <status>status</status>
-  </order>
-</tns:changeSalesOrderStatus>
-</bpel:literal></bpel:from>
-                <bpel:to variable="updateOrderInput" part="parameters"></bpel:to>
-            </bpel:copy>
-            <bpel:copy>
-                <bpel:from part="payload" variable="input">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:orderId]]></bpel:query>
-                </bpel:from>
-                <bpel:to part="parameters" variable="updateOrderInput">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+							</bpel:query>
+						</bpel:to>
+					</bpel:copy>
+				</bpel:assign>
+			</bpel:sequence>
+		</bpel:while>
+
+		<bpel:assign validate="no" name="Assign-order-details">
+			<bpel:copy>
+				<bpel:from>
+					<bpel:literal>
+						<tns:changeSalesOrderStatus
+							xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+							<order>
+								<comments>comments</comments>
+								<custDocumentNumber>custDocumentNumber</custDocumentNumber>
+								<custDocumentType>custDocumentType</custDocumentType>
+								<id>0</id>
+								<orderDate>2001-12-31T12:00:00</orderDate>
+								<orderItemList>
+									<id>0</id>
+									<itemNo>itemNo</itemNo>
+									<lodgingComments>lodgingComments</lodgingComments>
+									<orderId></orderId>
+									<price>0</price>
+									<productId>0</productId>
+									<productName>productName</productName>
+									<spectacleComments>spectacleComments</spectacleComments>
+									<spectacleId>0</spectacleId>
+									<spectacleTicket>0</spectacleTicket>
+									<status>status</status>
+									<transportChairNumber>transportChairNumber
+									</transportChairNumber>
+									<transportComments>transportComments</transportComments>
+									<transportOutTime>transportOutTime</transportOutTime>
+									<transportSourceCity>transportSourceCity</transportSourceCity>
+									<transportTargetCity>transportTargetCity</transportTargetCity>
+									<transportTravelDate>2001-12-31T12:00:00</transportTravelDate>
+									<transportTravelNumber>transportTravelNumber
+									</transportTravelNumber>
+								</orderItemList>
+								<price>0</price>
+								<status>status</status>
+							</order>
+						</tns:changeSalesOrderStatus>
+					</bpel:literal>
+				</bpel:from>
+				<bpel:to variable="updateOrderInput" part="parameters"></bpel:to>
+			</bpel:copy>
+			<bpel:copy>
+				<bpel:from part="payload" variable="input">
+					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:orderId]]></bpel:query>
+				</bpel:from>
+				<bpel:to part="parameters" variable="updateOrderInput">
+					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                         <![CDATA[order/id]]>
-                    </bpel:query>
-                </bpel:to>
-            </bpel:copy>
-            <bpel:copy>
-                <bpel:from>
-                    <bpel:literal>REJECTED</bpel:literal>
-                </bpel:from>
-                <bpel:to part="parameters" variable="updateOrderInput">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/status]]></bpel:query>
-                </bpel:to>
-            </bpel:copy>
-            <bpel:copy>
-                <bpel:from>
-                    <bpel:literal>THE ORDER WAS REJECTED</bpel:literal>
-                </bpel:from>
-                <bpel:to part="parameters" variable="updateOrderInput">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/comments]]></bpel:query>
-                </bpel:to>
-            </bpel:copy>
-        </bpel:assign>
-        <bpel:invoke name="Invoke-update-order-status" partnerLink="PartnerLinkSalesOrderWS" operation="changeSalesOrderStatus" portType="ns1:SalesOrderWS" inputVariable="updateOrderInput"></bpel:invoke>
-        
-    
-    
-    </bpel:sequence>
+					</bpel:query>
+				</bpel:to>
+			</bpel:copy>
+			<bpel:copy>
+				<bpel:from>
+					<bpel:literal>REJECTED</bpel:literal>
+				</bpel:from>
+				<bpel:to part="parameters" variable="updateOrderInput">
+					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/status]]></bpel:query>
+				</bpel:to>
+			</bpel:copy>
+			<bpel:copy>
+				<bpel:from>
+					<bpel:literal>THE ORDER WAS REJECTED</bpel:literal>
+				</bpel:from>
+				<bpel:to part="parameters" variable="updateOrderInput">
+					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[order/comments]]></bpel:query>
+				</bpel:to>
+			</bpel:copy>
+		</bpel:assign>
+		<bpel:invoke name="Invoke-update-order-status"
+			partnerLink="PartnerLinkSalesOrderWS" operation="changeSalesOrderStatus"
+			portType="ns1:SalesOrderWS" inputVariable="updateOrderInput"></bpel:invoke>
+
+
+
+	</bpel:sequence>
 </bpel:process>
 
