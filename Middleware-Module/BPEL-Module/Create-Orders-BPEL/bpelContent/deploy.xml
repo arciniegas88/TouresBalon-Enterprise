@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:b4p="http://docs.oasis-open.org/ns/bpel4people/bpel4people/200803" xmlns:bpel="http://touresbalon.com.co/orders/service/task/1.0.0" xmlns:email="http://tempuri.org/" xmlns:error="http://OrderProcessingError.com" xmlns:ht="http://touresbalon.com.co/salesorder/service/utility/1.0.0" xmlns:lodging="http://touresbalon.com.co/task/lodging/v1" xmlns:rules="http://touresbalon.com.co/businessrules/service/utility/1.0.0" xmlns:so="http://touresbalon.com.co/salesorder/service/task/1.0.0" xmlns:spectacle="http://spectacles.com.co/service/task/1.0.0" xmlns:transport="http://touresbalon.com.co/transport/service/task/1.0.0" xmlns:ws="http://redeban.com/creditcards/ws">
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:b4p="http://docs.oasis-open.org/ns/bpel4people/bpel4people/200803" xmlns:bpel="http://touresbalon.com.co/orders/service/task/1.0.0" xmlns:email="http://tempuri.org/" xmlns:error="http://touresbalon.com.co/auditor/service/entity/1.0.0" xmlns:ht="http://touresbalon.com.co/salesorder/service/utility/1.0.0" xmlns:lodging="http://touresbalon.com.co/task/lodging/v1" xmlns:rules="http://touresbalon.com.co/businessrules/service/utility/1.0.0" xmlns:so="http://touresbalon.com.co/salesorder/service/task/1.0.0" xmlns:spectacle="http://spectacles.com.co/service/task/1.0.0" xmlns:transport="http://touresbalon.com.co/transport/service/task/1.0.0" xmlns:ws="http://redeban.com/creditcards/ws" xmlns:microfocus="http://touresbalon.com.co/accounting/service/entity/1.0.0">
   <process name="bpel:Create-Orders-BPEL">
     <active>true</active>
     <retired>false</retired>
@@ -36,6 +36,9 @@
     </invoke>
     <invoke partnerLink="OrderProcessingErrorWSPartnerLink">
       <service name="error:orderProcessingErrorService" port="orderProcessingErrorPortPort"/>
+    </invoke>
+	<invoke partnerLink="MicrofocusWSPartnerLink">
+      <service name="microfocus:MicrofocusAdapterWS" port="MicrofocusAdapterPort"/>
     </invoke>
   </process>
 </deploy>

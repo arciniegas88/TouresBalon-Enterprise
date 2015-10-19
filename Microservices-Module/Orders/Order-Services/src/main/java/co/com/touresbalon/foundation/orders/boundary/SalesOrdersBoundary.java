@@ -117,6 +117,9 @@ public class SalesOrdersBoundary {
                 .setParameter("LODGING_COMMENTS", oi.getLodgingComments())
                 .setParameter("ORDER_ID", oi.getOrderId().getId())
                 .setParameter("ITEM_NO", itemNo)
+                .setParameter("LODGING_PROVIDER", oi.getLodgingProvider())
+                .setParameter("LODGING_RESERVATION_PROVIDER", oi.getLodgingReservationProvider())
+                .setParameter("TRANSPORT_TRAVEL_PROVIDER", oi.getTransportTravelProvider())
                 .executeUpdate();
 
     }

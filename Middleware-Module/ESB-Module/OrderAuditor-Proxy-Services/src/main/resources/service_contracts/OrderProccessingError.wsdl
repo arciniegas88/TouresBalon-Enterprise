@@ -1,20 +1,21 @@
 <?xml version="1.0"?>
 <definitions name="OrderProcessingError"
-        targetNamespace="http://OrderProcessingError.com"
-        xmlns:tns="http://OrderProcessingError.com"
+        targetNamespace="http://touresbalon.com.co/auditor/service/entity/1.0.0"
+        xmlns:tns="http://touresbalon.com.co/auditor/service/entity/1.0.0"
         xmlns="http://schemas.xmlsoap.org/wsdl/"
         xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
         >
-		
+
 	<types>
         <schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
-                targetNamespace="http://OrderProcessingError.com" 
+                targetNamespace="http://touresbalon.com.co/auditor/service/entity/1.0.0"
                 xmlns="http://www.w3.org/2001/XMLSchema">
 
             <element name="orderProcessingErrorRequest">
                 <complexType>
                     <sequence>
                         <element name="oderId" type="int"/>
+                        <element name="comments" type="string"/>
                         <element name="orderRequest" type="string"/>
                     </sequence>
                 </complexType>
@@ -47,7 +48,7 @@
 	
 	<service name="orderProcessingErrorService">
     	<port name="orderProcessingErrorPortPort" binding="tns:orderProcessingErrorBinding">
-    		<soap:address location="http://localhost:9080/orderProcessingError" />
+    		<soap:address location="http://localhost:9494/OrderAuditorWS-1.0-SNAPSHOT/OrderAuditorWS" />
     	</port>
     </service>
 </definitions>	

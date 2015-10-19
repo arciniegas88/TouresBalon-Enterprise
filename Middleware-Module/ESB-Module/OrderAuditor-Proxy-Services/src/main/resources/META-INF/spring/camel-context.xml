@@ -24,12 +24,12 @@
     <osgix:cm-properties id="esbProps" persistent-id="esbadmin"/>
     <ctx:property-placeholder properties-ref="esbProps"/>
 
-    <cxf:cxfEndpoint address="http://localhost:${http.esb.ordererror.service.port}/esb/OrderProccessingError/OrderProccessingError?wsdl"
+    <cxf:cxfEndpoint address="http://localhost:${http.esb.gateway.soap.service.port}/esb/services/entity/OrderAuditor/1.0.0?wsdl"
                      serviceName="s:orderProcessingErrorService"
                      endpointName="s:orderProcessingErrorPortPort"
                      wsdlURL="service_contracts/OrderProccessingError.wsdl"
                      id="OrderProcessingError"
-                     xmlns:s="http://OrderProcessingError.com" />
+                     xmlns:s="http://touresbalon.com.co/auditor/service/entity/1.0.0" />
 
     <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="tcp://localhost:61616" />

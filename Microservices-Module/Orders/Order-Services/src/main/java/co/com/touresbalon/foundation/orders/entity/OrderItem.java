@@ -40,7 +40,9 @@ import javax.xml.bind.annotation.XmlRootElement;
                         "o.transportTargetCity = :TRANSPORT_TARGET_CITY, o.transportTravelNumber = :TRANSPORT_TRAVEL_NUMBER," +
                         "o.transportChairNumber = :TRANSPORT_CHAIR_NUMBER, o.transportOutTime = :TRANSPORT_OUT_TIME," +
                         "o.spectacleComments = :SPECTACLE_COMMENTS, o.spectacleId = :SPECTACLE_ID," +
-                        "o.spectacleTicket = :SPECTACLE_TICKET, o.lodgingComments = :LODGING_COMMENTS " +
+                        "o.spectacleTicket = :SPECTACLE_TICKET, o.lodgingComments = :LODGING_COMMENTS, " +
+                        "o.lodgingProvider = :LODGING_PROVIDER, o.lodgingReservationProvider = :LODGING_RESERVATION_PROVIDER, " +
+                        "o.transportTravelProvider = :TRANSPORT_TRAVEL_PROVIDER " +
                         "WHERE o.orderId.id = :ORDER_ID AND o.itemNo = :ITEM_NO"),
         @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
 
@@ -55,7 +57,7 @@ import javax.xml.bind.annotation.XmlRootElement;
                         "oi.status, oi.transportComments, oi.transportTravelDate, oi.transportSourceCity," +
                         "oi.transportTargetCity, oi.transportTravelNumber, oi.transportChairNumber," +
                         "oi.transportOutTime, oi.spectacleComments, oi.spectacleId, oi.spectacleTicket," +
-                        "oi.lodgingComments, oi.transportTravelProvider)" +
+                        "oi.lodgingComments, oi.transportTravelProvider, oi.lodgingReservationProvider, oi.lodgingProvider )" +
                         "FROM OrderItem oi WHERE oi.orderId.id = :ID_SALES_ORDER ",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 })
@@ -128,6 +130,13 @@ public class OrderItem implements Serializable {
     @Column(name = "LODGING_COMMENTS")
     private String lodgingComments;
 
+    @Column(name = "LODGING_RESERVATION_PROVIDER")
+    private Long lodgingReservationProvider;
+
+    @Column(name = "LODGING_PROVIDER")
+    private String lodgingProvider;
+
+
     public OrderItem() {
     }
 
@@ -135,7 +144,7 @@ public class OrderItem implements Serializable {
                      String status, String transportComments, Date transportTravelDate, String transportSourceCity,
                      String transportTargetCity, String transportTravelNumber, String transportChairNumber,
                      String transportOutTime, String spectacleComments, Long spectacleId, Long spectacleTicket,
-                     String lodgingComments, String transportTravelProvider) {
+                     String lodgingComments, String transportTravelProvider ,Long lodgingReservationProvider, String lodgingProvider ) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
@@ -153,6 +162,8 @@ public class OrderItem implements Serializable {
         this.spectacleTicket = spectacleTicket;
         this.lodgingComments = lodgingComments;
         this.transportTravelProvider =transportTravelProvider;
+        this.lodgingReservationProvider =lodgingReservationProvider;
+        this.lodgingProvider =lodgingProvider;
     }
 
     public String getItemNo() {
@@ -260,6 +271,20 @@ public class OrderItem implements Serializable {
 
     public void setLodgingComments(String lodgingComments) {
         this.lodgingComments = lodgingComments;
+    }
+
+    public Long getLodgingReservationProvider() {return lodgingReservationProvider;}
+
+    public void setLodgingReservationProvider(Long lodgingReservationProvider) {
+        this.lodgingReservationProvider = lodgingReservationProvider;
+    }
+
+    public String getLodgingProvider() {
+        return lodgingProvider;
+    }
+
+    public void setLodgingProvider(String lodgingProvider) {
+        this.lodgingProvider = lodgingProvider;
     }
 
     public OrderItem(Long id) {

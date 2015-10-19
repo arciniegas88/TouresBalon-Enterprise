@@ -1,0 +1,79 @@
+<definitions xmlns:tns="http://touresbalon.com.co/accounting/service/entity/1.0.0"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+	name="MicrofocusAdapterWS" targetNamespace="http://touresbalon.com.co/accounting/service/entity/1.0.0">
+	<types>
+		<schema xmlns:tns="http://touresbalon.com.co/accounting/service/entity/1.0.0"
+			xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://www.w3.org/2001/XMLSchema"
+			attributeFormDefault="unqualified" elementFormDefault="qualified"
+			targetNamespace="http://touresbalon.com.co/accounting/service/entity/1.0.0">
+			<element name="AccountTransaction">
+				<complexType>
+					<sequence>
+						<element name="TransactionNumber" type="string" />
+						<element name="TransportProvider" type="string" />
+						<element name="LodgingProvider" type="string" />
+						<element name="WithdrawalAmount" type="double" />
+						<element name="DepositAmount" type="double" />
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+	</types>
+	<message name="createExecutedPayment">
+		<part element="tns:AccountTransaction" name="payload"></part>
+	</message>
+	<message name="createCompletedOrder">
+		<part element="tns:AccountTransaction" name="payload"></part>
+	</message>
+	<message name="createCancelledPayment">
+		<part element="tns:AccountTransaction" name="payload"></part>
+	</message>
+
+
+	<!-- Definicion de partnerLinkType  -->
+	<plnk:partnerLinkType name="MicrofocusAdapterWS_PLT">
+		<plnk:role name="MicrofocusAdapterWS_Role" portType="tns:MicrofocusAdapterPortType" />
+	</plnk:partnerLinkType>
+
+
+	<portType name="MicrofocusAdapterPortType">
+		<operation name="createCompletedOrder">
+			<input message="tns:createCompletedOrder"></input>
+		</operation>
+		<operation name="createExecutedPayment">
+			<input message="tns:createExecutedPayment"></input>
+		</operation>
+		<operation name="createCancelledPayment">
+			<input message="tns:createCancelledPayment"></input>
+		</operation>
+	</portType>
+	<binding name="MicrofocusAdapterSoapBinding" type="tns:MicrofocusAdapterPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="createCompletedOrder">
+			<soap:operation soapAction="createCompletedOrder" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+		<operation name="createExecutedPayment">
+			<soap:operation soapAction="createExecutedPayment" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+		<operation name="createCancelledPayment">
+			<soap:operation soapAction="createCancelledPayment" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+	</binding>
+	<service name="MicrofocusAdapterWS">
+		<port binding="tns:MicrofocusAdapterSoapBinding" name="MicrofocusAdapterPort">
+			<soap:address
+				location="http://localhost:9494/esb/services/entity/MicrofocusAdapterWS/1.0.0" />
+		</port>
+	</service>
+</definitions>

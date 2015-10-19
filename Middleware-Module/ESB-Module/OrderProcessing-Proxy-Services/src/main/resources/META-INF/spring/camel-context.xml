@@ -24,12 +24,12 @@
     <osgix:cm-properties id="esbProps" persistent-id="esbadmin"/>
     <ctx:property-placeholder properties-ref="esbProps"/>
 
-    <cxf:cxfEndpoint address="http://localhost:9080/ProcessingOrder/ProcessOrderService?wsdl"
-                     serviceName="s:ProcessOrderService"
-                     endpointName="s:ProcessOrderServiceSoap12"
-                     wsdlURL="service_contracts/ProcessingOrder.wsdl"
+    <cxf:cxfEndpoint address="http://${target.bpel.location}/services/Create-Orders-BPEL?wsdl"
+                     serviceName="s:Create-Orders-BPEL"
+                     endpointName="s:Create-Orders-BPELPort"
+                     wsdlURL="service_contracts/ProccessingOrder.wsdl"
                      id="ProcessOrderService"
-                     xmlns:s="http://www.TouresBalon.com" />
+                     xmlns:s="http://touresbalon.com.co/orders/service/task/1.0.0" />
 
 
     <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
@@ -58,17 +58,8 @@
 
         <camel:route>
             <camel:from uri="activemq:queue:proccessOrder?jmsMessageType=Text" />
+            <camel:to uri="cxf:bean:ProcessOrderService?dataFormat=PAYLOAD"/>
             <camel:to uri="file://C:/ORDERS?fileName=order-${date:now:yyyyMMdd_hhmmss}.xml"/>
-            <!-- <camel:to uri="cxf:bean:ProcessOrderService?dataFormat=MESSAGE"/>
-            <choice>
-                <when>
-                    <camel:xpath>//processOrderResponse/processOrderResult = 'OK'</camel:xpath>
-                    <camel:to uri="file://C:/ORDERS?fileName=response-${date:now:yyyyMMdd_hhmmss}.xml"/>
-                </when>
-                <otherwise>
-                    <camel:to uri="file://C:/ORDERS?fileName=fail-${date:now:yyyyMMdd_hhmmss}.xml"/>
-                </otherwise>
-            </choice> -->
         </camel:route>
 
         <camel:route>

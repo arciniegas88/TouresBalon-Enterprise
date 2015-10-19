@@ -48,6 +48,10 @@
 						type="xs:string" />
 					<xs:element minOccurs="0" name="transportTravelProvider"
 						type="xs:string" />
+					<xs:element minOccurs="0" name="lodgingProvider" 
+					type="xs:string" />
+					<xs:element minOccurs="0" name="lodgingReservationProvider"
+						type="xs:long" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="salesOrder">

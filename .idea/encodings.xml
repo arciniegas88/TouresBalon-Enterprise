@@ -17,6 +17,7 @@
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderAuditor-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderProcessing-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Security-Adapter" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Security-Proxy-Services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Presentation-Module/OMS/OMS-Studio/src/main/java/co/com/touresbalon/foundation/oms/security/AuthenticationFilter.java" charset="windows-1252" />
