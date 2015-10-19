@@ -1587,6 +1587,17 @@
                                                 </bpel:copy>
 
 
+                                                
+                                            </bpel:assign>
+
+                                            <bpel:invoke name="Invoke-cancel-transport"
+                                                         partnerLink="TransportWSPartnerLink"
+                                                         operation="cancelReservation" portType="transport:TransportWS"
+                                                         inputVariable="compTransportInput"></bpel:invoke>
+
+                                        </bpel:sequence>
+                                        <bpel:else>
+                                            <bpel:assign validate="no" name="Assign-Comment">
                                                 <bpel:copy>
                                                     <bpel:from>
                                                         <bpel:literal>THERE IS NOT AVAILABLE TRANSPORT</bpel:literal>
@@ -1596,13 +1607,7 @@
                                                     </bpel:to>
                                                 </bpel:copy>
                                             </bpel:assign>
-
-                                            <bpel:invoke name="Invoke-cancel-transport"
-                                                         partnerLink="TransportWSPartnerLink"
-                                                         operation="cancelReservation" portType="transport:TransportWS"
-                                                         inputVariable="compTransportInput"></bpel:invoke>
-
-                                        </bpel:sequence>
+                                        </bpel:else>
                                     </bpel:if>
                                 </bpel:sequence>
 
@@ -1731,6 +1736,12 @@
                                                         <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[cancelReservationRequest/reservationId]]></bpel:query>
                                                     </bpel:to>
                                                 </bpel:copy>
+                                                
+                                            </bpel:assign>
+                                            <bpel:invoke name="Invoke-cancel-lodging" partnerLink="LodgingWSPartnerLink" operation="cancelReservation" portType="lodging:LodgingPort" inputVariable="compLodgingInput" outputVariable="compLodgingOutput"></bpel:invoke>
+                                        </bpel:sequence>
+                                        <bpel:else>
+                                            <bpel:assign validate="no" name="Assing-Comments">
                                                 <bpel:copy>
                                                     <bpel:from>
                                                         <bpel:literal>THERE IS NOT AVAILABLE ROOM</bpel:literal>
@@ -1740,8 +1751,7 @@
                                                     </bpel:to>
                                                 </bpel:copy>
                                             </bpel:assign>
-                                            <bpel:invoke name="Invoke-cancel-lodging" partnerLink="LodgingWSPartnerLink" operation="cancelReservation" portType="lodging:LodgingPort" inputVariable="compLodgingInput" outputVariable="compLodgingOutput"></bpel:invoke>
-                                        </bpel:sequence>
+                                        </bpel:else>
                                     </bpel:if>
                                 </bpel:sequence>
                                 <bpel:sequence name="COMPENSATE_SPECTACLE">
@@ -1804,14 +1814,7 @@
                                                             <![CDATA[idSpectacle]]></bpel:query>
                                                     </bpel:to>
                                                 </bpel:copy>
-                                                <bpel:copy>
-                                                    <bpel:from>
-                                                        <bpel:literal>THERE IS NOT AVAILABLE SPECTACLE</bpel:literal>
-                                                    </bpel:from>
-                                                    <bpel:to part="parameters" variable="updateItemInput">
-                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[item/spectacleComments]]></bpel:query>
-                                                    </bpel:to>
-                                                </bpel:copy>
+                                                
                                             </bpel:assign>
 
 
@@ -1822,6 +1825,18 @@
                                                          inputVariable="cancelSpectacleInput"
                                                          outputVariable="cancelSpectacleOutput"></bpel:invoke>
                                         </bpel:sequence>
+                                        <bpel:else>
+                                            <bpel:assign validate="no" name="Assign-Comments">
+                                                <bpel:copy>
+                                                    <bpel:from>
+                                                        <bpel:literal>THERE IS NOT AVAILABLE SPECTACLE</bpel:literal>
+                                                    </bpel:from>
+                                                    <bpel:to part="parameters" variable="updateItemInput">
+                                                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[item/spectacleComments]]></bpel:query>
+                                                    </bpel:to>
+                                                </bpel:copy>
+                                            </bpel:assign>
+                                        </bpel:else>
                                     </bpel:if>
                                 </bpel:sequence>
                             </bpel:flow>
