@@ -25,6 +25,8 @@
 					<xs:element minOccurs="0" name="id" type="xs:long" />
 					<xs:element minOccurs="0" name="itemNo" type="xs:string" />
 					<xs:element minOccurs="0" name="lodgingComments" type="xs:string" />
+					<xs:element minOccurs="0" name="lodgingProvider" type="xs:string"/>
+					<xs:element minOccurs="0" name="lodgingReservationProvider" type="xs:long"/>
 					<xs:element minOccurs="0" name="orderId" type="tns:salesOrder" />
 					<xs:element minOccurs="0" name="price" type="xs:long" />
 					<xs:element minOccurs="0" name="productId" type="xs:long" />

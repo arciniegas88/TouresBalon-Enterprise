@@ -1,0 +1,31 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:model="http://touresbalon.com.co/model/canonical/1.0.0"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0" name="Create-Orders-BPEL"
+             targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0">
+            <import namespace="http://touresbalon.com.co/model/canonical/1.0.0" schemaLocation="canonical_schema.xsd"/>
+        </schema>
+    </types>
+    <message name="CreateSalesOrderRequest-Message">
+        <part name="payload" element="model:CreateSalesOrderRequest"></part>
+    </message>
+    <portType name="Create-Orders-BPEL">
+        <operation name="process">
+            <input message="tns:CreateSalesOrderRequest-Message"></input>
+        </operation>
+    </portType>
+    <binding name="Create-Orders-BPELBinding" type="tns:Create-Orders-BPEL">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="process">
+            <soap:operation soapAction="http://touresbalon.com.co/orders/service/task/1.0.0/process"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+        </operation>
+    </binding>
+    <service name="Create-Orders-BPEL">
+        <port name="Create-Orders-BPELPort" binding="tns:Create-Orders-BPELBinding">
+            <soap:address location="http://localhost:9763/services/Create-Orders-BPEL?wsdl"/>
+        </port>
+    </service>
+</definitions>

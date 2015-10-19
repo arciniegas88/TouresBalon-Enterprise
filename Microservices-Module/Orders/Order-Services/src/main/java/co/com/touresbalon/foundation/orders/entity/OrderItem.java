@@ -40,7 +40,9 @@ import javax.xml.bind.annotation.XmlRootElement;
                         "o.transportTargetCity = :TRANSPORT_TARGET_CITY, o.transportTravelNumber = :TRANSPORT_TRAVEL_NUMBER," +
                         "o.transportChairNumber = :TRANSPORT_CHAIR_NUMBER, o.transportOutTime = :TRANSPORT_OUT_TIME," +
                         "o.spectacleComments = :SPECTACLE_COMMENTS, o.spectacleId = :SPECTACLE_ID," +
-                        "o.spectacleTicket = :SPECTACLE_TICKET, o.lodgingComments = :LODGING_COMMENTS " +
+                        "o.spectacleTicket = :SPECTACLE_TICKET, o.lodgingComments = :LODGING_COMMENTS, " +
+                        "o.lodgingProvider = :LODGING_PROVIDER, o.lodgingReservationProvider = :LODGING_RESERVATION_PROVIDER, " +
+                        "o.transportTravelProvider = :TRANSPORT_TRAVEL_PROVIDER " +
                         "WHERE o.orderId.id = :ORDER_ID AND o.itemNo = :ITEM_NO"),
         @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
 
