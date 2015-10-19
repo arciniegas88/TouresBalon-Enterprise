@@ -32,7 +32,20 @@
 
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.security.adapter.port}}/esb/services/web-api/security/authentication?restletMethod=POST"/>
-            <camel:to uri="restlet:http://{{target.iis.location}}/SecurityService/microsoft/co/com/touresbalon/foundation/security/rest/SecurityResource.svc/authenticationResource?restletMethod=POST"/>
+            <camel:removeHeaders pattern="*"/>
+            <camel:setHeader headerName="Content-type">
+                <camel:constant>application/xml</camel:constant>
+            </camel:setHeader>
+            <camel:to uri="restlet:http://{{target.iis.location}}/SecurityService/microsoft/co/com/touresbalon/foundation/security/rest/SecurityResource.svc/authenticationResource?restletMethod=POST&amp;throwExceptionOnFailure=false"/>
+        </camel:route>
+
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.security.adapter.port}}/esb/services/web-api/security/createLdap?restletMethod=POST"/>
+            <camel:removeHeaders pattern="*"/>
+            <camel:setHeader headerName="Content-type">
+                <camel:constant>application/xml</camel:constant>
+            </camel:setHeader>
+            <camel:to uri="restlet:http://{{target.iis.location}}/SecurityService/microsoft/co/com/touresbalon/foundation/security/rest/SecurityResource.svc/createUserLdap?restletMethod=POST&amp;throwExceptionOnFailure=false"/>
         </camel:route>
 
     </camelContext>
