@@ -4,7 +4,8 @@
 	xmlns:task_1.0.0="http://touresbalon.com.co/salesorder/service/task/1.0.0"
 	xmlns:ns2="http://touresbalon.com.co/transport/service/task/1.0.0"
 	xmlns:ns3="http://spectacles.com.co/service/task/1.0.0" 
-	xmlns:lg4="http://touresbalon.com.co/task/lodging/v1" >
+	xmlns:lg4="http://touresbalon.com.co/task/lodging/v1"
+	xmlns:ma5="http://touresbalon.com.co/accounting/service/entity/1.0.0">
 	
 	<process name="sample:Cancel-Orders-BPEL">
 		<active>true</active>
@@ -26,5 +27,10 @@
 		<invoke partnerLink="PartnerLinkLodgingWS">
 			<service name="lg4:LodgingServiceService" port="LodgingPortPort" />
 		</invoke>
+		
+		<invoke partnerLink="PartnerLinkMicrofocusAdapterWS">
+			<service name="ma5:MicrofocusAdapterWS" port="MicrofocusAdapterPort" />
+		</invoke>
+		
 	</process>
 </deploy>
