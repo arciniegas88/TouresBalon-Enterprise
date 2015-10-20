@@ -56,9 +56,9 @@ namespace B2C.Facades
             return items;
         }
 
-        public void proccessOrder()
+        public void proccessOrder(String franchise, String number_card)
         {
-            this.orderService.proccessOrder();
+            this.orderService.proccessOrder(franchise, number_card);
         }
 
         public Object cancelOrder(int id)

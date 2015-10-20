@@ -53,10 +53,10 @@ namespace B2C.Agents
             }
         }
 
-        public void proccessOrder()
+        public void proccessOrder(String franchise, String number_card)
         {
             List<ProductCart> products = HandlerSession.getProducts();
-            String xml = HandlerXML.buildMessage(products);
+            String xml = HandlerXML.buildMessage(products, franchise, number_card);
 
             HandlerRequest request = new HandlerRequest();
             request.doMessage(xml, HandlerResource.getServiceAgentLocation("queueProcessingOrder"));

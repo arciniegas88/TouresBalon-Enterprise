@@ -1,0 +1,14 @@
+﻿<tns:CreateSalesOrderRequest xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0">
+  <order>
+     <comments>ORDEN PRUEBA</comments>
+     <custFirstName>ALEJANDRO</custFirstName>
+     <custLastName>QUINTERO</custLastName>
+     <email>alejinqm@gmail.com</email>
+     <custDocumentNumber>1070593404</custDocumentNumber>
+     <custDocumentType>CC</custDocumentType>
+     <customerType>SILVER</customerType>
+     <creditCardNumber>00000-318586</creditCardNumber>
+     <price>15000</price>
+     <custom/>
+  </order>
+</tns:CreateSalesOrderRequest>

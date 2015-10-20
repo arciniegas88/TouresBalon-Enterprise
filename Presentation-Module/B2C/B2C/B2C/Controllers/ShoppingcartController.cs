@@ -57,7 +57,7 @@ namespace B2C.Controllers
         {
             this.ini();
 
-            OrderFacade.Instance.proccessOrder();
+            OrderFacade.Instance.proccessOrder(Request.Params.Get("form.Franchise"), Request.Params.Get("form.Number"));
 
             return View();
         }
