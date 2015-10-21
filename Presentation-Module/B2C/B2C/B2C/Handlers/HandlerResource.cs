@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 
 namespace B2C.Handlers
 {
@@ -10,7 +11,29 @@ namespace B2C.Handlers
     {
         
         private static Dictionary<String, String> serviceAgentLocation;
-        
+        private static XmlDocument xmlProcessingOrder = null;
+        private static XmlDocument xmlItem = null;
+
+        public static XmlDocument getXmlProcessingOrder()
+        {
+            if(HandlerResource.xmlProcessingOrder == null)
+            {
+                HandlerResource.xmlProcessingOrder = HandlerXML.loadXml("~/Resources/protected/xml/ProccessingOrder.xml");
+            }
+
+            return HandlerResource.xmlProcessingOrder;
+        }
+
+        public static XmlDocument getXmlItem()
+        {
+            if (HandlerResource.xmlItem == null)
+            {
+                HandlerResource.xmlItem = HandlerXML.loadXml("~/Resources/protected/xml/Item.xml");
+            }
+
+            return HandlerResource.xmlItem;
+        }
+
         public static void iniServiceAgentLocation()
         {
             HandlerResource.serviceAgentLocation = HandlerXML.loadXml("serviceAgents", "serviceAgent");

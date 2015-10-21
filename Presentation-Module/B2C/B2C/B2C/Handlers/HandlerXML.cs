@@ -32,15 +32,46 @@ namespace B2C.Handlers
             return dictionary;
         }
 
-        public static string buildMessage(List<ProductCart> objects)
+        public static XmlDocument loadXml(String path)
         {
-            StringBuilder builder  = new StringBuilder();
+            XmlDocument xDoc = new XmlDocument();
+            String xmlData = HttpContext.Current.Server.MapPath(path);
+            xDoc.Load(xmlData);
+            return xDoc;
+        }
+
+        public static string buildMessage(List<ProductCart> objects, string franchise, string number_card)
+        {
+            XmlDocument order = HandlerResource.getXmlProcessingOrder();
+            XmlDocument item;
+            XmlNode root = order.DocumentElement;
+
+            order.GetElementsByTagName("comments").Item(0).InnerText = "Testing from B2C";
+            order.GetElementsByTagName("custFirstName").Item(0).InnerText = "NOT INTEGRATED";
+            order.GetElementsByTagName("custLastName").Item(0).InnerText = "NOT INTEGRATED";
+            order.GetElementsByTagName("email").Item(0).InnerText = "NOT INTEGRATED";
+            order.GetElementsByTagName("custDocumentNumber").Item(0).InnerText = "NOT INTEGRATED";
+            order.GetElementsByTagName("custDocumentType").Item(0).InnerText = "NOT INTEGRATED";
+            order.GetElementsByTagName("customerType").Item(0).InnerText = franchise;
+            order.GetElementsByTagName("creditCardNumber").Item(0).InnerText = number_card;
+
+            double total = 0;
 
             foreach (ProductCart obj in objects)
             {
-                builder.Append( obj.toXml() );
+                total += obj.Cost * obj.Account;
+                item = obj.toXml();
+                order.FirstChild.FirstChild.AppendChild( order.ImportNode(item.FirstChild, true) );
             }
-            return builder.ToString();
+
+            order.GetElementsByTagName("price").Item(0).InnerText = total.ToString();
+
+            StringWriter sw = new StringWriter();
+            XmlTextWriter tx = new XmlTextWriter(sw);
+            order.WriteTo(tx);
+
+            string str = sw.ToString();
+            return str;
         }
         
     }

@@ -1,0 +1,22 @@
+﻿ <items>
+    <productId>1</productId>
+    <productName>PRODUCTO PRUEBA</productName>
+    <transport>
+       <sourceCity>CALI</sourceCity>
+       <targetCity>ARMENIA</targetCity>
+       <travelDate>2017-08-21T09:00:00</travelDate>
+       <travelOutTime>1305</travelOutTime>
+       <travelBusinessProvider>BOLIVARIANO</travelBusinessProvider>
+    </transport>
+    <spectacle>
+       <id>1</id>
+    </spectacle>
+    <lodging>
+       <lodgingBusinessProvider>HILTON</lodgingBusinessProvider>
+       <targetCity>Bogota</targetCity>
+       <dateCheckIn>2015-05-10</dateCheckIn>
+       <dateCheckOut>2015-05-11</dateCheckOut>
+     </lodging>
+     <price>150000</price>
+     <custom/>
+</items>

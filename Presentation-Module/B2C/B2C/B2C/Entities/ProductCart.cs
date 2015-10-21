@@ -1,4 +1,6 @@
-﻿using System;
+﻿using B2C.Facades;
+using B2C.Handlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,16 +30,41 @@ namespace B2C.Entities
         private int state = 0;
         private int pos = 0;
 
-        public string toXml()
+        public XmlDocument toXml()
         {
-            XElement product =
-            new XElement("Product",
-                    new XElement("id", this.id),
-                    new XElement("name", this.name),
-                    new XElement("account", this.account),
-                    new XElement("cost", this.cost)
-                );
-            return product.ToString();
+            Product product = ProductFacade.Instance.getProduct(this.id);
+            XmlDocument item = HandlerResource.getXmlItem();
+            
+            
+            item.GetElementsByTagName("productId").Item(0).InnerText = this.Id.ToString();
+            item.GetElementsByTagName("productName").Item(0).InnerText = this.Name;
+            item.GetElementsByTagName("price").Item(0).InnerText = this.Cost.ToString();
+
+            /** Transport's Attributes **/
+            item.GetElementsByTagName("travelBusinessProvider").Item(0).InnerText = product.Transport.Name;
+            item.GetElementsByTagName("sourceCity").Item(0).InnerText = "NOT FOUND"; 
+            item.GetElementsByTagName("targetCity").Item(0).InnerText = "NOT FOUND";
+            item.GetElementsByTagName("travelDate").Item(0).InnerText = "NOT FOUND";
+            item.GetElementsByTagName("travelOutTime").Item(0).InnerText = "NOT FOUND";
+
+
+            /** Spectacle's Attributes **/
+            XmlNode node_spectacle = item.GetElementsByTagName("spectacle").Item(0);
+            foreach (XmlNode temp in node_spectacle.ChildNodes)
+            {
+                    if (temp.Name.Equals("id"))
+                         node_spectacle.InnerText = product.Spectacle.Id.ToString();
+            }
+
+            /** Lodging's Attributes **/
+            item.GetElementsByTagName("lodgingBusinessProvider").Item(0).InnerText = product.Lodging.Name;
+            item.GetElementsByTagName("targetCity").Item(1).InnerText = "NOT FOUND";
+            item.GetElementsByTagName("dateCheckIn").Item(0).InnerText = "NOT FOUND";
+            item.GetElementsByTagName("dateCheckOut").Item(0).InnerText = "NOT FOUND";
+            
+
+
+            return item;
         }
 
         public Boolean isDelete()
