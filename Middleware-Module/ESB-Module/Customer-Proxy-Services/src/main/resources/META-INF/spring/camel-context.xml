@@ -30,9 +30,24 @@
         <propertyPlaceholder id="esb" location="ref:esbProps"/>
         <!-- Customer By ID-->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/{id}?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}s/esb/service/web-api/customer/{id}?restletMethod=GET"/>
             <camel:recipientList>
                 <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/id=${header.id}?restletMethod=GET</camel:simple>
+            </camel:recipientList>
+        </camel:route>
+
+        <!-- Customer By Email-->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customerByEmail/{email}?restletMethod=GET"/>
+            <camel:setBody>
+                <camel:simple>${header.email}</camel:simple>
+            </camel:setBody>
+            <camel:removeHeaders pattern="*"/>
+            <camel:setHeader headerName="Content-type">
+                <camel:constant>application/xml</camel:constant>
+            </camel:setHeader>
+            <camel:recipientList>
+                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customerByEmail/email=${body.email}?restletMethod=GET</camel:simple>
             </camel:recipientList>
         </camel:route>
 
