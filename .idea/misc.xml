@@ -10,6 +10,7 @@
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Order-Proxy-Services" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderAuditor-Proxy-Services" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderProcessing-Proxy-Services" />
+    <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/OrderProcessingError-Proxy-Services" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Product-Proxy-Services" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Security-Adapter" />
     <file type="Osmorc" url="file://$PROJECT_DIR$/Middleware-Module/ESB-Module/Security-Proxy-Services" />

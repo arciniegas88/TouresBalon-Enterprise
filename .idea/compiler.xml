@@ -139,13 +139,6 @@
         <processorPath useClasspath="true" />
         <module name="CreditCard-Adapter" />
       </profile>
-      <profile default="false" name="Annotation profile for Security-Adapter" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
-        <module name="Security-Adapter" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -181,7 +174,6 @@
       <module name="Product-Proxy-Services" target="1.7" />
       <module name="Product-Services" target="1.7" />
       <module name="Products" target="1.5" />
-      <module name="Security-Adapter" target="1.7" />
       <module name="Security-Proxy-Services" target="1.7" />
       <module name="SpectaclesWS" target="1.7" />
       <module name="TouresBalon-Enterprise" target="1.5" />
