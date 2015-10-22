@@ -32,8 +32,17 @@
         <!-- Login -->
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.security.service.port}}/esb/services/web-api/security/login?restletMethod=POST"/>
+            <camel:removeHeaders pattern="*" />
+            <camel:setHeader headerName="Content-type">
+                <camel:constant>application/xml</camel:constant>
+            </camel:setHeader>
             <camel:to uri="restlet:http://localhost:{{http.esb.security.adapter.port}}/esb/services/web-api/security/authentication?restletMethod=POST" />
-            <camel:to uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/{id}?restletMethod=GET" />
+            <camel:setBody>
+                <camel:xpath>//authenticationResourceResponse/authenticationResourceResult/email/text()</camel:xpath>
+            </camel:setBody>
+            <camel:recipientList>
+                <camel:simple>restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customerByEmail/${body}?restletMethod=GET</camel:simple>
+            </camel:recipientList>
         </camel:route>
 
     </camelContext>
