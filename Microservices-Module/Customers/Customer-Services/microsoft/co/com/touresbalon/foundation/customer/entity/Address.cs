@@ -2,7 +2,7 @@
 
 namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.entity
 {
-    [DataContract]
+    [DataContract(Namespace = "")]
     public class Address
     {
         [DataMember]

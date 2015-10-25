@@ -1,33 +1,72 @@
-﻿using Security_Services.microsoft.co.com.touresbalon.foundation.security.boundary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
-
+﻿using Cross_Cutting.microsoft.co.com.touresbalon.foundation.crosscutting.entity;
+using Cross_Cutting.microsoft.co.com.touresbalon.foundation.crosscutting.exception;
+using Security_Services.microsoft.co.com.touresbalon.foundation.security.boundary;
+using Security_Services.microsoft.co.com.touresbalon.foundation.security.dto;
+using System.Net;
+using System.ServiceModel.Web;
 
 namespace Security_Services.microsoft.co.com.touresbalon.foundation.security.rest
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "SecurityResource" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select SecurityResource.svc or SecurityResource.svc.cs at the Solution Explorer and start debugging.
     public class SecurityResource : ISecurityResource
     {
+        private SecurityBoundary securityBoundary;
 
-        private SecurityBoundary securityBoundary = new SecurityBoundary();
-
-        public bool authenticationResource(string userName, string password)
+        public User authenticationResource(string email, string password)
         {
-            bool isAuthetication=true;
+            securityBoundary = new SecurityBoundary();
             try
             {
-                isAuthetication=securityBoundary.authenticateBoundary(userName, password);
-             }
-            catch {
-                isAuthetication = false;
+                return securityBoundary.authenticateBoundary(email, password);
             }
-            return isAuthetication;
+            catch (BusinessException e)
+            {
+                throw new WebFaultException<GeneralResponse>
+                    (new GeneralResponse
+                    {
+                        message = e.Message,
+                        status = GeneralResponse.STATUS_ERROR,
+                        code = "400"
+                    }, HttpStatusCode.BadRequest);
+            }
+            catch (PlatformException e)
+            {
+                throw new WebFaultException<GeneralResponse>
+                    (new GeneralResponse
+                    {
+                        message = e.Message,
+                        status = GeneralResponse.STATUS_ERROR,
+                        code = "500"
+                    }, HttpStatusCode.BadRequest);
+            }
         }
-              
+
+        public string createUserLdap(User user)
+        {
+            securityBoundary = new SecurityBoundary();
+            try
+            {
+                return securityBoundary.createUserLdap(user);
+            }
+            catch (BusinessException e)
+            {
+                throw new WebFaultException<GeneralResponse>
+                    (new GeneralResponse
+                    {
+                        message = e.Message,
+                        status = GeneralResponse.STATUS_ERROR,
+                        code = "400"
+                    }, HttpStatusCode.BadRequest);
+            }
+            catch (PlatformException e)
+            {
+                throw new WebFaultException<GeneralResponse>
+                    (new GeneralResponse
+                    {
+                        message = e.Message,
+                        status = GeneralResponse.STATUS_ERROR,
+                        code = "500"
+                    }, HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

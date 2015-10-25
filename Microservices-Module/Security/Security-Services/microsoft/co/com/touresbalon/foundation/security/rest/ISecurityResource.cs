@@ -1,32 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+﻿using System.ServiceModel;
 using System.ServiceModel.Web;
+using Security_Services.microsoft.co.com.touresbalon.foundation.security.dto;
 
 namespace Security_Services.microsoft.co.com.touresbalon.foundation.security.rest
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ISecurityResource" in both code and config file together.
-    [ServiceContract]
+    [ServiceContract(Namespace = "")]
     public interface ISecurityResource
     {
-        /*
-        [OperationContract]
+        [OperationContract] 
         [WebInvoke(Method = "POST",
-           ResponseFormat = WebMessageFormat.Json,
-           BodyStyle = WebMessageBodyStyle.Wrapped,
-           UriTemplate = "authenticationResource")]
-        bool authenticationResource(string userName, string password);
-        */
+            ResponseFormat = WebMessageFormat.Xml,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            RequestFormat = WebMessageFormat.Xml,
+            UriTemplate = "authenticationResource")]
+        User authenticationResource(string email, string password);
 
         [OperationContract]
-        [WebInvoke(Method = "GET",
-            ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",
+            ResponseFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped,
-            UriTemplate = "authenticationResource/userName={userName};password={password}")]
-        bool authenticationResource(string userName, string password);
+            RequestFormat = WebMessageFormat.Xml,
+            UriTemplate = "createUserLdap")]
+        string createUserLdap(User user);
 
     }
 }

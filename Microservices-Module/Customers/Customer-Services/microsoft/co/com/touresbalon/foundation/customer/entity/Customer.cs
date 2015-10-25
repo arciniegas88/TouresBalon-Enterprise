@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.entity
 {
-    [DataContract]
+    [DataContract(Namespace = "")]
     public class Customer
     {
         [DataMember]
@@ -20,6 +20,8 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.ent
         public virtual string creditcard_type { get; set; }
         [DataMember]
         public virtual string creditcard_number { get; set; }
+        [DataMember]
+        public virtual string password { get; set; }
         [DataMember]
         public virtual string status { get; set; }
         [DataMember]
