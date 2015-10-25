@@ -42,7 +42,7 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
 
                 //LinkedResource img = new LinkedResource(@"~/App_Data/img/touresBalon.jpg", MediaTypeNames.Image.Jpeg);
                 //LinkedResource img = new LinkedResource("~/microsoft/co/com/touresbalon/foundation/email/img/touresBalon.jpg", MediaTypeNames.Image.Jpeg);
-                LinkedResource img = new LinkedResource(@"N:\touresBalon.jpg", MediaTypeNames.Image.Jpeg);
+                LinkedResource img = new LinkedResource(@"C:\touresBalon.jpg", MediaTypeNames.Image.Jpeg);
                 img.ContentId = "imagen";
 
                 htmlView.LinkedResources.Add(img);
@@ -108,7 +108,7 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
             StringBuilder sb = new StringBuilder();
             try
             {
-                StreamReader file = new StreamReader("N:\\prueba.html");
+                StreamReader file = new StreamReader("C:\\prueba.html");
                 while ((line = file.ReadLine()) != null)
                 {
                     if (line.Contains("#name"))
