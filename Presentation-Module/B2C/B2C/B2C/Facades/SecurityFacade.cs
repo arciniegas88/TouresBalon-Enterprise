@@ -5,6 +5,7 @@ using System.Web;
 using B2C.Entities;
 using B2C.Agents;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace B2C.Facades
 {
@@ -36,7 +37,16 @@ namespace B2C.Facades
         public bool getLoginUser(Customer customer)
         {
             string body = customer.toXMLLogin();
-            return this.securityService.loginUser(body).authenticationResourceResult;
+            XmlDocument xml = this.securityService.loginUser(body);
+
+            if (xml.GetElementsByTagName("email").Item(0) != null)
+            {
+                Handlers.HandlerSession.setUser(xml);
+                return true;
+            }else
+            {
+                return false;
+            }
         }
     }
 }

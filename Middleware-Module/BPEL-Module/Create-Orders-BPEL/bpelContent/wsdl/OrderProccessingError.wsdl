@@ -4,9 +4,10 @@
 	xmlns="http://schemas.xmlsoap.org/wsdl/" name="OrderProcessingError"
 	targetNamespace="http://touresbalon.com.co/auditor/service/entity/1.0.0">
 	<types>
-		<schema xmlns:tns="http://touresbalon.com.co/auditor/service/entity/1.0.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns="http://www.w3.org/2001/XMLSchema"
-			attributeFormDefault="unqualified" elementFormDefault="qualified"
+		<schema xmlns:tns="http://touresbalon.com.co/auditor/service/entity/1.0.0"
+			xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+			xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="qualified"
 			targetNamespace="http://touresbalon.com.co/auditor/service/entity/1.0.0">
 
 
@@ -16,7 +17,7 @@
 
 					<sequence>
 						<element name="oderId" type="int" />
-                        <element name="comments" type="string"/>
+						<element name="comments" type="string" />
 						<element name="orderRequest" type="string" />
 					</sequence>
 
@@ -30,11 +31,11 @@
 		<part element="tns:orderProcessingErrorRequest" name="payload">
 		</part>
 	</message>
-	
+
 	<plnk:partnerLinkType name="OrderProcessingErrorWS_PLT">
 		<plnk:role name="OrderProcessingErrorWS_Role" portType="tns:orderProcessingErrorPort" />
 	</plnk:partnerLinkType>
-	
+
 	<portType name="orderProcessingErrorPort">
 		<operation name="pushOrder">
 			<input message="tns:orderProcessingErrorRequestMessage">

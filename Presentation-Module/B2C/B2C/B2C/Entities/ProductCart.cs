@@ -35,7 +35,6 @@ namespace B2C.Entities
             Product product = ProductFacade.Instance.getProduct(this.id);
             XmlDocument item = HandlerResource.getXmlItem();
             
-            
             item.GetElementsByTagName("productId").Item(0).InnerText = this.Id.ToString();
             item.GetElementsByTagName("productName").Item(0).InnerText = this.Name;
             item.GetElementsByTagName("price").Item(0).InnerText = this.Cost.ToString();
@@ -44,7 +43,7 @@ namespace B2C.Entities
             item.GetElementsByTagName("travelBusinessProvider").Item(0).InnerText = product.Transport.BusinessProvider;
             item.GetElementsByTagName("sourceCity").Item(0).InnerText = product.SourceCity; 
             item.GetElementsByTagName("targetCity").Item(0).InnerText = product.TargetCity;
-            item.GetElementsByTagName("travelDate").Item(0).InnerText = product.Transport.TravelDate.ToString();
+            item.GetElementsByTagName("travelDate").Item(0).InnerText = product.Transport.TravelDate.ToString("yyyy-MM-dd");
             item.GetElementsByTagName("travelOutTime").Item(0).InnerText = product.Transport.TravelOutTime.ToString();
 
 
@@ -53,14 +52,14 @@ namespace B2C.Entities
             foreach (XmlNode temp in node_spectacle.ChildNodes)
             {
                     if (temp.Name.Equals("id"))
-                         node_spectacle.InnerText = product.Spectacle.Id.ToString();
+                            temp.InnerText = product.Spectacle.Id.ToString();
             }
 
             /** Lodging's Attributes **/
             item.GetElementsByTagName("lodgingBusinessProvider").Item(0).InnerText = product.Lodging.Name;
             item.GetElementsByTagName("targetCity").Item(1).InnerText = product.TargetCity;
-            item.GetElementsByTagName("dateCheckIn").Item(0).InnerText = product.ArrivalDate.ToString();
-            item.GetElementsByTagName("dateCheckOut").Item(0).InnerText = product.DepartureDate.ToString();
+            item.GetElementsByTagName("dateCheckIn").Item(0).InnerText = product.ArrivalDate.ToString("yyyy-MM-dd");
+            item.GetElementsByTagName("dateCheckOut").Item(0).InnerText = product.DepartureDate.ToString("yyyy-MM-dd");
             
             return item;
         }

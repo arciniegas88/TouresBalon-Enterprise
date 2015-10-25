@@ -1,15 +1,22 @@
-﻿<div class="EmptyBox100"></div>
-<div class="Container80 MarAuto Fnone">
-    <h1 class="BigTopic FontRobotoMedium">Tu orden esta siendo procesada</h1>
+﻿@{
+    Layout = "~/Views/Layout/interna.cshtml";
+    ViewBag.Title = "Procesado";
+}
 
-    <div class="EmptyBox10"></div>
-    <div class="Wid100 Fleft Responsive50 TexAlCenter">
-        <button dataurl="@Url.Action("Index","Order")" class="btn_action ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left OrangeButton Fs28 White RaisedButton FloatNoneOnMobile pointer Wid70 TexAlCenter Fleft" type="button" name="j_idt17" id="j_idt17" role="button" aria-disabled="false">
-            <span class="fa  fa-list-ol"></span>
-            <span class="ui-button-text ui-c">Ver Ordenes</span>
-        </button>
+@section content
+{
+    <div class="EmptyBox100"></div>
+    <div class="Container80 MarAuto Fnone">
+        <h1 class="BigTopic FontRobotoMedium">Tu orden esta siendo procesada</h1>
+
+        <div class="EmptyBox10"></div>
+        <div class="Wid100 Fleft Responsive50 TexAlCenter">
+            <button dataurl="@Url.Action("Index","Order")" class="btn_action ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left OrangeButton Fs28 White RaisedButton FloatNoneOnMobile pointer Wid70 TexAlCenter Fleft" type="button" name="j_idt17" id="j_idt17" role="button" aria-disabled="false">
+                <span class="fa  fa-list-ol"></span>
+                <span class="ui-button-text ui-c">Ver Ordenes</span>
+            </button>
+        </div>
     </div>
-
-</div>
+}
 
 

@@ -6,6 +6,7 @@ using B2C.Entities;
 using B2C.Agents;
 using B2C.Contracts;
 using B2C.Utils;
+using B2C.Handlers;
 
 namespace B2C.Facades
 {
@@ -56,9 +57,9 @@ namespace B2C.Facades
             return items;
         }
 
-        public void proccessOrder(String franchise, String number_card)
+        public void proccessOrder()
         {
-            this.orderService.proccessOrder(franchise, number_card);
+            this.orderService.proccessOrder(HandlerSession.getProducts());
         }
 
         public Object cancelOrder(int id)

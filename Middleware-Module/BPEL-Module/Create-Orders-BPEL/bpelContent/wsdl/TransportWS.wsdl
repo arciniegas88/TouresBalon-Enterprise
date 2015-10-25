@@ -2,8 +2,8 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://touresbalon.com.co/transport/service/task/1.0.0"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
-	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
-	name="TransportWSService" targetNamespace="http://touresbalon.com.co/transport/service/task/1.0.0">
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="TransportWSService"
+	targetNamespace="http://touresbalon.com.co/transport/service/task/1.0.0">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 			xmlns:tns="http://touresbalon.com.co/transport/service/task/1.0.0"
@@ -100,11 +100,11 @@
 	<wsdl:message name="confirmTravel">
 		<wsdl:part element="tns:confirmTravel" name="parameters"></wsdl:part>
 	</wsdl:message>
-	
+
 	<plnk:partnerLinkType name="TransportWS_PLT">
 		<plnk:role name="TransportWS_Role" portType="tns:TransportWS" />
 	</plnk:partnerLinkType>
-	
+
 	<wsdl:portType name="TransportWS">
 		<wsdl:operation name="confirmTravel">
 			<wsdl:input message="tns:confirmTravel" name="confirmTravel"></wsdl:input>

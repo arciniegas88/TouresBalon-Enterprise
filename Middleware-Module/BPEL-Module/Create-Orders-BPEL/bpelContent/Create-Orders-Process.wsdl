@@ -1,89 +1,82 @@
 <?xml version="1.0"?>
 <definitions name="Create-Orders-BPEL"
-        targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0"
-        xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0"
-        xmlns:model="http://touresbalon.com.co/model/canonical/1.0.0"
-        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
-        xmlns="http://schemas.xmlsoap.org/wsdl/"
-        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-        >
+	targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0"
+	xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0"
+	xmlns:model="http://touresbalon.com.co/model/canonical/1.0.0"
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
 
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     TYPE DEFINITION - List of services participating in this BPEL process 
-     The default output of the BPEL designer uses strings as input and 
-     output to the BPEL Process. But you can define or import any XML 
-     Schema type and us them as part of the message types.
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
-      
-    <types>  
-        <schema elementFormDefault="qualified" 
-                targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0" 
-                xmlns="http://www.w3.org/2001/XMLSchema">
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+		TYPE DEFINITION - List of services participating in this BPEL process The 
+		default output of the BPEL designer uses strings as input and output to the 
+		BPEL Process. But you can define or import any XML Schema type and us them 
+		as part of the message types. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-            <import namespace="http://touresbalon.com.co/model/canonical/1.0.0" 
-            		schemaLocation="canonical_schema.xsd"/>
+	<types>
+		<schema elementFormDefault="qualified"
+			targetNamespace="http://touresbalon.com.co/orders/service/task/1.0.0"
+			xmlns="http://www.w3.org/2001/XMLSchema">
 
-        </schema>
-    </types>
-  
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     MESSAGE TYPE DEFINITION - Definition of the message types used as 
-     part of the port type defintions
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+			<import namespace="http://touresbalon.com.co/model/canonical/1.0.0"
+				schemaLocation="canonical_schema.xsd" />
 
-    <message name="CreateSalesOrderRequest-Message">
-        <part name="payload" element="model:CreateSalesOrderRequest"/>
-    </message>
+		</schema>
+	</types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+		MESSAGE TYPE DEFINITION - Definition of the message types used as part of 
+		the port type defintions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<message name="CreateSalesOrderRequest-Message">
+		<part name="payload" element="model:CreateSalesOrderRequest" />
+	</message>
 
 
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     PORT TYPE DEFINITION - A port type groups a set of operations into
-     a logical service unit.
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!-- portType implemented by the Create-Orders-BPEL BPEL process -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+		PORT TYPE DEFINITION - A port type groups a set of operations into a logical 
+		service unit. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- portType implemented by the Create-Orders-BPEL BPEL process -->
 
-    <portType name="Create-Orders-BPEL">
-        <operation name="process">
-            <input message="tns:CreateSalesOrderRequest-Message"/>
-        </operation>
-    </portType>
-
-
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     PARTNER LINK TYPE DEFINITION
-         the Create-Orders-BPEL partnerLinkType binds the provider and
-         requester portType into an asynchronous conversation.
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
-
-    <plnk:partnerLinkType name="Create-Orders-BPEL">
-        <plnk:role name="Create-Orders-BPELProvider" portType="tns:Create-Orders-BPEL"/>
-    </plnk:partnerLinkType>
+	<portType name="Create-Orders-BPEL">
+		<operation name="process">
+			<input message="tns:CreateSalesOrderRequest-Message" />
+		</operation>
+	</portType>
 
 
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     BINDING DEFINITION - Defines the message format and protocol details
-     for a web service.
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+		PARTNER LINK TYPE DEFINITION the Create-Orders-BPEL partnerLinkType binds 
+		the provider and requester portType into an asynchronous conversation. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-    <binding name="Create-Orders-BPELBinding" type="tns:Create-Orders-BPEL">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="process">
-            <soap:operation soapAction="http://touresbalon.com.co/orders/service/task/1.0.0/process"/>
-            <input>
-                <soap:body use="literal"/>
-            </input>
-        </operation>
-    </binding>
+	<plnk:partnerLinkType name="Create-Orders-BPEL">
+		<plnk:role name="Create-Orders-BPELProvider" portType="tns:Create-Orders-BPEL" />
+	</plnk:partnerLinkType>
 
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     SERVICE DEFINITION - A service groups a set of ports into
-     a service unit.
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-    <service name="Create-Orders-BPEL">
-        <port name="Create-Orders-BPELPort" binding="tns:Create-Orders-BPELBinding">
-    		<soap:address location="http://localhost:8080/Create-Orders-BPEL"/>
-        </port>
-    </service>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+		BINDING DEFINITION - Defines the message format and protocol details for 
+		a web service. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<binding name="Create-Orders-BPELBinding" type="tns:Create-Orders-BPEL">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="process">
+			<soap:operation
+				soapAction="http://touresbalon.com.co/orders/service/task/1.0.0/process" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+	</binding>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+		SERVICE DEFINITION - A service groups a set of ports into a service unit. 
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<service name="Create-Orders-BPEL">
+		<port name="Create-Orders-BPELPort" binding="tns:Create-Orders-BPELBinding">
+			<soap:address location="http://localhost:8080/Create-Orders-BPEL" />
+		</port>
+	</service>
 
 </definitions>

@@ -2,8 +2,8 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
-	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
-	name="SalesOrderWSService" targetNamespace="http://touresbalon.com.co/salesorder/service/task/1.0.0">
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="SalesOrderWSService"
+	targetNamespace="http://touresbalon.com.co/salesorder/service/task/1.0.0">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 			xmlns:tns="http://touresbalon.com.co/salesorder/service/task/1.0.0"
@@ -25,8 +25,9 @@
 					<xs:element minOccurs="0" name="id" type="xs:long" />
 					<xs:element minOccurs="0" name="itemNo" type="xs:string" />
 					<xs:element minOccurs="0" name="lodgingComments" type="xs:string" />
-					<xs:element minOccurs="0" name="lodgingProvider" type="xs:string"/>
-					<xs:element minOccurs="0" name="lodgingReservationProvider" type="xs:long"/>
+					<xs:element minOccurs="0" name="lodgingProvider" type="xs:string" />
+					<xs:element minOccurs="0" name="lodgingReservationProvider"
+						type="xs:long" />
 					<xs:element minOccurs="0" name="orderId" type="tns:salesOrder" />
 					<xs:element minOccurs="0" name="price" type="xs:long" />
 					<xs:element minOccurs="0" name="productId" type="xs:long" />
@@ -101,11 +102,11 @@
 	<wsdl:message name="updateItem">
 		<wsdl:part element="tns:updateItem" name="parameters"></wsdl:part>
 	</wsdl:message>
-	
+
 	<plnk:partnerLinkType name="SalesOrderWS_PLT">
 		<plnk:role name="SalesOrderWS_Role" portType="tns:SalesOrderWS" />
 	</plnk:partnerLinkType>
-	
+
 	<wsdl:portType name="SalesOrderWS">
 		<wsdl:operation name="updateItem">
 			<wsdl:input message="tns:updateItem" name="updateItem"></wsdl:input>
