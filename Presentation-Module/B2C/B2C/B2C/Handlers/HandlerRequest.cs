@@ -68,9 +68,13 @@ namespace B2C.Handlers
             if( accept.Equals(HandlerRequest.XML))
             {
                 request.ContentType = HandlerRequest.XML;
-               
-                string test = "<authenticationResource><email>test@gmail.com</email><password>123456</password></authenticationResource>";
-                byte[] bytes = Encoding.UTF8.GetBytes(test.ToString());
+                
+                string test = "<authenticationResource>";
+                test += "<email>alejinqm@gmail.com</email>";
+                test += "<password>123456</password>";
+                test += "</authenticationResource>";
+                byte[] bytes = Encoding.Default.GetBytes(body.ToString());
+                
                 request.ContentLength = bytes.Length;
 
                 using (Stream putStream = request.GetRequestStream())
@@ -82,8 +86,16 @@ namespace B2C.Handlers
             // If required by the server, set the credentials.
             //request.Credentials = CredentialCache.DefaultCredentials;
             // Get the response.
-            WebResponse response = request.GetResponse();
-           
+            WebResponse response = null;
+            try
+            {
+                response = request.GetResponse();
+            }
+            catch (WebException web)
+            {
+                Console.Write(web.Message + web.Response);
+                return web.Message;
+            }
             // Get the stream containing content returned by the server.
             Stream dataStream = response.GetResponseStream();
             // Open the stream using a StreamReader for easy access.

@@ -26,8 +26,6 @@ namespace B2C.Controllers
                 bool response = SecurityFacade.Instance.getLoginUser(customer);
                 if (response)
                 {
-                    customer = CustomerFacade.Instance.getCustomer(customer);
-                    HandlerSession.setUser(customer);
                     return Json(new { success = true, url = Url.Action("Index", "Home") });
                 }
                 else

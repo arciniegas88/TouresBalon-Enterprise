@@ -48,6 +48,7 @@ namespace B2C.Controllers
         public ActionResult Show()
         {
             this.ini();
+
             ViewData.Add("products", HandlerSession.getProducts());
             return View();
         }
@@ -57,7 +58,8 @@ namespace B2C.Controllers
         {
             this.ini();
 
-            OrderFacade.Instance.proccessOrder(Request.Params.Get("form.Franchise"), Request.Params.Get("form.Number"));
+            //(Request.Params.Get("form.Franchise"), Request.Params.Get("form.Number")
+            OrderFacade.Instance.proccessOrder();
 
             return View();
         }

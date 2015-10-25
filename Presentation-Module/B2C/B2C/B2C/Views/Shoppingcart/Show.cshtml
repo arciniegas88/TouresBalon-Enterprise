@@ -31,7 +31,22 @@
                 <span class="bold">Total: </span> <span id="total_car">@cost</span>
             </div>
             <div class="clear center-block">
-                <a id="proccess_button" href="#" class="buy ui-button-text-icon-left BlueModena RedButton Fs30 White RaisedButton FloatNoneOnMobile pointer Wid100 FontBold Fs20 OrangeButton PadWithBorder10">Procesar Orden</a>
+            
+            @if (B2C.Handlers.HandlerSession.isLogin())
+            {
+                using (Html.BeginForm("Proccess", "ShoppingCart", FormMethod.Post, new { @class = "form-horizontal", id = "creditCardForm", role = "form" }))
+                {
+                    <div class="EmptyBox10"></div>
+                         <div class="ClearBoth TexAlCenter">
+                         <input type="submit" value="Procesar Orden" class="RaisedButton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left  Fs18 White FloatNoneOnMobile TexAlCenter pointer Wid80" />
+                    </div>
+                }
+            }
+            else
+            {
+                <a href="@Url.Action("Login","Home")" class="ui-button-text-icon-left BlueModena RedButton Fs30 White RaisedButton FloatNoneOnMobile pointer Wid100 FontBold Fs20 OrangeButton PadWithBorder10">Iniciar Sesion</a>
+            }
+                <!--<a id="proccess_button" href="#" class="buy ui-button-text-icon-left BlueModena RedButton Fs30 White RaisedButton FloatNoneOnMobile pointer Wid100 FontBold Fs20 OrangeButton PadWithBorder10">Procesar Orden</a>-->
             </div>
         </div>
 

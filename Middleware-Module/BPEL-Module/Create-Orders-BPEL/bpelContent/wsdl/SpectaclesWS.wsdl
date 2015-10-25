@@ -2,8 +2,8 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://spectacles.com.co/service/task/1.0.0"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
-	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
-	name="SpectaclesWSService" targetNamespace="http://spectacles.com.co/service/task/1.0.0">
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="SpectaclesWSService"
+	targetNamespace="http://spectacles.com.co/service/task/1.0.0">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 			xmlns:tns="http://spectacles.com.co/service/task/1.0.0"
@@ -92,16 +92,16 @@
 			name="parameters">
 		</wsdl:part>
 	</wsdl:message>
-	
+
 	<wsdl:message name="buySpectacleByTicketResponse">
 		<wsdl:part element="tns:buySpectacleByTicketResponse" name="parameters">
 		</wsdl:part>
 	</wsdl:message>
-	
+
 	<plnk:partnerLinkType name="SpectaclesWS_PLT">
 		<plnk:role name="SpectaclesWS_Role" portType="tns:SpectaclesWS" />
 	</plnk:partnerLinkType>
-	
+
 	<wsdl:portType name="SpectaclesWS">
 		<wsdl:operation name="buySpectacleByTicket">
 			<wsdl:input message="tns:buySpectacleByTicket" name="buySpectacleByTicket">

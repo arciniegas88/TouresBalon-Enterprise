@@ -35,8 +35,11 @@ namespace B2C.Agents
         public List<DataContractOrder> getOrdersCustomer(Customer customer)
         {
             StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("getOrdersCustomer"));
-            builder.Append("typeDocument=CC&");
-            builder.Append("numberDocument=777777");
+            builder.Append("typeDocument=");
+            builder.Append(customer.Document_type);
+            builder.Append("&");
+            builder.Append("numberDocument=");
+            builder.Append(customer.UserID);
 
             HandlerRequest request = new HandlerRequest();
             String response = request.doRequest(builder.ToString(), "GET");
@@ -53,10 +56,9 @@ namespace B2C.Agents
             }
         }
 
-        public void proccessOrder(String franchise, String number_card)
+        public void proccessOrder(List<ProductCart> products)
         {
-            List<ProductCart> products = HandlerSession.getProducts();
-            String xml = HandlerXML.buildMessage(products, franchise, number_card);
+            String xml = HandlerXML.buildMessage(products);
 
             HandlerRequest request = new HandlerRequest();
             request.doMessage(xml, HandlerResource.getServiceAgentLocation("queueProcessingOrder"));
