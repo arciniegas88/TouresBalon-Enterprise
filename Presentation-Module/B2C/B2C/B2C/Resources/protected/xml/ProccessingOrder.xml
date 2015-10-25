@@ -1,4 +1,4 @@
-﻿<tns:CreateSalesOrderRequest xmlns:tns="http://touresbalon.com.co/orders/service/task/1.0.0">
+﻿<p:CreateSalesOrderRequest xmlns:p="http://touresbalon.com.co/model/canonical/1.0.0">
   <order>
      <comments>ORDEN PRUEBA</comments>
      <custFirstName>ALEJANDRO</custFirstName>
@@ -11,4 +11,4 @@
      <price>15000</price>
      <custom/>
   </order>
-</tns:CreateSalesOrderRequest>
+</p:CreateSalesOrderRequest>

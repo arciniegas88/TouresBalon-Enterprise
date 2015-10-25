@@ -1,13 +1,9 @@
 ﻿using B2C.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace B2C.Handlers
 {

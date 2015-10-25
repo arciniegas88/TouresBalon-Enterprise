@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using B2C.Entities;
 using B2C.Agents;
+using System.Xml;
 
 namespace B2C.Facades
 {
@@ -34,7 +35,8 @@ namespace B2C.Facades
 
         public bool getLoginUser(Customer customer)
         {
-            return this.securityService.loginUser(customer).authenticationResourceResult;
+            string body = customer.toXMLLogin();
+            return this.securityService.loginUser(body).authenticationResourceResult;
         }
     }
 }

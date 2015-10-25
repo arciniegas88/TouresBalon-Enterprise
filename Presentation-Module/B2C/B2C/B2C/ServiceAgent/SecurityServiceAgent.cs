@@ -12,16 +12,12 @@ namespace B2C.Agents
     public class SecurityService
     {
 
-        public DataContractLogin loginUser(Customer customer)
+        public DataContractLogin loginUser(String body)
         {
             HandlerRequest request = new HandlerRequest();
             StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("login"));
-            builder.Append("userName=");
-            builder.Append(customer.Email);
-            builder.Append(";password=");
-            builder.Append(customer.Password);
 
-            String response =  request.doRequest(builder.ToString(), "GET");
+            String response =  request.doRequest(builder.ToString(), HandlerRequest.POST, HandlerRequest.XML, body);
 
             try
             {

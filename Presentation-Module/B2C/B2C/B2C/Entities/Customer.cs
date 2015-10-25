@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using B2C.Forms;
+using System.Xml;
+using System.IO;
 
 namespace B2C.Entities
 {
@@ -215,6 +217,22 @@ namespace B2C.Entities
             {
                 document_type = value;
             }
+        }
+
+        public string toXMLLogin()
+        {
+            XmlDocument login = Handlers.HandlerResource.getXmlLogin();
+            login.GetElementsByTagName("email").Item(0).InnerText = this.Email;
+            login.GetElementsByTagName("password").Item(0).InnerText = this.Password;
+
+            StringWriter sw = new StringWriter();
+            XmlTextWriter tx = new XmlTextWriter(sw);
+            login.WriteTo(tx);
+
+            string str = sw.ToString();
+
+            return str;
+
         }
     }
 }

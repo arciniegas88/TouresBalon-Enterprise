@@ -73,6 +73,7 @@ namespace B2C.Contracts
         [JsonProperty("departureDate")]
         public DateTime departureDate { get; set; }
 
+
         [JsonProperty("imageRef", NullValueHandling = NullValueHandling.Ignore)]
         public byte[] imageRef { get; set; }
 
@@ -86,6 +87,16 @@ namespace B2C.Contracts
 
         [JsonProperty("lodgingType", NullValueHandling = NullValueHandling.Ignore)]
         public DataContractType lodgingType { get; set; }
+
+        
+        [JsonProperty("sourceCity", NullValueHandling = NullValueHandling.Ignore)]
+        public DataContractCity sourceCity { get; set; }
+
+
+        [JsonProperty("targetCity", NullValueHandling = NullValueHandling.Ignore)]
+        public DataContractCity targetCity { get; set; }
+
+        
 
     }
 
@@ -106,6 +117,16 @@ namespace B2C.Contracts
 
         [JsonProperty("cost", NullValueHandling = NullValueHandling.Ignore)]
         public double cost { get; set; }
+
+        [JsonProperty("travelDate", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTime travelDate { get; set; }
+
+
+        [JsonProperty("travelOutTime", NullValueHandling = NullValueHandling.Ignore)]
+        public int travelOutTime { get; set; }
+
+        [JsonProperty("businessProvider", NullValueHandling = NullValueHandling.Ignore)]
+        public string businessProvider { get; set; }
     }
 
     public class DataContractTopFive
@@ -115,6 +136,16 @@ namespace B2C.Contracts
 
         [JsonProperty("nameProduct", NullValueHandling = NullValueHandling.Ignore)]
         public string nameProduct { get; set; }
+    }
+
+    public class DataContractCity
+    {
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        public String name { get; set; }
+
+
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+        public int id { get; set; }
     }
 
     public class DataContractProductSmall

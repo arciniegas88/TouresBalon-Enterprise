@@ -41,11 +41,11 @@ namespace B2C.Entities
             item.GetElementsByTagName("price").Item(0).InnerText = this.Cost.ToString();
 
             /** Transport's Attributes **/
-            item.GetElementsByTagName("travelBusinessProvider").Item(0).InnerText = product.Transport.Name;
-            item.GetElementsByTagName("sourceCity").Item(0).InnerText = "NOT FOUND"; 
-            item.GetElementsByTagName("targetCity").Item(0).InnerText = "NOT FOUND";
-            item.GetElementsByTagName("travelDate").Item(0).InnerText = "NOT FOUND";
-            item.GetElementsByTagName("travelOutTime").Item(0).InnerText = "NOT FOUND";
+            item.GetElementsByTagName("travelBusinessProvider").Item(0).InnerText = product.Transport.BusinessProvider;
+            item.GetElementsByTagName("sourceCity").Item(0).InnerText = product.SourceCity; 
+            item.GetElementsByTagName("targetCity").Item(0).InnerText = product.TargetCity;
+            item.GetElementsByTagName("travelDate").Item(0).InnerText = product.Transport.TravelDate.ToString();
+            item.GetElementsByTagName("travelOutTime").Item(0).InnerText = product.Transport.TravelOutTime.ToString();
 
 
             /** Spectacle's Attributes **/
@@ -58,12 +58,10 @@ namespace B2C.Entities
 
             /** Lodging's Attributes **/
             item.GetElementsByTagName("lodgingBusinessProvider").Item(0).InnerText = product.Lodging.Name;
-            item.GetElementsByTagName("targetCity").Item(1).InnerText = "NOT FOUND";
-            item.GetElementsByTagName("dateCheckIn").Item(0).InnerText = "NOT FOUND";
-            item.GetElementsByTagName("dateCheckOut").Item(0).InnerText = "NOT FOUND";
+            item.GetElementsByTagName("targetCity").Item(1).InnerText = product.TargetCity;
+            item.GetElementsByTagName("dateCheckIn").Item(0).InnerText = product.ArrivalDate.ToString();
+            item.GetElementsByTagName("dateCheckOut").Item(0).InnerText = product.DepartureDate.ToString();
             
-
-
             return item;
         }
 
