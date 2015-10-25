@@ -3,6 +3,7 @@ package co.com.touresbalon.foundation.oms.infrastructure;
 import co.com.touresbalon.foundation.oms.webclient.OrdersWebClient;
 import co.com.touresbalon.foundation.oms.webclient.PartnerServicesWebClient;
 import co.com.touresbalon.foundation.oms.webclient.ProductsWebClient;
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -15,6 +16,23 @@ import javax.inject.Singleton;
 
 @ApplicationScoped
 public class WebResourceFactory {
+
+    //----------------------------------
+
+    @Produces
+    @Singleton
+    private ActiveMQConnectionFactory createMQConnectionFactory(){
+
+        StringBuilder endpoint = new StringBuilder();
+        endpoint.append("tcp://")
+                .append(System.getProperty("touresbalon.locations.esb.mq"));
+
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory( endpoint.toString() );
+        connectionFactory.setUserName("admin");
+        connectionFactory.setPassword("admin");
+
+        return connectionFactory;
+    }
 
 
     //----------------------------------
