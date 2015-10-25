@@ -36,13 +36,16 @@
             <camel:setHeader headerName="Content-type">
                 <camel:constant>application/xml</camel:constant>
             </camel:setHeader>
-            <camel:to uri="restlet:http://localhost:{{http.esb.security.adapter.port}}/esb/services/web-api/security/authentication?restletMethod=POST" />
-            <camel:setBody>
-                <camel:xpath>//authenticationResourceResponse/authenticationResourceResult/email/text()</camel:xpath>
-            </camel:setBody>
-            <camel:recipientList>
-                <camel:simple>restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customerByEmail/${body}?restletMethod=GET</camel:simple>
-            </camel:recipientList>
+            <camel:to uri="restlet:http://localhost:{{http.esb.security.adapter.port}}/esb/services/web-api/security/authentication?restletMethod=POST&amp;throwExceptionOnFailure=false" />
+            <camel:when>
+                <camel:xpath>//authenticationResourceResponse/authenticationResourceResult/userGroup/text() = "1"</camel:xpath>
+                <camel:setBody>
+                    <camel:xpath>//authenticationResourceResponse/authenticationResourceResult/email/text()</camel:xpath>
+                </camel:setBody>
+                <camel:recipientList>
+                    <camel:simple>restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customerByEmail/${body}?restletMethod=GET&amp;throwExceptionOnFailure=false</camel:simple>
+                </camel:recipientList>
+            </camel:when>
         </camel:route>
 
     </camelContext>
