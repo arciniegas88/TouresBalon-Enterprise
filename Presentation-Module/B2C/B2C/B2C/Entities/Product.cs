@@ -72,10 +72,10 @@ namespace B2C.Entities
             if ( contract.spectacleType != null)
                 this.Spectacle = new Type(contract.spectacleType);
 
-            if( contract.targetCity.name != null)
+            if(contract.targetCity != null && contract.targetCity.name != null)
                 this.targetCity = contract.targetCity.name;
 
-            if (contract.sourceCity.name != null)
+            if (contract.sourceCity != null && contract.sourceCity.name != null)
                 this.sourceCity = contract.sourceCity.name;
 
         }

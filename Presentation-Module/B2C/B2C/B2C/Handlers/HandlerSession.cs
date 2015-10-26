@@ -6,20 +6,36 @@ using B2C.Entities;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using B2C.Utils;
+using System.Xml;
 
 namespace B2C.Handlers
 {
     public class HandlerSession
     {
+        public static bool isLogin()
+        {
+            if (HttpContext.Current.Session["Id"] != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static Customer getCustomer()
         {
             Customer user = null;
-            if (HttpContext.Current.Session["UserID"] != null)
+            if (HttpContext.Current.Session["Id"] != null)
             {
-                int id = Int32.Parse(HttpContext.Current.Session["UserID"].ToString());
-                string username = HttpContext.Current.Session["username"].ToString();
-
-                user = new Customer(id, username);
+                Customer customer = new Customer(HttpContext.Current.Session["Id"].ToString(),
+                                          HttpContext.Current.Session["email"].ToString(),
+                                          HttpContext.Current.Session["creditcard_number"].ToString(),
+                                          HttpContext.Current.Session["creditcard_type"].ToString(),
+                                          HttpContext.Current.Session["first_name"].ToString(),
+                                          HttpContext.Current.Session["last_name"].ToString()
+                                          );
+                return customer;
             }
             else
             {
@@ -27,12 +43,6 @@ namespace B2C.Handlers
             }
 
             return user;
-        }
-
-        public static void setUser(Customer user)
-        {
-            HttpContext.Current.Session.Add("username", user.Email);
-            HttpContext.Current.Session.Add("UserID", user.UserID);
         }
 
         public static Object addProduct(int id, string name, int account, double cost)
@@ -92,12 +102,41 @@ namespace B2C.Handlers
             }
         }
 
+        public static void setUser(XmlDocument xml)
+        {
+            if (xml.GetElementsByTagName("email").Item(0) != null)
+                HttpContext.Current.Session.Add("email", xml.GetElementsByTagName("email").Item(0).InnerText);
+
+            if (xml.GetElementsByTagName("creditcard_number").Item(0) != null)
+                HttpContext.Current.Session.Add("creditcard_number", xml.GetElementsByTagName("creditcard_number").Item(0).InnerText);
+
+            if (xml.GetElementsByTagName("creditcard_type").Item(0) != null)
+                HttpContext.Current.Session.Add("creditcard_type", xml.GetElementsByTagName("creditcard_type").Item(0).InnerText);
+
+            if (xml.GetElementsByTagName("first_name").Item(0) != null)
+                HttpContext.Current.Session.Add("first_name", xml.GetElementsByTagName("first_name").Item(0).InnerText);
+
+            if (xml.GetElementsByTagName("last_name").Item(0) != null)
+                HttpContext.Current.Session.Add("last_name", xml.GetElementsByTagName("last_name").Item(0).InnerText);
+
+            if (xml.GetElementsByTagName("phone_number").Item(0) != null)
+                HttpContext.Current.Session.Add("phone_number", xml.GetElementsByTagName("phone_number").Item(0).InnerText);
+
+            if (xml.GetElementsByTagName("Id").Item(0) != null)
+                HttpContext.Current.Session.Add("Id", xml.GetElementsByTagName("Id").Item(0).InnerText);
+
+        }
+
         public static void destroy()
         {
-            if (HttpContext.Current.Session["UserID"] != null)
+            if (HttpContext.Current.Session["Id"] != null)
             {
-                HttpContext.Current.Session.Remove("UserID");
-                HttpContext.Current.Session.Remove("username");
+                HttpContext.Current.Session.Remove("Id");
+                HttpContext.Current.Session.Remove("email");
+                HttpContext.Current.Session.Remove("creditcard_number");
+                HttpContext.Current.Session.Remove("creditcard_type");
+                HttpContext.Current.Session.Remove("last_name");
+                HttpContext.Current.Session.Remove("phone_number");
             }
         }
     }

@@ -50,7 +50,7 @@ $(document).ready(function () {
         var name = $(this).attr("dataname");
         var cost = $(this).attr("datacost");
 
-        $("#account").val(1);
+       $("#account").val(1);
 
         $("#name_product").html(name);
         $("#name_product").attr('data-id', id);

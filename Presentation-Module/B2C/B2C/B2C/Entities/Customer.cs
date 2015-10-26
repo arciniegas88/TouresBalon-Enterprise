@@ -16,6 +16,7 @@ namespace B2C.Entities
         private string phone_number;
         private string email;
         private string password;
+        private string user_name;
 
         private string creditcard_type;
         private string creditcard_number;
@@ -48,6 +49,17 @@ namespace B2C.Entities
             this.last_name = form.LastName;
             this.phone_number = form.PhoneNumber;
             this.password = form.Password;
+        }
+
+
+        public Customer(string id, string email, string creditcard_number, string creditcard_type, string first_name, string last_name)
+        {
+            this.userID = int.Parse(id);
+            this.email = email;
+            this.Creditcard_number = creditcard_number;
+            this.Creditcard_type = creditcard_type;
+            this.First_name = first_name;
+            this.Last_name = last_name;
         }
 
         public int UserID
@@ -219,6 +231,19 @@ namespace B2C.Entities
             }
         }
 
+        public string User_name
+        {
+            get
+            {
+                return user_name;
+            }
+
+            set
+            {
+                user_name = value;
+            }
+        }
+
         public string toXMLLogin()
         {
             XmlDocument login = Handlers.HandlerResource.getXmlLogin();
@@ -232,7 +257,8 @@ namespace B2C.Entities
             string str = sw.ToString();
 
             return str;
-
         }
+
+
     }
 }
