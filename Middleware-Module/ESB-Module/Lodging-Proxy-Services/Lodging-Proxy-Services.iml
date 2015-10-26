@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<module version="4">
   <component name="FacetManager">
     <facet type="Osmorc" name="OSGi">
-      <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="Product-Proxy-Services-1.0.0-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="co.com.touresbalon.foundation.middleware.Product-Proxy-Services" bundleVersion="1.0.0.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
+      <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="Lodging-Proxy-Services-1.0.0-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="co.com.touresbalon.foundation.middleware.Lodging-Proxy-Services" bundleVersion="1.0.0.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
         <additionalProperties>
-          <property key="Bundle-Name" value="Product-Proxy-Services" />
-          <property key="Include-Resource" value="canonical/canonical_schema.xsd=$MODULE_DIR$/src/main/resources/canonical/canonical_schema.xsd,log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,META-INF/spring/service-infrastructure.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/service-infrastructure.xml,static/product-used-error.xml=$MODULE_DIR$/src/main/resources/static/product-used-error.xml" />
+          <property key="Bundle-Name" value="Lodging-Proxy-Services" />
         </additionalProperties>
         <additionalJARContents />
-      </configuration>
-    </facet>
-    <facet type="Spring" name="Spring">
-      <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/META-INF/spring/service-infrastructure.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml</file>
-        </fileset>
       </configuration>
     </facet>
   </component>
@@ -23,7 +14,6 @@
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
