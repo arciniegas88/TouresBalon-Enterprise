@@ -70,8 +70,23 @@
 
         <!-- Create Customer -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/create?restletMethod=POST"/>
-            <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/createCustomer?restletMethod=POST"/>
+            <camel:from id="input" uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/create?restletMethod=POST"/>
+            <camel:setProperty propertyName="request">
+                <camel:xpath>//createCustomer</camel:xpath>
+            </camel:setProperty>
+            <camel:removeHeaders pattern="*"/>
+            <camel:setHeader headerName="Content-type">
+                <camel:constant>application/xml</camel:constant>
+            </camel:setHeader>
+            <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/createCustomer?restletMethod=POST&amp;throwExceptionOnFailure=false"/>
+            <camel:when>
+                <camel:xpath>//createCustomerResponse/createCustomerResult/text() = "OK"</camel:xpath>
+                <camel:setBody>
+                    <camel:simple>${property.request}</camel:simple>
+                </camel:setBody>
+                <camel:to uri="xslt:transformation/CustomerToUser.xsl"/>
+                <camel:to uri="restlet:http://localhost:{{http.esb.security.adapter.port}}/esb/services/web-api/security/createLdap?restletMethod=POST&amp;throwExceptionOnFailure=false" />
+            </camel:when>
         </camel:route>
 
         <!-- Update Customer -->
@@ -87,4 +102,5 @@
         </camel:route>
 
     </camelContext>
+
 </beans>
