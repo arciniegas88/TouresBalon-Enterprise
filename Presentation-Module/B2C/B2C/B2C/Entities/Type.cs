@@ -13,6 +13,11 @@ namespace B2C.Entities
         private string name;
         private double cost;
 
+        /** Just for transport **/
+        private DateTime travelDate;
+        private int travelOutTime;
+        private String businessProvider;
+
         public Type(DataContractType type)
         {
             this.id = type.id;
@@ -22,6 +27,15 @@ namespace B2C.Entities
             this.name = Encoding.UTF8.GetString(data);
 
             this.cost = type.cost;
+
+            if (type.travelDate != null)
+                this.TravelDate = type.travelDate;
+
+            if (type.travelOutTime != null && type.travelOutTime != 0)
+                this.TravelOutTime = type.travelOutTime;
+
+            if (type.businessProvider != null)
+                this.businessProvider = type.businessProvider;
         }
 
         public int Id
@@ -60,6 +74,45 @@ namespace B2C.Entities
             set
             {
                 cost = value;
+            }
+        }
+
+        public DateTime TravelDate
+        {
+            get
+            {
+                return travelDate;
+            }
+
+            set
+            {
+                travelDate = value;
+            }
+        }
+
+        public int TravelOutTime
+        {
+            get
+            {
+                return travelOutTime;
+            }
+
+            set
+            {
+                travelOutTime = value;
+            }
+        }
+
+        public string BusinessProvider
+        {
+            get
+            {
+                return businessProvider;
+            }
+
+            set
+            {
+                businessProvider = value;
             }
         }
     }

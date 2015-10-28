@@ -15,11 +15,13 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
     [ServiceBehavior(ConcurrencyMode=ConcurrencyMode.Multiple)]
     public class CustomerService : ICustomerService
     {
+        private CustomerBoundary customerBoundary;
+
         public string createCustomer(Customer customer)
         {
             try
             {
-                CustomerBoundary customerBoundary = new CustomerBoundary();
+               customerBoundary = new CustomerBoundary();
 
                 return customerBoundary.createCustomer(customer);
             }catch(BusinessException e)
@@ -44,7 +46,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
         {
             try
             {
-                CustomerBoundary customerBoundary = new CustomerBoundary();
+                customerBoundary = new CustomerBoundary();
 
                 return customerBoundary.deleteCustomer(id);
             }
@@ -70,9 +72,8 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
         {
             try
             {
-                CustomerBoundary customerBoundary = new CustomerBoundary();
+                customerBoundary = new CustomerBoundary();
                 return customerBoundary.getCustomer(id);
-
             }
             catch (BusinessException e)
             {
@@ -96,11 +97,42 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
             }
         }
 
+        public Customer getCustomerByEmail(string email)
+        {
+            try
+            {
+                customerBoundary = new CustomerBoundary();
+                return customerBoundary.getCustomerByEmail(email);
+            }
+            catch (BusinessException e)
+            {
+                throw new WebFaultException<GeneralResponse>
+                    (new GeneralResponse
+                    {
+                        message = e.Message,
+                        status = GeneralResponse.STATUS_ERROR,
+                        code = "400"
+                    }, HttpStatusCode.BadRequest);
+            }
+            catch (PlatformException e)
+            {
+                throw new WebFaultException<GeneralResponse>
+                    (new GeneralResponse
+                    {
+                        message = e.Message,
+                        status = GeneralResponse.STATUS_ERROR,
+                        code = "500"
+                    }, HttpStatusCode.BadRequest);
+            }
+            
+            throw new NotImplementedException();
+        }
+
         public IList<Customer> getCustomers(string pagina, string regPagina)
         {
             try
             { 
-                CustomerBoundary customerBoundary = new CustomerBoundary();
+                customerBoundary = new CustomerBoundary();
 
                 return customerBoundary.getCustomers(Int32.Parse(pagina), Int32.Parse(regPagina));
             }
@@ -126,7 +158,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
         {
             try
             { 
-                CustomerBoundary customerBoundary = new CustomerBoundary();
+                customerBoundary = new CustomerBoundary();
 
                 return customerBoundary.updateCustomer(customer);
             }

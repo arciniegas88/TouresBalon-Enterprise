@@ -36,6 +36,32 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.bou
             }
         }
 
+        public Customer getCustomerByEmail(string email)
+        {
+            try
+            {
+                customerDAO = new CustomerDAO();
+                Customer customer = customerDAO.getCustomerByEmail(email);
+
+                AddressDAO addressDAO = new AddressDAO();
+                customer.address = addressDAO.getCustomerAddress(customer.Id);
+
+                return customer;
+            }
+            catch (BusinessException e)
+            {
+                throw e;
+            }
+            catch (PlatformException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw new PlatformException(e.Message);
+            }
+        }
+
         public IList<Customer> getCustomers(int pagina, int regPagina)
         {
             try

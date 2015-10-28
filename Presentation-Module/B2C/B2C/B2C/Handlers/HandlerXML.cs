@@ -1,13 +1,9 @@
 ﻿using B2C.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace B2C.Handlers
 {
@@ -40,20 +36,22 @@ namespace B2C.Handlers
             return xDoc;
         }
 
-        public static string buildMessage(List<ProductCart> objects, string franchise, string number_card)
+        public static string buildMessage(List<ProductCart> objects)
         {
             XmlDocument order = HandlerResource.getXmlProcessingOrder();
             XmlDocument item;
             XmlNode root = order.DocumentElement;
 
+            Customer customer = HandlerSession.getCustomer();
+
             order.GetElementsByTagName("comments").Item(0).InnerText = "Testing from B2C";
-            order.GetElementsByTagName("custFirstName").Item(0).InnerText = "NOT INTEGRATED";
-            order.GetElementsByTagName("custLastName").Item(0).InnerText = "NOT INTEGRATED";
-            order.GetElementsByTagName("email").Item(0).InnerText = "NOT INTEGRATED";
-            order.GetElementsByTagName("custDocumentNumber").Item(0).InnerText = "NOT INTEGRATED";
-            order.GetElementsByTagName("custDocumentType").Item(0).InnerText = "NOT INTEGRATED";
-            order.GetElementsByTagName("customerType").Item(0).InnerText = franchise;
-            order.GetElementsByTagName("creditCardNumber").Item(0).InnerText = number_card;
+            order.GetElementsByTagName("custFirstName").Item(0).InnerText = customer.First_name;
+            order.GetElementsByTagName("custLastName").Item(0).InnerText = customer.Last_name;
+            order.GetElementsByTagName("email").Item(0).InnerText = customer.Email;
+            order.GetElementsByTagName("custDocumentNumber").Item(0).InnerText = customer.UserID.ToString();
+            order.GetElementsByTagName("custDocumentType").Item(0).InnerText = "CC";
+            order.GetElementsByTagName("customerType").Item(0).InnerText = "SILVER";
+            order.GetElementsByTagName("creditCardNumber").Item(0).InnerText = customer.Creditcard_number;
 
             double total = 0;
 

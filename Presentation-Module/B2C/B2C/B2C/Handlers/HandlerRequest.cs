@@ -16,6 +16,13 @@ namespace B2C.Handlers
 {
     public class HandlerRequest
     {
+        public static string XML = "application/xml";
+        public static string JSON = "application/json";
+
+        public static string POST = "POST";
+        public static string GET = "GET";
+
+
         private static IConnectionFactory factory = null;
         private static IConnection connection;
         private static ISession session;
@@ -47,18 +54,48 @@ namespace B2C.Handlers
             }
         }
 
-        public String doRequest(String url, String method)
+        public String doRequest(String url, String method, String accept = "", String body = "")
         {
+            if (accept.Equals(""))
+                accept = HandlerRequest.JSON;
+
             // Create a request for the URL. 
-            HttpWebRequest request = HttpWebRequest.CreateHttp(url);
-            request.Accept = "application/json";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Accept = accept;
+            request.Method = method;
+            
+
+            if( accept.Equals(HandlerRequest.XML))
+            {
+                request.ContentType = HandlerRequest.XML;
                 
+                string test = "<authenticationResource>";
+                test += "<email>alejinqm@gmail.com</email>";
+                test += "<password>123456</password>";
+                test += "</authenticationResource>";
+                byte[] bytes = Encoding.Default.GetBytes(body.ToString());
+                
+                request.ContentLength = bytes.Length;
+
+                using (Stream putStream = request.GetRequestStream())
+                {
+                    putStream.Write(bytes, 0, bytes.Length);
+                }
+            }
+
             // If required by the server, set the credentials.
-            request.Credentials = CredentialCache.DefaultCredentials;
+            //request.Credentials = CredentialCache.DefaultCredentials;
             // Get the response.
-            WebResponse response = request.GetResponse();
-            // Display the status.
-            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            WebResponse response = null;
+            try
+            {
+                response = request.GetResponse();
+            }
+            catch (WebException web)
+            {
+                Console.Write(web.Message + web.Response);
+                return web.Message;
+            }
             // Get the stream containing content returned by the server.
             Stream dataStream = response.GetResponseStream();
             // Open the stream using a StreamReader for easy access.

@@ -14,11 +14,13 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class AddressService : IAddressService
     {
+        private AddressBoundary addressBoundary;
+
         public string addAddress(string customer_id, Address address)
         {
             try
             { 
-                AddressBoundary addressBoundary = new AddressBoundary();
+                addressBoundary = new AddressBoundary();
                 return addressBoundary.addAddress(customer_id, address);
             }
             catch(BusinessException e)
@@ -43,7 +45,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
         {
             try
             { 
-                AddressBoundary addressBoundary = new AddressBoundary();
+                addressBoundary = new AddressBoundary();
                 return addressBoundary.deleteAddress(id, customer_id);
             }
             catch(BusinessException e)
@@ -68,7 +70,7 @@ namespace Customer_Services.microsoft.co.com.touresbalon.foundation.customer.res
         {
             try
             { 
-                AddressBoundary addressBoundary = new AddressBoundary();
+                addressBoundary = new AddressBoundary();
                 return addressBoundary.updateAddress(address);
             }
             catch(BusinessException e)

@@ -13,6 +13,7 @@ namespace B2C.Handlers
         private static Dictionary<String, String> serviceAgentLocation;
         private static XmlDocument xmlProcessingOrder = null;
         private static XmlDocument xmlItem = null;
+        private static XmlDocument xmlLogin = null;
 
         public static XmlDocument getXmlProcessingOrder()
         {
@@ -34,6 +35,15 @@ namespace B2C.Handlers
             return HandlerResource.xmlItem;
         }
 
+        public static XmlDocument getXmlLogin()
+        {
+            if (HandlerResource.xmlLogin == null)
+            {
+                HandlerResource.xmlLogin = HandlerXML.loadXml("~/Resources/protected/xml/login.xml");
+            }
+
+            return HandlerResource.xmlLogin;
+        }
         public static void iniServiceAgentLocation()
         {
             HandlerResource.serviceAgentLocation = HandlerXML.loadXml("serviceAgents", "serviceAgent");

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using B2C.Forms;
+using System.Xml;
+using System.IO;
 
 namespace B2C.Entities
 {
@@ -14,6 +16,7 @@ namespace B2C.Entities
         private string phone_number;
         private string email;
         private string password;
+        private string user_name;
 
         private string creditcard_type;
         private string creditcard_number;
@@ -46,6 +49,17 @@ namespace B2C.Entities
             this.last_name = form.LastName;
             this.phone_number = form.PhoneNumber;
             this.password = form.Password;
+        }
+
+
+        public Customer(string id, string email, string creditcard_number, string creditcard_type, string first_name, string last_name)
+        {
+            this.userID = int.Parse(id);
+            this.email = email;
+            this.Creditcard_number = creditcard_number;
+            this.Creditcard_type = creditcard_type;
+            this.First_name = first_name;
+            this.Last_name = last_name;
         }
 
         public int UserID
@@ -216,5 +230,35 @@ namespace B2C.Entities
                 document_type = value;
             }
         }
+
+        public string User_name
+        {
+            get
+            {
+                return user_name;
+            }
+
+            set
+            {
+                user_name = value;
+            }
+        }
+
+        public string toXMLLogin()
+        {
+            XmlDocument login = Handlers.HandlerResource.getXmlLogin();
+            login.GetElementsByTagName("email").Item(0).InnerText = this.Email;
+            login.GetElementsByTagName("password").Item(0).InnerText = this.Password;
+
+            StringWriter sw = new StringWriter();
+            XmlTextWriter tx = new XmlTextWriter(sw);
+            login.WriteTo(tx);
+
+            string str = sw.ToString();
+
+            return str;
+        }
+
+
     }
 }

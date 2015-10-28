@@ -22,40 +22,34 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
         {
             try
             {
+                email = setEmailMessage(email);                
                 m.From = new MailAddress(from);
                 m.To.Add(new MailAddress(email.email));
-                //m.Body = message;
                 m.Subject = email.subject;
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.Credentials = new NetworkCredential(from, password);
                 smtp.EnableSsl = true;
+
                 string text = email.messageSend;
-
                 AlternateView plainView = AlternateView.CreateAlternateViewFromString(text, Encoding.UTF8, MediaTypeNames.Text.Plain);
-
-
-                string html = templateBody(email);
+                string html = readTemplate(email);
 
                 AlternateView htmlView =
                     AlternateView.CreateAlternateViewFromString(html,
                                             Encoding.UTF8,
                                             MediaTypeNames.Text.Html);
 
-                LinkedResource img = new LinkedResource(@"C:\touresBalon.jpg",
-                                        MediaTypeNames.Image.Jpeg);
+                //LinkedResource img = new LinkedResource(@"~/App_Data/img/touresBalon.jpg", MediaTypeNames.Image.Jpeg);
+                //LinkedResource img = new LinkedResource("~/microsoft/co/com/touresbalon/foundation/email/img/touresBalon.jpg", MediaTypeNames.Image.Jpeg);
+                LinkedResource img = new LinkedResource(@"C:\touresBalon.jpg", MediaTypeNames.Image.Jpeg);
                 img.ContentId = "imagen";
 
                 htmlView.LinkedResources.Add(img);
                 m.AlternateViews.Add(plainView);
                 m.AlternateViews.Add(htmlView);
-                
-                Console.WriteLine(" funcion y metodo body" + m.Body);
                 m.IsBodyHtml = true;
-
                 smtp.Send(m);
-
-
                 return true;
             }
             catch (Exception e)
@@ -66,33 +60,81 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
 
         }
 
-        private string templateBody(Email email)
-        {
-            string body = string.Empty;
-            StringBuilder sb = new StringBuilder();
 
-            sb.Append("<html>");
-            sb.Append("<head>");
-            sb.Append("<title></title>");
-            sb.Append("</head>");
-            sb.Append("<body>");
-            sb.Append("<img src='cid:imagen' /><br/><br/>");
-            sb.Append("<div style=\"border-top:3px solid #22BCE5\"> &nbsp;</div>");
-            sb.Append("<span style=\"font-family:Arial;font-size:10pt\">");
-            sb.Append("Hola <b>" + email.first_name + " " + email.last_name + "</b>,<br/><br/>");
-            sb.Append(email.body + "<br/><br/>");
-            sb.Append("<br/><br/>");
-            sb.Append("Saludos cordiales <br/>");
-            sb.Append(email.footer);
-            sb.Append("</span>");
-            sb.Append("</body>");
-            sb.Append("</html>");
+        private Email setEmailMessage(Email email) {
+            int caseSwitch = Int32.Parse(email.Id);
+            switch (caseSwitch)
+            {
+                case 1:
+                    email.subject = "Aprovisionamiento Manual";
+                    email.messageSend = "Su orden esta en aprovisionamiento manual";
+                    email.body = "Su orden esta en aprovisionamiento manual";
+                    email.footer = "Querido usuario gracias por utilizar Nuestro sistema";
+                    break;
+                case 2:
+                    email.subject = "Orden No procesada";
+                    email.messageSend = "Error en tarjeta de credito";
+                    email.body = "la información de la tarjeta de credito no pudo ser validada";
+                    email.footer = "Querido usuario gracias por utilizar Nuestro sistema";
+                    break;
+                case 3:
+                    email.subject = "Orden No procesada";
+                    email.messageSend = "Error producto seleccionado no existe ";
+                    email.body = "El producto seleccionado tiene inconvenientes, favor revisar los parametros de la orden";
+                    email.footer = "Querido usuario gracias por utilizar Nuestro sistema";
+                    break;
+                case 4:
+                    email.subject = "Orden Procesada Correctamente";
+                    email.body = "Su orden ha sido aprobada";
+                    email.messageSend = "Su orden ha sido procesada gracias por utilizar el servicio TouresBalon";
+                    email.footer = "Querido usuario gracias por utilizar Nuestro sistema";
+                    break;
+                default:
+                    email.subject = "Error procesando la orden";
+                    email.messageSend = "Error procesando la orden, comuniquese con el administrador del sistema";
+                    email.body = "Hay problemas con con el procesamiento de su orden";
+                    email.footer = "Querido usuario gracias por utilizar Nuestro sistema";
+                    break;
+            }
 
-            body = sb.ToString();
 
-            return body;
+            return email;
         }
 
+              
+        
+        public string readTemplate(Email email) {
+            string line = "";
+            StringBuilder sb = new StringBuilder();
+            try
+            {
+                StreamReader file = new StreamReader("C:\\prueba.html");
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (line.Contains("#name"))
+                    {
+                        line = line.Replace("#name", email.first_name+" "+ email.last_name);                        
+                    }
+                    if (line.Contains("#bodyMessagge"))
+                    {
+                        line = line.Replace("#bodyMessagge", email.body);
+                    }
+                    if (line.Contains("#footerMessage"))
+                    {
+                        line = line.Replace("#footerMessage", email.footer);
+                    }
+                    sb.Append(line); 
+                }
+                file.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error:" + e.Message);
+            }
+            return sb.ToString();
+
+        }
+        
 
         public bool sendMail(string from, string password, Customer customer)
         {
@@ -125,18 +167,12 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
                                         MediaTypeNames.Image.Jpeg);
                 img.ContentId = "imagen";
 
-                // Lo incrustamos en la vista HTML...
-
                 htmlView.LinkedResources.Add(img);
-
-                // Por último, vinculamos ambas vistas al mensaje...
 
                 m.AlternateViews.Add(plainView);
                 m.AlternateViews.Add(htmlView);
 
-
-                //m.Body = PopulateBody("nestor","esto que es");
-                Console.WriteLine("esto es el body" + m.Body);
+                
                 m.IsBodyHtml = true;
 
                 smtp.Send(m);
@@ -151,11 +187,6 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
             }
 
         }
-
-
-        
-
-
 
         private string templateBody(Customer customer)
         {
@@ -187,4 +218,6 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
 
 
     }
+     
+
 }

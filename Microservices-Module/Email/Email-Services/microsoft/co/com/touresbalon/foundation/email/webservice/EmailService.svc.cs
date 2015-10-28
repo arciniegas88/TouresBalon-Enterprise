@@ -13,7 +13,7 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.webservic
     // NOTE: In order to launch WCF Test Client for testing this service, please select EmailService.svc or EmailService.svc.cs at the Solution Explorer and start debugging.
     public class EmailService : IEmailService
     {
-        public string sendMailToCustomer(Email emailSend)
+        public void sendMailToCustomer(Email emailSend)
         {
             BoundaryEmail email = new BoundaryEmail();
             string fromEmail = "touresbalongrupo3@gmail.com";
@@ -23,7 +23,7 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.webservic
             {
                 email.sendMailCustomer(fromEmail, password, emailSend);
             }
-            return "send email successful";
+           // return "send email successful";
         }
     }
 }

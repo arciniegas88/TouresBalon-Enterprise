@@ -4,184 +4,191 @@
 	xmlns:tns="http://touresbalon.com.co/model/canonical/1.0.0">
 
 	<!-- ================================================================= -->
-    <!-- SOA ENTITY MODEL                                                  -->
-    <!-- List of entities participating in the soa services                -->
-    <!-- ================================================================= -->
+	<!-- SOA ENTITY MODEL -->
+	<!-- List of entities participating in the soa services -->
+	<!-- ================================================================= -->
 
 	<xs:complexType name="SalesOrder">
 		<xs:sequence>
 			<xs:element name="comments" type="xs:string" minOccurs="0" />
-			<xs:element name="custFirstName" type="xs:string" minOccurs="0" />
-			<xs:element name="custLastName" type="xs:string" minOccurs="0" />
+			<xs:element name="custFirstName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="custLastName" type="xs:string"
+				minOccurs="0" />
 			<xs:element name="email" type="xs:string" minOccurs="0" />
-			<xs:element name="custDocumentNumber" type="xs:string" minOccurs="0" />
-            <xs:element name="custDocumentType" type="tns:documentType" minOccurs="0" />
-            <xs:element name="customerType" type="tns:customerType"/>
-            <xs:element name="creditCardNumber" type="xs:string"/>
-            <xs:element name="price" type="xs:decimal" minOccurs="0" />
-            <xs:element name="items" type="tns:OrderItem" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="custom" type="tns:SalesOrderCustomFields"/>
+			<xs:element name="custDocumentNumber" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="custDocumentType" type="tns:documentType"
+				minOccurs="0" />
+			<xs:element name="customerType" type="tns:customerType" />
+			<xs:element name="creditCardNumber" type="xs:string" />
+			<xs:element name="price" type="xs:decimal" minOccurs="0" />
+			<xs:element name="items" type="tns:OrderItem" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="custom" type="tns:SalesOrderCustomFields" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="SalesOrderCustomFields">
-		<xs:sequence/>
+		<xs:sequence />
 	</xs:complexType>
 
-    <xs:complexType name="OrderItem">
-        <xs:sequence>
-            <xs:element name="productId" type="xs:long"/>
-            <xs:element name="productName" type="xs:string" minOccurs="0" />
-            <xs:element name="transport" type="tns:Transport" minOccurs="0" />
-            <xs:element name="spectacle" type="tns:Spectacle" minOccurs="0" />
-            <xs:element name="lodging" type="tns:Lodging" minOccurs="0" />
-            <xs:element name="price" type="xs:decimal" minOccurs="0" />
-            <xs:element name="custom" type="tns:OrderItemCustomFields"/>
-        </xs:sequence>
-    </xs:complexType>
+	<xs:complexType name="OrderItem">
+		<xs:sequence>
+			<xs:element name="productId" type="xs:long" />
+			<xs:element name="productName" type="xs:string" minOccurs="0" />
+			<xs:element name="transport" type="tns:Transport"
+				minOccurs="0" />
+			<xs:element name="spectacle" type="tns:Spectacle"
+				minOccurs="0" />
+			<xs:element name="lodging" type="tns:Lodging" minOccurs="0" />
+			<xs:element name="price" type="xs:decimal" minOccurs="0" />
+			<xs:element name="custom" type="tns:OrderItemCustomFields" />
+		</xs:sequence>
+	</xs:complexType>
 
-    <xs:complexType name="OrderItemCustomFields">
-        <xs:sequence/>
-    </xs:complexType>
+	<xs:complexType name="OrderItemCustomFields">
+		<xs:sequence />
+	</xs:complexType>
 
 	<xs:complexType name="Transport">
-        <xs:sequence>
-            <xs:element name="sourceCity" type="xs:string"/>
-            <xs:element name="targetCity" type="xs:string"/>
-            <xs:element name="travelDate" type="xs:string"/>
-            <xs:element name="travelOutTime" type="xs:string"/>
-            <xs:element name="travelBusinessProvider" type="tns:transportProvider"/>
-        </xs:sequence>
-    </xs:complexType>
-    
+		<xs:sequence>
+			<xs:element name="sourceCity" type="xs:string" />
+			<xs:element name="targetCity" type="xs:string" />
+			<xs:element name="travelDate" type="xs:string" />
+			<xs:element name="travelOutTime" type="xs:string" />
+			<xs:element name="travelBusinessProvider" type="tns:transportProvider" />
+		</xs:sequence>
+	</xs:complexType>
+
 	<xs:complexType name="Spectacle">
-        <xs:sequence>
-            <xs:element name="id" type="xs:long"/>
-        </xs:sequence>
-    </xs:complexType>    
-    
-    <xs:complexType name="Lodging">
-        <xs:sequence>
-            <xs:element name="lodgingBusinessProvider" type="xs:string"/>
-            <xs:element name="targetCity" type="xs:string"/>
-            <xs:element name="dateCheckIn" type="xs:string"/>
-            <xs:element name="dateCheckOut" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="ProvisioningStock">
-        <xs:sequence>
-            <xs:element name="completed" type="xs:boolean"/>
-            <xs:element name="transport" type="tns:TransportReservation"/>
-            <xs:element name="lodging" type="tns:LodgingReservation"/>
-            <xs:element name="spectacle" type="tns:SpectacleReservation"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="TransportReservation">
-        <xs:sequence>
-        	<xs:element name="available" type="xs:boolean"/>
-            <xs:element name="travelNumber" type="xs:string"/>
-            <xs:element name="chairNumber" type="xs:string"/>
-            <xs:element name="observations" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="LodgingReservation">
-        <xs:sequence>
-        	<xs:element name="available" type="xs:boolean"/>
-            <xs:element name="hotel" type="xs:string"/>
-            <xs:element name="roomNumber" type="xs:string"/>
-            <xs:element name="observations" type="xs:string"/>
-            <xs:element name="reservationId" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="SpectacleReservation">
-        <xs:sequence>
-        	<xs:element name="available" type="xs:boolean"/>
-            <xs:element name="ticket" type="xs:string"/>
-            <xs:element name="observations" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Lodging">
+		<xs:sequence>
+			<xs:element name="lodgingBusinessProvider" type="xs:string" />
+			<xs:element name="targetCity" type="xs:string" />
+			<xs:element name="dateCheckIn" type="xs:string" />
+			<xs:element name="dateCheckOut" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ProvisioningStock">
+		<xs:sequence>
+			<xs:element name="completed" type="xs:boolean" />
+			<xs:element name="transport" type="tns:TransportReservation" />
+			<xs:element name="lodging" type="tns:LodgingReservation" />
+			<xs:element name="spectacle" type="tns:SpectacleReservation" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TransportReservation">
+		<xs:sequence>
+			<xs:element name="available" type="xs:boolean" />
+			<xs:element name="travelNumber" type="xs:string" />
+			<xs:element name="chairNumber" type="xs:string" />
+			<xs:element name="observations" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LodgingReservation">
+		<xs:sequence>
+			<xs:element name="available" type="xs:boolean" />
+			<xs:element name="hotel" type="xs:string" />
+			<xs:element name="roomNumber" type="xs:string" />
+			<xs:element name="observations" type="xs:string" />
+			<xs:element name="reservationId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SpectacleReservation">
+		<xs:sequence>
+			<xs:element name="available" type="xs:boolean" />
+			<xs:element name="ticket" type="xs:string" />
+			<xs:element name="observations" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
 
 	<!-- ================================================================= -->
-	<!-- CONSTANTS                                                         -->
-	<!-- List of constants                                                 -->
+	<!-- CONSTANTS -->
+	<!-- List of constants -->
 	<!-- ================================================================= -->
 
-    <xs:simpleType name="documentType" final="restriction" >
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="CC" />
-            <xs:enumeration value="CE" />
-            <xs:enumeration value="NIT" />
-            <xs:enumeration value="OTHER" />
-        </xs:restriction>
-    </xs:simpleType>
+	<xs:simpleType name="documentType" final="restriction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CC" />
+			<xs:enumeration value="CE" />
+			<xs:enumeration value="NIT" />
+			<xs:enumeration value="OTHER" />
+		</xs:restriction>
+	</xs:simpleType>
 
-    <xs:simpleType name="orderStatus" final="restriction" >
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="IN_VALIDATION" />
-            <xs:enumeration value="IN_BOOKING" />
-            <xs:enumeration value="CLOSED" />
-            <xs:enumeration value="REJECTED" />
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="transportProvider" final="restriction" >
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="AVIANCA" />
-            <xs:enumeration value="AMERICAN_AIRLINES" />
-            <xs:enumeration value="BOLIVARIANO" />
-        </xs:restriction>
-    </xs:simpleType>
+	<xs:simpleType name="orderStatus" final="restriction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IN_VALIDATION" />
+			<xs:enumeration value="IN_BOOKING" />
+			<xs:enumeration value="CLOSED" />
+			<xs:enumeration value="REJECTED" />
+		</xs:restriction>
+	</xs:simpleType>
 
-	<xs:simpleType name="customerType" final="restriction" >
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PLATINUM" />
-            <xs:enumeration value="GOLD" />
-            <xs:enumeration value="SILVER" />
-        </xs:restriction>
-    </xs:simpleType>
+	<xs:simpleType name="transportProvider" final="restriction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AVIANCA" />
+			<xs:enumeration value="AMERICAN_AIRLINES" />
+			<xs:enumeration value="BOLIVARIANO" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="customerType" final="restriction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PLATINUM" />
+			<xs:enumeration value="GOLD" />
+			<xs:enumeration value="SILVER" />
+		</xs:restriction>
+	</xs:simpleType>
 
 
 	<!-- ================================================================= -->
-    <!-- XML MESSAGES                                             		   -->
-    <!-- List of xml element messages referenced from wsdl contracts       -->
-    <!-- ================================================================= -->
+	<!-- XML MESSAGES -->
+	<!-- List of xml element messages referenced from wsdl contracts -->
+	<!-- ================================================================= -->
 
 	<xs:element name="CreateSalesOrderRequest">
 		<xs:complexType>
 			<xs:sequence>
-                <xs:element name="order" type="tns:SalesOrder"/>
+				<xs:element name="order" type="tns:SalesOrder" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 
 	<!-- ================================================================= -->
-	<!-- MESSAGES AGREGATIONS / REUSABLE ESTRUCTURES                       -->
-	<!-- List of message agreations created from source entities           -->
+	<!-- MESSAGES AGREGATIONS / REUSABLE ESTRUCTURES -->
+	<!-- List of message agreations created from source entities -->
 	<!-- ================================================================= -->
 
 
-	<!-- ================================================================= -->         
-    <!-- COMMON MESSAGES                      							   -->
-    <!-- List of commons message            							   -->
-    <!-- ================================================================= -->
+	<!-- ================================================================= -->
+	<!-- COMMON MESSAGES -->
+	<!-- List of commons message -->
+	<!-- ================================================================= -->
 
 	<xs:complexType name="CanonicalFault">
 		<xs:sequence>
-			<xs:element name="code" type="xs:string"/>
-			<xs:element name="description" type="xs:string"/>
+			<xs:element name="code" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:element name="stock" type="tns:ProvisioningStock"/>
+	<xs:element name="stock" type="tns:ProvisioningStock" />
 
 	<xs:element name="JournalProvisioning">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="tns:stock" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="tns:stock" minOccurs="0" maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -189,21 +196,21 @@
 	<xs:element name="EvaluationResponse">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="result" type="xs:boolean"/>
+				<xs:element name="result" type="xs:boolean" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="TransactionVoidResponse">
 		<xs:complexType>
-			<xs:sequence/>
+			<xs:sequence />
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="SystemFault">
 		<xs:complexType>
 			<xs:complexContent>
-				<xs:extension base="tns:CanonicalFault"/>
+				<xs:extension base="tns:CanonicalFault" />
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
@@ -211,7 +218,7 @@
 	<xs:element name="BusinessFault">
 		<xs:complexType>
 			<xs:complexContent>
-				<xs:extension base="tns:CanonicalFault"/>
+				<xs:extension base="tns:CanonicalFault" />
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
@@ -219,8 +226,8 @@
 	<xs:element name="IteratorCounter">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="counter" type="xs:int"/>
-				<xs:element name="iterations" type="xs:int"/>
+				<xs:element name="counter" type="xs:int" />
+				<xs:element name="iterations" type="xs:int" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

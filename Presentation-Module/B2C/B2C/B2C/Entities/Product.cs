@@ -23,6 +23,8 @@ namespace B2C.Entities
         private Type spectacle;
         private Type lodging;
         private double price;
+        private string sourceCity;
+        private string targetCity;
 
         public static SelectList FILTER_OPTIONS = new SelectList(
           new List<Object>
@@ -58,6 +60,8 @@ namespace B2C.Entities
             this.departureDate = contract.departureDate;
 
             this.price = contract.price;
+            this.arrivalDate = contract.arrivalDate;
+            this.departureDate = contract.departureDate;
 
             if( contract.transportType != null)
                 this.Transport = new Type(contract.transportType);
@@ -67,6 +71,12 @@ namespace B2C.Entities
 
             if ( contract.spectacleType != null)
                 this.Spectacle = new Type(contract.spectacleType);
+
+            if(contract.targetCity != null && contract.targetCity.name != null)
+                this.targetCity = contract.targetCity.name;
+
+            if (contract.sourceCity != null && contract.sourceCity.name != null)
+                this.sourceCity = contract.sourceCity.name;
 
         }
 
@@ -221,6 +231,32 @@ namespace B2C.Entities
             set
             {
                 lodging = value;
+            }
+        }
+
+        public string SourceCity
+        {
+            get
+            {
+                return sourceCity;
+            }
+
+            set
+            {
+                sourceCity = value;
+            }
+        }
+
+        public string TargetCity
+        {
+            get
+            {
+                return targetCity;
+            }
+
+            set
+            {
+                targetCity = value;
             }
         }
     }
