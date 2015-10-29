@@ -4,3 +4,9 @@ C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Serv
 C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\obj\Debug\Email-Services.dll
 C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\obj\Debug\Email-Services.pdb
 C:\Users\Usuario\Documents\Visual Studio 2015\Projects\Email-Services\Email-Services\obj\Debug\Email-Services.csprojResolveAssemblyReference.cache
+N:\RepositotioGIFHUB\ProyectoImplementacion\TouresBalon-Enterprise\Microservices-Module\Email\Email-Services\bin\Email-Services.dll.config
+N:\RepositotioGIFHUB\ProyectoImplementacion\TouresBalon-Enterprise\Microservices-Module\Email\Email-Services\bin\Email-Services.dll
+N:\RepositotioGIFHUB\ProyectoImplementacion\TouresBalon-Enterprise\Microservices-Module\Email\Email-Services\bin\Email-Services.pdb
+N:\RepositotioGIFHUB\ProyectoImplementacion\TouresBalon-Enterprise\Microservices-Module\Email\Email-Services\obj\Debug\Email-Services.csprojResolveAssemblyReference.cache
+N:\RepositotioGIFHUB\ProyectoImplementacion\TouresBalon-Enterprise\Microservices-Module\Email\Email-Services\obj\Debug\Email-Services.dll
+N:\RepositotioGIFHUB\ProyectoImplementacion\TouresBalon-Enterprise\Microservices-Module\Email\Email-Services\obj\Debug\Email-Services.pdb
