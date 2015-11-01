@@ -25,7 +25,7 @@ public class OrdersMQClient {
             Connection connection = factory.createConnection();
             connection.start();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = session.createQueue("MQ-CancelOrderQueue");
+            Destination destination = session.createQueue("MQ-CancelOrderRequest");
 
             MessageProducer producer = session.createProducer(destination);
             TextMessage m = session.createTextMessage(request.toString());

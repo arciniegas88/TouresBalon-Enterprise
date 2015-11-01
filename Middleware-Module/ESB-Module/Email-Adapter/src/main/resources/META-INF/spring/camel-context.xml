@@ -45,7 +45,7 @@
 
             <camel:from uri="cxf:bean:EmailWS?dataFormat=PAYLOAD"/>
             <camel:to uri="xslt:transformation/request_transformer.xsl"/>
-            
+
             <camel:setHeader headerName="SOAPAction">
                 <camel:constant>http://tempuri.org/IEmailService/sendMailToCustomer</camel:constant>
             </camel:setHeader>

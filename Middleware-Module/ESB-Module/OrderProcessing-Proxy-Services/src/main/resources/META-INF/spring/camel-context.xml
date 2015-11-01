@@ -30,46 +30,58 @@
                      wsdlURL="service_contracts/ProccessingOrder.wsdl"
                      id="ProcessOrderService"
                      xmlns:s="http://touresbalon.com.co/orders/service/task/1.0.0">
-            <cxf:properties>
-                <entry key="dataFormat" value="PAYLOAD"/>
-            </cxf:properties>
+        <cxf:properties>
+            <entry key="dataFormat" value="PAYLOAD"/>
+        </cxf:properties>
     </cxf:cxfEndpoint>
 
 
+    <cxf:cxfEndpoint address="http://${target.bpel.location}/services/Cancel-Orders-BPEL"
+                     serviceName="s:Cancel-Orders-BPEL"
+                     endpointName="s:Cancel-Orders-BPELPort"
+                     wsdlURL="service_contracts/Cancel-Orders-BPELArtifacts.wsdl"
+                     id="ProcessCancelOrderService"
+                     xmlns:s="http://touresbalon.com.co/orders/service/task/1.0.0"/>
+
+
     <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="tcp://localhost:61616" />
-        <property name="userName" value="admin" />
-        <property name="password" value="admin" />
+        <property name="brokerURL" value="tcp://localhost:61616"/>
+        <property name="userName" value="admin"/>
+        <property name="password" value="admin"/>
     </bean>
 
     <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
           init-method="start" destroy-method="stop">
-        <property name="maxConnections" value="4" />
-        <property name="connectionFactory" ref="jmsConnectionFactory" />
+        <property name="maxConnections" value="4"/>
+        <property name="connectionFactory" ref="jmsConnectionFactory"/>
     </bean>
 
     <bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
-        <property name="connectionFactory" ref="pooledConnectionFactory" />
-        <property name="transacted" value="false" />
-        <property name="concurrentConsumers" value="10" />
+        <property name="connectionFactory" ref="pooledConnectionFactory"/>
+        <property name="transacted" value="false"/>
+        <property name="concurrentConsumers" value="10"/>
     </bean>
 
     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
-        <property name="configuration" ref="jmsConfig" />
+        <property name="configuration" ref="jmsConfig"/>
     </bean>
 
     <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
 
         <camel:route>
-            <camel:from uri="activemq:queue:proccessOrder?jmsMessageType=Text" />
-            <setHeader headerName="soapAction"><constant>process</constant></setHeader>
+            <camel:from uri="activemq:queue:MQ-ProcessOrderRequest?jmsMessageType=Text"/>
+            <setHeader headerName="soapAction">
+                <constant>process</constant>
+            </setHeader>
             <camel:to uri="cxf:bean:ProcessOrderService?dataFormat=PAYLOAD"/>
-            <camel:to uri="file://C:/ORDERS?fileName=order-${date:now:yyyyMMdd_hhmmss}.xml"/>
         </camel:route>
 
         <camel:route>
-            <camel:from uri="activemq:queue:cancelOrder?jmsMessageType=Text" />
-            <camel:to uri="file://C:/ORDERS?fileName=cancel-${date:now:yyyyMMdd_hhmmss}.xml"/>
+            <camel:from uri="activemq:queue:MQ-CancelOrderRequest?jmsMessageType=Text"/>
+            <setHeader headerName="soapAction">
+                <constant>process</constant>
+            </setHeader>
+            <camel:to uri="cxf:bean:ProcessCancelOrderService?dataFormat=PAYLOAD"/>
         </camel:route>
 
     </camel:camelContext>
