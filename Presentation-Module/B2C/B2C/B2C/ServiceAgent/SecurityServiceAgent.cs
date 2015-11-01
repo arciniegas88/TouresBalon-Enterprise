@@ -23,7 +23,10 @@ namespace B2C.Agents
 
             //This service return XML
             XmlDocument xml = new XmlDocument();
-            xml.LoadXml(response); // suppose that myXmlString contains "<Names>...</Names>"
+            if (!response.Equals("Error"))
+                xml.LoadXml(response); // suppose that myXmlString contains "<Names>...</Names>"
+            else
+                return null;
 
             return xml;
         }

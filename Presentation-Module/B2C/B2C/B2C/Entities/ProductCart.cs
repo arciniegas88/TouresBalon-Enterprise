@@ -20,7 +20,7 @@ namespace B2C.Entities
         [XmlElement("name")]
         private string name;
 
-        [XmlElement("accout")]
+        [XmlElement("account")]
         private int account = 0;
 
         [XmlElement("cost")]

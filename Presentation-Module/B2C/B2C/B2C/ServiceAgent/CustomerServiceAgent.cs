@@ -1,18 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using B2C.Entities;
+using B2C.Handlers;
+using System.Text;
+using B2C.Contracts;
+
 
 namespace B2C.AgentsService
 {
     public class CustomerAgentsService
     {
-        public Customer registerCustomer(Customer customer )
+        public bool registerCustomer(string body )
         {
-            Random rnd = new Random();
-            customer.UserID = rnd.Next(1, 500);
-            return customer;
+            HandlerRequest request = new HandlerRequest();
+            StringBuilder builder = new StringBuilder(HandlerResource.getServiceAgentLocation("register"));
+
+            String response = request.doRequest(builder.ToString(), HandlerRequest.POST, HandlerRequest.XML, body);
+            
+            return DataContractRegister.getResponse(response);
         }
 
         public Customer getCustomer(Customer customer)

@@ -3,6 +3,7 @@
     ViewBag.Title = "Register";
 }
 @using B2C.Forms
+@using B2C.Handlers
 @{ var form = ViewData["registerForm"] as RegisterForm; }
 
 
@@ -26,8 +27,31 @@
 
             @Html.AntiForgeryToken()
             @Html.Hidden("returnUrl", this.Request.RawUrl)
+            
+            <div id="error" class="ui-messages-error ui-corner-all DispNone">
+                <span class="ui-messages-error-icon"></span>
+                <span class="ui-messages-error-summary">Error!</span>
+                <p class="ui-messages-error-detail error"></p>
+            </div>
+
 
             <table class="Wid100">
+
+
+                <tr>
+                    <td class="Wid40"><label for="form_Document_Type" class="Fs24 PadWithBorder5 BoldGray">Tipo de documento</label></td>
+                    <td class="Wid60">
+                        @Html.DropDownListFor(m => form.Document_Type, HandlerResource.getDocumentType(), new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td class="Wid40"><label for="form_Id" class="Fs24 PadWithBorder5 BoldGray">Documento</label></td>
+                    <td class="Wid60">@Html.TextBoxFor(m => form.Id, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
+                </tr>
+
                 <tr>
                     <td class="Wid40"><label for="form_FirstName" class="Fs24 PadWithBorder5 BoldGray">Nombre</label></td>
                     <td class="Wid60">@Html.TextBoxFor(m => form.FirstName, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
@@ -53,12 +77,31 @@
                     <td>@Html.PasswordFor(m => form.Password, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
                 </tr>
 
+                <tr>
+                    <td class="Wid40"><label for="form_Franchise" class="Fs24 PadWithBorder5 BoldGray">Franquicia</label></td>
+                    <td class="Wid60">
+                        @Html.DropDownListFor(m => form.Franchise, HandlerResource.getFranchises(), new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="Wid40"><label for="form_Number" class="Fs24 PadWithBorder5 BoldGray">Numero</label></td>
+                    <td class="Wid60">@Html.TextBoxFor(m => form.Number, new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })</td>
+                </tr>
+
+                <tr>
+                    <td class="Wid40"><label for="form_Type" class="Fs24 PadWithBorder5 BoldGray">Tipo de cliente</label></td>
+                    <td class="Wid60">
+                        @Html.DropDownListFor(m => form.Type, HandlerResource.getTypeClient(), new { @class = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all Wid90" })
+                    </td>
+                </tr>
+
+
             </table>
 
             <div class="EmptyBox40"></div>
 
             <div class="Wid100 Fleft Responsive50 TexAlCenter">
-                <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left  Fs18 White RaisedButton FloatNoneOnMobile TexAlCenter pointer Wid70" type="button" name="login" id="login" role="button" aria-disabled="false">
+                <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left  Fs18 White RaisedButton FloatNoneOnMobile TexAlCenter pointer Wid70" type="button" name="register" id="register" role="button" aria-disabled="false">
                     <span class="ui-button-icon-left ui-icon ui-c icon-create"></span>
                     <span class="ui-button-text ui-c">Registrarse</span>
                 </button>

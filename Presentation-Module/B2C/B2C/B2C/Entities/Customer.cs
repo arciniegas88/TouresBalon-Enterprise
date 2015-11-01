@@ -24,6 +24,7 @@ namespace B2C.Entities
         private string status;
         private string document_number;
         private string document_type;
+        private string type;
 
         public Customer(int _userID, string _email)
         {
@@ -52,7 +53,7 @@ namespace B2C.Entities
         }
 
 
-        public Customer(string id, string email, string creditcard_number, string creditcard_type, string first_name, string last_name)
+        public Customer(string id, string email, string creditcard_number, string creditcard_type, string first_name, string last_name, string type, string doc_type)
         {
             this.userID = int.Parse(id);
             this.email = email;
@@ -60,6 +61,8 @@ namespace B2C.Entities
             this.Creditcard_type = creditcard_type;
             this.First_name = first_name;
             this.Last_name = last_name;
+            this.Type = type;
+            this.Document_type = doc_type;
         }
 
         public int UserID
@@ -222,12 +225,12 @@ namespace B2C.Entities
         {
             get
             {
-                return document_type;
+                return Document_type1;
             }
 
             set
             {
-                document_type = value;
+                Document_type1 = value;
             }
         }
 
@@ -241,6 +244,32 @@ namespace B2C.Entities
             set
             {
                 user_name = value;
+            }
+        }
+
+        public string Document_type1
+        {
+            get
+            {
+                return document_type;
+            }
+
+            set
+            {
+                document_type = value;
+            }
+        }
+
+        public string Type
+        {
+            get
+            {
+                return type;
+            }
+
+            set
+            {
+                type = value;
             }
         }
 

@@ -33,7 +33,9 @@ namespace B2C.Handlers
                                           HttpContext.Current.Session["creditcard_number"].ToString(),
                                           HttpContext.Current.Session["creditcard_type"].ToString(),
                                           HttpContext.Current.Session["first_name"].ToString(),
-                                          HttpContext.Current.Session["last_name"].ToString()
+                                          HttpContext.Current.Session["last_name"].ToString(),
+                                          HttpContext.Current.Session["type"].ToString(),
+                                          HttpContext.Current.Session["doc_type"].ToString()
                                           );
                 return customer;
             }
@@ -124,6 +126,12 @@ namespace B2C.Handlers
 
             if (xml.GetElementsByTagName("Id").Item(0) != null)
                 HttpContext.Current.Session.Add("Id", xml.GetElementsByTagName("Id").Item(0).InnerText);
+
+            if (xml.GetElementsByTagName("type").Item(0) != null)
+                HttpContext.Current.Session.Add("type", xml.GetElementsByTagName("type").Item(0).InnerText);
+
+            if (xml.GetElementsByTagName("doc_type").Item(0) != null)
+                HttpContext.Current.Session.Add("doc_type", xml.GetElementsByTagName("doc_type").Item(0).InnerText);
 
         }
 

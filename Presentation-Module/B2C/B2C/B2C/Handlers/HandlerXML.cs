@@ -49,8 +49,8 @@ namespace B2C.Handlers
             order.GetElementsByTagName("custLastName").Item(0).InnerText = customer.Last_name;
             order.GetElementsByTagName("email").Item(0).InnerText = customer.Email;
             order.GetElementsByTagName("custDocumentNumber").Item(0).InnerText = customer.UserID.ToString();
-            order.GetElementsByTagName("custDocumentType").Item(0).InnerText = "CC";
-            order.GetElementsByTagName("customerType").Item(0).InnerText = "SILVER";
+            order.GetElementsByTagName("custDocumentType").Item(0).InnerText = customer.Document_type;
+            order.GetElementsByTagName("customerType").Item(0).InnerText = customer.Type;
             order.GetElementsByTagName("creditCardNumber").Item(0).InnerText = customer.Creditcard_number;
 
             double total = 0;

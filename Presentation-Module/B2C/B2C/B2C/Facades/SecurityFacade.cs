@@ -39,7 +39,7 @@ namespace B2C.Facades
             string body = customer.toXMLLogin();
             XmlDocument xml = this.securityService.loginUser(body);
 
-            if (xml.GetElementsByTagName("email").Item(0) != null)
+            if (xml != null && xml.GetElementsByTagName("email").Item(0) != null)
             {
                 Handlers.HandlerSession.setUser(xml);
                 return true;

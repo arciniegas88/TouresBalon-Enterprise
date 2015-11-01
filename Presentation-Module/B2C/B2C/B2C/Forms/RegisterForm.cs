@@ -10,6 +10,14 @@ namespace B2C.Forms
     {
 
         [Required]
+        [Display(Name = "Tipo Documento")]
+        public string Document_Type { get; set; }
+
+        [Required]
+        [Display(Name = "Documento")]
+        public string Id { get; set; }
+
+        [Required]
         [Display(Name = "Nombre")]
         public string FirstName { get; set; }
 
@@ -30,5 +38,18 @@ namespace B2C.Forms
         [Required]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "Franchise")]
+        public string Franchise { get; set; }
+
+        [Required]
+        [Display(Name = "Number")]
+        [DataType(DataType.CreditCard)]
+        public string Number { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo")]
+        public string Type { get; set; }
     }
 }

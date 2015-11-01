@@ -5,6 +5,9 @@ using System.Web;
 using B2C.Forms;
 using B2C.Entities;
 using B2C.AgentsService;
+using B2C.Handlers;
+using System.Text;
+using System.Xml;
 
 namespace B2C.Facades
 {
@@ -30,16 +33,10 @@ namespace B2C.Facades
             }
         }
 
-        public Customer registerCustomer(Customer customer)
+        public bool registerCustomer(string body)
         {
-            customer = this.agentService.registerCustomer(customer);
-            return customer;
-        }
-
-        public Customer getCustomer(Customer customer)
-        {
-            customer = this.agentService.registerCustomer(customer);
-            return customer;
+            this.agentService.registerCustomer(body);
+            return true;
         }
 
     }

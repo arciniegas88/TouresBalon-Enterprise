@@ -68,11 +68,7 @@ namespace B2C.Handlers
             if( accept.Equals(HandlerRequest.XML))
             {
                 request.ContentType = HandlerRequest.XML;
-                
-                string test = "<authenticationResource>";
-                test += "<email>alejinqm@gmail.com</email>";
-                test += "<password>123456</password>";
-                test += "</authenticationResource>";
+
                 byte[] bytes = Encoding.Default.GetBytes(body.ToString());
                 
                 request.ContentLength = bytes.Length;
@@ -93,8 +89,8 @@ namespace B2C.Handlers
             }
             catch (WebException web)
             {
-                Console.Write(web.Message + web.Response);
-                return web.Message;
+                Console.Write(web.Message + web.Response + web.GetType());
+                return "Error";
             }
             // Get the stream containing content returned by the server.
             Stream dataStream = response.GetResponseStream();

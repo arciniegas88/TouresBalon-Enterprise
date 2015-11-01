@@ -14,6 +14,7 @@ namespace B2C.Handlers
         private static XmlDocument xmlProcessingOrder = null;
         private static XmlDocument xmlItem = null;
         private static XmlDocument xmlLogin = null;
+        private static XmlDocument xmlRegister = null;
 
         public static XmlDocument getXmlProcessingOrder()
         {
@@ -44,6 +45,16 @@ namespace B2C.Handlers
 
             return HandlerResource.xmlLogin;
         }
+
+        public static XmlDocument getXmlRegister()
+        {
+            if (HandlerResource.xmlRegister == null)
+            {
+                HandlerResource.xmlRegister = HandlerXML.loadXml("~/Resources/protected/xml/register.xml");
+            }
+            return HandlerResource.xmlRegister;
+        }
+
         public static void iniServiceAgentLocation()
         {
             HandlerResource.serviceAgentLocation = HandlerXML.loadXml("serviceAgents", "serviceAgent");
@@ -76,6 +87,37 @@ namespace B2C.Handlers
             }
             return HandlerResource.franchises;
         }
+
+        private static List<SelectListItem> type_client = null;
+        public static IEnumerable<SelectListItem> getTypeClient()
+        {
+            if (HandlerResource.type_client == null)
+            {
+                HandlerResource.type_client = new List<SelectListItem>();
+                HandlerResource.type_client.Add(new SelectListItem { Text = "Seleccione Tipo de cliente", Value = "" });
+                HandlerResource.type_client.Add(new SelectListItem { Text = "PLATEADO", Value = "SILVER" });
+                HandlerResource.type_client.Add(new SelectListItem { Text = "PLATINO", Value = "PLATINUM" });
+                HandlerResource.type_client.Add(new SelectListItem { Text = "DORADO", Value = "GOLD" });
+            }
+            return HandlerResource.type_client;
+        }
+
+
+        private static List<SelectListItem> document_type = null;
+        public static IEnumerable<SelectListItem> getDocumentType()
+        {
+            if (HandlerResource.document_type == null)
+            {
+                HandlerResource.document_type = new List<SelectListItem>();
+                HandlerResource.document_type.Add(new SelectListItem { Text = "Seleccione Tipo de documento", Value = "" });
+                HandlerResource.document_type.Add(new SelectListItem { Text = "Cedula de ciudadania", Value = "CC" });
+                HandlerResource.document_type.Add(new SelectListItem { Text = "Cedula de extranjeria", Value = "CE" });
+                HandlerResource.document_type.Add(new SelectListItem { Text = "Pasaporte", Value = "PASSPORT" });
+                HandlerResource.document_type.Add(new SelectListItem { Text = "Nit", Value = "NIT" });
+            }
+            return HandlerResource.document_type;
+        }
+
 
         private static List<SelectListItem> years = null;
         public static IEnumerable<SelectListItem> getYears()

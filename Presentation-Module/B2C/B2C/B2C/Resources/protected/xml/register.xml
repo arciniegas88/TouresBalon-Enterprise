@@ -1,0 +1,26 @@
+﻿<createCustomer>
+  <customer>
+    <Id>0537730</Id>
+    <address>
+      <Address>
+        <Id>1003</Id>
+        <address_type>2</address_type>
+        <city>Bogota</city>
+        <country>Colombia</country>
+        <state>Cundinamarca</state>
+        <street>Calle 72</street>
+        <zip>00001</zip>
+      </Address>
+    </address>
+    <creditcard_number>123123</creditcard_number>
+    <creditcard_type>VISA</creditcard_type>
+    <doc_type>CC</doc_type>
+    <email>alej55oqqm@b2c.com</email>
+    <first_name>Alejandro </first_name>
+    <last_name>B2C</last_name>
+    <password>bun33022</password>
+    <phone_number>556665</phone_number>
+    <status>1</status>
+    <type>SILVER</type>
+  </customer>
+</createCustomer>

@@ -44,6 +44,85 @@ $(document).ready(function () {
 
     });
 
+    $("#register").click(function () {
+        var document_type = $("#form_Document_Type").val();
+        var id = $("#form_Id").val();
+        var first_name = $("#form_FirstName").val();
+        var last_name = $("#form_LastName").val();
+        var phone = $("#form_PhoneNumber").val();
+        var email = $("#form_Email").val();
+        var password = $("#form_Password").val();
+        var franchise = $("#form_Franchise").val();
+        var number = $("#form_Number").val();
+        var type = $("#form_Type").val();
+        
+        var error = false;
+
+        $(".error").html("");
+
+        if (document_type == "")
+        {
+            error = true;
+            $(".error").append("Ingrese el tipo de documento <br />");
+        }
+
+        if (id == "") {
+            error = true;
+            $(".error").append("Ingrese el documento <br />");
+        }
+        if (first_name == "") {
+            error = true;
+            $(".error").append("Ingrese el Nombre <br />");
+        }
+        if (last_name == "") {
+            error = true;
+            $(".error").append("Ingrese el Apellido <br />");
+        }
+        if (phone == "") {
+            error = true;
+            $(".error").append("Ingrese el Telefono <br />");
+        }
+        if (email == "") {
+            error = true;
+            $(".error").append("Ingrese el Email <br />");
+        }
+        if (password == "") {
+            error = true;
+            $(".error").append("Ingrese el Password <br />");
+        }
+        if (franchise == "") {
+            error = true;
+            $(".error").append("Ingrese la franquicia <br />");
+        }
+        if (number == "") {
+            error = true;
+            $(".error").append("Ingrese la tarjeta de credito <br />");
+        }
+        if (type == "") {
+            error = true;
+            $(".error").append("Ingrese el tipo de cliente <br />");
+        }
+
+
+        if (!error)
+        {
+            showLoading();
+            $('#error').hide();
+            $.post("/customer/create/", { email:email, password:password, document_type:document_type, id:id, first_name:first_name, last_name:last_name, phone:phone, franchise:franchise, number:number, type:type }, function (response) {
+                hideLoading();
+                if (response.success) {
+                    document.location.href = response.url;
+                } else {
+                    showMessage("Logueo", response.message);
+                }
+
+            }, 'json');
+        } else {
+            $('#error').show();
+        }
+
+    });
+
     $(".buy").bind("click", function () {
         var value = $(this).attr("id");
         var id = value.split("_")[1];

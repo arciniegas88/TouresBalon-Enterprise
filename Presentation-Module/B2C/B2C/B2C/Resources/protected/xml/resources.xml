@@ -2,6 +2,8 @@
 <serviceAgents>
       <serviceAgent name="login" location="http://localhost:9499/esb/services/web-api/security/login/">
       </serviceAgent>
+      <serviceAgent name="register" location="http://localhost:9497/esb/services/web-api/customer/create">
+      </serviceAgent>
       <serviceAgent name="proccessOrder" location="tcp://localhost:61616">
       </serviceAgent>
       <serviceAgent name="getOrder" location="http://localhost:9495/esb/services/web-api/orders/orderItems/">
