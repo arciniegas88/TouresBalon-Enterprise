@@ -32,7 +32,7 @@
             xmlns:s="http://touresbalon.com.co/email/service/utility/1.0.0"/>
 
     <cxf:cxfEndpoint
-            address="http://${target.iis.location}/microsoft/co/com/touresbalon/foundation/email/webservice/EmailService.svc"
+            address="http://${target.iis.location}/Email/microsoft/co/com/touresbalon/foundation/email/webservice/EmailService.svc"
             serviceName="s:EmailService"
             endpointName="s:BasicHttpBinding_IEmailService"
             wsdlURL="service_contracts/EmailService.wsdl"
