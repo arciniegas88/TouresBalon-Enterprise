@@ -44,9 +44,8 @@
         <camel:route streamCache="true">
 
             <camel:from uri="cxf:bean:EmailWS?dataFormat=PAYLOAD"/>
-            <camel:log message="1------------------ ${body}"/>
             <camel:to uri="xslt:transformation/request_transformer.xsl"/>
-            <camel:log message="2------------------ ${body}"/>
+
             <camel:setHeader headerName="SOAPAction">
                 <camel:constant>http://tempuri.org/IEmailService/sendMailToCustomer</camel:constant>
             </camel:setHeader>
