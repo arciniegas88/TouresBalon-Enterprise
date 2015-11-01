@@ -7,6 +7,7 @@
                 xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xmlns:tns="http://tempuri.org/"
                 xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+                xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas"
                 xmlns:ns0="http://touresbalon.com.co/email/service/utility/1.0.0"
                 xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
