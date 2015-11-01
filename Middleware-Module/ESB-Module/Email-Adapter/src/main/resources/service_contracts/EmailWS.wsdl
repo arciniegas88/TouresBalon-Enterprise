@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<definitions name="EmailWS"
+             targetNamespace="http://touresbalon.com.co/email/service/utility/1.0.0"
+             xmlns:tns="http://touresbalon.com.co/email/service/utility/1.0.0"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+    <types>
+        <schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+                targetNamespace="http://touresbalon.com.co/email/service/utility/1.0.0"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <element name="SendEmail">
+                <complexType>
+                    <sequence>
+                        <element name="Id" type="string"/>
+                        <element name="body" type="string"/>
+                        <element name="email" type="string"/>
+                        <element name="first_name" type="string"/>
+                        <element name="footer" type="string"/>
+                        <element name="last_name" type="string"/>
+                        <element name="messageSend" type="string"/>
+                        <element name="subject" type="string"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+        </schema>
+    </types>
+
+    <message name="sendEmail">
+        <part name="payload" element="tns:SendEmail"/>
+    </message>
+
+    <portType name="EmailWSPortType">
+        <operation name="sendEmail">
+            <input message="tns:sendEmail"/>
+        </operation>
+    </portType>
+
+    <binding name="EmailWSSoapBinding" type="tns:EmailWSPortType">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="sendEmail">
+            <soap:operation soapAction="sendEmail"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+        </operation>
+    </binding>
+
+    <service name="EmailWS">
+        <port name="EmailWSPort" binding="tns:EmailWSSoapBinding">
+            <soap:address location="http://localhost:9494/esb/services/utility/EmailWS/1.0.0"/>
+        </port>
+    </service>
+</definitions>	
+	

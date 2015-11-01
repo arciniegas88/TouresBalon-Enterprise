@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Camel Context -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+       xsi:schemaLocation="
+	   http://www.springframework.org/schema/osgi-compendium https://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+    <!-- ================================================================= -->
+    <!-- ESB SERVICE INFRAESTRUCTURE                                       -->
+    <!-- Service environment configuration                                 -->
+    <!-- ================================================================= -->
+
+    <!--Configuration of connection to activeMQ -->
+
+    <osgix:cm-properties id="esbProps" persistent-id="esbadmin"/>
+    <ctx:property-placeholder properties-ref="esbProps"/>
+
+    <cxf:cxfEndpoint
+            address="http://localhost:${http.esb.gateway.soap.service.port}/esb/services/utility/EmailWS/1.0.0"
+            serviceName="s:EmailWS"
+            endpointName="s:EmailWSPort"
+            wsdlURL="service_contracts/EmailWS.wsdl"
+            id="EmailWS"
+            xmlns:s="http://touresbalon.com.co/email/service/utility/1.0.0"/>
+
+    <cxf:cxfEndpoint
+            address="http://${target.iis.location}/Email/microsoft/co/com/touresbalon/foundation/email/webservice/EmailService.svc"
+            serviceName="s:EmailService"
+            endpointName="s:BasicHttpBinding_IEmailService"
+            wsdlURL="service_contracts/EmailService.wsdl"
+            id="IISEmailWS"
+            xmlns:s="http://tempuri.org/"/>
+
+    <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
+
+        <camel:route>
+
+            <camel:from uri="cxf:bean:EmailWS?dataFormat=PAYLOAD"/>
+            <camel:to uri="xslt:transformation/request_transformer.xsl"/>
+
+            <camel:setHeader headerName="SOAPAction">
+                <camel:constant>http://touresbalon.email.com/IEmailService/sendMailToCustomer</camel:constant>
+            </camel:setHeader>
+
+            <camel:setHeader headerName="operationName">
+                <camel:constant>sendMailToCustomer</camel:constant>
+            </camel:setHeader>
+
+            <camel:setHeader headerName="operationNamespace">
+                <camel:constant>http://touresbalon.email.com</camel:constant>
+            </camel:setHeader>
+
+            <camel:to uri="cxf:bean:IISEmailWS?dataFormat=PAYLOAD"/>
+
+        </camel:route>
+
+    </camel:camelContext>
+
+</beans>

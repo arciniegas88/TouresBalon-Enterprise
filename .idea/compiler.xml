@@ -145,6 +145,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
       </profile>
+      <profile default="false" name="Annotation profile for Email-Adapter" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Email-Adapter" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="B2C" target="1.5" />
@@ -160,6 +167,7 @@
       <module name="Customer-Proxy-Services" target="1.7" />
       <module name="Customers" target="1.5" />
       <module name="EIS-Module" target="1.5" />
+      <module name="Email-Adapter" target="1.7" />
       <module name="ESB-Module" target="1.5" />
       <module name="HiltonBookingWS" target="1.6" />
       <module name="Lodging" target="1.5" />

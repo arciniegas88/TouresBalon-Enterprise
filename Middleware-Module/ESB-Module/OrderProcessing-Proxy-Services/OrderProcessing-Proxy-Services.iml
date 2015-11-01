@@ -5,7 +5,7 @@
       <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="OrderProcessing-Proxy-Services-1.0.0-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="co.com.touresbalon.foundation.middleware.OrderProcessing-Proxy-Services" bundleVersion="1.0.0.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
         <additionalProperties>
           <property key="Bundle-Name" value="OrderProcessing-Proxy-Services" />
-          <property key="Include-Resource" value="log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,service_contracts/CreditCard.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/CreditCard.wsdl,service_contracts/ProcessingOrder.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/ProcessingOrder.wsdl" />
+          <property key="Include-Resource" value="log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,service_contracts/canonical_schema.xsd=$MODULE_DIR$/src/main/resources/service_contracts/canonical_schema.xsd,service_contracts/ProccessingOrder.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/ProccessingOrder.wsdl" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>
