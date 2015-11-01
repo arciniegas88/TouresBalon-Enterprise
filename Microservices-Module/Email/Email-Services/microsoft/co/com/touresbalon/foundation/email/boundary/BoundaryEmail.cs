@@ -18,7 +18,7 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
         MailMessage m = new MailMessage();
         SmtpClient smtp = new SmtpClient();
 
-        public bool sendMailCustomer(string from, string password, Email email)
+        public void sendMailCustomer(string from, string password, Email email)
         {
             try
             {
@@ -50,12 +50,10 @@ namespace Email_Services.microsoft.co.com.touresbalon.foundation.email.boundary
                 m.AlternateViews.Add(htmlView);
                 m.IsBodyHtml = true;
                 smtp.Send(m);
-                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
-                return false;
             }
 
         }
