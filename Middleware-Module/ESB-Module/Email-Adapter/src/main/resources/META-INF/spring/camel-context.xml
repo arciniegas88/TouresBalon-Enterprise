@@ -32,7 +32,7 @@
             xmlns:s="http://touresbalon.com.co/email/service/utility/1.0.0"/>
 
     <cxf:cxfEndpoint
-            address="http://${target.iis.location}/Email/microsoft/co/com/touresbalon/foundation/email/webservice/EmailService.svc"
+            address="http://${target.iis.location}/microsoft/co/com/touresbalon/foundation/email/webservice/EmailService.svc"
             serviceName="s:EmailService"
             endpointName="s:BasicHttpBinding_IEmailService"
             wsdlURL="service_contracts/EmailService.wsdl"
@@ -48,7 +48,7 @@
             <camel:to uri="xslt:transformation/request_transformer.xsl"/>
             <camel:log message="2------------------ ${body}"/>
             <camel:setHeader headerName="SOAPAction">
-                <camel:constant>http://touresbalon.email.com/IEmailService/sendMailToCustomer</camel:constant>
+                <camel:constant>http://tempuri.org/IEmailService/sendMailToCustomer</camel:constant>
             </camel:setHeader>
 
             <camel:setHeader headerName="operationName">
@@ -56,7 +56,7 @@
             </camel:setHeader>
 
             <camel:setHeader headerName="operationNamespace">
-                <camel:constant>http://touresbalon.email.com</camel:constant>
+                <camel:constant>http://tempuri.org/</camel:constant>
             </camel:setHeader>
 
             <camel:to uri="cxf:bean:IISEmailWS?dataFormat=PAYLOAD"/>

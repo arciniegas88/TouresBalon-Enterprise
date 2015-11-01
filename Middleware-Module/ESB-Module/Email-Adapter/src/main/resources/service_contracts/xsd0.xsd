@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema elementFormDefault="qualified" targetNamespace="http://touresbalon.email.com"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://touresbalon.email.com">
-	<xs:import
-		schemaLocation="xsd2.xsd"
-		namespace="http://schemas.datacontract.org/2004/07/Email_Services.microsoft.co.com.touresbalon.foundation.email.entity" />
+<xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/">
+	<xs:import schemaLocation="xsd2.xsd" namespace="http://schemas.datacontract.org/2004/07/Email_Services.microsoft.co.com.touresbalon.foundation.email.entity"/>
 	<xs:element name="sendMailToCustomer">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" name="email" nillable="true"
-					type="q1:Email"
-					xmlns:q1="http://schemas.datacontract.org/2004/07/Email_Services.microsoft.co.com.touresbalon.foundation.email.entity" />
+				<xs:element minOccurs="0" name="email" nillable="true" type="q1:Email" xmlns:q1="http://schemas.datacontract.org/2004/07/Email_Services.microsoft.co.com.touresbalon.foundation.email.entity"/>
 			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="sendMailToCustomerResponse">
-		<xs:complexType>
-			<xs:sequence />
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
