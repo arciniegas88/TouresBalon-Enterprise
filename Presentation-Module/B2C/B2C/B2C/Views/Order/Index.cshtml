@@ -20,7 +20,7 @@
              <div class="MarTop20 Wid100">
              @foreach (var item in orders)
              {
-                 @RenderPage("~/Views/Order/OrderSmall.cshtml", new { @price = item.Price, @id = item.Id, comments = item.Comments, status = item.Status })
+                 @RenderPage("~/Views/Order/OrderSmall.cshtml", new { @price = item.Price, @id = item.Id, comments = item.Comments, status = item.statusShow() })
              }
              </div>
         </div>

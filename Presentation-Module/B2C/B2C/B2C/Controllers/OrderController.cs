@@ -34,7 +34,8 @@ namespace B2C.Controllers
 
         public JsonResult Cancel(int id)
         {
-            return Json(OrderFacade.Instance.cancelOrder(id));
+            OrderFacade.Instance.cancelOrder(id);
+            return Json(new { success = true, message = B2C.Utils.Message.CANCEL_IN_PROCESS });
         }
 
     }

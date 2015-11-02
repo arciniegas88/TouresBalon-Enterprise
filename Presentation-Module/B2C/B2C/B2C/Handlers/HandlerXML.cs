@@ -36,6 +36,16 @@ namespace B2C.Handlers
             return xDoc;
         }
 
+        public static String xmlToString(XmlDocument xml)
+        {
+            StringWriter sw = new StringWriter();
+            XmlTextWriter tx = new XmlTextWriter(sw);
+            xml.WriteTo(tx);
+
+            string str = sw.ToString();
+            return str;
+        }
+
         public static string buildMessage(List<ProductCart> objects)
         {
             XmlDocument order = HandlerResource.getXmlProcessingOrder();
@@ -57,9 +67,12 @@ namespace B2C.Handlers
 
             foreach (ProductCart obj in objects)
             {
-                total += obj.Cost * obj.Account;
-                item = obj.toXml();
-                order.FirstChild.FirstChild.AppendChild( order.ImportNode(item.FirstChild, true) );
+                if (!obj.isDelete())
+                {
+                    total += obj.Cost * obj.Account;
+                    item = obj.toXml();
+                    order.FirstChild.FirstChild.AppendChild(order.ImportNode(item.FirstChild, true));
+                }
             }
 
             order.GetElementsByTagName("price").Item(0).InnerText = total.ToString();

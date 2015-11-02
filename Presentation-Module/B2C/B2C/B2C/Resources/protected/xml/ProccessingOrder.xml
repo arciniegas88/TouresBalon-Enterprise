@@ -9,6 +9,6 @@
      <customerType>SILVER</customerType>
      <creditCardNumber>00000-318586</creditCardNumber>
      <price>15000</price>
-     <custom/>
+    <custom>DEFAULT</custom>
   </order>
 </p:CreateSalesOrderRequest>

@@ -74,7 +74,9 @@
             <camel:from uri="activemq:queue:MQ-ProcessOrderRequest?jmsMessageType=Text"/>
 
             <camel:convertBodyTo type="java.lang.String"/>
+            <camel:log message="1-------${body}" />
             <camel:process ref="bodyProcessor"/>
+            <camel:log message="2-------${body}" />
 
             <setHeader headerName="soapAction">
                 <constant>process</constant>

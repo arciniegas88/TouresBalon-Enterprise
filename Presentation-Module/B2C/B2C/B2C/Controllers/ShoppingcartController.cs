@@ -61,6 +61,8 @@ namespace B2C.Controllers
             //(Request.Params.Get("form.Franchise"), Request.Params.Get("form.Number")
             OrderFacade.Instance.proccessOrder();
 
+            HandlerSession.clearShoppingCar();
+
             return View();
         }
     }

@@ -59,6 +59,20 @@ namespace B2C.Handlers
             return (new { success = true, total = count, message = Message.ADD_SUCCESS });
         }
 
+        public static void clearShoppingCar()
+        {
+            int count = HandlerSession.getTotalOrder();
+            int i = 0;
+            ProductCart product_temp;
+            for (i = 0; i < count; i++)
+            {
+                product_temp = HttpContext.Current.Session[String.Concat("producto", (i + 1))] as ProductCart;
+                product_temp.delete();
+                HttpContext.Current.Session.Add(String.Concat("producto", (i + 1)), product_temp);
+            }
+            HandlerSession.setTotalOrder(0);
+        }
+
         public static Object deleteProduct(int id, int pos)
         {
             ProductCart product_temp;
@@ -85,6 +99,22 @@ namespace B2C.Handlers
 
             return response;
 
+        }
+
+        public static int getTotalRealOrder()
+        {
+            int count = HandlerSession.getTotalOrder();
+            int i = 0;
+            int total = 0;
+            ProductCart product_temp;
+            for (i = 0; i < count; i++)
+            {
+                product_temp = HttpContext.Current.Session[String.Concat("producto", (i + 1))] as ProductCart;
+                if (!product_temp.isDelete())
+                    total++;
+            }
+
+            return total;
         }
 
         private static void setTotalOrder(int count)

@@ -188,7 +188,7 @@ $(document).ready(function () {
                 } else {
                     showMessage("Error", data.message);
                 }
-            });
+            }, 'json');
             return false;
         }
 
@@ -261,6 +261,9 @@ $(document).ready(function () {
         $.post("order/cancel/" + id, function (data) {
             if (data.success) {
                 showMessage("Cancelacion orden", data.message);
+                $("#close_message").click(function () {
+                    location.reload();
+                });
             }
         }, 'json');
     });

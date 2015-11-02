@@ -35,12 +35,13 @@ public class BodyProcessor implements Processor {
             String contentPrice       = xPath.compile(price).evaluate(new InputSource( new StringReader( payload ) ));
 
             builder.append(contentProductName )
-                    .append(" : $")
+                    .append(" : \\$")
                     .append(contentPrice)
                     .append("<br/>");
 
         }
-        payload=payload.replaceAll("<custom/>","<custom><![CDATA["+builder.toString()+"]]></custom>");
+        payload=payload.replaceAll("<custom>DEFAULT</custom>","<custom><![CDATA["+builder.toString()+"]]></custom>");
         exchange.getIn().setBody(payload, String.class);
+        //exchange.getOut().setBody(payload, String.class);
     }
 }

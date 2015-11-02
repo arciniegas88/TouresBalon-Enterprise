@@ -13,17 +13,14 @@ namespace B2C.Handlers
         private static Dictionary<String, String> serviceAgentLocation;
         private static XmlDocument xmlProcessingOrder = null;
         private static XmlDocument xmlItem = null;
+        private static XmlDocument xmlCancel = null;
         private static XmlDocument xmlLogin = null;
         private static XmlDocument xmlRegister = null;
 
         public static XmlDocument getXmlProcessingOrder()
         {
-            if(HandlerResource.xmlProcessingOrder == null)
-            {
-                HandlerResource.xmlProcessingOrder = HandlerXML.loadXml("~/Resources/protected/xml/ProccessingOrder.xml");
-            }
-
-            return HandlerResource.xmlProcessingOrder;
+            XmlDocument xml = HandlerXML.loadXml("~/Resources/protected/xml/ProccessingOrder.xml");
+            return xml;
         }
 
         public static XmlDocument getXmlItem()
@@ -34,6 +31,16 @@ namespace B2C.Handlers
             }
 
             return HandlerResource.xmlItem;
+        }
+
+        public static XmlDocument getXmlCancel()
+        {
+            if (HandlerResource.xmlCancel == null)
+            {
+                HandlerResource.xmlCancel = HandlerXML.loadXml("~/Resources/protected/xml/CancelOrder.xml");
+            }
+
+            return HandlerResource.xmlCancel;
         }
 
         public static XmlDocument getXmlLogin()

@@ -64,14 +64,10 @@ namespace B2C.Agents
             request.doMessage(xml, HandlerResource.getServiceAgentLocation("queueProcessingOrder"));
         }
 
-        public Object cancelOrder(int id)
+        public void cancelOrder(String cancel)
         {
             HandlerRequest request = new HandlerRequest();
-            StringBuilder builder = new StringBuilder("<orderCancel>$id</orderCancel>");
-            builder.Replace("$id", id.ToString());
-
-            request.doMessage( builder.ToString(), HandlerResource.getServiceAgentLocation("queueCancelingOrder"));
-            return (new { success = true, message = Message.CANCEL_IN_PROCESS });
+            request.doMessage(cancel, HandlerResource.getServiceAgentLocation("queueCancelingOrder"));
         }
     }
 }

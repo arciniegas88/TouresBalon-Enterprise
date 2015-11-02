@@ -62,9 +62,9 @@ namespace B2C.Facades
             this.orderService.proccessOrder(HandlerSession.getProducts());
         }
 
-        public Object cancelOrder(int id)
+        public void cancelOrder(int id)
         {
-            return this.orderService.cancelOrder(id);
+            this.orderService.cancelOrder( HandlerXML.xmlToString(Order.toCancel(id)) );
         }
 
     }

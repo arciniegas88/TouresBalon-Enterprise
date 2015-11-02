@@ -1,0 +1,3 @@
+﻿<ns:Cancel-Orders-BPELRequest xmlns:ns="http://touresbalon.com.co/orders/service/task/1.0.0">
+  <ns:orderId xmlns:ns="http://touresbalon.com.co/orders/service/task/1.0.0">1</ns:orderId>
+</ns:Cancel-Orders-BPELRequest>

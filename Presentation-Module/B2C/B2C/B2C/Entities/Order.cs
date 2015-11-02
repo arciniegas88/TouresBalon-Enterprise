@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using B2C.Contracts;
+using System.Xml;
 
 namespace B2C.Entities
 {
@@ -22,6 +23,14 @@ namespace B2C.Entities
             this.comments = contract.comments;
         }
 
+
+        public static XmlDocument toCancel(int Id)
+        {
+            XmlDocument xml = Handlers.HandlerResource.getXmlCancel();
+            xml.GetElementsByTagName("ns:orderId").Item(0).InnerText = Id.ToString();
+
+            return xml;
+        }
         public int Id
         {
             get
@@ -72,6 +81,19 @@ namespace B2C.Entities
             {
                 comments = value;
             }
+        }
+
+        public string statusShow()
+        {
+            if (this.status.Equals("IN_VALIDATION"))
+                return "En validacion";
+            if (this.status.Equals("PENDING"))
+                return "Pendiente";
+            if (this.status.Equals("CLOSED"))
+                return "Cerrada";
+            if (this.status.Equals("COMPLETED"))
+                return "Completad";
+            return "";
         }
     }
 }

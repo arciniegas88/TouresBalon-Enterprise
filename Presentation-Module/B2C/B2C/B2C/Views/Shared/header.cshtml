@@ -1,6 +1,6 @@
 ﻿@{
     var filter_options = B2C.Entities.Product.FILTER_OPTIONS as SelectList;
-    var total_car = B2C.Handlers.HandlerSession.getTotalOrder();
+    var total_car = B2C.Handlers.HandlerSession.getTotalRealOrder();
 }
 
 <div id="layout-topbar">
@@ -9,7 +9,7 @@
         <span class="ButtonLine" id="ButtonLine2"></span>
         <span class="ButtonLine" id="ButtonLine3"></span>
     </a>
-    <a href="/modena/dashboard.xhtml" id="logo">
+    <a href="#" id="logo">
         <img src="~/Resources/modena-layout/images/logo.png" class="Fleft">
     </a>
 

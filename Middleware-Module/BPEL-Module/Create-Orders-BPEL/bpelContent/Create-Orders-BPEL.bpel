@@ -212,7 +212,9 @@
 
         <!-- Receive input from requestor. Note: This maps to operation defined
             in Create-Orders-BPEL.wsdl -->
-
+	    <bpel:receive name="receiveInput" partnerLink="client"
+                      portType="tns:Create-Orders-BPEL" operation="process" variable="input"
+                      createInstance="yes"/>
 
         <bpel:sequence name="VALIDATION_STAGE"><bpel:assign validate="no" name="Assign-variable-init">
                 <bpel:copy>
@@ -555,9 +557,9 @@
                                     <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                                         <![CDATA[order/customerType]]></bpel:query>
                                 </bpel:from>
-                                <bpel:to part="ClaimApprovalRequest" variable="claimInput">
+                                <bpel:to part="ClaimApprovalRequest" variable="claimInput">
                                     <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                                        <![CDATA[htschema:order/htschema:custom]]>
+                                        <![CDATA[htschema:order/htschema:customerType]]>
                                     </bpel:query>
                                 </bpel:to>
                             </bpel:copy>
@@ -1605,9 +1607,6 @@
 
         
         </bpel:sequence>
-        <bpel:receive name="receiveInput" partnerLink="client"
-                      portType="tns:Create-Orders-BPEL" operation="process" variable="input"
-                      createInstance="yes"/>
 
 
         <!-- ================================================================= -->
