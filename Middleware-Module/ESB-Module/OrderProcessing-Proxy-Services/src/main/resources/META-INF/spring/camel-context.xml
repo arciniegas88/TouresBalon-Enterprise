@@ -80,10 +80,9 @@
                 <constant>process</constant>
             </setHeader>
 
-            <camel:to uri="file://C:/touresbalon?fileName=salida.xml"/>
-            <!--
+          <!--  <camel:to uri="file://C:/touresbalon?fileName=salida.xml"/> -->
             <camel:to uri="cxf:bean:ProcessOrderService?dataFormat=PAYLOAD"/>
-            -->
+
         </camel:route>
 
         <camel:route>
