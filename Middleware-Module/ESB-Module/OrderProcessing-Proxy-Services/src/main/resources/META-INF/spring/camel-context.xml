@@ -66,14 +66,24 @@
         <property name="configuration" ref="jmsConfig"/>
     </bean>
 
+    <bean id="bodyProcessor" class="co.com.foundation.middleware.processor.BodyProcessor"/>
+
     <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
 
         <camel:route>
             <camel:from uri="activemq:queue:MQ-ProcessOrderRequest?jmsMessageType=Text"/>
+
+            <camel:convertBodyTo type="java.lang.String"/>
+            <camel:process ref="bodyProcessor"/>
+
             <setHeader headerName="soapAction">
                 <constant>process</constant>
             </setHeader>
+
+            <camel:to uri="file://C:/touresbalon?fileName=salida.xml"/>
+            <!--
             <camel:to uri="cxf:bean:ProcessOrderService?dataFormat=PAYLOAD"/>
+            -->
         </camel:route>
 
         <camel:route>
