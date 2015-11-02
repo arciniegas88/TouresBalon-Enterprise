@@ -27,6 +27,7 @@
 								<xsd:element name="custDocumentNumber" type="xsd:string" />
 								<xsd:element name="custDocumentType" type="xsd:string" />
 								<xsd:element name="customerType" type="xsd:string" />
+								<xsd:element name="custom" type="xsd:string" />
 							</xsd:sequence>
 						</xsd:complexType>
 					</xsd:element>

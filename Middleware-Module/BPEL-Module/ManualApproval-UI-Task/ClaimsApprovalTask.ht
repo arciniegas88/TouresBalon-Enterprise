@@ -106,6 +106,10 @@
                                                type="xsd:string">
                         htd:getInput("ClaimApprovalRequest")/test10:order/test10:customerType
                     </htd:presentationParameter>
+                    <htd:presentationParameter name="custom"
+                                               type="xsd:string">
+                        htd:getInput("ClaimApprovalRequest")/test10:order/test10:custom
+                    </htd:presentationParameter>
                 </htd:presentationParameters>
 
                 <htd:subject xml:lang="en-US">
