@@ -5,6 +5,7 @@
         String custDocumentNumber = "";
         String custDocumentType = "";
         String customerType = "";
+        String custom ="";
 
         OMElement requestElement = (OMElement) request.getAttribute("taskInput");
         String ns = "http://touresbalon.com.co/salesorder/schema/utility/1.0.0";
@@ -27,6 +28,13 @@
                 if(p3 != null){
                     customerType = p3.getText();
                 }
+
+                OMElement p4 = orderElement.getFirstChildWithName(new QName(ns, "custom"));
+                if(p4 != null){
+                    custom = p4.getText();
+                }
+
+
             }
         }
     %>
@@ -45,6 +53,11 @@
     <tr>
         <td>Customer Type</td>
         <td><%=customerType%>
+        </td>
+    </tr>
+    <tr>
+        <td>Details</td>
+        <td><%=custom%>
         </td>
     </tr>
 </table>

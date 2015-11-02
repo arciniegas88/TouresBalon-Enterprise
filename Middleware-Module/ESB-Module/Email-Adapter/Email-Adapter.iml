@@ -5,7 +5,7 @@
       <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="Email-Adapter-1.0.0-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="co.com.touresbalon.foundation.middleware.Email-Adapter" bundleVersion="1.0.0.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
         <additionalProperties>
           <property key="Bundle-Name" value="Email-Adapter" />
-          <property key="Include-Resource" value="log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,service_contracts/EmailService.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/EmailService.wsdl,service_contracts/EmailService0.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/EmailService0.wsdl,service_contracts/EmailWS.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/EmailWS.wsdl,service_contracts/xsd0.xsd=$MODULE_DIR$/src/main/resources/service_contracts/xsd0.xsd,service_contracts/xsd1.xsd=$MODULE_DIR$/src/main/resources/service_contracts/xsd1.xsd,service_contracts/xsd2.xsd=$MODULE_DIR$/src/main/resources/service_contracts/xsd2.xsd" />
+          <property key="Include-Resource" value="log4j.properties=$MODULE_DIR$/src/main/resources/log4j.properties,META-INF/spring/camel-context.xml=$MODULE_DIR$/src/main/resources/META-INF/spring/camel-context.xml,service_contracts/EmailService.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/EmailService.wsdl,service_contracts/EmailWS.wsdl=$MODULE_DIR$/src/main/resources/service_contracts/EmailWS.wsdl,service_contracts/xsd0.xsd=$MODULE_DIR$/src/main/resources/service_contracts/xsd0.xsd,service_contracts/xsd1.xsd=$MODULE_DIR$/src/main/resources/service_contracts/xsd1.xsd,service_contracts/xsd2.xsd=$MODULE_DIR$/src/main/resources/service_contracts/xsd2.xsd,transformation/request_transformer.xsl=$MODULE_DIR$/src/main/resources/transformation/request_transformer.xsl" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>
@@ -41,6 +41,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.camel:camel-bindy:2.15.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.xml.bind:jaxb-core:2.2.11" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.2.11" level="project" />
   </component>
 </module>

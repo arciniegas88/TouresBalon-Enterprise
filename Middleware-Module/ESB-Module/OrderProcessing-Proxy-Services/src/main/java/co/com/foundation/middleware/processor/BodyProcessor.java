@@ -24,15 +24,23 @@ public class BodyProcessor implements Processor {
 
         String count      = "count(/*[local-name() = 'CreateSalesOrderRequest']/order/items)";
         String payload    = exchange.getIn().getBody().toString();
-        int size = Integer.parseInt( xPath.compile( count ).evaluate( new InputSource( new StringReader( payload ) ) ) );
+        int size = Integer.parseInt(xPath.compile(count).evaluate(new InputSource(new StringReader(payload))));
+        StringBuilder builder =new StringBuilder();
 
         for( int i=1;i<=size;++i ){
 
-            InputSource is = new InputSource( new StringReader( payload ) );
-            String expression = "/*[local-name() = 'CreateSalesOrderRequest']/order/items[" +i+"]/productName";
-            String content = xPath.compile(expression).evaluate(is);
-            System.out.println("-----------------> " + content);
-        }
+            String productName = "/*[local-name() = 'CreateSalesOrderRequest']/order/items[" +i+"]/productName";
+            String price       = "/*[local-name() = 'CreateSalesOrderRequest']/order/items[" +i+"]/price";
+            String contentProductName = xPath.compile(productName).evaluate(new InputSource( new StringReader( payload ) ));
+            String contentPrice       = xPath.compile(price).evaluate(new InputSource( new StringReader( payload ) ));
 
+            builder.append(contentProductName )
+                    .append(" : $")
+                    .append(contentPrice)
+                    .append("<br/>");
+
+        }
+        payload=payload.replaceAll("<custom/>","<custom><![CDATA["+builder.toString()+"]]></custom>");
+        exchange.getIn().setBody(payload, String.class);
     }
 }
