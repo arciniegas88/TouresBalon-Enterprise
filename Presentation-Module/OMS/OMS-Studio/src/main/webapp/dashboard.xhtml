@@ -17,6 +17,7 @@
             <p:remoteCommand name="searchProductsAction" update="@form" action="#{portalController.searchProductsAction()}"/>
             <p:remoteCommand name="productsAdminAction" update="@form" action="#{portalController.productsAdminAction}"/>
             <p:remoteCommand name="ratesAdminAction" update="@form" action="#{portalController.ratessAdminAction}"/>
+            <p:remoteCommand name="searchCustomersAction" update="@form" action="#{portalController.searchCustomerAction}" />
 
             <div class="Container100">
                 <div class="ContainerIndent">
@@ -42,10 +43,10 @@
 
                             <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen"
                                                icon="icon-group_add" label="Admin. Clientes"
-                                               target="searchProductsAction"/>
+                                               target="customersAdminAction"/>
                             <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple"
                                                icon="icon-contacts" label="Consultas Clientes"
-                                               target="searchProductsAction"/>
+                                               target="searchCustomersAction"/>
 
                             <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
                                                icon="icon-cancel" label="Cancelar Ordenes"

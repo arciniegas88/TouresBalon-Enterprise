@@ -2,6 +2,7 @@ package co.com.touresbalon.foundation.oms.usecases.portal;
 
 import co.com.touresbalon.foundation.oms.domain.products.City;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
+import co.com.touresbalon.foundation.oms.usecases.customersearch.CustomersModel;
 import co.com.touresbalon.foundation.oms.usecases.productadmin.AdminProductsModel;
 import co.com.touresbalon.foundation.oms.usecases.productssearch.ProductsModel;
 import co.com.touresbalon.foundation.oms.usecases.ratesadmin.RatesModel;
@@ -24,11 +25,14 @@ public class PortalController {
     public static final String RATES_ADMIN_PAGE    = "/OMS-Studio/content/rates/ratesAdmin.xhtml";
     public static final String PRODUCT_SEARCH_PAGE = "/OMS-Studio/content/products/productSearch.xhtml";
     public static final String PRODUCTS_ADMIN_PAGE = "/OMS-Studio/content/productsAdmin/productAdmin.xhtml";
+    private static final String CUSTOMER_SEARCH_PAGE = "/OMS-Studio/content/customers/customerSearch.xhtml";
 
     @Inject
     private FacesUtil util;
     @Inject
     private ProductsModel productModel;
+    @Inject
+    private CustomersModel customersModel;
     @Inject
     private RatesModel ratesModel;
     @Inject
@@ -64,6 +68,11 @@ public class PortalController {
         adminProductsModel.setSpectacles( productFacade.getSpectacles() );
 
         RequestContext.getCurrentInstance().execute( "window.location.href='"+PRODUCTS_ADMIN_PAGE+"';" );
+    }
+
+    public void searchCustomerAction(){
+        productModel.cleanModel();
+        RequestContext.getCurrentInstance().execute("window.location.href='" + CUSTOMER_SEARCH_PAGE + "';");
     }
 
 }

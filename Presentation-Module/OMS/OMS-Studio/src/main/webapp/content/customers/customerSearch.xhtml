@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/template.xhtml">
+
+    <ui:define name="subheader">
+        <b>Consultas especiales sobre clientes</b>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <style>
+            .ui-tabs-left > .ui-tabs-nav {
+                float: left;
+                width: 15%;
+                height: 300px;
+                background-image: none;
+                padding-top: 1px;
+            }
+
+            .ui-tabs-left > .ui-tabs-panels {
+                float: right;
+                width: 84%;
+            }
+        </style>
+
+        <div class="Container100 Responsive100">
+            <h:form id="form">
+                <br/>
+                <p:growl showDetail="true" showSummary="false"/>
+
+                <p:tabView orientation="left" id="TVCustomers">
+
+                    <p:tab title="Clientes">
+                        <ui:include src="customersSearchFragment.xhtml"/>
+                    </p:tab>
+                </p:tabView>
+
+                <p:dialog header="Detalle del Cliente" widgetVar="customerDialog" modal="true"
+                          resizable="false" width="700">
+
+                    <p:outputPanel id="customerDetail">
+
+                        <div class="Container50 Responsive100">
+
+                            <div class="Container100">
+                                <div class="ContainerIndent">
+                                    <h:panelGrid columns="2" rendered="#{not empty customersModel.customer}">
+
+                                        <h:outputText value="Id" style="font-weight: bold"/>
+                                        <h:outputText value="#{customersModel.customer.id}"/>
+
+                                        <h:outputText value="Nombre" style="font-weight: bold"/>
+                                        <h:outputText value="#{customersModel.customer.firstName}"/>
+
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                        </div>
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,77 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card HeiAutoOnMobile" style="min-height:275px;">
+
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:commandButton value="buscar" styleClass="OrangeButton"
+                                         update="form:TVCustomers:customerTable"
+                                         icon="fa fa-check-square-o"/>
+                        <p:commandButton value="limpiar" styleClass="OrangeButton"
+                                         update="form:TVCustomers:txtId, form:TVCustomers:txtEmail"
+                                         action="#{customersModel.cleanFormAction()}"
+                                         icon="fa fa-ban"/>
+                    </f:facet>
+                </p:toolbar>
+
+
+                <div class="Container70 Responsive70">
+                    <div class="ContainerIndent">
+
+                        <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                                     styleClass="FormContent">
+                            <p:inputText styleClass="Wid90" placeholder="Id"
+                                         value="#{customersModel.id}" id="txtId"/>
+                            <p:inputText styleClass="Wid90" placeholder="Email"
+                                         value="#{customersModel.email}" id="txtEmail"/>
+                        </p:panelGrid>
+                        <br/>
+                    </div>
+                </div>
+
+
+                <div class="Container100">
+                    <div class="ContainerIndent">
+
+                        <p:dataTable id="customerTable" var="c" value="#{customersModel}"
+                                     rows="5" paginator="true"
+                                     emptyMessage="No customers found with given criteria"
+                                     lazy="true">
+
+                            <p:column headerText="Id" footerText="Id">
+                                <h:outputText value="#{c.id}"/>
+                            </p:column>
+
+                            <p:column headerText="Nombre" footerText="Nombre" style="text-align: center;">
+                                <h:outputText value="#{c.nombre}"/>
+                            </p:column>
+
+                            <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
+                                                 title="Detalles" update="form:productDetail"
+                                                 action="#{customersController.showProductDetail(c)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
+                                                 title="Editar" update="@form"
+                                                 action="#{customersController.updateCustomerDetail(c)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                 title="Eliminar" update="@form"
+                                                 action="#{customersController.deleteCustomer(c)}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>
