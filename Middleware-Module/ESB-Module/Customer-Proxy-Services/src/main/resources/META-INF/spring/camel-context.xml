@@ -54,6 +54,14 @@
 
         <!-- All Customers -->
         <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/count/id={id};email={email}?restletMethod=GET"/>
+            <camel:recipientList>
+                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/count/id=${header.id};email=${header.email}?restletMethod=GET</camel:simple>
+            </camel:recipientList>
+        </camel:route>
+
+        <!-- All Customers -->
+        <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customers/pag={pag}/regPag={regPag}?restletMethod=GET"/>
             <camel:recipientList>
                 <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customers/pag=${header.pag};regPag=${header.regPag}?restletMethod=GET</camel:simple>
