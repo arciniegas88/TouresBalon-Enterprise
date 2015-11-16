@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by harcalejo on 2/11/15.
  */
-@Path("/")
+
 public interface CustomerWebClient {
 
     @GET
@@ -17,9 +17,8 @@ public interface CustomerWebClient {
     CustomerResponseType getCustomerById(@PathParam("id") String customerId);
 
     @GET
-    @Path("/customer/count/id={id};email={email}")
-    @Consumes(MediaType.APPLICATION_XML)
-    CountCustomersResponseType getCustomerCount(@PathParam("id") String customerId, @PathParam("email") String email);
+    @Path("/customer/count")
+    CountCustomersResponseType getCustomerCount(@QueryParam("id") String customerId, @QueryParam("email") String email);
 
 
     @GET

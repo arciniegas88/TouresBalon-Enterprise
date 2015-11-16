@@ -82,7 +82,7 @@ public class WebResourceFactory {
         StringBuilder endpoint = new StringBuilder();
         endpoint.append("http://")
                 .append(System.getProperty("touresbalon.locations.esb.customers"))
-                .append("/esb/service/web-api");
+                .append("/esb/services/web-api");
         CustomerWebClient client = JAXRSClientFactory.create(endpoint.toString(), CustomerWebClient.class);
         return client;
     }

@@ -39,7 +39,6 @@
 
                 <div class="Container100">
                     <div class="ContainerIndent">
-
                         <p:dataTable id="customerTable" var="c" value="#{customersModel}"
                                      rows="5" paginator="true"
                                      emptyMessage="No customers found with given criteria"
@@ -50,13 +49,29 @@
                             </p:column>
 
                             <p:column headerText="Nombre" footerText="Nombre" style="text-align: center;">
-                                <h:outputText value="#{c.nombre}"/>
+                                <h:outputText value="#{c.firstName}"/>
+                            </p:column>
+
+                            <p:column headerText="Apellido" footerText="Apellido" style="text-align: center;">
+                                <h:outputText value="#{c.lastName}"/>
+                            </p:column>
+
+                            <p:column headerText="Email" footerText="Email" style="text-align: center;">
+                                <h:outputText value="#{c.email}"/>
+                            </p:column>
+
+                            <p:column headerText="Tipo" footerText="Tipo" style="text-align: center;">
+                                <h:outputText value="#{c.type}"/>
+                            </p:column>
+
+                            <p:column headerText="Estado" footerText="Estado" style="text-align: center;">
+                                <h:outputText value="#{c.status == 1 ? 'Activo' : 'InActivo'}"/>
                             </p:column>
 
                             <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
-                                                 title="Detalles" update="form:productDetail"
-                                                 action="#{customersController.showProductDetail(c)}"/>
+                                                 title="Detalles" update="form:customerDetail"
+                                                 action="#{customersController.showCustomerDetail(c)}"/>
                                 <p:spacer width="2"/>
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
                                                  title="Editar" update="@form"

@@ -22,6 +22,7 @@ public class CustomersModel extends LazyDataModel<CustomerType> implements Seria
     private String id;
     private String email;
 
+
     private CustomerType customer;
     private List<CustomerType> customers;
 
