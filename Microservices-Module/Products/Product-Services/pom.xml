@@ -140,6 +140,18 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>7.7.Final</version>
+                <configuration>
+                    <hostname>localhost</hostname>
+                    <port>9999</port>
+                    <name>Product-Services.war</name>
+                    <username>admin</username>
+                    <password>gust@v0-88</password>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

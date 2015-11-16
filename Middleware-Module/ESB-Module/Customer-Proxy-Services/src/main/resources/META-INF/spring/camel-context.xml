@@ -85,7 +85,7 @@
                     <camel:simple>${property.request}</camel:simple>
                 </camel:setBody>
                 <camel:to uri="xslt:transformation/CustomerToUser.xsl"/>
-                <camel:to uri="restlet:http://localhost:{{http.esb.security.adapter.port}}/esb/services/web-api/security/createLdap?restletMethod=POST&amp;throwExceptionOnFailure=false" />
+                <camel:to uri="restlet:http://localhost:{{http.esb.security.service.port}}/esb/services/web-api/security/createLdap?restletMethod=POST&amp;throwExceptionOnFailure=false" />
             </camel:when>
         </camel:route>
 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="CI-Task" basedir=".">
+
+    <property name="MAVEN_HOME" value="C:/desarrollo/infraestructura/apache-maven-3.3.3/bin"/>
+    <property name="path.microservices" value="C:/Users/GustavoAdolfo/IdeaProjects/TouresBalon-Enterprise/Microservices-Module"/>
+    <property name="path.eis" value="C:/Users/GustavoAdolfo/IdeaProjects/TouresBalon-Enterprise/EIS-Module"/>
+
+
+    <target name="install-ms" description="deploy microservices">
+        <echo message="------- DEPLOY ---------" />
+
+        <exec dir="${path.microservices}/BusinessRules/BusinessRule-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:deploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Lodging/Lodging-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:deploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Orders/Order-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:deploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Lodging/Lodging-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:deploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Products/Product-Services/" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:deploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Transports/Transport-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:deploy" />
+        </exec>
+
+        <exec dir="${path.eis}/CreditCardWS" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:deploy" />
+        </exec>
+
+        <exec dir="${path.eis}/SpectaclesWS" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:deploy" />
+        </exec>
+
+    </target>
+
+
+    <target name="uninstall-ms" description="deploy microservices">
+        <echo message="------- UNDEPLOY ---------" />
+
+        <exec dir="${path.microservices}/BusinessRules/BusinessRule-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:undeploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Lodging/Lodging-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:undeploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Orders/Order-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:undeploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Lodging/Lodging-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:undeploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Products/Product-Services/" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:undeploy" />
+        </exec>
+
+        <exec dir="${path.microservices}/Transports/Transport-Services" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:undeploy" />
+        </exec>
+
+        <exec dir="${path.eis}/CreditCardWS" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:undeploy" />
+        </exec>
+
+        <exec dir="${path.eis}/SpectaclesWS" executable="${MAVEN_HOME}/mvn.cmd">
+            <arg line="jboss-as:undeploy" />
+        </exec>
+
+    </target>
+
+
+</project>
