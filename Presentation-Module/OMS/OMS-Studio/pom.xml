@@ -115,6 +115,9 @@
                 <version>2.1.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <packagingExcludes>
+                        WEB-INF/lib/spring-*.jar
+                    </packagingExcludes>
                 </configuration>
             </plugin>
             <plugin>
