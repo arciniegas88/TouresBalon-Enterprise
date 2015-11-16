@@ -48,5 +48,64 @@ public class CampaignBoundary {
         }
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void createCampaingn(Campaign campaign) throws SystemException {
+        try {
+            em.persist(campaign);
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+
+    }
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void updateCampaingn(Campaign campaign)throws SystemException{
+        try {
+            em.createNamedQuery("Campaign.update")
+                    .setParameter("NAME", campaign.getName())
+                    .setParameter("IMAGE_REF", campaign.getImageRef())
+                    .setParameter("EFFECTIVE_DATE", campaign.getEffectiveDate())
+                    .setParameter("ID", campaign.getId())
+                    .executeUpdate();
+            em.flush();
+
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void deleteCampaingn(Long id)throws SystemException{
+        try {
+            em.createNamedQuery("Campaign.delete")
+                    .setParameter("ID", id)
+                    .executeUpdate();
+            em.flush();
+
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Campaign> searchCampaignByIdProduct(Long idProduct) throws SystemException {
+        try {
+            return em.createNamedQuery("Campaign.ByIdProduct", Campaign.class)
+                    .setParameter("ID_PRODUCT", idProduct)
+                    .getResultList();
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+
+
+
+
+
 
 }

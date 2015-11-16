@@ -14,7 +14,15 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = "Campaign.findAll",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign(c.id, c.name,c.imageRef, c.product.id)  FROM Campaign c",
-                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "Campaign.update", query = "UPDATE Campaign c " +
+                           "SET c.name = :NAME, " +
+                           "c.imageRef = :IMAGE_REF, " +
+                           "c.effectiveDate = :EFFECTIVE_DATE    WHERE c.id = :ID "),
+        @NamedQuery(name = "Campaign.delete", query = "DELETE FROM Campaign c WHERE c.id = :ID "),
+        @NamedQuery(name = "Campaign.ByIdProduct",
+                query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign (c.id, c.name,c.imageRef, c.product.id) FROM Campaign c  " +
+                        "WHERE c.product.id  = :ID_PRODUCT")
 })
 public class Campaign implements Serializable {
 
@@ -41,6 +49,11 @@ public class Campaign implements Serializable {
     private Product product;
 
     public Campaign() {
+    }
+
+    public Campaign(String name, Long id) {
+        this.name = name;
+        this.id = id;
     }
 
     public Campaign(Long id ,String name, byte[] imageRef, Long productId) {
