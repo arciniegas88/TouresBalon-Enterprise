@@ -51,10 +51,40 @@
         </camel:route>
 
         <!-- search campaigns -->
+
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/campaigns?restletMethod=GET"/>
             <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/campaigns?restletMethod=GET"/>
         </camel:route>
+
+        <!-- delete campaigns -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/campaigns/delete/{id}?restletMethod=DELETE"/>
+            <camel:recipientList>
+                <camel:simple>restlet:http://{{target.jboss.location}}/Product-Services/web-api/campaigns/${header.id}?restletMethod=DELETE</camel:simple>
+            </camel:recipientList>
+        </camel:route>
+
+        <!-- get campaigns by id product-->
+
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/campaigns/byIdProduct?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/campaigns/byIdProduct?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- create campaigns -->
+
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/campaigns?restletMethod=POST"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/campaigns?restletMethod=POST"/>
+        </camel:route>
+
+        <!-- update campaigns -->
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/campaigns?restletMethod=PUT"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/campaigns?restletMethod=PUT"/>
+        </camel:route>
+
 
         <!-- get orders ranking -->
         <camel:route>
