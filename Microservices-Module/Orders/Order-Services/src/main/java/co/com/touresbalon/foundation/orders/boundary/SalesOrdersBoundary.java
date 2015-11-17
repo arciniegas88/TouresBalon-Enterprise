@@ -6,6 +6,7 @@ import co.com.touresbalon.foundation.orders.dto.Product;
 import co.com.touresbalon.foundation.orders.entity.OrderItem;
 import co.com.touresbalon.foundation.orders.entity.SalesOrder;
 import co.com.touresbalon.foundation.orders.entity.SalesOrderStatus;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -247,4 +248,121 @@ public class SalesOrdersBoundary {
             throw exceptionBuilder.buildSystemException();
         }
     }
+
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<SalesOrder> searchSalesOrder(String id, String productId,int pageIndex, int pageSize) throws SystemException {
+
+        try {
+
+            id = (id!= null && id.trim().equals("")) ? null : id;
+            productId = (productId != null && productId.trim().equals("")) ? null : productId;
+
+            if (isEmpty(id) && isEmpty(productId)) {
+                return em.createNamedQuery("SalesOrder.findAll", SalesOrder.class)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            } else if(!isEmpty(id) && isEmpty(productId)) {
+                return em.createNamedQuery("SalesOrder.findAllByCriteria", SalesOrder.class)
+                        .setParameter("ID", id)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            }else if(isEmpty(id) && !isEmpty(productId)){
+                return em.createNamedQuery("SalesOrder.findAllByProduct", SalesOrder.class)
+                        .setParameter("PRODUCTID", productId)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            }else {
+                return em.createNamedQuery("SalesOrder.findAllByIdAndProduct", SalesOrder.class)
+                        .setParameter("ID", id)
+                        .setParameter("PRODUCTID", productId)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            }
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public int countSalesOrders(String id, String productId) throws SystemException {
+        try {
+
+            id = (id != null && id.trim().equals("")) ? null : id;
+            productId = (productId != null && productId.trim().equals("")) ? null : productId;
+
+            if (isEmpty(id) && isEmpty(productId)) {
+                return em.createNamedQuery("SalesOrder.findAllCount", Long.class)
+                        .getSingleResult().intValue();
+            } else if (!isEmpty(id) && isEmpty(productId)){
+                return em.createNamedQuery("SalesOrder.findAllByCriteriaCount", Long.class)
+                        .setParameter("ID", id)
+                        .getSingleResult().intValue();
+            }else if(isEmpty(id) && !isEmpty(productId)) {
+                return em.createNamedQuery("SalesOrder.findAllByCountProduct", Long.class)
+                        .setParameter("PRODUCTID", productId)
+                        .getSingleResult().intValue();
+            }else  {
+                return em.createNamedQuery("SalesOrder.findAllByCountIdAndProduct", Long.class)
+                        .setParameter("ID", id)
+                        .setParameter("PRODUCTID", productId)
+                        .getSingleResult().intValue();
+            }
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<SalesOrder> searchSalesOrderStatus(String status,int pageIndex, int pageSize) throws SystemException {
+
+        try {
+            status = (status != null && status.trim().equals("")) ? null : status;
+            if (isEmpty(status)) {
+                return em.createNamedQuery("SalesOrder.findAll", SalesOrder.class)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            } else{
+                return em.createNamedQuery("SalesOrder.findAllByStatus", SalesOrder.class)
+                        .setParameter("STATUS", "%" + status+ "%")
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            }
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public int countSalesOrdersStatus(String status) throws SystemException {
+        try {
+
+            status = (status != null && status.trim().equals("")) ? null : status;
+
+            if (isEmpty(status)) {
+                return em.createNamedQuery("SalesOrder.findAllCount", Long.class)
+                        .getSingleResult().intValue();
+            } else  {
+                return em.createNamedQuery("SalesOrder.findAllByStatusCount", Long.class)
+                        .setParameter("STATUS", "%" + status+ "%")
+                        .getSingleResult().intValue();
+            }
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
 }

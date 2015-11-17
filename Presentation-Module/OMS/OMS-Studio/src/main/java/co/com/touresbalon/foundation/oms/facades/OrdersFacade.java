@@ -3,6 +3,8 @@ package co.com.touresbalon.foundation.oms.facades;
 import co.com.touresbalon.foundation.oms.domain.orderprocessing.CancelOrdersBPELRequest;
 import co.com.touresbalon.foundation.oms.mqclient.OrdersMQClient;
 import co.com.touresbalon.foundation.oms.webclient.OrdersWebClient;
+import co.com.touresbalon.foundation.oms.domain.orders.OrderItem;
+import co.com.touresbalon.foundation.oms.domain.orders.SalesOrder;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -32,6 +34,10 @@ public class OrdersFacade {
         return ordersWC.getRankingSoldProducts(sdf.format(startOrderDate), sdf.format(endOrderDate)).getData();
     }
 
+    public List<SalesOrder> getSalesOrderDetail(Long idSalesOrder){
+        return ordersWC.getSalesOrderDetail(idSalesOrder);
+    }
+
 
     // ------------------------------
 
@@ -39,5 +45,30 @@ public class OrdersFacade {
         ordersMQ.cancelOrder(request);
     }
 
+    public List<SalesOrder> searchSalesOrders(String id,String productId,int pageIndex,int pageSize){
+        return ordersWC.searchSalesOrders(id, productId, pageIndex, pageSize);
+    }
+
+
+    public int getTotalPagesBySalesOrdersSearch(String id,String productId){
+        String total = ordersWC.getTotalPagesBySalesOrdersSearch(id, productId);
+        return Integer.parseInt(total.replaceAll("<total>", "").replaceAll("</total>", ""));
+    }
+
+    public List<SalesOrder> searchSalesOrdersStatus(String status,int pageIndex,int pageSize){
+        return ordersWC.searchSalesOrdersStatus(status, pageIndex, pageSize);
+    }
+
+
+    public int getTotalOrderStatus(String status) {
+        String total = ordersWC.getTotalOrderStatus(status);
+        return Integer.parseInt(total.replaceAll("<total>", "").replaceAll("</total>", ""));
+    }
+
+
+
+    public List<OrderItem> getOrderItems(Long idSalesOrder){
+        return ordersWC.getOrderItems(idSalesOrder);
+    }
 
 }

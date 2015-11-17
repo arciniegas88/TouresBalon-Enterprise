@@ -22,7 +22,11 @@ import javax.xml.bind.annotation.XmlRootElement;
                 query = "UPDATE SalesOrder s SET s.status = :STATUS," +
                         "s.comments = :COMMENTS " +
                         "WHERE s.id = :ID"),
-        @NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s"),
+        //@NamedQuery(name = "SalesOrder.findAll", query = "SELECT s FROM SalesOrder s"),
+        @NamedQuery(name = "SalesOrder.findAll",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder(s.id, s.orderDate, s.price," +
+                        "s.status, s.comments, s.custDocumentNumber ,s.custDocumentType) FROM SalesOrder s ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
         @NamedQuery(name = "SalesOrder.ByCustomer",
                 query = "SELECT  NEW co.com.touresbalon.foundation.orders.entity.SalesOrder (s.id, s.orderDate,s.price, s.status, " +
                         "s.comments) FROM SalesOrder s " +
@@ -33,6 +37,47 @@ import javax.xml.bind.annotation.XmlRootElement;
                         "s.comments, s.custDocumentNumber ,s.custDocumentType) FROM SalesOrder s " +
                         "WHERE s.id=:ID_SALES_ORDER",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.findAllByCriteria",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder(s.id, s.orderDate, s.price," +
+                        "s.status, s.comments, s.custDocumentNumber, s.custDocumentType) FROM SalesOrder s WHERE " +
+                        "TRIM(s.id) = TRIM(:ID)",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
+        @NamedQuery(name = "SalesOrder.findAllByStatus",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder(s.id, s.orderDate, s.price," +
+                        "s.status, s.comments, s.custDocumentNumber, s.custDocumentType) FROM SalesOrder s WHERE " +
+                        "LOWER(s.status) LIKE TRIM(LOWER(:STATUS))",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.findAllByStatusCount",
+                query = "SELECT count(s) FROM SalesOrder s WHERE " +
+                        "LOWER(s.status) LIKE TRIM(LOWER(:STATUS))",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.findAllByIdAndProduct",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder(s.id, s.orderDate, s.price," +
+                        "s.status, s.comments, s.custDocumentNumber, s.custDocumentType) FROM SalesOrder s,OrderItem o WHERE " +
+                        "s.id = o.orderId.id AND TRIM(s.id) = TRIM(:ID) AND TRIM(o.productId) = TRIM(:PRODUCTID)",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.findAllByProduct",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder(s.id, s.orderDate, s.price," +
+                        "s.status, s.comments, s.custDocumentNumber, s.custDocumentType) FROM SalesOrder s,OrderItem o WHERE " +
+                        "s.id = o.orderId.id AND TRIM(o.productId) = TRIM(:PRODUCTID)",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.findAllCount",
+                query = "SELECT count(s) FROM SalesOrder s ",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.findAllByCriteriaCount",
+                query = "SELECT count(s) FROM SalesOrder s WHERE " +
+                        "TRIM(s.id) = TRIM(:ID)",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.findAllByCountIdAndProduct",
+                query = "SELECT count(s) FROM SalesOrder s, OrderItem o WHERE " +
+                        " s.id = o.orderId.id AND TRIM(s.id) = TRIM(:ID) AND TRIM(o.productId) = TRIM(:PRODUCTID)",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "SalesOrder.findAllByCountProduct",
+                query = "SELECT count(s) FROM SalesOrder s, OrderItem o WHERE " +
+                        " s.id = o.orderId.id AND TRIM(o.productId) = TRIM(:PRODUCTID)",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
         @NamedQuery(name ="SalesOrder.ById",
                 query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder( s.id, s.orderDate, s.price, s.status," +
                         "s.comments ) FROM SalesOrder s " +
@@ -107,6 +152,9 @@ public class SalesOrder implements Serializable {
         this.custDocumentType = custDocumentType;
         this.status = status;
     }
+
+
+
 
     public Long getId() {
         return id;

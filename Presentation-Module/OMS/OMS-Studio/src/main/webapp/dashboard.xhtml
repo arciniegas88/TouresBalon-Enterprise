@@ -18,6 +18,7 @@
             <p:remoteCommand name="productsAdminAction" update="@form" action="#{portalController.productsAdminAction}"/>
             <p:remoteCommand name="ratesAdminAction" update="@form" action="#{portalController.ratessAdminAction}"/>
             <p:remoteCommand name="searchCustomersAction" update="@form" action="#{portalController.searchCustomerAction}" />
+            <p:remoteCommand name="searchOrdersAction" update="@form" action="#{portalController.searchOrdersAction}"/>
 
             <div class="Container100">
                 <div class="ContainerIndent">
@@ -53,7 +54,7 @@
                                                target="searchProductsAction"/>
                             <custom:optionItem topClass="YellowBack White" bottomClass="White"
                                                icon="icon-server" label="Consultas Ordenes"
-                                               target="searchProductsAction"/>
+                                               target="searchOrdersAction"/>
 
 
                         </custom:operationContainer>
