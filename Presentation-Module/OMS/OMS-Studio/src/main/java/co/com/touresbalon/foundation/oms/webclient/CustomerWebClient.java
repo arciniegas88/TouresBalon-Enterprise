@@ -13,7 +13,6 @@ public interface CustomerWebClient {
 
     @GET
     @Path("/customer/{id}")
-    @Consumes(MediaType.APPLICATION_XML)
     CustomerResponseType getCustomerById(@PathParam("id") String customerId);
 
     @GET

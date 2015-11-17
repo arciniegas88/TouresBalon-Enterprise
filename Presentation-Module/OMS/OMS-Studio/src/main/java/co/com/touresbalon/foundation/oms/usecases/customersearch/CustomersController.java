@@ -1,8 +1,11 @@
 package co.com.touresbalon.foundation.oms.usecases.customersearch;
 
 import co.com.touresbalon.foundation.oms.domain.customers.CustomerType;
+import co.com.touresbalon.foundation.oms.facades.CustomerFacade;
+import org.primefaces.context.RequestContext;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -13,8 +16,15 @@ import java.io.Serializable;
 @SessionScoped
 public class CustomersController implements Serializable{
 
-    public void showCustomerDetail(CustomerType customer){
+    @Inject
+    private CustomersModel model;
 
+    @Inject
+    private CustomerFacade facade;
+
+    public void showCustomerDetail(CustomerType customer){
+        model.setCustomer(facade.getCustomerById(customer.getId()).getGetCustomerResult());
+        RequestContext.getCurrentInstance().execute("PF('customerDialog').show()");
     }
 
     public void updateCustomerDetail(CustomerType customer){

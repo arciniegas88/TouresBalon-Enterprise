@@ -1,6 +1,7 @@
 package co.com.touresbalon.foundation.oms.usecases.customersearch;
 
 import co.com.touresbalon.foundation.oms.domain.customers.CustomerType;
+import co.com.touresbalon.foundation.oms.domain.products.Product;
 import co.com.touresbalon.foundation.oms.facades.CustomerFacade;
 import co.com.touresbalon.foundation.oms.infrastructure.BeanLocator;
 import org.primefaces.model.LazyDataModel;
@@ -43,6 +44,17 @@ public class CustomersModel extends LazyDataModel<CustomerType> implements Seria
         cacheCustomers = facade.getCustomers(id, email, firts, pageSize);
 
         return cacheCustomers;
+    }
+
+    @Override
+    public CustomerType getRowData(String rowKey) {
+
+        for (CustomerType c : cacheCustomers) {
+            if (c.getId().toString().equals(rowKey))
+                return c;
+        }
+
+        return null;
     }
 
     public String getId() {

@@ -31,9 +31,13 @@
 
         <!-- Customer By ID-->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/service/web-api/customer/{id}?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/{id}?restletMethod=GET"/>
+            <camel:setBody>
+                <camel:simple>${header.id}</camel:simple>
+            </camel:setBody>
+            <camel:removeHeaders pattern="*"/>
             <camel:recipientList>
-                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/id=${header.id}?restletMethod=GET</camel:simple>
+                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/id=${body}?restletMethod=GET</camel:simple>
             </camel:recipientList>
         </camel:route>
 
@@ -52,19 +56,27 @@
             </camel:recipientList>
         </camel:route>
 
-        <!-- All Customers -->
+        <!-- Count Customers -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/count/id={id};email={email}?restletMethod=GET"/>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/count?restletMethod=GET"/>
+            <camel:removeHeaders pattern="*"/>
             <camel:recipientList>
-                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/count/id=${header.id};email=${header.email}?restletMethod=GET</camel:simple>
+                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/count?restletMethod=GET</camel:simple>
             </camel:recipientList>
         </camel:route>
 
         <!-- All Customers -->
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customers/pag={pag}/regPag={regPag}?restletMethod=GET"/>
+            <camel:setProperty propertyName="pag">
+                <simple>${header.pag}</simple>
+            </camel:setProperty>
+            <camel:setProperty propertyName="regPag">
+                <simple>${header.regPag}</simple>
+            </camel:setProperty>
+            <camel:removeHeaders pattern="*" />
             <camel:recipientList>
-                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customers/pag=${header.pag};regPag=${header.regPag}?restletMethod=GET</camel:simple>
+                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customers/pag=${property.pag};regPag=${property.regPag}?restletMethod=GET&amp;throwExceptionOnFailure=false"</camel:simple>
             </camel:recipientList>
         </camel:route>
 
