@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/template.xhtml">
+
+    <ui:define name="subheader">
+        <b>Consultas especiales sopre ordenes</b>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <style>
+            .ui-tabs-left > .ui-tabs-nav {
+                float: left;
+                width: 15%;
+                height: 300px;
+                background-image: none;
+                padding-top: 1px;
+            }
+
+            .ui-tabs-left > .ui-tabs-panels {
+                float: right;
+                width: 84%;
+            }
+        </style>
+
+        <div class="Container100 Responsive100">
+            <h:form id="formOrders">
+                <br/>
+                <p:growl showDetail="true" showSummary="false"/>
+
+                <p:tabView orientation="left" id="TVOrders">
+                    <p:tab title="Ordenes Facturacion">
+                        <ui:include src="orderSearchTotalInvoice.xhtml"/>
+                    </p:tab>
+
+                </p:tabView>
+
+                <p:dialog header="Detalle de la Orden" widgetVar="salesOrderDialog" modal="true"
+                          resizable="false" width="700">
+
+                    <p:outputPanel id="orderDetail">
+                        <div class="Container80 Responsive100">
+                            <div class="Container100">
+                                <div class="ContainerIndent">
+                                    <h:panelGrid columns="2">
+                                        <h:outputText value="Nº orden" style="font-weight: bold"/>
+                                        <h:outputText value="#{ordersModel.salesOrder.id}"/>
+                                        <h:outputText value="fecha de la Orden" style="font-weight: bold"/>
+                                        <h:outputText value="#{ordersModel.salesOrder.orderDate}">
+                                            <!--<f:convertDateTime pattern="dd-MM-yyyy"/>-->
+                                        </h:outputText>
+
+                                        <h:outputText value="Precio" style="font-weight: bold"/>
+                                        <h:outputText value="#{ordersModel.salesOrder.price}"/>
+
+                                        <h:outputText value="Estado" style="font-weight: bold"/>
+                                        <h:outputText value="#{ordersModel.salesOrder.status}"/>
+
+                                        <h:outputText value="identificacion Cliente" style="font-weight: bold"/>
+                                        <h:outputText value="#{ordersModel.salesOrder.custDocumentNumber}"/>
+
+                                        <h:outputText value="tipo de identificaion cliente" style="font-weight: bold"/>
+                                        <h:outputText value="#{ordersModel.salesOrder.custDocumentType}"/>
+                                    </h:panelGrid>
+                                    <br></br>
+                                    <div class="Container100">
+                                        <div class="ContainerIndent">
+                                            <p:dataTable var="itemOrder" value="#{ordersModel.cacheOrderItem}">
+                                                <p:column headerText="Producto">
+                                                    <h:outputText value="#{itemOrder.productId}" />
+                                                </p:column>
+                                                <p:column headerText="Nombre Producto">
+                                                    <h:outputText value="#{itemOrder.productName}" />
+                                                </p:column>
+                                                <p:column headerText="Espectaculo ">
+                                                    <h:outputText value="#{itemOrder.spectacleTicket}" />
+                                                </p:column>
+                                                <p:column headerText="Ciudad de transporte">
+                                                    <h:outputText value="#{itemOrder.transportSourceCity}" />
+                                                </p:column>
+                                            </p:dataTable>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p:outputPanel>
+                </p:dialog>
+
+
+
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

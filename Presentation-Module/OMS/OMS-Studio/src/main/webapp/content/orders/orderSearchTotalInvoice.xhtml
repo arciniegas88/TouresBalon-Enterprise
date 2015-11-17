@@ -1,0 +1,80 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card HeiAutoOnMobile" style="min-height:275px;">
+
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:commandButton value="buscar" styleClass="OrangeButton"
+                                         update="formOrders:TVOrders:ordersTableInvoice,formOrders:TVOrders:lblInvoice"
+                                         icon="fa fa-check-square-o"/>
+                        <p:commandButton value="limpiar" styleClass="OrangeButton" icon="fa fa-ban" />
+                                         <!--update="form:TVProducts:txtName, form:TVProducts:txtCoode, form:TVProducts:txtDescription, form:TVProducts:txtSpectacle"-->
+                                         <!--action="#{productsController.cleanFormAction()}"-->
+                                         <!--icon="fa fa-ban"/>-->
+                    </f:facet>
+                </p:toolbar>
+
+
+                <div class="Container100 Responsive100">
+                    <div class="ContainerIndent">
+
+                        <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                                     styleClass="FormContent">
+                            <p:inputText styleClass="Wid90" placeholder="Estado"
+                                         value="#{orderInvoiceModel.status}" id="txtEstado1"/>
+                            <p:outputLabel for="mask" value="Mask:" />
+                            <p:calendar id="mask" value="#{orderInvoiceModel.dateOrder}" pattern="yyyy-MM" mask="true" />
+
+                        </p:panelGrid>
+                        <br/>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                             styleClass="FormContent">
+                    <p:outputLabel styleClass="Orange"  value="Numero de Ordenes:"/>
+                    <p:outputLabel styleClass="Orange"  value="#{orderInvoiceModel.totalRegister}" id="lblInvoice"/>
+                </p:panelGrid>
+                <div class="Container100">
+                    <div class="ContainerIndent">
+                        <p:dataTable id="ordersTableInvoice" var="o" value="#{orderInvoiceModel}"
+                                     rows="5" paginator="true"
+                                     emptyMessage="No Orders found with given criteria"
+                                     lazy="true">
+                            <p:column headerText="N° Orden" footerText="N° Orden">
+                                <h:outputText value="#{o.id}"/>
+                            </p:column>
+                            <p:column headerText="Fecha de la Orden" footerText="Fecha de la Orden">
+                                <h:outputText value="#{o.orderDate}"/>
+                            </p:column>
+                            <p:column headerText="Precio" footerText="Precio">
+                                <h:outputText value="#{o.price}"/>
+                            </p:column>
+                            <p:column headerText="Estado" footerText="Estado">
+                                <h:outputText value="#{o.status}"/>
+                            </p:column>
+                            <p:column headerText="Comentarios" footerText="Comentarios">
+                                <h:outputText value="#{o.comments}"/>
+                            </p:column>
+                            <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
+                                                 title="Detalles" update="formOrders:orderDetail"
+                                                 action="#{ordersController.showSalesOrderDetail(o)}"/>
+                                <p:spacer width="2"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>

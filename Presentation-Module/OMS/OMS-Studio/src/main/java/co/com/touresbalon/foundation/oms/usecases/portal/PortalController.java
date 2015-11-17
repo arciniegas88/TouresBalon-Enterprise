@@ -7,6 +7,8 @@ import co.com.touresbalon.foundation.oms.usecases.productadmin.AdminProductsMode
 import co.com.touresbalon.foundation.oms.usecases.productssearch.ProductsModel;
 import co.com.touresbalon.foundation.oms.usecases.ratesadmin.RatesModel;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
+import co.com.touresbalon.foundation.oms.usecases.ordersearch.OrdersModel;
+import co.com.touresbalon.foundation.oms.facades.OrdersFacade;
 import org.primefaces.context.RequestContext;
 
 import javax.enterprise.context.RequestScoped;
@@ -26,6 +28,7 @@ public class PortalController {
     public static final String PRODUCT_SEARCH_PAGE = "/OMS-Studio/content/products/productSearch.xhtml";
     public static final String PRODUCTS_ADMIN_PAGE = "/OMS-Studio/content/productsAdmin/productAdmin.xhtml";
     private static final String CUSTOMER_SEARCH_PAGE = "/OMS-Studio/content/customers/customerSearch.xhtml";
+    public static final String ORDERS_ADMIN_PAGE = "/OMS-Studio/content/orders/ordersSearch.xhtml";
 
     @Inject
     private FacesUtil util;
@@ -39,6 +42,10 @@ public class PortalController {
     private AdminProductsModel adminProductsModel;
     @Inject
     private ProductsFacade productFacade;
+    @Inject
+    private OrdersFacade orderFacade;
+    @Inject
+    private OrdersModel ordersModel;
 
     public void ratessAdminAction() {
 
@@ -65,7 +72,7 @@ public class PortalController {
         adminProductsModel.setTargetCities(cityList);
         adminProductsModel.setTransports( productFacade.getTransports() );
         adminProductsModel.setLodgings( productFacade.getLodging() );
-        adminProductsModel.setSpectacles( productFacade.getSpectacles() );
+        adminProductsModel.setSpectacles(productFacade.getSpectacles());
 
         RequestContext.getCurrentInstance().execute( "window.location.href='"+PRODUCTS_ADMIN_PAGE+"';" );
     }
@@ -73,6 +80,12 @@ public class PortalController {
     public void searchCustomerAction(){
         productModel.cleanModel();
         RequestContext.getCurrentInstance().execute("window.location.href='" + CUSTOMER_SEARCH_PAGE + "';");
+    }
+
+
+    public void searchOrdersAction() {
+        ordersModel.cleanModel();
+        RequestContext.getCurrentInstance().execute("window.location.href='" + ORDERS_ADMIN_PAGE + "';");
     }
 
 }
