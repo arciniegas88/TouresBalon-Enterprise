@@ -1,6 +1,10 @@
 package co.com.touresbalon.foundation.oms.security;
 
 
+import co.com.touresbalon.foundation.oms.domain.security.User;
+import co.com.touresbalon.foundation.oms.exceptions.BusinessException;
+import co.com.touresbalon.foundation.oms.exceptions.SystemException;
+import co.com.touresbalon.foundation.oms.facades.SecurityFacade;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
@@ -27,6 +31,9 @@ public class LoginController {
     @Inject
     private LoginModel model;
 
+    @Inject
+    private SecurityFacade facade;
+
     //-----------------------------------
 
     // [constructor] ---------------------------------
@@ -38,11 +45,16 @@ public class LoginController {
     
     public String login(){
 
-        if(StringUtils.equals( model.getUser().getLogin(),"admin" ) && StringUtils.equals( model.getUser().getPassword(),"admin" )){
+        try {
+
+            User local = facade.login( model.getUser() );
             model.setAuthenticated(true);
+            model.setUser( local );
+
             return util.redirect("/dashboard.xhtml");
-        }else{
-            util.addErrorMessage("Usuario o clave incorrectas");
+
+        } catch (BusinessException | SystemException e) {
+            util.addErrorMessage( e.getMessage() );
             return "";
         }
 

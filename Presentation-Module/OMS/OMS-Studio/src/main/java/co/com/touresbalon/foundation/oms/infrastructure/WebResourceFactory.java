@@ -6,10 +6,14 @@ import co.com.touresbalon.foundation.oms.webclient.PartnerServicesWebClient;
 import co.com.touresbalon.foundation.oms.webclient.ProductsWebClient;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
+import org.apache.http.client.methods.HttpPost;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Singleton;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 
 /**
  * Created by garciniegas on 05/10/2015.
@@ -17,6 +21,23 @@ import javax.inject.Singleton;
 
 @ApplicationScoped
 public class WebResourceFactory {
+
+    //----------------------------------
+
+    @Produces
+    private HttpPost createSecurityPOSTResourceClient(){
+
+        StringBuilder endpoint = new StringBuilder();
+        endpoint.append("http://")
+                .append(System.getProperty("touresbalon.locations.esb.security"))
+                .append("/esb/services/web-api/security/login");
+
+        HttpPost post = new HttpPost( endpoint.toString() );
+        post.addHeader("Accept", "application/xml");
+        post.addHeader("Content-Type", "application/xml");
+        return post;
+    }
+
 
     //----------------------------------
 
