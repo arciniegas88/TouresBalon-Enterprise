@@ -1,6 +1,7 @@
 package co.com.touresbalon.foundation.oms.infrastructure;
 
 import co.com.touresbalon.foundation.oms.webclient.CustomerWebClient;
+import co.com.touresbalon.foundation.oms.webclient.CampaignWebClient;
 import co.com.touresbalon.foundation.oms.webclient.OrdersWebClient;
 import co.com.touresbalon.foundation.oms.webclient.PartnerServicesWebClient;
 import co.com.touresbalon.foundation.oms.webclient.ProductsWebClient;
@@ -103,6 +104,20 @@ public class WebResourceFactory {
                 .append(System.getProperty("touresbalon.locations.esb.customers"))
                 .append("/esb/services/web-api");
         CustomerWebClient client = JAXRSClientFactory.create(endpoint.toString(), CustomerWebClient.class);
+        return client;
+    }
+
+    //----------------------------------
+
+    @Produces
+    @Singleton
+    private CampaignWebClient createCampaignRestClient(){
+
+        StringBuilder endpoint = new StringBuilder();
+        endpoint.append("http://")
+                .append(System.getProperty("touresbalon.locations.esb.products"))
+                .append("/esb/services/web-api");
+        CampaignWebClient client = JAXRSClientFactory.create(endpoint.toString(), CampaignWebClient.class);
         return client;
     }
 

@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Date;
 
 
 /**
@@ -42,7 +43,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class Campaign {
 
     @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar effectiveDate;
+    protected Date effectiveDate;
     protected Long id;
     protected byte[] imageRef;
     protected String name;
@@ -56,7 +57,7 @@ public class Campaign {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getEffectiveDate() {
+    public Date getEffectiveDate() {
         return effectiveDate;
     }
 
@@ -68,7 +69,7 @@ public class Campaign {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setEffectiveDate(XMLGregorianCalendar value) {
+    public void setEffectiveDate(Date value) {
         this.effectiveDate = value;
     }
 

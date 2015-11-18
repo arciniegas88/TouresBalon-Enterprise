@@ -6,6 +6,7 @@ import co.com.touresbalon.foundation.oms.exceptions.BusinessException;
 import co.com.touresbalon.foundation.oms.exceptions.SystemException;
 import co.com.touresbalon.foundation.oms.facades.OrdersFacade;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
+import co.com.touresbalon.foundation.oms.usecases.campaingnadmin.AdminCampaingnModel;
 import co.com.touresbalon.foundation.oms.usecases.portal.PortalController;
 import co.com.touresbalon.foundation.oms.usecases.productadmin.AdminProductsModel;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
@@ -41,6 +42,9 @@ public class ProductsController {
     @Inject
     private OrdersFacade ordersFacade;
 
+    @Inject
+    private AdminCampaingnModel adminCampaingnModel;
+
     //[action] ------------------
 
     public void showProductLinkDetail( String product  ) {
@@ -66,7 +70,6 @@ public class ProductsController {
 
         RequestContext.getCurrentInstance().execute( "window.location.href='"+ PortalController.PRODUCTS_ADMIN_PAGE+"';" );
     }
-
 
     //[action] ------------------
 
@@ -114,6 +117,9 @@ public class ProductsController {
         RequestContext.getCurrentInstance().execute("PF('productDialog').show()");
     }
 
+
+
+
     //[action] ------------------
     public void spectaclesRankingAction() {
         model.setSpectaclesRanking(facade.getRankingSoldOrders(model.getSpectacleRankingSD(), model.getSpectacleRankingED()));
@@ -140,6 +146,12 @@ public class ProductsController {
     public void cleanFormSpectacleRankingAction() {
         model.setSpectacleRankingED(new Date());
         model.setSpectacleRankingSD(new Date());
+    }
+
+    public void adminCompaign( Product product){
+        adminCampaingnModel.setListCampaigns(facade.searchCampaignByIdProduct(product.getId()));
+        adminCampaingnModel.setProduct(product);
+        RequestContext.getCurrentInstance().execute( "window.location.href='"+ PortalController.CAMPAIGN_ADMIN_PAGE+"';" );
     }
 
 

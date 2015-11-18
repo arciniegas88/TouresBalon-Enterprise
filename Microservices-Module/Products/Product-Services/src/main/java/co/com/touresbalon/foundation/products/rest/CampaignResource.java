@@ -55,7 +55,6 @@ public class CampaignResource {
     }
 
     // [search campaign filter by name service] -------------------------------
-
     @GET
     @Path("/byIdProduct")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

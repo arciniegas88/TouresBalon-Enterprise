@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/template.xhtml">
+
+    <ui:define name="subheader">
+        <b>Administración de Campañas</b>
+    </ui:define>
+
+    <ui:define name="content">
+        <style>
+            .ui-right-col {
+                float: left;
+                width: 70%;
+            }
+
+            .ui-left-col {
+                text-align: right;
+                width: 30%;
+            }
+        </style>
+
+        <div class="Container100 Responsive100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                    <h:form id="form" enctype="multipart/form-data">
+                        <p:growl showDetail="true" showSummary="false"/>
+
+                        <div class="Container100 Responsive100">
+                            <div class="ContainerIndent">
+                                <h2 class="BigTopic" style="font-weight:bold;">Administración de Campañas</h2>
+                                <br/>
+
+                                <p:dataTable id="campaignTable" var="c" value="#{adminCampaingnModel.listCampaigns}"
+                                             rows="5" paginator="true"
+                                             emptyMessage="No campaigns found with given criteria"
+                                             lazy="true">
+
+                                    <p:column headerText="Nombre" footerText="Nombre">
+                                        <h:outputText value="#{c.name}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Fecha" footerText="Fecha" style="text-align: center;">
+                                        <h:outputText value="#{c.effectiveDate}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+
+
+                                    <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
+                                        <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
+                                                         title="Detalles" update="@form"
+                                                         action="#{adminCampaingnController.showProductDetail(p)}"/>
+                                        <p:spacer width="2"/>
+                                        <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
+                                                         title="Editar" update="@form"
+                                                         action="#{adminCampaingnController.updateProduct(p)}"/>
+                                        <p:spacer width="2"/>
+                                        <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                         title="Eliminar" update="@form"
+                                                         action="#{adminCampaingnController.deleteProduct(p)}"/>
+
+                                    </p:column>
+
+                                </p:dataTable>
+
+
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

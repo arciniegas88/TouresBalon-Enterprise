@@ -21,7 +21,7 @@ import java.util.Date;
                            "c.effectiveDate = :EFFECTIVE_DATE    WHERE c.id = :ID "),
         @NamedQuery(name = "Campaign.delete", query = "DELETE FROM Campaign c WHERE c.id = :ID "),
         @NamedQuery(name = "Campaign.ByIdProduct",
-                query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign (c.id, c.name,c.imageRef, c.product.id) FROM Campaign c  " +
+                query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign (c.id, c.name, c.effectiveDate, c.product.id) FROM Campaign c  " +
                         "WHERE c.product.id  = :ID_PRODUCT")
 })
 public class Campaign implements Serializable {
@@ -60,6 +60,14 @@ public class Campaign implements Serializable {
         this.id = id;
         this.name = name;
         this.imageRef = imageRef;
+        product = new Product();
+        product.setId(productId);
+    }
+
+    public Campaign(Long id, String name, Date effectiveDate, Long productId) {
+        this.id = id;
+        this.name = name;
+        this.effectiveDate = effectiveDate;
         product = new Product();
         product.setId(productId);
     }

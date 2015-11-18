@@ -61,9 +61,6 @@
                                 <h:outputText value="$#{p.spectacleType.name}"/>
                             </p:column>
 
-                            <p:column headerText="Precio" footerText="Precio" style="text-align: center;">
-                                <h:outputText value="$#{p.price}"/>
-                            </p:column>
 
                             <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
@@ -77,6 +74,10 @@
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
                                                  title="Eliminar" update="@form"
                                                  action="#{productsController.deleteProduct(p)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                 title="Campañas" update="@form"
+                                                 action="#{productsController.adminCompaign(p)}" />
                             </p:column>
 
                         </p:dataTable>
