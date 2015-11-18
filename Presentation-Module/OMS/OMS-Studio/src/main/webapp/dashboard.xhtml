@@ -28,38 +28,43 @@
 
                             <custom:optionItem topClass="RedBack SoftRed" bottomClass="SoftRed"
                                                icon="icon-build" label="Admin. Productos"
-                                               target="productsAdminAction"/>
+                                               target="productsAdminAction"
+                                               rendered="#{loginModel.user.roleStore.adminProducts}"/>
 
                             <custom:optionItem topClass="YellowBack White" bottomClass="White"
                                                icon="icon-attach_money" label="Admin. Tarifas"
-                                               target="ratesAdminAction"/>
+                                               target="ratesAdminAction"
+                                               rendered="#{loginModel.user.roleStore.adminRates}"/>
 
                             <custom:optionItem topClass="OrangeBack SoftOrange" bottomClass="SoftOrange"
                                                icon="icon-assignment" label="Consultas Productos"
-                                               target="searchProductsAction"/>
+                                               target="searchProductsAction"
+                                               rendered="#{loginModel.user.roleStore.productSearch}"/>
 
                             <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
                                                icon="icon-camera" label="Admin. Campanas"
-                                               target="searchProductsAction"/>
+                                               target="searchProductsAction"
+                                               rendered="#{loginModel.user.roleStore.adminCampigns}"/>
 
                             <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen"
                                                icon="icon-group_add" label="Admin. Clientes"
-                                               target="customersAdminAction"/>
+                                               target="customersAdminAction"
+                                               rendered="#{loginModel.user.roleStore.adminCustomer}"/>
 
                             <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple"
                                                icon="icon-contacts" label="Consultas Clientes"
-                                               target="searchCustomersAction"/>
+                                               target="searchCustomersAction"
+                                               rendered="#{loginModel.user.roleStore.customerSearch}"/>
 
                             <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
                                                icon="icon-cancel" label="Cancelar Ordenes"
-                                               target="searchProductsAction"/>
+                                               target="searchProductsAction"
+                                               rendered="#{loginModel.user.roleStore.orderCancel}"/>
 
                             <custom:optionItem topClass="YellowBack White" bottomClass="White"
                                                icon="icon-server" label="Consultas Ordenes"
-                                               target="searchProductsAction"
+                                               target="searchOrdersAction"
                                                rendered="#{loginModel.user.roleStore.orderSearch}"/>
-
-
 
                         </custom:operationContainer>
 
