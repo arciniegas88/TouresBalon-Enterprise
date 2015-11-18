@@ -28,6 +28,7 @@ public class PortalController {
     public static final String PRODUCT_SEARCH_PAGE = "/OMS-Studio/content/products/productSearch.xhtml";
     public static final String PRODUCTS_ADMIN_PAGE = "/OMS-Studio/content/productsAdmin/productAdmin.xhtml";
     private static final String CUSTOMER_SEARCH_PAGE = "/OMS-Studio/content/customers/customerSearch.xhtml";
+    private static final String CUSTOMER_ADMIN_PAGE = "/OMS-Studio/content/customersAdmin/customerAdmin.xhtml";
     public static final String ORDERS_ADMIN_PAGE = "/OMS-Studio/content/orders/ordersSearch.xhtml";
     public static final String CAMPAIGN_ADMIN_PAGE = "/OMS-Studio/content/campaignAdmin/campaignAdmin.xhtml";
 
@@ -87,6 +88,11 @@ public class PortalController {
     public void searchOrdersAction() {
         ordersModel.cleanModel();
         RequestContext.getCurrentInstance().execute("window.location.href='" + ORDERS_ADMIN_PAGE + "';");
+    }
+
+    public void customersAdminAction(){
+        adminProductsModel.setCreationFlow(true);
+        RequestContext.getCurrentInstance().execute("window.location.href='" + CUSTOMER_ADMIN_PAGE + "';");
     }
 
 }

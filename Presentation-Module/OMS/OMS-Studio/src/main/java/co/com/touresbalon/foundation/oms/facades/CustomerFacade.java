@@ -33,4 +33,9 @@ public class CustomerFacade implements Serializable{
     public CustomerResponseType getCustomerById(String id){
         return customerWC.getCustomerById(id);
     }
+
+    public void deleteCustomer(String id){
+        customerWC.delete(id);
+    }
+
 }

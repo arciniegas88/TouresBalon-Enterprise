@@ -3,7 +3,6 @@ package co.com.touresbalon.foundation.oms.usecases.productssearch;
 import co.com.touresbalon.foundation.oms.domain.products.Product;
 import co.com.touresbalon.foundation.oms.facades.ProductsFacade;
 import co.com.touresbalon.foundation.oms.infrastructure.BeanLocator;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.primefaces.model.StreamedContent;

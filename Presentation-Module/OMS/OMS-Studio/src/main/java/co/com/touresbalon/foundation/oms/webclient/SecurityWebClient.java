@@ -109,7 +109,7 @@ public class SecurityWebClient {
     private boolean evaluateRole( String xpath, String message )throws Exception{
 
         String result = xPath.compile(xpath).evaluate(new InputSource(new StringReader(message)));
-        return StringUtils.equals( result,"true" );
+        return StringUtils.equals( result,"TRUE" );
     }
 
 }

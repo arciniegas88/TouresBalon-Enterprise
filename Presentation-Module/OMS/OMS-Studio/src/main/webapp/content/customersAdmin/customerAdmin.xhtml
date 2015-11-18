@@ -35,26 +35,9 @@
                                              styleClass="FormContent" columnClasses="ui-left-col,ui-right-col">
 
                                     <p:outputLabel for="txtName" value="Nombre"/>
-                                    <p:inputText id="txtName" value="#{adminProductsModel.product.name}"
+                                    <p:inputText id="txtName" value="#{adminCustomerModel.customer.firstName}"
                                                  style="width:100%;" required="true" maxlength="50"
-                                                 disabled="#{not adminProductsModel.creationFlow}"/>
-
-
-                                    <p:outputLabel for="txtCode" value="Código"/>
-                                    <p:inputText id="txtCode" value="#{adminProductsModel.product.code}"
-                                                 style="width:100%;" required="true" maxlength="20"
-                                                 disabled="#{not adminProductsModel.creationFlow}"/>
-
-
-                                    <p:outputLabel for="txtPrecio" value="Precio"/>
-                                    <p:inputText id="txtPrecio" value="#{adminProductsModel.product.price}"
-                                                 style="width:100%;" required="true"/>
-
-
-                                    <p:outputLabel for="txtdescription" value="Descripción"/>
-                                    <p:inputTextarea id="txtdescription"
-                                                     value="#{adminProductsModel.product.description}"
-                                                     style="width:100%;" required="true"/>
+                                                 disabled="#{not adminCustomerModel.creationFlow}"/>
 
                                 </p:panelGrid>
 
@@ -65,40 +48,7 @@
                                 <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
                                              styleClass="FormContent" columnClasses="ui-left-col,ui-right-col">
 
-                                    <p:outputLabel for="cbxSourceCountry" value="Pais origen"/>
-                                    <p:selectOneMenu id="cbxSourceCountry" style="width:87%;"
-                                                     value="#{adminProductsModel.countrySource}">
-                                        <f:selectItems value="#{adminProductsModel.countries}" var="item"
-                                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
-                                        <p:ajax update="form:cbxSourceCity"
-                                                listener="#{adminProductsController.loadSourceCities()}"/>
-                                    </p:selectOneMenu>
 
-
-                                    <p:outputLabel for="cbxSourceCity" value="Ciudad origen"/>
-                                    <p:selectOneMenu id="cbxSourceCity" style="width:87%;"
-                                                     value="#{adminProductsModel.product.sourceCity.id}">
-                                        <f:selectItems value="#{adminProductsModel.sourceCities}" var="item"
-                                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
-                                    </p:selectOneMenu>
-
-
-                                    <p:outputLabel for="cbxTargetCountry" value="Pais destino"/>
-                                    <p:selectOneMenu id="cbxTargetCountry" style="width:87%;"
-                                                     value="#{adminProductsModel.countryTarget}">
-                                        <f:selectItems value="#{adminProductsModel.countries}" var="item"
-                                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
-                                        <p:ajax update="form:cbxTargetCity"
-                                                listener="#{adminProductsController.loadTargetCities()}"/>
-                                    </p:selectOneMenu>
-
-
-                                    <p:outputLabel for="cbxTargetCity" value="Ciudad destino"/>
-                                    <p:selectOneMenu id="cbxTargetCity" style="width:87%;"
-                                                     value="#{adminProductsModel.product.targetCity.id}">
-                                        <f:selectItems value="#{adminProductsModel.targetCities}" var="item"
-                                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
-                                    </p:selectOneMenu>
 
 
                                 </p:panelGrid>
@@ -110,85 +60,18 @@
                         <div class="Container100 Responsive100">
                             <div class="ContainerIndent">
 
-                                <h2 class="BigTopic" style="font-weight:bold;">Detalles de dirección</h2>
+                                <h2 class="BigTopic" style="font-weight:bold;">Direccion</h2>
                                 <br/>
 
-                                <p:dataTable id="transportTable" var="p" value="#{adminProductsModel.transports}"
+                                <p:dataTable id="transportTable" var="c" value="#{adminCustomerModel.customer.address}"
                                              rows="5" paginator="true"
                                              paginatorPosition="bottom"
                                              selectionMode="single"
-                                             selection="#{adminProductsModel.product.transportType}"
-                                             rowKey="#{p.id}"
+                                             rowKey="#{c.id}"
                                              emptyMessage="No registries found with given criteria">
 
-                                    <p:column headerText="Proveedor">
-                                        <h:outputText value="#{p.businessProvider}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Nombre" style="text-align: center;">
-                                        <h:outputText value="#{p.name}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Fecha" style="text-align: center;">
-                                        <h:outputText value="#{p.travelDate}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                        </h:outputText>
-                                    </p:column>
-
-                                    <p:column headerText="Precio" style="text-align: center;">
-                                        <h:outputText value="$#{p.cost}"/>
-                                    </p:column>
-
-                                </p:dataTable>
-
-
-                                <br/>
-                                <h2 class="BigTopic" style="font-weight:bold;">Detalles de alojamiento</h2>
-                                <br/>
-
-                                <p:dataTable id="lodgingTable" var="p" value="#{adminProductsModel.lodgings}"
-                                             rows="5" paginator="true"
-                                             paginatorPosition="bottom"
-                                             selectionMode="single"
-                                             selection="#{adminProductsModel.product.lodgingType}"
-                                             rowKey="#{p.id}"
-                                             emptyMessage="No registries found with given criteria">
-
-                                    <p:column headerText="Nombre/Proveedor" style="text-align: center;">
-                                        <h:outputText value="#{p.name}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Precio" style="text-align: center;">
-                                        <h:outputText value="$#{p.cost}"/>
-                                    </p:column>
-
-                                </p:dataTable>
-
-
-                                <br/>
-                                <h2 class="BigTopic" style="font-weight:bold;">Detalles del espectáculo</h2>
-                                <br/>
-
-                                <p:dataTable id="spectacleTable" var="p" value="#{adminProductsModel.spectacles}"
-                                             rows="5" paginator="true"
-                                             paginatorPosition="bottom"
-                                             selectionMode="single"
-                                             selection="#{adminProductsModel.product.spectacleType}"
-                                             rowKey="#{p.id}"
-                                             emptyMessage="No registries found with given criteria">
-
-                                    <p:column headerText="Nombre" style="text-align: center;">
-                                        <h:outputText value="#{p.name}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Fecha" style="text-align: center;">
-                                        <h:outputText value="#{p.spectacleDate}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                        </h:outputText>
-                                    </p:column>
-
-                                    <p:column headerText="Precio" style="text-align: center;">
-                                        <h:outputText value="$#{p.cost}"/>
+                                    <p:column headerText="Ciudad">
+                                        <h:outputText value="#{c.city}"/>
                                     </p:column>
 
                                 </p:dataTable>
@@ -197,17 +80,17 @@
 
                                 <p:toolbar>
                                     <f:facet name="right">
-                                        <p:commandButton value="#{adminProductsModel.creationFlow ? 'crear':'actualizar'}" styleClass="OrangeButton"
-                                                         action="#{adminProductsController.createProduct()}"
+                                        <p:commandButton value="#{adminCustomerModel.creationFlow ? 'crear':'actualizar'}" styleClass="OrangeButton"
+                                                         action="#{adminCustomerContoller.createCustomer()}"
                                                          update="@form"
                                                          icon="fa fa-check-square-o"/>
                                         <p:commandButton value="limpiar" styleClass="OrangeButton"
-                                                         action="#{adminProductsController.cleanForm()}"
-                                                         update="@form" rendered="#{adminProductsModel.creationFlow}"
+                                                         action="#{adminCustomerContoller.cleanForm()}"
+                                                         update="@form" rendered="#{adminCustomerModel.creationFlow}"
                                                          icon="fa fa-ban"/>
                                         <p:commandButton value="cancelar" styleClass="OrangeButton"
                                                          action="#{facesUtil.redirect('/content/products/productSearch.xhtml')}"
-                                                         update="@form" rendered="#{not adminProductsModel.creationFlow}"
+                                                         update="@form" rendered="#{not adminCustomerModel.creationFlow}"
                                                          icon="fa fa-ban"/>
                                     </f:facet>
                                 </p:toolbar>

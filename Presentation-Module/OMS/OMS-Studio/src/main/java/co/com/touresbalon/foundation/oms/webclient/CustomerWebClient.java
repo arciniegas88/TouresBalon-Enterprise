@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 public interface CustomerWebClient {
 
     @GET
-    @Path("/customer/{id}")
+    @Path("/customerById/{id}")
     CustomerResponseType getCustomerById(@PathParam("id") String customerId);
 
     @GET
