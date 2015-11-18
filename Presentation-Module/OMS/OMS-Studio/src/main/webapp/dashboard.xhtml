@@ -45,6 +45,7 @@
                             <custom:optionItem topClass="GreenBack SoftGreen" bottomClass="SoftGreen"
                                                icon="icon-group_add" label="Admin. Clientes"
                                                target="customersAdminAction"/>
+
                             <custom:optionItem topClass="PurpleBack SoftPurple" bottomClass="SoftPurple"
                                                icon="icon-contacts" label="Consultas Clientes"
                                                target="searchCustomersAction"/>
@@ -52,9 +53,12 @@
                             <custom:optionItem topClass="GrayBack SoftGray" bottomClass="SoftGray"
                                                icon="icon-cancel" label="Cancelar Ordenes"
                                                target="searchProductsAction"/>
+
                             <custom:optionItem topClass="YellowBack White" bottomClass="White"
                                                icon="icon-server" label="Consultas Ordenes"
-                                               target="searchOrdersAction"/>
+                                               target="searchProductsAction"
+                                               rendered="#{loginModel.user.roleStore.orderSearch}"/>
+
 
 
                         </custom:operationContainer>

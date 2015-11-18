@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
  * @author javeriana
  */
 
-
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +26,19 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String userGroup;
+    private RoleStore roleStore;
+
+    public User() {
+        roleStore = new RoleStore();
+    }
+
+    public RoleStore getRoleStore() {
+        return roleStore;
+    }
+
+    public void setRoleStore(RoleStore roleStore) {
+        this.roleStore = roleStore;
+    }
 
     public String getLogin() {
         return login;

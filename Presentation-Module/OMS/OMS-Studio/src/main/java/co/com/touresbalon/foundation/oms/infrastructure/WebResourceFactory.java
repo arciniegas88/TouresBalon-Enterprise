@@ -25,7 +25,7 @@ public class WebResourceFactory {
     //----------------------------------
 
     @Produces
-    private HttpPost createSecurityPOSTResourceClient(){
+    public HttpPost createSecurityPOSTResourceClient(){
 
         StringBuilder endpoint = new StringBuilder();
         endpoint.append("http://")
@@ -33,8 +33,6 @@ public class WebResourceFactory {
                 .append("/esb/services/web-api/security/login");
 
         HttpPost post = new HttpPost( endpoint.toString() );
-        post.addHeader("Accept", "application/xml");
-        post.addHeader("Content-Type", "application/xml");
         return post;
     }
 
