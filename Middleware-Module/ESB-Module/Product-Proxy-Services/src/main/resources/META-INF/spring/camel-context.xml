@@ -72,6 +72,15 @@
             <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/campaigns/byIdProduct?restletMethod=GET"/>
         </camel:route>
 
+
+        <!-- get campaigns by id campaigns-->
+
+        <camel:route>
+            <camel:from uri="restlet:http://localhost:{{http.esb.products.service.port}}/esb/services/web-api/campaigns/byIdCampaign?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Product-Services/web-api/campaigns/byIdCampaign?restletMethod=GET"/>
+        </camel:route>
+
+
         <!-- create campaigns -->
 
         <camel:route>

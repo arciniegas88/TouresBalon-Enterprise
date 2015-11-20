@@ -15,6 +15,8 @@ import java.util.Date;
         @NamedQuery(name = "Campaign.findAll",
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign(c.id, c.name,c.imageRef, c.product.id)  FROM Campaign c",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+        @NamedQuery(name = "Campaign.findById",
+                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign(c.id, c.name, c.effectiveDate,c.imageRef, c.product.id) FROM Campaign c WHERE c.id =:ID"),
         @NamedQuery(name = "Campaign.update", query = "UPDATE Campaign c " +
                            "SET c.name = :NAME, " +
                            "c.imageRef = :IMAGE_REF, " +
@@ -24,6 +26,9 @@ import java.util.Date;
                 query = "SELECT NEW co.com.touresbalon.foundation.products.entity.Campaign (c.id, c.name, c.effectiveDate, c.product.id) FROM Campaign c  " +
                         "WHERE c.product.id  = :ID_PRODUCT")
 })
+
+@TableGenerator(name="CAMPAIGN_SEQ_GEN",table="virtual_sequences", pkColumnName="gen_key", valueColumnName="gen_value",
+        pkColumnValue="CAMPAIGN_SEQ",allocationSize=1)
 public class Campaign implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,6 +36,7 @@ public class Campaign implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CAMPAIGN_SEQ_GEN")
     private Long id;
 
     @Column(name = "name")
@@ -68,6 +74,15 @@ public class Campaign implements Serializable {
         this.id = id;
         this.name = name;
         this.effectiveDate = effectiveDate;
+        product = new Product();
+        product.setId(productId);
+    }
+
+    public Campaign(Long id, String name, Date effectiveDate, byte[] imageRef, Long productId) {
+        this.id = id;
+        this.name = name;
+        this.effectiveDate = effectiveDate;
+        this.imageRef = imageRef;
         product = new Product();
         product.setId(productId);
     }

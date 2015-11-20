@@ -1,10 +1,7 @@
 
 package co.com.touresbalon.foundation.oms.domain.products;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Date;
 
@@ -32,6 +29,7 @@ import java.util.Date;
  * 
  * 
  */
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "campaign", propOrder = {
     "effectiveDate",
@@ -167,4 +165,18 @@ public class Campaign {
         this.product = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Campaign campaign = (Campaign) o;
+
+        return id.equals(campaign.id);
+
+    }
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

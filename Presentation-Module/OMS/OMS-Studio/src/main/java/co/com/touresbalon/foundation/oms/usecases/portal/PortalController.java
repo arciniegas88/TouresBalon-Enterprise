@@ -31,6 +31,9 @@ public class PortalController {
     private static final String CUSTOMER_ADMIN_PAGE = "/OMS-Studio/content/customersAdmin/customerAdmin.xhtml";
     public static final String ORDERS_ADMIN_PAGE = "/OMS-Studio/content/orders/ordersSearch.xhtml";
     public static final String CAMPAIGN_ADMIN_PAGE = "/OMS-Studio/content/campaignAdmin/campaignAdmin.xhtml";
+    public static final String CAMPAIGN_UPDATE_PAGE = "/OMS-Studio/content/campaignAdmin/campaignUpdate.xhtml";
+    public static final String CAMPAIGN_CREATE_PAGE = "/OMS-Studio/content/campaignAdmin/campaignCreate.xhtml";
+
 
     @Inject
     private FacesUtil util;

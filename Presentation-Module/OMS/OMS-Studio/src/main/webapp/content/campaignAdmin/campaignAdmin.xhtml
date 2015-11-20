@@ -51,21 +51,56 @@
 
                                     <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
                                         <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
-                                                         title="Detalles" update="@form"
-                                                         action="#{adminCampaingnController.showProductDetail(p)}"/>
+                                                         title="Detalles" update="form:campaignDetail"
+                                                         action="#{adminCampaingnController.showCampaignDetail(c)}"/>
                                         <p:spacer width="2"/>
                                         <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
                                                          title="Editar" update="@form"
-                                                         action="#{adminCampaingnController.updateProduct(p)}"/>
+                                                         action="#{adminCampaingnController.showCampaignUpdate(c)}"/>
                                         <p:spacer width="2"/>
                                         <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
                                                          title="Eliminar" update="@form"
-                                                         action="#{adminCampaingnController.deleteProduct(p)}"/>
+                                                         action="#{adminCampaingnController.deleteCampaign(c)}"/>
 
                                     </p:column>
 
                                 </p:dataTable>
 
+                                <p:dialog header="Detalle del Campañas" widgetVar="campaignDialog" modal="true"
+                                          resizable="false" width="700">
+
+                                    <p:outputPanel id="campaignDetail">
+
+                                        <div class="Container50 Responsive100">
+                                            <div class="Container100">
+                                                <div class="ContainerIndent">
+                                                    <p:graphicImage value="#{adminCampaingnModel.campaignImage}" cache="false" width="300"
+                                                                    height="300"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="Container50 Responsive100">
+
+                                            <div class="Container100">
+                                                <div class="ContainerIndent">
+                                                    <h:panelGrid columns="2" rendered="#{not empty adminCampaingnModel.campaign}">
+
+                                                        <h:outputText value="Nombre" style="font-weight: bold"/>
+                                                        <h:outputText value="#{adminCampaingnModel.campaign.name}"/>
+
+                                                        <h:outputText value="Fecha de Vigencia" style="font-weight: bold"/>
+                                                        <h:outputText value="#{adminCampaingnModel.campaign.effectiveDate}">
+                                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                        </h:outputText>
+
+                                                        <h:outputText value="Producto" style="font-weight: bold"/>
+                                                        <h:outputText value="#{adminCampaingnModel.product.name}"/>
+                                                    </h:panelGrid>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </p:outputPanel>
+                                </p:dialog>
 
                             </div>
                         </div>

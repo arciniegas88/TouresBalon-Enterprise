@@ -38,4 +38,8 @@ public interface CampaignWebClient {
     public List<Campaign> searchCampaignByIdProduct(@QueryParam("idProduct") Long idProduct);
 
 
+    @GET
+    @Path("/byIdCampaign")
+    @Consumes({ MediaType.APPLICATION_XML})
+    public Campaign searchCampaignById(@QueryParam("idCampaign")Long idCampaign);
 }

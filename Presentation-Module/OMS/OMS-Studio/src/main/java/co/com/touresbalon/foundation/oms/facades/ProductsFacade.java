@@ -161,4 +161,8 @@ public class ProductsFacade {
         return campaignWC.searchCampaignByIdProduct(idProduct);
     }
 
+    public Campaign searchCampaignById(Long idCampaign){
+        return campaignWC.searchCampaignById(idCampaign);
+    }
+
 }

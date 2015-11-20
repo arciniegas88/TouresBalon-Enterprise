@@ -16,6 +16,7 @@ import java.util.List;
 @SessionScoped
 public class AdminProductsModel implements Serializable{
 
+
     private boolean creationFlow;
     private Product product;
     private List<Country> countries;

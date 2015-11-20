@@ -48,6 +48,21 @@ public class CampaignBoundary {
         }
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public Campaign searchCampaignById(Long idCampaign) throws SystemException {
+
+        try {
+            return em.createNamedQuery("Campaign.findById", Campaign.class)
+                    .setParameter("ID",idCampaign)
+                    .getSingleResult();
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+
+
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void createCampaingn(Campaign campaign) throws SystemException {
         try {

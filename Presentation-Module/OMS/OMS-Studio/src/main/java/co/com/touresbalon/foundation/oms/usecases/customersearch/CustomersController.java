@@ -29,6 +29,7 @@ public class CustomersController implements Serializable{
         RequestContext.getCurrentInstance().execute("PF('customerDialog').show()");
     }
 
+
     public void updateCustomerDetail(CustomerType customer){
 
     }

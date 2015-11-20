@@ -151,8 +151,16 @@ public class ProductsController {
     public void adminCompaign( Product product){
         adminCampaingnModel.setListCampaigns(facade.searchCampaignByIdProduct(product.getId()));
         adminCampaingnModel.setProduct(product);
-        RequestContext.getCurrentInstance().execute( "window.location.href='"+ PortalController.CAMPAIGN_ADMIN_PAGE+"';" );
+        RequestContext.getCurrentInstance().execute("window.location.href='" + PortalController.CAMPAIGN_ADMIN_PAGE + "';");
     }
+
+
+    public void createCampaign(Product product){
+        adminCampaingnModel.setProduct(product);
+        RequestContext.getCurrentInstance().execute("window.location.href='" + PortalController.CAMPAIGN_CREATE_PAGE + "';");
+    }
+
+
 
 
 }

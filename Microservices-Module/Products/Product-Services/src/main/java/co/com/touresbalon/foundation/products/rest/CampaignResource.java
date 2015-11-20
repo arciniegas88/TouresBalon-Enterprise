@@ -62,4 +62,11 @@ public class CampaignResource {
         return boundary.searchCampaignByIdProduct(idProduct);
     }
 
+    @GET
+    @Path("/byIdCampaign")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Campaign searchCampaignById(@QueryParam("idCampaign")Long idCampaign) throws SystemException{
+        return boundary.searchCampaignById(idCampaign);
+    }
+
 }

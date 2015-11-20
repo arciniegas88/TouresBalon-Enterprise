@@ -78,6 +78,10 @@
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
                                                  title="Campañas" update="@form"
                                                  action="#{productsController.adminCompaign(p)}" />
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                 title="Crear Campañas" update="@form"
+                                                 action="#{productsController.createCampaign(p)}" />
                             </p:column>
 
                         </p:dataTable>
