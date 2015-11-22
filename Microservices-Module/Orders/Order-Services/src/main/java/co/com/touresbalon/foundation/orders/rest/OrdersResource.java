@@ -49,13 +49,11 @@ public class OrdersResource {
 
     @GET
     @Path("/generateOrderId")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces("text/plain")
     public Response generateSalesOrderId() throws SystemException {
         Long idSalesOrder =boundary.generateSalesOrderId();
-        return Response.status(200).entity("{idOrder: "+ idSalesOrder +"}").build();
-
+        return Response.status(200).entity(idSalesOrder).build();
     }
-
 
     @GET
     @Path("/orderItems/{idSalesOrder}")

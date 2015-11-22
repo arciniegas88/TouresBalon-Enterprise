@@ -66,7 +66,10 @@
         <property name="configuration" ref="jmsConfig"/>
     </bean>
 
-    <bean id="bodyProcessor" class="co.com.foundation.middleware.processor.BodyProcessor"/>
+    <bean id="bodyProcessor" class="co.com.foundation.middleware.processor.BodyProcessor">
+        <property name="endpoint" value="http://${target.jboss.location}/Order-Services/web-api/orders/generateOrderId"/>
+        <property name="factory" ref="jmsConnectionFactory"/>
+    </bean>
 
     <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
 
@@ -74,17 +77,14 @@
             <camel:from uri="activemq:queue:MQ-ProcessOrderRequest?jmsMessageType=Text"/>
 
             <camel:convertBodyTo type="java.lang.String"/>
-            <camel:log message="1-------${body}" />
             <camel:process ref="bodyProcessor"/>
-            <camel:log message="2-------${body}" />
 
             <setHeader headerName="soapAction">
                 <constant>process</constant>
             </setHeader>
 
-          <!--  <camel:to uri="file://C:/touresbalon?fileName=salida.xml"/> -->
             <camel:to uri="cxf:bean:ProcessOrderService?dataFormat=PAYLOAD"/>
-
+            <!--<camel:to uri="file://C:/touresbalon?fileName=salida.xml"/>-->
         </camel:route>
 
         <camel:route>
