@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using B2C.Contracts;
 using Apache.NMS;
 using Apache.NMS.ActiveMQ;
+using Apache.NMS.ActiveMQ.Commands;
 
 namespace B2C.Handlers
 {
@@ -44,13 +45,28 @@ namespace B2C.Handlers
             return HandlerRequest.session.GetQueue(queue);
         }
 
-        public void doMessage(String message, String queue)
+        public String doMessage(String message, String queue, String response)
         {
+            String correlation_id = Guid.NewGuid().ToString();
+
             HandlerRequest.createConnection();
             using (IMessageProducer producer = HandlerRequest.session.CreateProducer(this.getDestination(queue)))
             {
                 var message_sent = producer.CreateTextMessage(message);
+                message_sent.NMSCorrelationID = correlation_id;
                 producer.Send(message_sent);
+            }
+
+            IDestination dest = session.GetQueue(response);
+
+            string selector = "JMSCorrelationID = '<correlation_id>'";
+            selector = selector.Replace("<correlation_id>", correlation_id);
+            
+            using (IMessageConsumer consumer = session.CreateConsumer(dest, selector))
+            {
+                IMessage advisory = consumer.Receive(TimeSpan.FromMilliseconds(2000));
+                ActiveMQTextMessage amqMsg = advisory as ActiveMQTextMessage;
+                return amqMsg.Text;
             }
         }
 

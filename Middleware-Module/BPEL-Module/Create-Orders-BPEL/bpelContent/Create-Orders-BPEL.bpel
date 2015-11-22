@@ -289,32 +289,8 @@
                     </bpel:to>
                 </bpel:copy>
             </bpel:assign>
-            <bpel:assign validate="no" name="Assign-input-error">
-                <bpel:copy>
-                    <bpel:from>
-                        <bpel:literal>
-                            <tns:orderProcessingErrorRequest xmlns:tns="http://touresbalon.com.co/auditor/service/entity/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                                <tns:oderId>0</tns:oderId>
-                                <tns:comments>Comentarios</tns:comments>
-                                <tns:orderRequest>tns:orderRequest</tns:orderRequest>
-                            </tns:orderProcessingErrorRequest>
-                        </bpel:literal>
-                    </bpel:from>
-                    <bpel:to variable="orderProccesingErrorInput" part="payload"></bpel:to>
-                </bpel:copy>
-                <bpel:copy>
-                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-
-
-                        <![CDATA[$input.payload]]>
-                    </bpel:from>
-                    <bpel:to part="payload" variable="orderProccesingErrorInput">
-                        <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                            <![CDATA[error:orderRequest]]></bpel:query>
-                    </bpel:to>
-                </bpel:copy>
-            </bpel:assign>
-            <bpel:invoke name="Invoke-error" partnerLink="OrderProcessingErrorWSPartnerLink" operation="pushOrder" portType="error:orderProcessingErrorPort" inputVariable="orderProccesingErrorInput"></bpel:invoke>
+            
+            
 
             <bpel:sequence name="VALIDATE_CREDIT_CARD">
                 <bpel:assign validate="no" name="Assign-Input">

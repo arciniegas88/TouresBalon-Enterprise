@@ -12,7 +12,6 @@
         </exec>
     </target>
 
-
     <target name="uninstall-oms" description="undeploy oms" >
         <exec dir="${path.oms}/" executable="${MAVEN_HOME}/mvn.cmd">
             <arg line="jboss-as:undeploy" />

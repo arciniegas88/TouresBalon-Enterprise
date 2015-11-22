@@ -59,9 +59,9 @@ namespace B2C.Controllers
             this.ini();
 
             //(Request.Params.Get("form.Franchise"), Request.Params.Get("form.Number")
-            OrderFacade.Instance.proccessOrder();
-
+            string order_id = OrderFacade.Instance.proccessOrder();
             HandlerSession.clearShoppingCar();
+            ViewData.Add("order_id", order_id);
 
             return View();
         }

@@ -56,18 +56,19 @@ namespace B2C.Agents
             }
         }
 
-        public void proccessOrder(List<ProductCart> products)
+        public string proccessOrder(List<ProductCart> products)
         {
             String xml = HandlerXML.buildMessage(products);
 
             HandlerRequest request = new HandlerRequest();
-            request.doMessage(xml, HandlerResource.getServiceAgentLocation("queueProcessingOrder"));
+            string order_id = request.doMessage(xml, HandlerResource.getServiceAgentLocation("queueProcessingOrder"), HandlerResource.getServiceAgentLocation("queueProcessingOrderResponse"));
+            return order_id;
         }
 
         public void cancelOrder(String cancel)
         {
             HandlerRequest request = new HandlerRequest();
-            request.doMessage(cancel, HandlerResource.getServiceAgentLocation("queueCancelingOrder"));
+            request.doMessage(cancel, HandlerResource.getServiceAgentLocation("queueCancelingOrder"), "");
         }
     }
 }

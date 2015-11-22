@@ -22,6 +22,8 @@
       </serviceAgent>
       <serviceAgent name="queueProcessingOrder" location="MQ-ProcessOrderRequest">
       </serviceAgent>
+      <serviceAgent name="queueProcessingOrderResponse" location="MQ-ProcessOrderResponse">
+      </serviceAgent>
       <serviceAgent name="queueCancelingOrder" location="MQ-CancelOrderRequest">
       </serviceAgent>
 </serviceAgents>

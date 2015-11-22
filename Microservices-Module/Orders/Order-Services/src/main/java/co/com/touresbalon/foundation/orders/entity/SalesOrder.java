@@ -116,12 +116,12 @@ import javax.xml.bind.annotation.XmlRootElement;
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 
 })
-@SequenceGenerator(name="SALES_ORDER_GEN", sequenceName = "SALES_ORDER_SEQ",initialValue=1, allocationSize=1)
+/** @SequenceGenerator(name="SALES_ORDER_GEN", sequenceName = "SALES_ORDER_SEQ",initialValue=1, allocationSize=1 ) */
 public class SalesOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SALES_ORDER_GEN")
+    /** @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SALES_ORDER_GEN") **/
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;

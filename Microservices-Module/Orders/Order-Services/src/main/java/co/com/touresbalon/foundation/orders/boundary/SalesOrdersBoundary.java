@@ -174,7 +174,7 @@ public class SalesOrdersBoundary {
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Long generateSalesOrderId() throws SystemException {
-        String sql = "SELECT sequence_sales_orders.nextval FROM dual";
+        String sql = "SELECT SALES_ORDER_SEQ.NEXTVAL FROM DUAL";
         try {
             return ((BigDecimal) em.createNativeQuery(sql).getSingleResult()).longValue();
         } catch (Throwable enf) {
