@@ -67,7 +67,7 @@
 		<wsdl:port binding="tns:BusinessRulesWSServiceSoapBinding"
 			name="BusinessRulesWSPort">
 			<soap:address
-				location="http://192.168.1.35:9090/BusinessRule-Services/BusinessRulesWS" />
+				location="http://jboss-business-tier:9090/BusinessRule-Services/BusinessRulesWS" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
