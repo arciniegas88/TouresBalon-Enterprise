@@ -194,7 +194,7 @@
 	<wsdl:service name="SalesOrderWSService">
 		<wsdl:port binding="tns:SalesOrderWSServiceSoapBinding"
 			name="SalesOrderWSPort">
-			<soap:address location="http://192.168.1.35:9090/Order-Services/SalesOrderWS" />
+			<soap:address location="http://jboss-business-tier:9090/Order-Services/SalesOrderWS" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
