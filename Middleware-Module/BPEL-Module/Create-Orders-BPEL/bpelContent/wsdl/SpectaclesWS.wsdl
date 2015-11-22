@@ -163,7 +163,7 @@
 		<wsdl:port binding="tns:SpectaclesWSServiceSoapBinding"
 			name="SpectaclesWSPort">
 			<soap:address
-				location="http://localhost:9090/SpectaclesWS-1.0-SNAPSHOT/SpectaclesWS" />
+				location="http://192.168.1.35:9090/SpectaclesWS-1.0-SNAPSHOT/SpectaclesWS" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

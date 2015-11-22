@@ -2,9 +2,9 @@
 <project name="CI-Task" basedir=".">
 
     <property name="MAVEN_HOME" value="C:/desarrollo/infraestructura/apache-maven-3.3.3/bin"/>
-    <property name="path.microservices" value="C:/Users/Jenny/IdeaProjects/TouresBalon-Enterprise/Microservices-Module"/>
+    <property name="path.microservices" value="C:/Users/GustavoAdolfo/IdeaProjects/TouresBalon-Enterprise/Microservices-Module"/>
     <property name="path.eis" value="C:/Users/GustavoAdolfo/IdeaProjects/TouresBalon-Enterprise/EIS-Module"/>
-    <property name="path.oms" value="C:/Users/Jenny/IdeaProjects/TouresBalon-Enterprise/Presentation-Module/OMS/OMS-Studio"/>
+    <property name="path.oms" value="C:/Users/GustavoAdolfo/IdeaProjects/TouresBalon-Enterprise/Presentation-Module/OMS/OMS-Studio"/>
 
     <target name="install-oms" description="deploy oms" >
         <exec dir="${path.oms}/" executable="${MAVEN_HOME}/mvn.cmd">
@@ -22,7 +22,7 @@
         <echo message="------- DEPLOY ---------" />
 
         <exec dir="${path.microservices}/BusinessRules/BusinessRule-Services" executable="${MAVEN_HOME}/mvn.cmd">
-            <arg line="jboss-as:deploy" />
+            <arg line="jboss-as:deploy -Dmaven.test.skip=true" />
         </exec>
 
         <exec dir="${path.microservices}/Lodging/Lodging-Services" executable="${MAVEN_HOME}/mvn.cmd">
@@ -30,10 +30,6 @@
         </exec>
 
         <exec dir="${path.microservices}/Orders/Order-Services" executable="${MAVEN_HOME}/mvn.cmd">
-            <arg line="jboss-as:deploy" />
-        </exec>
-
-        <exec dir="${path.microservices}/Lodging/Lodging-Services" executable="${MAVEN_HOME}/mvn.cmd">
             <arg line="jboss-as:deploy" />
         </exec>
 
