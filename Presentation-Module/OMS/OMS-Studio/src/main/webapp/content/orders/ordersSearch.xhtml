@@ -32,9 +32,22 @@
                 <p:growl showDetail="true" showSummary="false"/>
 
                 <p:tabView orientation="left" id="TVOrders">
-                    <p:tab title="Ordenes Facturacion">
+                    <p:tab title="Ordenes Facturacion" id="tbOrderInvoice">
                         <ui:include src="orderSearchTotalInvoice.xhtml"/>
                     </p:tab>
+                    <p:tab title="Buscar Ordenes">
+                        <ui:include src="orderSearchFragment.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Estado Ordenes" id="tbStatusOrder">
+                        <ui:include src="orderSearchStatus.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Ranking de ordenes por precio" id="tbPriceOrder">
+                        <ui:include src="orderSearchRankingPrice.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Ranking de ordenes Abiertas" id="tbRankingOrderStatus">
+                        <ui:include src="orderSearchRankingStatus.xhtml"/>
+                    </p:tab>
+
 
                 </p:tabView>
 

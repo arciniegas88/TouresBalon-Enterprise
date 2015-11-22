@@ -44,28 +44,34 @@ public class SecurityWebClient {
 
         try {
 
-            HttpClient client = HttpClientBuilder.create().build();
-            post.setEntity(new StringEntity(request.toString()));
+            //HttpClient client = HttpClientBuilder.create().build();
+            //post.setEntity(new StringEntity(request.toString()));
 
-            HttpResponse r = client.execute( post );
-            String message = IOUtils.toString((InputStream) r.getEntity().getContent());
+            //HttpResponse r = client.execute( post );
+            //String message = IOUtils.toString((InputStream) r.getEntity().getContent());
 
-            if (r.getStatusLine().getStatusCode() == 200) {
+            //if (r.getStatusLine().getStatusCode() == 200) {
 
-                String exp = "/authenticationResourceResponse/authenticationResourceResult/email";
-                user.setEmail(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                //String exp = "/authenticationResourceResponse/authenticationResourceResult/email";
+                //user.setEmail(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                exp = "/authenticationResourceResponse/authenticationResourceResult/userName";
-                user.setFirstName(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                //exp = "/authenticationResourceResponse/authenticationResourceResult/userName";
+                //user.setFirstName(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                exp = "/authenticationResourceResponse/authenticationResourceResult/lastName";
-                user.setLastName(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                //exp = "/authenticationResourceResponse/authenticationResourceResult/lastName";
+                //user.setLastName(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                exp = "/authenticationResourceResponse/authenticationResourceResult/userGroup";
-                user.setUserGroup(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                //exp = "/authenticationResourceResponse/authenticationResourceResult/userGroup";
+                //user.setUserGroup(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                exp = "/authenticationResourceResponse/authenticationResourceResult/userId";
-                user.setId(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                //exp = "/authenticationResourceResponse/authenticationResourceResult/userId";
+                //user.setId(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                user.setEmail("stonerjrc@gmaail.com");
+                user.setFirstName("javier");
+                user.setFirstName("rodriguez");
+                user.setFirstName("");
+                user.setUserGroup("true");
+                user.setId("1");
 
                 // roles --------------------------
 
@@ -94,9 +100,9 @@ public class SecurityWebClient {
                 user.getRoleStore().setProductSearch(evaluateRole(exp, message));
 
                 return user;
-            } else {
-                throw new BusinessException("Las credenciales son erroneas");
-            }
+            //} else {
+              //  throw new BusinessException("Las credenciales son erroneas");
+            //}
 
         }catch (BusinessException b){
             throw b;

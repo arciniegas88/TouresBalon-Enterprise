@@ -11,22 +11,25 @@
 
                 <p:toolbar>
                     <f:facet name="right">
-                        <p:commandButton value="buscar" styleClass="OrangeButton" action="#{ordersController.updateValueTotal}"
-                                         update="formOrders:TVOrders:ordersTableStatus,formOrders:TVOrders:lblTotalRegister"
+                        <p:commandButton value="buscar" styleClass="OrangeButton"
+                                         update="formOrders:TVOrders:ordersTableRankingStatus"
                                          icon="fa fa-check-square-o"/>
                         <p:commandButton value="limpiar" styleClass="OrangeButton" icon="fa fa-ban"
-                                         update="formOrders:TVOrders:txtStatus"
-                                         action="#{ordersController.cleanFormStatusAction()}"/>
+                                         update="formOrders:TVOrders:txtStatusRanking"
+                                         action="#{ordersController.cleanOrderRankingStatusModel}"/>
                     </f:facet>
                 </p:toolbar>
 
 
                 <div class="Container100 Responsive100">
                     <div class="ContainerIndent">
-                        <p:inputText styleClass="Wid90" placeholder="Estado" size="30"
-                          value="#{orderStatusModel.status}" id="txtStatus"/>
 
+                        <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                                     styleClass="FormContent">
+                            <p:inputText styleClass="Wid90" placeholder="Estado"
+                                         value="#{orderRankingStatusModel.status}" id="txtStatusRanking"/>
 
+                        </p:panelGrid>
                         <br/>
                     </div>
                 </div>
@@ -34,34 +37,32 @@
                 <br/>
                 <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
                              styleClass="FormContent">
-                    <p:outputLabel styleClass="Orange"  value="Numero de Ordenes:"/>
-                    <p:outputLabel styleClass="Orange"  value="#{orderStatusModel.totalRegister}" id="lblTotalRegister"/>
                 </p:panelGrid>
                 <div class="Container100">
                     <div class="ContainerIndent">
-                        <p:dataTable id="ordersTableStatus" var="orderStatusS" value="#{orderStatusModel}"
+                        <p:dataTable id="ordersTableRankingStatus" var="oRanking" value="#{orderRankingStatusModel}"
                                      rows="5" paginator="true"
                                      emptyMessage="No Orders found with given criteria"
                                      lazy="true">
                             <p:column headerText="N° Orden" footerText="N° Orden">
-                                <h:outputText value="#{orderStatusS.id}"/>
+                                <h:outputText value="#{oRanking.id}"/>
                             </p:column>
                             <p:column headerText="Fecha de la Orden" footerText="Fecha de la Orden">
-                                <h:outputText value="#{orderStatusS.orderDate}"/>
+                                <h:outputText value="#{oRanking.orderDate}"/>
                             </p:column>
                             <p:column headerText="Precio" footerText="Precio">
-                                <h:outputText value="#{orderStatusS.price}"/>
+                                <h:outputText value="#{oRanking.price}"/>
                             </p:column>
                             <p:column headerText="Estado" footerText="Estado">
-                                <h:outputText value="#{orderStatusS.status}"/>
+                                <h:outputText value="#{oRanking.status}"/>
                             </p:column>
                             <p:column headerText="Comentarios" footerText="Comentarios">
-                                <h:outputText value="#{orderStatusS.comments}"/>
+                                <h:outputText value="#{oRanking.comments}"/>
                             </p:column>
                             <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
                                                  title="Detalles" update="formOrders:orderDetail"
-                                                 action="#{ordersController.showSalesOrderDetail(orderStatusS)}"/>
+                                                 action="#{ordersController.showSalesOrderDetail(oRanking)}"/>
                                 <p:spacer width="2"/>
                             </p:column>
                         </p:dataTable>

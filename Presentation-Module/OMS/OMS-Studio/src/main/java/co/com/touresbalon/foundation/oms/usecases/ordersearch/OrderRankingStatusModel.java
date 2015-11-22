@@ -6,7 +6,7 @@ import co.com.touresbalon.foundation.oms.infrastructure.BeanLocator;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
-
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -18,25 +18,20 @@ import java.util.Map;
  */
 @Named
 @SessionScoped
-public class OrderStatusModel extends LazyDataModel<SalesOrder> implements Serializable {
+public class OrderRankingStatusModel extends LazyDataModel<SalesOrder> implements Serializable {
 
     private String status;
     private SalesOrder salesOrder;
-    private int totalRegister;
+
 
     private List<SalesOrder> listSalesOrder;
 
-    public OrderStatusModel() {
-        OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
-        this.setTotalRegister((facade.getTotalOrderStatus("")));
-    }
 
     @Override
     public List<SalesOrder> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
         OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
-        setRowCount(facade.getTotalOrderStatus(status));
-        this.setTotalRegister(facade.getTotalOrderStatus(status));
-        listSalesOrder = facade.searchSalesOrdersStatus(status,first,pageSize);
+        setRowCount(facade.searchOrderSalesCountRankingStatus(status));
+        listSalesOrder = facade.searchOrderSalesRankingStatus(status,first,pageSize);
         return listSalesOrder;
     }
 
@@ -48,11 +43,6 @@ public class OrderStatusModel extends LazyDataModel<SalesOrder> implements Seria
             }
         }
         return null;
-    }
-
-
-    public void cleanStatusModel() {
-        status = null;
     }
 
 
@@ -73,11 +63,8 @@ public class OrderStatusModel extends LazyDataModel<SalesOrder> implements Seria
         this.salesOrder = salesOrder;
     }
 
-    public int getTotalRegister() {
-        return totalRegister;
+    public void cleanModel() {
+        status = null;
     }
 
-    public void setTotalRegister(int totalRegister) {
-        this.totalRegister = totalRegister;
-    }
 }

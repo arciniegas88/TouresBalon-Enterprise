@@ -442,4 +442,236 @@ public class SalesOrdersBoundary {
         }
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public int searchOrderSalesCountInvoice(String fecha) throws SystemException {
+        fecha = (fecha != null && fecha.trim().equals("")) ? null : fecha;
+        try {
+            if (!isEmpty(fecha)) {
+                String sql = "select count(*) from SALES_ORDER S where to_char(S.ORDER_DATE, 'yyyy-mm') = '" + fecha + "' order by S.ORDER_DATE";
+                BigDecimal value  =(BigDecimal) em.createNativeQuery(sql).getSingleResult();
+                if(value!=null) {
+                    return value.intValue();
+                }else{
+                    return 0;
+                }
+            }else{
+                return em.createNamedQuery("SalesOrder.findAllCount", Long.class)
+                        .getSingleResult().intValue();
+
+            }
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<SalesOrder> searchOrderSalesInvoice(String fecha,int pageIndex, int pageSize) throws SystemException {
+        fecha = (fecha != null && fecha.trim().equals("")) ? null : fecha;
+        List<SalesOrder> listSalesOrder = new ArrayList<>();
+        try {
+            if (!isEmpty(fecha)) {
+                String sql = "select * from SALES_ORDER S where to_char(S.ORDER_DATE, 'yyyy-mm') = '" + fecha + "' order by S.ORDER_DATE";
+                List<SalesOrder> listSales = em.createNativeQuery(sql, SalesOrder.class).setMaxResults(pageSize)
+                        .setFirstResult(pageIndex).getResultList();
+                if(!listSales.isEmpty()) {
+                    for (SalesOrder o : listSales) {
+                        SalesOrder sales = new co.com.touresbalon.foundation.orders.entity.SalesOrder(o.getId(),
+                                o.getOrderDate(), o.getPrice(),o.getStatus(), o.getComments(), o.getCustDocumentNumber()
+                                ,o.getCustDocumentType());
+                        listSalesOrder.add(sales);
+                    }
+                }
+                return listSalesOrder;
+            }else{
+                return em.createNamedQuery("SalesOrder.findAll", SalesOrder.class)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            }
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public String searchOrderSalesTotalInvoice(String fecha) throws SystemException {
+        fecha = (fecha != null && fecha.trim().equals("")) ? null : fecha;
+        try {
+            if (!isEmpty(fecha)) {
+                String sql = "select SUM(S.PRICE) as total from SALES_ORDER S where to_char(S.ORDER_DATE, 'yyyy-mm') = '" + fecha + "' order by S.ORDER_DATE";
+                BigDecimal value  =(BigDecimal) em.createNativeQuery(sql).getSingleResult();
+                if(value!=null) {
+                    return value.toString();
+                }else{
+                    return "";
+                }
+            }else{
+                String sql = "select SUM(S.PRICE) as total from SALES_ORDER S order by S.ORDER_DATE";
+                BigDecimal value  =(BigDecimal) em.createNativeQuery(sql).getSingleResult();
+                if(value!=null) {
+                    return value.toString();
+                }else{
+                    return "";
+                }
+            }
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<SalesOrder> searchOrderSalesRankingStatus(String status,int pageIndex, int pageSize) throws SystemException {
+
+        //status = (status != null && status.trim().equals("")) ? "'IN_VALIDATION','IN_BOOKING'" : "'"+status+"'";
+        if(status == null || status.equals("")){
+            status = "'IN_VALIDATION','IN_BOOKING'";
+        } else if(!status.trim().equals("")){
+            status ="'"+status+"'";
+        }
+
+
+        List<SalesOrder> listSalesOrder = new ArrayList<>();
+        try {
+
+                String sql = "select * from SALES_ORDER S where S.STATUS IN("+status+")  ORDER BY S.ORDER_DATE";
+
+            System.out.println(" la consulta de rank status es: " + sql);
+
+            List<SalesOrder> listSales = em.createNativeQuery(sql, SalesOrder.class).setMaxResults(pageSize)
+                        .setFirstResult(pageIndex).getResultList();
+                if(!listSales.isEmpty()) {
+                    for (SalesOrder o : listSales) {
+                        SalesOrder sales = new co.com.touresbalon.foundation.orders.entity.SalesOrder(o.getId(),
+                                o.getOrderDate(), o.getPrice(),o.getStatus(), o.getComments(), o.getCustDocumentNumber()
+                                ,o.getCustDocumentType());
+                        listSalesOrder.add(sales);
+                    }
+                }
+                return listSalesOrder;
+
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+
+    }
+
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public int searchOrderSalesCountRankingStatus(String status) throws SystemException {
+
+        if(status == null || status.equals("")){
+            status = "'IN_VALIDATION','IN_BOOKING'";
+        } else if(!status.trim().equals("")){
+            status ="'"+status+"'";
+        }
+        try {
+
+            String sql = "select count(*) from SALES_ORDER S where S.STATUS in("+status+")";
+
+            System.out.println(" la consulta de rank count status es: "+sql);
+
+            BigDecimal value  = (BigDecimal)  em.createNativeQuery(sql).getSingleResult();
+            if(value!=null) {
+                System.out.println(" el resultado: " + value);
+                return value.intValue();
+            }else{
+                System.out.println(" no trajo resultados: " + value);
+                return 0;
+            }
+
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+
+    }
+
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<SalesOrder> searchOrderSalesRankingPrice(String fechaInicio,String fechaFin,String status,int pageIndex, int pageSize) throws SystemException {
+
+        status = (status != null && status.trim().equals("")) ? null : "'"+status+"'";
+        fechaInicio = (fechaInicio != null && fechaInicio.trim().equals("")) ? null : fechaInicio;
+        fechaFin = (fechaFin != null && fechaFin.trim().equals("")) ? null : fechaFin;
+
+
+        String whereDate="";
+        if(fechaInicio!=null && fechaFin!=null){
+            whereDate="AND S.ORDER_DATE BETWEEN TO_DATE('"+fechaInicio+"','yyyy-MM-dd') and TO_DATE('"+fechaFin+"','yyyy-MM-dd')";
+        }
+
+
+        List<SalesOrder> listSalesOrder = new ArrayList<>();
+        try {
+
+            String sql = "SELECT * FROM SALES_ORDER S " +
+                    " WHERE S.STATUS = " + status +
+                    "" + whereDate
+                    +" ORDER BY S.PRICE DESC ";
+
+
+            System.out.println(" el sql de ranking price " + sql);
+            List<SalesOrder> listSales = em.createNativeQuery(sql, SalesOrder.class).setMaxResults(pageSize)
+                    .setFirstResult(pageIndex).getResultList();
+            if(!listSales.isEmpty()) {
+                for (SalesOrder o : listSales) {
+                    SalesOrder sales = new co.com.touresbalon.foundation.orders.entity.SalesOrder(o.getId(),
+                            o.getOrderDate(), o.getPrice(),o.getStatus(), o.getComments(), o.getCustDocumentNumber()
+                            ,o.getCustDocumentType());
+                    listSalesOrder.add(sales);
+                }
+            }
+            return listSalesOrder;
+
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+
+    }
+
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public int searchOrderSalesCountRankingPrice(String fechaInicio,String fechaFin,String status) throws SystemException {
+
+        status = (status != null && status.trim().equals("")) ? null : "'"+status+"'";
+        fechaInicio = (fechaInicio != null && fechaInicio.trim().equals("")) ? null : fechaInicio;
+        fechaFin = (fechaFin != null && fechaFin.trim().equals("")) ? null : fechaFin;
+
+
+        String whereDate="";
+        if(fechaInicio!=null && fechaFin!=null){
+            whereDate="AND S.ORDER_DATE BETWEEN TO_DATE('"+fechaInicio+"','yyyy-MM-dd') and TO_DATE('"+fechaFin+"','yyyy-MM-dd')";
+        }
+
+        try {
+
+            String sql = "SELECT count(*) FROM SALES_ORDER S " +
+                    " WHERE S.STATUS = "+status+" " +
+                    "" + whereDate;
+
+            BigDecimal value  = (BigDecimal)  em.createNativeQuery(sql).getSingleResult();
+            if(value!=null) {
+                return value.intValue();
+            }else{
+                return 0;
+            }
+
+        }catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+
+    }
+
+
+
+
 }

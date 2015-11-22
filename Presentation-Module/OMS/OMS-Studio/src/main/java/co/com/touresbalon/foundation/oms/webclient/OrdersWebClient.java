@@ -82,4 +82,52 @@ public interface OrdersWebClient {
     @Path("/countStatus")
     @Produces({MediaType.APPLICATION_XML})
     String getTotalOrderStatus(@QueryParam("status") String status);
+
+    @GET
+    @Path("/orderSalesInvoice")
+    @Produces({MediaType.APPLICATION_XML})
+    List<SalesOrder> searchSalesOrdersInvoce(@QueryParam("fecha") String fecha,
+                                                    @QueryParam("pageIndex") int pageIndex,
+                                                    @QueryParam("pageSize") int pageSize);
+
+
+    @GET
+    @Path("/orderSalesCountInvoice")
+    @Produces({MediaType.APPLICATION_XML})
+    String searchOrderSalesCountInvoice(@QueryParam("fecha") String fecha);
+
+
+    @GET
+    @Path("/orderSalesTotalInvoice")
+    @Produces({MediaType.APPLICATION_XML})
+    String searchOrderSalesTotalInvoice(@QueryParam("fecha") String fecha);
+
+    @GET
+    @Path("/orderSalesRankingStatus")
+    @Produces({MediaType.APPLICATION_XML})
+    List<SalesOrder> searchOrderSalesRankingStatus(@QueryParam("status") String status,
+                                                          @QueryParam("pageIndex") int pageIndex,
+                                                          @QueryParam("pageSize") int pageSize);
+
+    @GET
+    @Path("/orderSalesCountRankingStatus")
+    @Produces({MediaType.APPLICATION_XML})
+    String searchOrderSalesCountRankingStatus(@QueryParam("status") String status);
+
+    @GET
+    @Path("/orderSalesRankingPrice")
+    @Produces({MediaType.APPLICATION_XML})
+    List<SalesOrder> searchOrderSalesRankingPrice(@QueryParam("fechaInicio") String fechaInicio,
+                                                         @QueryParam("fechaFin") String fechaFin,
+                                                         @QueryParam("status") String status,
+                                                         @QueryParam("pageIndex") int pageIndex,
+                                                         @QueryParam("pageSize") int pageSize);
+
+    @GET
+    @Path("/orderSalesCountRankingPrice")
+    @Produces({MediaType.APPLICATION_XML})
+    String searchOrderSalesCountRankingPrice(@QueryParam("fechaInicio") String fechaInicio,
+                                                      @QueryParam("fechaFin") String fechaFin,
+                                                      @QueryParam("status") String status);
+
 }

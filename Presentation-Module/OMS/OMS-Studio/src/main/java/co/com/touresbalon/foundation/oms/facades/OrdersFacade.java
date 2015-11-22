@@ -71,4 +71,40 @@ public class OrdersFacade {
         return ordersWC.getOrderItems(idSalesOrder);
     }
 
+
+    public List<SalesOrder> searchSalesOrdersInvoice(String fecha,int pageIndex,int pageSize){
+        return ordersWC.searchSalesOrdersInvoce(fecha, pageIndex, pageSize);
+    }
+
+    public int searchOrderSalesCountInvoice(String fecha){
+        String total = ordersWC.searchOrderSalesCountInvoice(fecha);
+        return Integer.parseInt(total.replaceAll("<total>", "").replaceAll("</total>", ""));
+    }
+
+    public String searchOrderSalesTotalInvoice(String fecha){
+        return ordersWC.searchOrderSalesTotalInvoice(fecha);
+    }
+
+    public List<SalesOrder> searchOrderSalesRankingStatus(String status,int pageIndex, int pageSize){
+        return ordersWC.searchOrderSalesRankingStatus(status, pageIndex, pageSize);
+    }
+
+    public int searchOrderSalesCountRankingStatus(String status){
+        String total = ordersWC.searchOrderSalesCountRankingStatus(status);
+
+        System.out.println("esto es lo que esta retornando en base de datos facade "+total);
+        total = total.replaceAll("<total>", "").replaceAll("</total>", "");
+        //total = total.replaceAll("{total}", "").replaceAll("</total>", "");
+        return Integer.parseInt(total);
+    }
+
+    public List<SalesOrder> searchOrderSalesRankingPrice(String fechaInicio,String fechaFin,String status,int pageIndex, int pageSize) {
+        return ordersWC.searchOrderSalesRankingPrice(fechaInicio, fechaFin,status, pageIndex, pageSize);
+    }
+
+    public int searchOrderSalesCountRankingPrice(String fechaInicio,String fechaFin,String status){
+        String total = ordersWC.searchOrderSalesCountRankingPrice(fechaInicio, fechaFin, status);
+        return Integer.parseInt(total.replaceAll("<total>", "").replaceAll("</total>", ""));
+    }
+
 }

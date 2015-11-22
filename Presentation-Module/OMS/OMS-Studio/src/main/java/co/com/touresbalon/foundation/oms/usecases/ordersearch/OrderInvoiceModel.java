@@ -6,9 +6,12 @@ import co.com.touresbalon.foundation.oms.infrastructure.BeanLocator;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,31 +24,33 @@ import java.util.Map;
 @SessionScoped
 public class OrderInvoiceModel extends LazyDataModel<SalesOrder> implements Serializable {
 
-    private String status;
     private SalesOrder salesOrder;
-    private int totalRegister;
     private Date dateOrder;
-
+    private String totalFacturado;
     private List<SalesOrder> listSalesOrderInvoice;
+
+    public OrderInvoiceModel() {
+        OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        this.setTotalFacturado(df.format(new BigDecimal(facade.searchOrderSalesTotalInvoice(""))));
+    }
 
 
     @Override
     public List<SalesOrder> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
         OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
-        setRowCount(facade.getTotalOrderStatus(status));
-
-
         System.out.println("la fecha type Date  seleccionada es :" + dateOrder);
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM");
+        String dateString = "";
         if(dateOrder!=null) {
-            String fecha = formateador.format(dateOrder);
-            System.out.println("la fecha type String  seleccionada es :" + fecha);
+            dateString = formateador.format(dateOrder);
+            System.out.println("la fecha type String  seleccionada es :" + dateString);
         }
-        this.setTotalRegister(facade.getTotalOrderStatus(status));
+        setRowCount(facade.searchOrderSalesCountInvoice(dateString));
 
-        totalRegister = (facade.getTotalOrderStatus(status));
-        System.out.println("cuantos registros son :" + totalRegister);
-        listSalesOrderInvoice = facade.searchSalesOrdersStatus(status,first,pageSize);
+        totalFacturado = facade.searchOrderSalesTotalInvoice(dateString);
+        System.out.println("total facturado: " + totalFacturado);
+        listSalesOrderInvoice = facade.searchSalesOrdersInvoice(dateString,first,pageSize);
         return listSalesOrderInvoice;
     }
 
@@ -60,12 +65,8 @@ public class OrderInvoiceModel extends LazyDataModel<SalesOrder> implements Seri
     }
 
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void cleanModel() {
+        dateOrder = null;
     }
 
     public SalesOrder getSalesOrder() {
@@ -74,14 +75,6 @@ public class OrderInvoiceModel extends LazyDataModel<SalesOrder> implements Seri
 
     public void setSalesOrder(SalesOrder salesOrder) {
         this.salesOrder = salesOrder;
-    }
-
-    public int getTotalRegister() {
-        return totalRegister;
-    }
-
-    public void setTotalRegister(int totalRegister) {
-        this.totalRegister = totalRegister;
     }
 
     public Date getDateOrder() {
@@ -98,5 +91,13 @@ public class OrderInvoiceModel extends LazyDataModel<SalesOrder> implements Seri
 
     public void setListSalesOrderInvoice(List<SalesOrder> listSalesOrderInvoice) {
         this.listSalesOrderInvoice = listSalesOrderInvoice;
+    }
+
+    public String getTotalFacturado() {
+        return totalFacturado;
+    }
+
+    public void setTotalFacturado(String totalFacturado) {
+        this.totalFacturado = totalFacturado;
     }
 }
