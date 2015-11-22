@@ -1,6 +1,7 @@
 ﻿<p:CreateSalesOrderRequest xmlns:p="http://touresbalon.com.co/model/canonical/1.0.0">
   <order>
-     <comments>ORDEN PRUEBA</comments>
+    <id>DEFAULT</id>
+    <comments>ORDEN PRUEBA</comments>
      <custFirstName>ALEJANDRO</custFirstName>
      <custLastName>QUINTERO</custLastName>
      <email>alejinqm@gmail.com</email>

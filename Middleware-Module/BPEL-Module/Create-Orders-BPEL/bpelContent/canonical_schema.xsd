@@ -10,6 +10,7 @@
 
 	<xs:complexType name="SalesOrder">
 		<xs:sequence>
+			<xs:element name="id" type="xs:int" minOccurs="0" />
 			<xs:element name="comments" type="xs:string" minOccurs="0" />
 			<xs:element name="custFirstName" type="xs:string"
 				minOccurs="0" />

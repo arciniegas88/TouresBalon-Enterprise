@@ -1,13 +1,15 @@
 ﻿@{
     Layout = "~/Views/Layout/interna.cshtml";
     ViewBag.Title = "Procesado";
-}
+    
+    var order_id = (ViewData["order_id"] as string);
+ }
 
 @section content
 {
     <div class="EmptyBox100"></div>
     <div class="Container80 MarAuto Fnone">
-        <h1 class="BigTopic FontRobotoMedium">Tu orden esta siendo procesada</h1>
+        <h1 class="BigTopic FontRobotoMedium">Tu orden numero @order_id esta siendo procesada</h1>
 
         <div class="EmptyBox10"></div>
         <div class="Wid100 Fleft Responsive50 TexAlCenter">

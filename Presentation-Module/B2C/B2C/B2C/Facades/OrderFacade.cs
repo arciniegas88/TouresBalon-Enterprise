@@ -57,9 +57,10 @@ namespace B2C.Facades
             return items;
         }
 
-        public void proccessOrder()
+        public string proccessOrder()
         {
-            this.orderService.proccessOrder(HandlerSession.getProducts());
+            string order_id = this.orderService.proccessOrder(HandlerSession.getProducts());
+            return order_id;
         }
 
         public void cancelOrder(int id)

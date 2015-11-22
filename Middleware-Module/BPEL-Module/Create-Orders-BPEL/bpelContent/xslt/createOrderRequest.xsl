@@ -38,6 +38,9 @@
 	<xsl:template match="/">
 		<tns:createSalesOrder>
 			<order>
+				<id>
+					<xsl:value-of select="/ns0:CreateSalesOrderRequest/order/id" />
+				</id>
 				<comments>
 					<xsl:value-of select="/ns0:CreateSalesOrderRequest/order/comments" />
 				</comments>
