@@ -1,21 +1,21 @@
 package co.com.touresbalon.foundation.orders.rest;
 
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
+import co.com.touresbalon.foundation.crosscutting.util.RESTUtil;
 import co.com.touresbalon.foundation.orders.boundary.SalesOrdersBoundary;
 import co.com.touresbalon.foundation.orders.dto.CollectionWrapper;
+import co.com.touresbalon.foundation.orders.dto.Customer;
 import co.com.touresbalon.foundation.orders.dto.Product;
 import co.com.touresbalon.foundation.orders.entity.OrderItem;
 import co.com.touresbalon.foundation.orders.entity.SalesOrder;
-import co.com.touresbalon.foundation.crosscutting.util.RESTUtil;
 
 import javax.inject.Inject;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Date;
 import java.util.List;
-import javax.ws.rs.core.HttpHeaders;
 
 /**
  * Created by Jenny Rodriguez on 19/08/2015.
@@ -43,7 +43,7 @@ public class OrdersResource {
     @GET
     @Path("/customerOrders")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<SalesOrder>searchSalesOrderByCustomer(@QueryParam("typeDocument") String typeDocument ,@QueryParam("numberDocument") String numberDocument) throws SystemException {
+    public List<SalesOrder> searchSalesOrderByCustomer(@QueryParam("typeDocument") String typeDocument, @QueryParam("numberDocument") String numberDocument) throws SystemException {
         return boundary.searchSalesOrderByCustomer(typeDocument, numberDocument);
     }
 
@@ -51,8 +51,8 @@ public class OrdersResource {
     @Path("/generateOrderId")
     @Produces({MediaType.APPLICATION_JSON})
     public Response generateSalesOrderId() throws SystemException {
-        Long idSalesOrder =boundary.generateSalesOrderId();
-        return Response.status(200).entity("{idOrder: "+ idSalesOrder +"}").build();
+        Long idSalesOrder = boundary.generateSalesOrderId();
+        return Response.status(200).entity("{idOrder: " + idSalesOrder + "}").build();
 
     }
 
@@ -60,7 +60,7 @@ public class OrdersResource {
     @GET
     @Path("/orderItems/{idSalesOrder}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<OrderItem> getOrderItems(@PathParam("idSalesOrder")Long idSalesOrder) throws SystemException {
+    public List<OrderItem> getOrderItems(@PathParam("idSalesOrder") Long idSalesOrder) throws SystemException {
         return boundary.getOrderItems(idSalesOrder);
     }
 
@@ -75,11 +75,11 @@ public class OrdersResource {
     @GET
     @Path("/soldProducts/ranking")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public CollectionWrapper getRankingSoldProducts( @QueryParam("startOrderDate") String startOrderDate,
-                                                     @QueryParam("endOrderDate")  String endOrderDate ) throws SystemException {
+    public CollectionWrapper getRankingSoldProducts(@QueryParam("startOrderDate") String startOrderDate,
+                                                    @QueryParam("endOrderDate") String endOrderDate) throws SystemException {
 
         CollectionWrapper wrapper = new CollectionWrapper();
-        wrapper.setData( boundary.getRankingSoldProducts(startOrderDate,endOrderDate) );
+        wrapper.setData(boundary.getRankingSoldProducts(startOrderDate, endOrderDate));
 
         return wrapper;
     }
@@ -87,10 +87,10 @@ public class OrdersResource {
     @GET
     @Path("/soldProducts/occurrences/{productId}")
     @Produces({MediaType.APPLICATION_XML})
-    public Response countProductTotalOccurrences( @PathParam("productId") Long productId )throws SystemException {
+    public Response countProductTotalOccurrences(@PathParam("productId") Long productId) throws SystemException {
 
-        Long total = boundary.countTotalProductOccurrences( productId );
-        return Response.status(200).entity("<response><occurrences>"+ (total == 0 ? false : true) +"</occurrences></response>").build();
+        Long total = boundary.countTotalProductOccurrences(productId);
+        return Response.status(200).entity("<response><occurrences>" + (total == 0 ? false : true) + "</occurrences></response>").build();
     }
 
     // [search all sales Orders] -------------------------------
@@ -98,12 +98,12 @@ public class OrdersResource {
     @GET
     @Path("/orderSales")
     @Produces({MediaType.APPLICATION_XML})
-    public List<SalesOrder> searchSalesOrders( @QueryParam("id") String id,
-                                               @QueryParam("productId") String productId,
-                                               @QueryParam("pageIndex") int pageIndex,
-                                               @QueryParam("pageSize") int pageSize)throws SystemException {
+    public List<SalesOrder> searchSalesOrders(@QueryParam("id") String id,
+                                              @QueryParam("productId") String productId,
+                                              @QueryParam("pageIndex") int pageIndex,
+                                              @QueryParam("pageSize") int pageSize) throws SystemException {
 
-        return boundary.searchSalesOrder(id, productId,pageIndex, pageSize);
+        return boundary.searchSalesOrder(id, productId, pageIndex, pageSize);
     }
 
 
@@ -111,13 +111,13 @@ public class OrdersResource {
 
     @GET
     @Path("/count")
-    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public Response getTotalPagesBySalesOrdersSearch( @QueryParam("id") String id,
-                                                      @QueryParam("productId") String productId) throws SystemException {
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response getTotalPagesBySalesOrdersSearch(@QueryParam("id") String id,
+                                                     @QueryParam("productId") String productId) throws SystemException {
 
         int totalPages = boundary.countSalesOrders(id, productId);
-        String content = RESTUtil.getNegotiatedContent(headers,totalPages,"total");
-        return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
+        String content = RESTUtil.getNegotiatedContent(headers, totalPages, "total");
+        return Response.status(200).entity(content).type(RESTUtil.getAcceptedMediaType(headers)).build();
     }
 
     @GET
@@ -125,19 +125,58 @@ public class OrdersResource {
     @Produces({MediaType.APPLICATION_XML})
     public List<SalesOrder> searchSalesOrdersStatus(@QueryParam("status") String status,
                                                     @QueryParam("pageIndex") int pageIndex,
-                                                    @QueryParam("pageSize") int pageSize)throws SystemException  {
+                                                    @QueryParam("pageSize") int pageSize) throws SystemException {
 
         return boundary.searchSalesOrderStatus(status, pageIndex, pageSize);
     }
 
     @GET
     @Path("/countStatus")
-    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public Response getTotalOrderStatus( @QueryParam("status") String status) throws SystemException {
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response getTotalOrderStatus(@QueryParam("status") String status) throws SystemException {
 
         int totalPages = boundary.countSalesOrdersStatus(status);
-        String content = RESTUtil.getNegotiatedContent(headers, totalPages,"total");
-        return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
+        String content = RESTUtil.getNegotiatedContent(headers, totalPages, "total");
+        return Response.status(200).entity(content).type(RESTUtil.getAcceptedMediaType(headers)).build();
+    }
+
+    @GET
+    @Path("/salesOrder/customersProduct/count")
+    @Produces(MediaType.APPLICATION_XML)
+    public Response countCustomersByProductSold(@QueryParam("productId") String productId) throws SystemException {
+
+        int count = boundary.countCustomersByProductsSold(productId);
+        return Response.status(200).entity("<response><occurrences>" + count + "</occurrences></response>").build();
+    }
+
+    @GET
+    @Path("/salesOrder/customersProduct")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Customer> getCustomersByProductSold(@QueryParam("productId") Long productId,
+                                                    @QueryParam("pageIndex") int pageIndex,
+                                                    @QueryParam("pageSize") int pageSize) throws SystemException {
+
+        return boundary.getCustomersByProductSold(productId, pageIndex, pageSize);
+    }
+
+    @GET
+    @Path("/salesOrder/customerRanking/count")
+    @Produces(MediaType.APPLICATION_XML)
+    public Response countCustomerRanking(@QueryParam("startDate") String startDate,
+                                               @QueryParam("endDate") String endDate) throws SystemException{
+        int count = boundary.countCustomerRanking(startDate, endDate);
+        return Response.status(200).entity("<response><occurrences>" + count + "</occurrences></response>").build();
+    }
+
+    @GET
+    @Path("/salesOrder/customerRanking")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Customer> getCustomerRanking(@QueryParam("startDate") String startDate,
+                                             @QueryParam("endDate") String endDate,
+                                             @QueryParam("pageIndex") int pageIndex,
+                                             @QueryParam("pageSize") int pageSize) throws  SystemException{
+        return boundary.getCustomerRanking(startDate, endDate, pageIndex, pageSize);
+
     }
 
 }

@@ -82,8 +82,38 @@ import javax.xml.bind.annotation.XmlRootElement;
                 query = "SELECT NEW co.com.touresbalon.foundation.orders.entity.SalesOrder( s.id, s.orderDate, s.price, s.status," +
                         "s.comments ) FROM SalesOrder s " +
                         "WHERE s.id =:ID_SALES_ORDER ",
-                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 
+        @NamedQuery(name = "SalesOrder.countCustomersByProduct",
+                query = "SELECT COUNT( DISTINCT s.custDocumentNumber ) FROM SalesOrder s LEFT JOIN s.orderItemList o " +
+                        "WHERE o.productId = :PRODUCTID",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
+        @NamedQuery(name = "SalesOrder.findCustomersByProduct",
+                query = "SELECT DISTINCT NEW co.com.touresbalon.foundation.orders.dto.Customer( s.custDocumentNumber, s.custDocumentType ) " +
+                        "FROM SalesOrder s LEFT JOIN s.orderItemList o WHERE o.productId = :PRODUCTID",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
+        @NamedQuery(name = "SalesOrder.countAllCustomersByProduct",
+                query = "SELECT COUNT( DISTINCT s.custDocumentNumber ) FROM SalesOrder s LEFT JOIN s.orderItemList o",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
+        @NamedQuery(name = "SalesOrder.findAllCustomersByProduct",
+                query = "SELECT DISTINCT NEW co.com.touresbalon.foundation.orders.dto.Customer( s.custDocumentNumber, s.custDocumentType ) " +
+                        "FROM SalesOrder s LEFT JOIN s.orderItemList o",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
+        @NamedQuery(name = "SalesOrder.countCustomersRanking",
+                query = "SELECT COUNT( s.custDocumentNumber ) FROM SalesOrder s " +
+                        "WHERE s.orderDate BETWEEN :STARTDATE AND :ENDDATE GROUP BY s.custDocumentNumber, s.custDocumentType",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
+        @NamedQuery(name = "SalesOrder.findCustomersRanking",
+                query = "SELECT NEW co.com.touresbalon.foundation.orders.dto.Customer( " +
+                        "s.custDocumentNumber, s.custDocumentType, SUM( s.price ) ) " +
+                        "FROM SalesOrder s WHERE s.orderDate BETWEEN :STARTDATE AND :ENDDATE GROUP BY s.custDocumentNumber, " +
+                        "s.custDocumentType ORDER BY SUM(s.price) DESC",
+                hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})
 
 })
 @SequenceGenerator(name="SALES_ORDER_GEN", sequenceName = "SALES_ORDER_SEQ",initialValue=1, allocationSize=1)

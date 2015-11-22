@@ -112,6 +112,8 @@ public class CustomerType {
      *     
      */
     public AddressArrayType getAddress() {
+        if( null == address )
+            address = new AddressArrayType();
         return address;
     }
 

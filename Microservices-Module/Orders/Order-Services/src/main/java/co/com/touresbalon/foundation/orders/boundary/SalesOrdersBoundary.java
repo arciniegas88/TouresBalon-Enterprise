@@ -2,11 +2,11 @@ package co.com.touresbalon.foundation.orders.boundary;
 
 import co.com.touresbalon.foundation.crosscutting.exceptions.ExceptionBuilder;
 import co.com.touresbalon.foundation.crosscutting.exceptions.SystemException;
+import co.com.touresbalon.foundation.orders.dto.Customer;
 import co.com.touresbalon.foundation.orders.dto.Product;
 import co.com.touresbalon.foundation.orders.entity.OrderItem;
 import co.com.touresbalon.foundation.orders.entity.SalesOrder;
 import co.com.touresbalon.foundation.orders.entity.SalesOrderStatus;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Created by Jenny Rodriguez on 19/08/2015.
@@ -44,7 +46,7 @@ public class SalesOrdersBoundary {
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public Long countTotalProductOccurrences(Long productId)throws SystemException{
+    public Long countTotalProductOccurrences(Long productId) throws SystemException {
 
         try {
 
@@ -251,11 +253,11 @@ public class SalesOrdersBoundary {
 
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<SalesOrder> searchSalesOrder(String id, String productId,int pageIndex, int pageSize) throws SystemException {
+    public List<SalesOrder> searchSalesOrder(String id, String productId, int pageIndex, int pageSize) throws SystemException {
 
         try {
 
-            id = (id!= null && id.trim().equals("")) ? null : id;
+            id = (id != null && id.trim().equals("")) ? null : id;
             productId = (productId != null && productId.trim().equals("")) ? null : productId;
 
             if (isEmpty(id) && isEmpty(productId)) {
@@ -263,19 +265,19 @@ public class SalesOrdersBoundary {
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
                         .getResultList();
-            } else if(!isEmpty(id) && isEmpty(productId)) {
+            } else if (!isEmpty(id) && isEmpty(productId)) {
                 return em.createNamedQuery("SalesOrder.findAllByCriteria", SalesOrder.class)
                         .setParameter("ID", id)
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
                         .getResultList();
-            }else if(isEmpty(id) && !isEmpty(productId)){
+            } else if (isEmpty(id) && !isEmpty(productId)) {
                 return em.createNamedQuery("SalesOrder.findAllByProduct", SalesOrder.class)
                         .setParameter("PRODUCTID", productId)
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
                         .getResultList();
-            }else {
+            } else {
                 return em.createNamedQuery("SalesOrder.findAllByIdAndProduct", SalesOrder.class)
                         .setParameter("ID", id)
                         .setParameter("PRODUCTID", productId)
@@ -290,7 +292,6 @@ public class SalesOrdersBoundary {
     }
 
 
-
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public int countSalesOrders(String id, String productId) throws SystemException {
         try {
@@ -301,15 +302,15 @@ public class SalesOrdersBoundary {
             if (isEmpty(id) && isEmpty(productId)) {
                 return em.createNamedQuery("SalesOrder.findAllCount", Long.class)
                         .getSingleResult().intValue();
-            } else if (!isEmpty(id) && isEmpty(productId)){
+            } else if (!isEmpty(id) && isEmpty(productId)) {
                 return em.createNamedQuery("SalesOrder.findAllByCriteriaCount", Long.class)
                         .setParameter("ID", id)
                         .getSingleResult().intValue();
-            }else if(isEmpty(id) && !isEmpty(productId)) {
+            } else if (isEmpty(id) && !isEmpty(productId)) {
                 return em.createNamedQuery("SalesOrder.findAllByCountProduct", Long.class)
                         .setParameter("PRODUCTID", productId)
                         .getSingleResult().intValue();
-            }else  {
+            } else {
                 return em.createNamedQuery("SalesOrder.findAllByCountIdAndProduct", Long.class)
                         .setParameter("ID", id)
                         .setParameter("PRODUCTID", productId)
@@ -323,7 +324,7 @@ public class SalesOrdersBoundary {
 
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<SalesOrder> searchSalesOrderStatus(String status,int pageIndex, int pageSize) throws SystemException {
+    public List<SalesOrder> searchSalesOrderStatus(String status, int pageIndex, int pageSize) throws SystemException {
 
         try {
             status = (status != null && status.trim().equals("")) ? null : status;
@@ -332,9 +333,9 @@ public class SalesOrdersBoundary {
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
                         .getResultList();
-            } else{
+            } else {
                 return em.createNamedQuery("SalesOrder.findAllByStatus", SalesOrder.class)
-                        .setParameter("STATUS", "%" + status+ "%")
+                        .setParameter("STATUS", "%" + status + "%")
                         .setMaxResults(pageSize)
                         .setFirstResult(pageIndex)
                         .getResultList();
@@ -354,14 +355,90 @@ public class SalesOrdersBoundary {
             if (isEmpty(status)) {
                 return em.createNamedQuery("SalesOrder.findAllCount", Long.class)
                         .getSingleResult().intValue();
-            } else  {
+            } else {
                 return em.createNamedQuery("SalesOrder.findAllByStatusCount", Long.class)
-                        .setParameter("STATUS", "%" + status+ "%")
+                        .setParameter("STATUS", "%" + status + "%")
                         .getSingleResult().intValue();
             }
         } catch (Throwable enf) {
             logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
             throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public int countCustomersByProductsSold(String productId) throws SystemException{
+        try{
+            if (null == productId || productId.compareTo("") == 0) {
+                return em.createNamedQuery("SalesOrder.countAllCustomersByProduct", Long.class)
+                        .getSingleResult().intValue();
+            }else{
+                return em.createNamedQuery("SalesOrder.countCustomersByProduct", Long.class)
+                        .setParameter("PRODUCTID", productId)
+                        .getSingleResult().intValue();
+            }
+        }catch(Throwable enf){
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw  exceptionBuilder.buildSystemException();
+        }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Customer> getCustomersByProductSold(Long productId, int pageIndex, int pageSize) throws SystemException {
+        try {
+
+            if (null == productId || productId == 0) {
+                return em.createNamedQuery("SalesOrder.findAllCustomersByProduct", Customer.class)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            } else {
+
+                return em.createNamedQuery("SalesOrder.findCustomersByProduct", Customer.class)
+                        .setParameter("PRODUCTID", productId)
+                        .setMaxResults(pageSize)
+                        .setFirstResult(pageIndex)
+                        .getResultList();
+            }
+
+        } catch (Throwable enf) {
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public int countCustomerRanking(String startDate, String endDate) throws SystemException{
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+            return em.createNamedQuery("SalesOrder.countCustomersRanking", Long.class)
+                    .setParameter("STARTDATE", sdf.parse(startDate), TemporalType.DATE)
+                    .setParameter("ENDDATE", sdf.parse(endDate), TemporalType.DATE )
+                    .getSingleResult()
+                    .intValue();
+
+        }catch(Throwable enf){
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw exceptionBuilder.buildSystemException();
+        }
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Customer> getCustomerRanking(String startDate, String endDate, int pageIndex, int pageSize) throws SystemException{
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+            return em.createNamedQuery("SalesOrder.findCustomersRanking", Customer.class)
+                    .setParameter("STARTDATE", sdf.parse(startDate), TemporalType.DATE)
+                    .setParameter("ENDDATE", sdf.parse(endDate), TemporalType.DATE)
+                    .setFirstResult(pageIndex)
+                    .setMaxResults(pageSize)
+                    .getResultList();
+
+        }catch(Throwable enf){
+            logger.error(exceptionBuilder.getSystemErrorMessage() + " : " + enf.getMessage(), enf);
+            throw  exceptionBuilder.buildSystemException();
         }
     }
 

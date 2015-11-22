@@ -102,5 +102,29 @@
             <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/countStatus?restletMethod=GET"/>
         </camel:route>
 
+        <!-- count customersByProductsSold -->
+        <camel:route streamCache="true">
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/salesOrder/customersProduct/count?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/salesOrder/customersProduct/count?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- customersByProductsSold -->
+        <camel:route streamCache="true">
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/salesOrder/customersProduct?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/salesOrder/customersProduct?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- count customersRanking -->
+        <camel:route streamCache="true">
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/salesOrder/customerRanking/count?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/salesOrder/customerRanking/count?restletMethod=GET"/>
+        </camel:route>
+
+        <!-- customersRanking -->
+        <camel:route streamCache="true">
+            <camel:from uri="restlet:http://localhost:{{http.esb.orders.service.port}}/esb/services/web-api/orders/salesOrder/customerRanking?restletMethod=GET"/>
+            <camel:to uri="restlet:http://{{target.jboss.location}}/Order-Services/web-api/orders/salesOrder/customerRanking?restletMethod=GET"/>
+        </camel:route>
+
     </camelContext>
 </beans>

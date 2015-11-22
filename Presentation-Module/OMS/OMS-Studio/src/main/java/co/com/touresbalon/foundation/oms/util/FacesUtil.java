@@ -5,6 +5,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
 /**
  * FacesUtil -
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Named
 @ApplicationScoped
-public class FacesUtil {
+public class FacesUtil implements Serializable{
     
 	//[utility] -----------------------------------
 	
