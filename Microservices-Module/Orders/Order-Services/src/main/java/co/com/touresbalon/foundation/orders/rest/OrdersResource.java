@@ -141,6 +141,76 @@ public class OrdersResource {
         return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
     }
 
+
+    @GET
+    @Path("/orderSalesInvoice")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<SalesOrder> searchSalesOrdersInvoce(@QueryParam("fecha") String fecha,
+                                                    @QueryParam("pageIndex") int pageIndex,
+                                                    @QueryParam("pageSize") int pageSize)throws SystemException  {
+
+        return boundary.searchOrderSalesInvoice(fecha, pageIndex, pageSize);
+    }
+
+    @GET
+    @Path("/orderSalesCountInvoice")
+    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+    public Response searchOrderSalesCountInvoice(@QueryParam("fecha") String fecha)throws SystemException  {
+        int totalPages = boundary.searchOrderSalesCountInvoice(fecha);
+        String content = RESTUtil.getNegotiatedContent(headers, totalPages,"total");
+        return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
+    }
+
+    @GET
+    @Path("/orderSalesTotalInvoice")
+    @Produces({MediaType.APPLICATION_XML})
+    public String searchOrderSalesTotalInvoice(@QueryParam("fecha") String fecha)throws SystemException  {
+        return boundary.searchOrderSalesTotalInvoice(fecha);
+    }
+
+    @GET
+    @Path("/orderSalesRankingStatus")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<SalesOrder> searchOrderSalesRankingStatus(@QueryParam("status") String status,
+                                                    @QueryParam("pageIndex") int pageIndex,
+                                                    @QueryParam("pageSize") int pageSize)throws SystemException  {
+
+        return boundary.searchOrderSalesRankingStatus(status, pageIndex, pageSize);
+    }
+
+    @GET
+    @Path("/orderSalesCountRankingStatus")
+    @Produces({MediaType.APPLICATION_XML})
+    public Response searchOrderSalesCountRankingStatus(@QueryParam("status") String status)throws SystemException  {
+        int totalPages = boundary.searchOrderSalesCountRankingStatus(status);
+        System.out.println("%%%%%%% esto es el retorno de cantidad de registros:" +totalPages);
+        String content = RESTUtil.getNegotiatedContent(headers, totalPages,"total");
+        return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
+    }
+
+    @GET
+    @Path("/orderSalesRankingPrice")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<SalesOrder> searchOrderSalesRankingPrice(@QueryParam("fechaInicio") String fechaInicio,
+                                                         @QueryParam("fechaFin") String fechaFin,
+                                                         @QueryParam("status") String status,
+                                                         @QueryParam("pageIndex") int pageIndex,
+                                                         @QueryParam("pageSize") int pageSize)throws SystemException  {
+
+        return boundary.searchOrderSalesRankingPrice(fechaInicio,fechaFin,status, pageIndex, pageSize);
+    }
+
+    @GET
+    @Path("/orderSalesCountRankingPrice")
+    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+    public Response searchOrderSalesCountRankingPrice(@QueryParam("fechaInicio") String fechaInicio,
+                                                 @QueryParam("fechaFin") String fechaFin,
+                                                 @QueryParam("status") String status)throws SystemException  {
+        int totalPages = boundary.searchOrderSalesCountRankingPrice(fechaInicio, fechaFin, status);
+        String content = RESTUtil.getNegotiatedContent(headers, totalPages,"total");
+        return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
+    }
+
     @GET
     @Path("/salesOrder/customersProduct/count")
     @Produces(MediaType.APPLICATION_XML)

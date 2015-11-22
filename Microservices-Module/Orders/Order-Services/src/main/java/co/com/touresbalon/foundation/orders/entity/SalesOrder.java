@@ -62,6 +62,7 @@ import javax.xml.bind.annotation.XmlRootElement;
                         "s.status, s.comments, s.custDocumentNumber, s.custDocumentType) FROM SalesOrder s,OrderItem o WHERE " +
                         "s.id = o.orderId.id AND TRIM(o.productId) = TRIM(:PRODUCTID)",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
+
         @NamedQuery(name = "SalesOrder.findAllCount",
                 query = "SELECT count(s) FROM SalesOrder s ",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
