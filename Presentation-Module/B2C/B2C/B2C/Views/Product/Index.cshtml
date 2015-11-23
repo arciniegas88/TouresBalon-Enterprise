@@ -9,6 +9,22 @@
     var actual_page = (int)ViewData["actual_page"];
     var search = (string)ViewData["search"];
     var search_by = (string)ViewData["search_by"];
+
+    var min = actual_page;
+    var max = total_page;
+    var diff = 0;
+
+    if ((min + 10) < max)
+    {
+        max = min + 10;
+    }
+    else
+    {
+        diff = actual_page - total_page;
+        diff = 10 - diff;
+        min = actual_page - diff;
+        max = total_page;
+    }
 }
 
 @section content
@@ -22,7 +38,7 @@
 
             </div>
             <div role="navigation" class="ui-paginator ui-paginator-top ui-widget-header MarRight20">
-                @RenderPage("~/Views/Shared/paginator.cshtml", new { @action = "GetPage", @controller = "Product", @total_page = total_page, @actual_page = actual_page, @search = search, @search_by = search_by })
+                @RenderPage("~/Views/Shared/paginator.cshtml", new { @min = min, @max = max, @action = "Index", @controller = "Product", @total_page = total_page, @actual_page = actual_page, @search = search, @search_by = search_by })
             </div> 
         </div>  
             <div class="ui-datagrid-content ui-grid ui-grid-responsive MarTop40">
