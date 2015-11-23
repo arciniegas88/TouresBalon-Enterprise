@@ -100,4 +100,26 @@
         </xsd:sequence>
     </xsd:complexType>
 
+    <xsd:element name="createCustomer" type="createCustomerType" />
+    <xsd:complexType name="createCustomerType">
+        <xsd:sequence>
+            <xsd:element name="customer" type="customerType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="createCustomerResponse" type="createCustomerResponseType" />
+    <xsd:complexType name="createCustomerResponseType">
+        <xsd:sequence>
+            <xsd:element name="createCustomerResult" type="createCustomerResultType" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="createCustomerResultType">
+        <xsd:sequence>
+            <xsd:element name="code" type="xsd:string"/>
+            <xsd:element name="message" type="xsd:string"/>
+            <xsd:element name="status" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
 </xsd:schema>

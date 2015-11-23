@@ -25,12 +25,12 @@ import java.io.StringReader;
 
 public class SecurityWebClient {
 
-    private XPath xPath =  XPathFactory.newInstance().newXPath();
+    private XPath xPath = XPathFactory.newInstance().newXPath();
 
     @Inject
     private WebResourceFactory factory;
 
-    public User login( User user ) throws BusinessException, SystemException{
+    public User login(User user) throws BusinessException, SystemException {
 
         HttpPost post = factory.createSecurityPOSTResourceClient();
         post.addHeader("Accept", "application/xml");
@@ -43,35 +43,29 @@ public class SecurityWebClient {
         request.append("</authenticationResource>");
 
         try {
+            HttpClient client = HttpClientBuilder.create().build();
+            post.setEntity(new StringEntity(request.toString()));
 
-            //HttpClient client = HttpClientBuilder.create().build();
-            //post.setEntity(new StringEntity(request.toString()));
+            HttpResponse r = client.execute(post);
+            String message = IOUtils.toString((InputStream) r.getEntity().getContent());
 
-            //HttpResponse r = client.execute( post );
-            //String message = IOUtils.toString((InputStream) r.getEntity().getContent());
+            if (r.getStatusLine().getStatusCode() == 200) {
 
-            //if (r.getStatusLine().getStatusCode() == 200) {
+                String exp = "/authenticationResourceResponse/authenticationResourceResult/email";
+                user.setEmail(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                //String exp = "/authenticationResourceResponse/authenticationResourceResult/email";
-                //user.setEmail(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                exp = "/authenticationResourceResponse/authenticationResourceResult/userName";
+                user.setFirstName(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                //exp = "/authenticationResourceResponse/authenticationResourceResult/userName";
-                //user.setFirstName(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                exp = "/authenticationResourceResponse/authenticationResourceResult/lastName";
+                user.setLastName(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                //exp = "/authenticationResourceResponse/authenticationResourceResult/lastName";
-                //user.setLastName(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                exp = "/authenticationResourceResponse/authenticationResourceResult/userGroup";
+                user.setUserGroup(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                //exp = "/authenticationResourceResponse/authenticationResourceResult/userGroup";
-                //user.setUserGroup(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
+                exp = "/authenticationResourceResponse/authenticationResourceResult/userId";
+                user.setId(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
 
-                //exp = "/authenticationResourceResponse/authenticationResourceResult/userId";
-                //user.setId(xPath.compile(exp).evaluate(new InputSource(new StringReader(message))));
-                user.setEmail("stonerjrc@gmaail.com");
-                user.setFirstName("javier");
-                user.setFirstName("rodriguez");
-                user.setFirstName("");
-                user.setUserGroup("true");
-                user.setId("1");
 
                 // roles --------------------------
 
@@ -79,43 +73,43 @@ public class SecurityWebClient {
                 user.getRoleStore().setAdminCampigns(evaluateRole(exp, message));
 
                 exp = "/authenticationResourceResponse/authenticationResourceResult/adminCustomer";
-                user.getRoleStore().setAdminCustomer( evaluateRole( exp,message  ) );
+                user.getRoleStore().setAdminCustomer(evaluateRole(exp, message));
 
                 exp = "/authenticationResourceResponse/authenticationResourceResult/adminProducts";
-                user.getRoleStore().setAdminProducts(evaluateRole(exp, message  ) );
+                user.getRoleStore().setAdminProducts(evaluateRole(exp, message));
 
                 exp = "/authenticationResourceResponse/authenticationResourceResult/adminRates";
-                user.getRoleStore().setAdminRates( evaluateRole( exp,message  ) );
+                user.getRoleStore().setAdminRates(evaluateRole(exp, message));
 
                 exp = "/authenticationResourceResponse/authenticationResourceResult/customerSearch";
-                user.getRoleStore().setCustomerSearch( evaluateRole( exp,message  ) );
+                user.getRoleStore().setCustomerSearch(evaluateRole(exp, message));
 
                 exp = "/authenticationResourceResponse/authenticationResourceResult/orderCancel";
-                user.getRoleStore().setOrderCancel(evaluateRole(exp, message  ) );
+                user.getRoleStore().setOrderCancel(evaluateRole(exp, message));
 
                 exp = "/authenticationResourceResponse/authenticationResourceResult/orderSearch";
-                user.getRoleStore().setOrderSearch( evaluateRole( exp,message  ) );
+                user.getRoleStore().setOrderSearch(evaluateRole(exp, message));
 
                 exp = "/authenticationResourceResponse/authenticationResourceResult/productSearch";
                 user.getRoleStore().setProductSearch(evaluateRole(exp, message));
 
                 return user;
-            //} else {
-              //  throw new BusinessException("Las credenciales son erroneas");
-            //}
+            } else {
+                throw new BusinessException("Las credenciales son erroneas");
+            }
 
-        }catch (BusinessException b){
+        } catch (BusinessException b) {
             throw b;
-        }catch (Exception e){
-            System.out.println( e );
+        } catch (Exception e) {
+            System.out.println(e);
             throw new SystemException("Ha ocurrido un error interno en el sistema");
         }
     }
 
-    private boolean evaluateRole( String xpath, String message )throws Exception{
+    private boolean evaluateRole(String xpath, String message) throws Exception {
 
         String result = xPath.compile(xpath).evaluate(new InputSource(new StringReader(message)));
-        return StringUtils.equals( result,"TRUE" );
+        return StringUtils.equals(result, "TRUE");
     }
 
 }

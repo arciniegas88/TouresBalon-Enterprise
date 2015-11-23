@@ -32,7 +32,7 @@
                             <div class="ContainerIndent">
                                 <h2 class="BigTopic" style="font-weight:bold;">Información del Cliente</h2>
                                 <br/>
-                                <!--p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                                <p:panelGrid id="pnlMain" columns="2" layout="grid" style="border:0px !important; background:none;"
                                              styleClass="FormContent" columnClasses="ui-left-col,ui-right-col">
 
                                     <p:outputLabel for="cbxDocType" value="Tipo Documento"/>
@@ -76,7 +76,7 @@
                                 <h2 class="BigTopic" style="font-weight:bold;">Detalles de Cliente</h2>
                                 <br/>
 
-                                <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                                <p:panelGrid id="pnlDetail" columns="2" layout="grid" style="border:0px !important; background:none;"
                                              styleClass="FormContent" columnClasses="ui-left-col,ui-right-col">
 
                                     <p:outputLabel for="cbxClientStatus" value="Estado Cliente"/>
@@ -101,21 +101,22 @@
                                     </p:selectOneMenu>
 
                                     <p:outputLabel for="txtCardNumber" value="Tarjeta de crédito"/>
-                                    <p:inputText id="txtCardNumber" value="#{adminCustomerModel.customer.creditcardNumber}"
+                                    <p:inputText id="txtCardNumber"
+                                                 value="#{adminCustomerModel.customer.creditcardNumber}"
                                                  style="width:100%;" required="true" maxlength="50"
                                                  disabled="#{not adminCustomerModel.creationFlow}"/>
 
                                     <p:outputLabel for="txtPassword" value="Password"/>
-                                    <p:inputText id="txtPassword" value="#{adminCustomerModel.customer.password}"
+                                    <p:password id="txtPassword" value="#{adminCustomerModel.customer.password}"
                                                  style="width:100%;" required="true" maxlength="50"
                                                  disabled="#{not adminCustomerModel.creationFlow}"/>
 
                                     <p:outputLabel for="txtNewPassword" value="Confirmar Password"/>
-                                    <p:inputText id="txtNewPassword" value="#{adminCustomerModel.newPassword}"
+                                    <p:password id="txtNewPassword" value="#{adminCustomerModel.newPassword}"
                                                  style="width:100%;" required="true" maxlength="50"
                                                  disabled="#{not adminCustomerModel.creationFlow}"/>
 
-                                </p:panelGrid-->
+                                </p:panelGrid>
 
                                 <br/>
 
@@ -142,23 +143,23 @@
                                              rows="5" paginator="true"
                                              paginatorPosition="bottom"
                                              selectionMode="single"
-                                             rowKey="#{c.id}"
+                                             rowKey="#{a.id}"
                                              emptyMessage="No registries found with given criteria">
 
-                                    <p:column headerText="Id">
-                                        <h:outputText value="#{c.id}"/>
-                                    </p:column>
-
                                     <p:column headerText="Dirección">
-                                        <h:outputText value="#{c.street}"/>
+                                        <h:outputText value="#{a.street}"/>
                                     </p:column>
 
                                     <p:column headerText="Ciudad">
-                                        <h:outputText value="#{c.city}"/>
+                                        <h:outputText value="#{a.city}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Estado">
+                                        <h:outputText value="#{a.state}"/>
                                     </p:column>
 
                                     <p:column headerText="País">
-                                        <h:outputText value="#{c.country}"/>
+                                        <h:outputText value="#{a.country}"/>
                                     </p:column>
 
                                 </p:dataTable>
@@ -173,24 +174,24 @@
                                                 <div class="ContainerIndent">
                                                     <h:panelGrid columns="2">
 
-                                                        <p:outputLabel value="Tipo"/>
-                                                        <p:inputText id="lblAddressType"
-                                                                     value="#{adminCustomerModel.address.addressType}"
-                                                                     style="width:100%;" required="true"
-                                                                     maxlength="50"
-                                                                     disabled="#{not adminCustomerModel.creationFlow}"/>
+                                                        <p:outputLabel for="cbxAddressType" value="Tipo"/>
+                                                        <p:selectOneMenu id="cbxAddressType" style="width:87%;"
+                                                                         value="#{adminCustomerModel.address.addressType}">
+                                                            <f:selectItems value="#{adminCustomerModel.addressTypes}" var="item"
+                                                                           itemLabel="#{item}" itemValue="#{item}"/>
+                                                        </p:selectOneMenu>
 
                                                         <p:outputLabel for="lblStreet" value="Dirección"/>
                                                         <p:inputText id="lblStreet"
                                                                      value="#{adminCustomerModel.address.street}"
-                                                                     style="width:100%;" required="true"
+                                                                     style="width:100%;" required="#{adminCustomerModel.createDirection}"
                                                                      maxlength="50"
                                                                      disabled="#{not adminCustomerModel.creationFlow}"/>
 
                                                         <p:outputLabel for="lblCity" value="Ciudad"/>
                                                         <p:inputText id="lblCity"
                                                                      value="#{adminCustomerModel.address.city}"
-                                                                     style="width:100%;" required="true"
+                                                                     style="width:100%;" required="#{adminCustomerModel.createDirection}"
                                                                      maxlength="50"
                                                                      disabled="#{not adminCustomerModel.creationFlow}"/>
                                                     </h:panelGrid>
@@ -203,21 +204,21 @@
                                                         <p:outputLabel for="lblState" value="Estado"/>
                                                         <p:inputText id="lblState"
                                                                      value="#{adminCustomerModel.address.state}"
-                                                                     style="width:100%;" required="true"
+                                                                     style="width:100%;" required="#{adminCustomerModel.createDirection}"
                                                                      maxlength="50"
                                                                      disabled="#{not adminCustomerModel.creationFlow}"/>
 
                                                         <p:outputLabel for="lblCountry" value="País"/>
                                                         <p:inputText id="lblCountry"
                                                                      value="#{adminCustomerModel.address.country}"
-                                                                     style="width:100%;" required="true"
+                                                                     style="width:100%;" required="#{adminCustomerModel.createDirection}"
                                                                      maxlength="50"
                                                                      disabled="#{not adminCustomerModel.creationFlow}"/>
 
                                                         <p:outputLabel for="lblZip" value="Código ZIP"/>
                                                         <p:inputText id="lblZip"
                                                                      value="#{adminCustomerModel.address.zip}"
-                                                                     style="width:100%;" required="true"
+                                                                     style="width:100%;" required="#{adminCustomerModel.createDirection}"
                                                                      maxlength="50"
                                                                      disabled="#{not adminCustomerModel.creationFlow}"/>
 
@@ -230,7 +231,7 @@
                                                     <p:commandButton value="Crear" styleClass="OrangeButton"
                                                                      action="#{adminCustomerContoller.createDirection}"
                                                                      icon="fa fa-check-square-o"
-                                                                     update=":form:directionDetail"/>
+                                                                     update=":form:directionDetail directionTable"/>
 
                                                 </f:facet>
                                             </p:toolbar>

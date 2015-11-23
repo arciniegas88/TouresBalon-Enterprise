@@ -97,6 +97,7 @@
                 <camel:constant>application/xml</camel:constant>
             </camel:setHeader>
             <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/createCustomer?restletMethod=POST&amp;throwExceptionOnFailure=false"/>
+            <!--camel:to uri="file:///j01?fileName=request-${date:now:yyyyMMdd_hhmmss}.xml"/-->
             <camel:when>
                 <camel:xpath>//createCustomerResponse/createCustomerResult/text() = "OK"</camel:xpath>
                 <camel:setBody>
