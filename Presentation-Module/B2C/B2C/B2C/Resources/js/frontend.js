@@ -4,6 +4,8 @@
     }
 });*/
 
+//var url = 'http://127.0.0.1/B2C/';
+var url = 'http://localhost:64298';
 function showMessage(title, message)
 {
     $('body').css('overflow-y', 'hidden');
@@ -31,7 +33,7 @@ $(document).ready(function () {
         var inputEmail = $("#inputEmail").val();
         var inputPassword = $("#inputPassword").val();
         showLoading();
-        $.post("/security/login/", { email: inputEmail, password: inputPassword }, function (response) {
+        $.post( url + "/security/login/", { email: inputEmail, password: inputPassword }, function (response) {
             hideLoading();
             if (response.success)
             {
@@ -152,7 +154,7 @@ $(document).ready(function () {
             var name = $("#name_product").html();
             var cost = $("#cost_product").html();
             showMessage();
-            $.post("/shoppingcart/add", { id: id, name: name, account: account, cost: cost }, function (data) {
+            $.post( url + "/shoppingcart/add", { id: id, name: name, account: account, cost: cost }, function (data) {
                 hideLoading();
                 $("#close_lightbox").click();
                 showMessage('Carrito de compras', data.message);
@@ -178,7 +180,7 @@ $(document).ready(function () {
             var cost = $(this).attr("datacost");
 
             showLoading();
-            $.post("/shoppingcart/delete", { id: id, pos: pos }, function (data) {
+            $.post( url + "/shoppingcart/delete", { id: id, pos: pos }, function (data) {
                 hideLoading();
                 if (data.success) {
                     $("#car_item_" + id).remove();
@@ -195,9 +197,9 @@ $(document).ready(function () {
     });
 
     $('.get_pager').click(function () {
-        var url = $(this).attr("href");
+       /* var url1 = $(this).attr("href");
         showLoading();
-        $.post(url, {}, function (data) {
+        $.post(url1, {}, function (data) {
             hideLoading();
             $("#list_items").html(data);
             $(".buy").bind("click", function () {
@@ -222,7 +224,7 @@ $(document).ready(function () {
                 });
 
                 return false;
-            });
+            });*/
         });
 
         $("#pagination .disable").addClass("pager");
@@ -258,7 +260,7 @@ $(document).ready(function () {
         var temp = id.split("_");
         id = temp[1];
 
-        $.post("order/cancel/" + id, function (data) {
+        $.post( url + "/order/cancel/" + id, function (data) {
             if (data.success) {
                 showMessage("Cancelacion orden", data.message);
                 $("#close_message").click(function () {

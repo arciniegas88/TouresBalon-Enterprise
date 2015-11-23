@@ -1,19 +1,19 @@
-﻿<nav>
+﻿@{
+    var i = Page.min;
+}
+
+<nav>
     <ul class="pagination">
         <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
+            <a href="@Url.Action(@Page.action as String, @Page.controller as String, new { @page =  1, search = @Page.search, search_by = @Page.search_by })">Primer Pagina</a>
         </li>
-
-        @for (var i = 1; i <= @Page.total_page; i++)
+        @for (i = @Page.min; i <= @Page.max; i++)
         {
-            <li>@Html.ActionLink(i.ToString(), @Page.action as String, @Page.controller as String, new { @page = i, search = @Page.search, search_by = @Page.search_by }, new { @class = "get_pager" })</li>
+            <li> <a href="@Url.Action(@Page.action as String, @Page.controller as String, new { @page = i, search = @Page.search, search_by = @Page.search_by })">@i</a></li>
         }
         <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
+            <a href="@Url.Action(@Page.action as String, @Page.controller as String, new { @page =  Page.total_page, search = @Page.search, search_by = @Page.search_by })">Ultima Pagina</a>
         </li>
+
     </ul>
 </nav>

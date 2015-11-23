@@ -51,7 +51,9 @@ namespace B2C.Controllers
 
         public PartialViewResult GetPage()
         {
-            int page = Int32.Parse(Request.Params.Get("page"));
+            int page = 1;
+            if (Request.Params.Get("page") != null && !Request.Params.Get("page").Equals("page") )
+                 page = Int32.Parse(Request.Params.Get("page"));
             String search = Request.Params.Get("search");
             String search_by = Request.Params.Get("search_by");
             List < B2C.Entities.Product > items = ProductFacade.Instance.getProducts(search, search_by, page, ProductController.BY_PAGE);
