@@ -359,6 +359,16 @@
                                         <![CDATA[order/comments]]></bpel:query>
                                 </bpel:to>
                             </bpel:copy>
+                            <bpel:copy>
+                                <bpel:from>
+                                    <bpel:literal>CANCELLED</bpel:literal>
+                                </bpel:from>
+                                <bpel:to part="parameters" variable="createOrderInput">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[order/status]]>
+                                    </bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
                         </bpel:assign>
                         <bpel:invoke name="Invoke-create-order" partnerLink="SalesOrderWSPartnerLink" operation="createSalesOrder" portType="so:SalesOrderWS" inputVariable="createOrderInput" outputVariable="createOrderOutput"></bpel:invoke>
 
