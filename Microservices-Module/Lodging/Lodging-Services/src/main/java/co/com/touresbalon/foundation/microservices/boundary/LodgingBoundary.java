@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 import javax.transaction.UserTransaction;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class LodgingBoundary {
     @Resource
     private UserTransaction utx;
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public LodgingBoundary() {
 

@@ -150,7 +150,7 @@
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>7.7.Final</version>
                 <configuration>
-                    <hostname>192.168.1.48</hostname>
+                    <hostname>192.168.0.17</hostname>
                     <port>9999</port>
                     <name>OMS-Studio.war</name>
                     <username>aes</username>
