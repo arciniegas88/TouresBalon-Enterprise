@@ -43,5 +43,6 @@ public interface CustomerWebClient {
 
     @POST
     @Path("/customer/update")
+    @Consumes(MediaType.APPLICATION_XML)
     UpdateCustomerResponseType updateCustomer(UpdateCustomerType customer);
 }

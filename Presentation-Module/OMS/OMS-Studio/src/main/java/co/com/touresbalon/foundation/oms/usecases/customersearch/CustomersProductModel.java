@@ -1,0 +1,80 @@
+package co.com.touresbalon.foundation.oms.usecases.customersearch;
+
+import co.com.touresbalon.foundation.oms.domain.customers.Customer;
+import co.com.touresbalon.foundation.oms.facades.OrdersFacade;
+import co.com.touresbalon.foundation.oms.infrastructure.BeanLocator;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by harcalejo on 23/11/15.
+ */
+@Named
+@SessionScoped
+public class CustomersProductModel extends LazyDataModel<Customer> {
+
+    private Long productId;
+
+    private Customer customer;
+    private List<Customer> customers;
+
+    private List<Customer> cacheCustomers;
+
+    @Override
+    public List<Customer> load(int firts, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+        OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
+        setRowCount(facade.countCustomersByProduct(productId));
+        cacheCustomers = facade.getCustomerByProductSold(productId, firts, pageSize);
+
+        return cacheCustomers;
+    }
+
+    @Override
+    public Customer getRowData(String rowKey) {
+        for (Customer c : cacheCustomers) {
+            if (c.getCustomerId().toString().equals(rowKey)) {
+                return c;
+            }
+        }
+
+        return null;
+    }
+
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public List<Customer> getCacheCustomers() {
+        return cacheCustomers;
+    }
+
+    public void setCacheCustomers(List<Customer> cacheCustomers) {
+        this.cacheCustomers = cacheCustomers;
+    }
+}

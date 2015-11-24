@@ -1,7 +1,6 @@
 package co.com.touresbalon.foundation.oms.usecases.customersearch;
 
 import co.com.touresbalon.foundation.oms.domain.customers.CustomerType;
-import co.com.touresbalon.foundation.oms.domain.products.Product;
 import co.com.touresbalon.foundation.oms.facades.CustomerFacade;
 import co.com.touresbalon.foundation.oms.infrastructure.BeanLocator;
 import org.primefaces.model.LazyDataModel;
@@ -23,19 +22,12 @@ public class CustomersModel extends LazyDataModel<CustomerType> implements Seria
     private String id;
     private String email;
 
+    private String productId;
 
     private CustomerType customer;
     private List<CustomerType> customers;
 
     private List<CustomerType> cacheCustomers;
-
-    public CustomersModel(){
-
-    }
-
-    public void cleanFormAction(){
-
-    }
 
     @Override
     public  List<CustomerType> load(int firts, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
@@ -95,5 +87,13 @@ public class CustomersModel extends LazyDataModel<CustomerType> implements Seria
 
     public void setCacheCustomers(List<CustomerType> cacheCustomers) {
         this.cacheCustomers = cacheCustomers;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 }

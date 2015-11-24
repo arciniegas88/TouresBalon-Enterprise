@@ -1,5 +1,6 @@
 package co.com.touresbalon.foundation.oms.facades;
 
+import co.com.touresbalon.foundation.oms.domain.customers.Customer;
 import co.com.touresbalon.foundation.oms.domain.orderprocessing.CancelOrdersBPELRequest;
 import co.com.touresbalon.foundation.oms.mqclient.OrdersMQClient;
 import co.com.touresbalon.foundation.oms.webclient.OrdersWebClient;
@@ -9,6 +10,7 @@ import co.com.touresbalon.foundation.oms.domain.orders.SalesOrder;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.SystemException;
+import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -65,8 +67,6 @@ public class OrdersFacade {
         return Integer.parseInt(total.replaceAll("<total>", "").replaceAll("</total>", ""));
     }
 
-
-
     public List<OrderItem> getOrderItems(Long idSalesOrder){
         return ordersWC.getOrderItems(idSalesOrder);
     }
@@ -92,9 +92,7 @@ public class OrdersFacade {
     public int searchOrderSalesCountRankingStatus(String status){
         String total = ordersWC.searchOrderSalesCountRankingStatus(status);
 
-        System.out.println("esto es lo que esta retornando en base de datos facade "+total);
         total = total.replaceAll("<total>", "").replaceAll("</total>", "");
-        //total = total.replaceAll("{total}", "").replaceAll("</total>", "");
         return Integer.parseInt(total);
     }
 
@@ -105,6 +103,28 @@ public class OrdersFacade {
     public int searchOrderSalesCountRankingPrice(String fechaInicio,String fechaFin,String status){
         String total = ordersWC.searchOrderSalesCountRankingPrice(fechaInicio, fechaFin, status);
         return Integer.parseInt(total.replaceAll("<total>", "").replaceAll("</total>", ""));
+    }
+
+    public int countCustomersByProduct(Long productId){
+        String total = ordersWC.countCustomerByProductsSold(productId);
+        total = total.replaceAll("<response><occurrences>", "").replaceAll("</occurrences></response>", "");
+
+        return Integer.parseInt(total);
+    }
+
+    public List<Customer> getCustomerByProductSold(Long productId, int pageIndex, int pageSize){
+        return ordersWC.getCustomersByProductsSold(productId, pageIndex, pageSize);
+    }
+
+    public int countCustomersRanking(String startDate, String endDate){
+        String total = ordersWC.countCustomerRanking(startDate, endDate);
+        total = total.replaceAll("<response><occurrences>", "").replaceAll("</occurrences></response>", "");
+
+        return Integer.parseInt(total);
+    }
+
+    public List<Customer> getCustomersRanking(String startDate, String endDate, int pageIndex, int pageSize){
+        return ordersWC.getCustomerRanking(startDate, endDate, pageIndex, pageSize);
     }
 
 }

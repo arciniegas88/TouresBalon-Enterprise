@@ -1,0 +1,70 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card HeiAutoOnMobile" style="min-height:275px;">
+
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:commandButton value="buscar" styleClass="OrangeButton"
+                                         update="form:TVCustomers:customerProductTable"
+                                         icon="fa fa-check-square-o"/>
+                        <p:commandButton value="limpiar" styleClass="OrangeButton"
+                                         update="form:TVCustomers:txtId, form:TVCustomers:txtEmail"
+                                         action="#{customersController.cleanFormCustomer}"
+                                         icon="fa fa-ban"/>
+                    </f:facet>
+                </p:toolbar>
+
+
+                <div class="Container70 Responsive70">
+                    <div class="ContainerIndent">
+                            <p:inputText styleClass="Wid90" placeholder="ProductoID"
+                                         value="#{customersProductModel.productId}" id="txtProductId"/>
+                        <br/>
+                    </div>
+                </div>
+
+
+                <div class="Container100">
+                    <div class="ContainerIndent">
+                        <p:dataTable id="customerProductTable" var="c" value="#{customersProductModel}"
+                                     rows="5" paginator="true"
+                                     emptyMessage="No customers found with given criteria"
+                                     lazy="true">
+
+                            <p:column headerText="Tipo Documento" footerText="Tipo Documento">
+                                <h:outputText value="#{c.customerDocType}"/>
+                            </p:column>
+
+                            <p:column headerText="Id" footerText="Id" style="text-align: center;">
+                                <h:outputText value="#{c.customerId}"/>
+                            </p:column>
+
+                            <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
+                                                 title="Detalles" update="form:customerDetail"
+                                                 action="#{customersController.showCustomerDetail(c)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
+                                                 title="Editar" update="@form"
+                                                 action="#{customersController.updateCustomerDetail(c)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                 title="Eliminar" update="@form"
+                                                 action="#{customersController.deleteCustomer(c)}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>

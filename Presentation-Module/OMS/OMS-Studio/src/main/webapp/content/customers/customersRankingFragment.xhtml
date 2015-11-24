@@ -1,0 +1,92 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card HeiAutoOnMobile" style="min-height:275px;">
+
+                <p:toolbar>
+                    <f:facet name="right">
+                        <p:commandButton value="buscar" styleClass="OrangeButton"
+                                         update="form:TVCustomers:customerRankingTable"
+                                         icon="fa fa-check-square-o"/>
+                        <p:commandButton value="limpiar" styleClass="OrangeButton"
+                                         update="form:TVCustomers:idDateStart, form:TVCustomers:idDateFinal"
+                                         action="#{customersModel.cleanFormAction()}"
+                                         icon="fa fa-ban"/>
+                    </f:facet>
+                </p:toolbar>
+
+
+                <div class="Container70 Responsive70">
+                    <div class="ContainerIndent">
+
+                        <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;"
+                                     styleClass="FormContent">
+                            <p:outputLabel for="idDateStart" value="Fecha Inicial" />
+                            <p:outputLabel for="idDateFinal" value="FechaFinal" />
+                            <p:calendar id="idDateStart" value="#{customersRankingModel.startDate}" />
+                            <p:calendar id="idDateFinal" value="#{customersRankingModel.endDate}" />
+                            </p:panelGrid>
+                        <br/>
+                    </div>
+                </div>
+
+
+                <div class="Container100">
+                    <div class="ContainerIndent">
+                        <p:dataTable id="customerRankingTable" var="c" value="#{customersRankingModel}"
+                                     rows="5" paginator="true"
+                                     emptyMessage="No customers found with given criteria"
+                                     lazy="true">
+
+                            <p:column headerText="Id" footerText="Id">
+                                <h:outputText value="#{c.id}"/>
+                            </p:column>
+
+                            <p:column headerText="Nombre" footerText="Nombre" style="text-align: center;">
+                                <h:outputText value="#{c.firstName}"/>
+                            </p:column>
+
+                            <p:column headerText="Apellido" footerText="Apellido" style="text-align: center;">
+                                <h:outputText value="#{c.lastName}"/>
+                            </p:column>
+
+                            <p:column headerText="Email" footerText="Email" style="text-align: center;">
+                                <h:outputText value="#{c.email}"/>
+                            </p:column>
+
+                            <p:column headerText="Tipo" footerText="Tipo" style="text-align: center;">
+                                <h:outputText value="#{c.type}"/>
+                            </p:column>
+
+                            <p:column headerText="Estado" footerText="Estado" style="text-align: center;">
+                                <h:outputText value="#{c.status == 1 ? 'Activo' : 'InActivo'}"/>
+                            </p:column>
+
+                            <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
+                                                 title="Detalles" update="form:customerDetail"
+                                                 action="#{customersController.showCustomerDetail(c)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
+                                                 title="Editar" update="@form"
+                                                 action="#{customersController.updateCustomerDetail(c)}"/>
+                                <p:spacer width="2"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                 title="Eliminar" update="@form"
+                                                 action="#{customersController.deleteCustomer(c)}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>

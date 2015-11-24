@@ -1,5 +1,6 @@
 package co.com.touresbalon.foundation.oms.webclient;
 
+import co.com.touresbalon.foundation.oms.domain.customers.Customer;
 import co.com.touresbalon.foundation.oms.domain.orders.CollectionWrapper;
 import co.com.touresbalon.foundation.oms.domain.orders.OrderItem;
 import co.com.touresbalon.foundation.oms.domain.orders.SalesOrder;
@@ -130,4 +131,29 @@ public interface OrdersWebClient {
                                                       @QueryParam("fechaFin") String fechaFin,
                                                       @QueryParam("status") String status);
 
+    @GET
+    @Path("/sales/customersProduct/count")
+    @Produces(MediaType.APPLICATION_XML)
+    String countCustomerByProductsSold(@QueryParam("productId") Long productId);
+
+    @GET
+    @Path("/sales/customersProduct")
+    @Produces(MediaType.APPLICATION_XML)
+    List<Customer> getCustomersByProductsSold(@QueryParam("productId") Long productId,
+                                              @QueryParam("pageIndex") int pageIndex,
+                                              @QueryParam("pageSize") int pageSize);
+
+    @GET
+    @Path("/sales/customerRanking/count")
+    @Produces(MediaType.APPLICATION_XML)
+    String countCustomerRanking(@QueryParam("startDate") String startDate,
+                                         @QueryParam("endDate") String endDate);
+
+    @GET
+    @Path("/sales/customerRanking")
+    @Produces(MediaType.APPLICATION_XML)
+    List<Customer> getCustomerRanking(@QueryParam("startDate") String startDate,
+                                             @QueryParam("endDate") String endDate,
+                                             @QueryParam("pageIndex") int pageIndex,
+                                             @QueryParam("pageSize") int pageSize);
 }
