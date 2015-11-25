@@ -44,28 +44,12 @@
                                      emptyMessage="No customers found with given criteria"
                                      lazy="true">
 
+                            <p:column headerText="Tipo Documento" footerText="Tipo Documento">
+                                <h:outputText value="#{c.customerDocType}"/>
+                            </p:column>
+
                             <p:column headerText="Id" footerText="Id">
-                                <h:outputText value="#{c.id}"/>
-                            </p:column>
-
-                            <p:column headerText="Nombre" footerText="Nombre" style="text-align: center;">
-                                <h:outputText value="#{c.firstName}"/>
-                            </p:column>
-
-                            <p:column headerText="Apellido" footerText="Apellido" style="text-align: center;">
-                                <h:outputText value="#{c.lastName}"/>
-                            </p:column>
-
-                            <p:column headerText="Email" footerText="Email" style="text-align: center;">
-                                <h:outputText value="#{c.email}"/>
-                            </p:column>
-
-                            <p:column headerText="Tipo" footerText="Tipo" style="text-align: center;">
-                                <h:outputText value="#{c.type}"/>
-                            </p:column>
-
-                            <p:column headerText="Estado" footerText="Estado" style="text-align: center;">
-                                <h:outputText value="#{c.status == 1 ? 'Activo' : 'InActivo'}"/>
+                                <h:outputText value="#{c.customerId}"/>
                             </p:column>
 
                             <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
