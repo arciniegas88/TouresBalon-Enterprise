@@ -55,11 +55,24 @@
                                 <div class="ContainerIndent">
                                     <h:panelGrid columns="2" rendered="#{not empty customersModel.customer}">
 
+                                        <h:outputText value="Tipo Documento" style="font-weight: bold"/>
+                                        <h:outputText value="#{customersModel.customer.docType}"/>
+
                                         <h:outputText value="Id" style="font-weight: bold"/>
                                         <h:outputText value="#{customersModel.customer.id}"/>
 
                                         <h:outputText value="Nombre" style="font-weight: bold"/>
                                         <h:outputText value="#{customersModel.customer.firstName}"/>
+
+                                        <h:outputText value="Apellido" style="font-weight: bold"/>
+                                        <h:outputText value="#{customersModel.customer.lastName}"/>
+
+                                        <h:outputText value="Tipo" style="font-weight: bold"/>
+                                        <h:outputText value="#{customersModel.customer.type}"/>
+
+                                        <h:outputText value="Estado" style="font-weight: bold"/>
+                                        <h:outputText
+                                                value="#{customersModel.customer.status == 1 ? 'ACTIVO' : 'INACTIVO'}"/>
 
                                     </h:panelGrid>
                                 </div>
