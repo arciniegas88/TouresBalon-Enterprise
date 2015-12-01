@@ -13,31 +13,32 @@ import java.util.List;
  */
 
 @ApplicationScoped
-public class CustomerFacade implements Serializable{
+public class CustomerFacade implements Serializable {
 
     @Inject
     private CustomerWebClient customerWC;
 
-    public int getTotalPagesByCustomers(String id, String email){
+    public int getTotalPagesByCustomers(String id, String email) {
         CountCustomersResponseType response = customerWC.getCustomerCount(id, email);
         return response.getCountCustomersResult();
     }
 
-    public List<CustomerType> getCustomers(String id, String email, int pageIndex, int pageSize){
-        List<CustomerType> customers = customerWC.getCustomers(pageIndex + 1, pageSize).getGetCustomersResult().getCustomer();
+    public List<CustomerType> getCustomers(String id, String email, int pageIndex, int pageSize) {
+        List<CustomerType> customers = customerWC.getCustomers(pageIndex, pageSize, id, email)
+                .getGetCustomersResult().getCustomer();
         return customers;
     }
 
-    public CreateCustomerResponseType createCustomer(CreateCustomerType customer){
+    public CreateCustomerResponseType createCustomer(CreateCustomerType customer) {
         return customerWC.createCustomer(customer);
     }
 
 
-    public CustomerResponseType getCustomerById(String id){
+    public CustomerResponseType getCustomerById(String id) {
         return customerWC.getCustomerById(id);
     }
 
-    public void deleteCustomer(String id){
+    public void deleteCustomer(String id) {
         customerWC.delete(id);
     }
 

@@ -16,7 +16,7 @@
                                          icon="fa fa-check-square-o"/>
                         <p:commandButton value="limpiar" styleClass="OrangeButton"
                                          update="form:TVCustomers:idDateStart, form:TVCustomers:idDateFinal"
-                                         action="#{customersModel.cleanFormAction()}"
+                                         action="#{customersController.cleanFormCustomerRanking}"
                                          icon="fa fa-ban"/>
                     </f:facet>
                 </p:toolbar>
@@ -52,18 +52,17 @@
                                 <h:outputText value="#{c.customerId}"/>
                             </p:column>
 
+                            <p:column headerText="Total Facturado" footerText="Total Facturado">
+                                <h:outputText value="#{c.invoicedTotal}"/>
+                            </p:column>
+
+
+
                             <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
                                                  title="Detalles" update="form:customerDetail"
-                                                 action="#{customersController.showCustomerDetail(c)}"/>
-                                <p:spacer width="2"/>
-                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
-                                                 title="Editar" update="@form"
-                                                 action="#{customersController.updateCustomerDetail(c)}"/>
-                                <p:spacer width="2"/>
-                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
-                                                 title="Eliminar" update="@form"
-                                                 action="#{customersController.deleteCustomer(c)}"/>
+                                                 action="#{customersController.showCustomerDetail(c.customerId)}"/>
+
                             </p:column>
 
                         </p:dataTable>

@@ -21,8 +21,6 @@ public class CustomersProductModel extends LazyDataModel<Customer> {
     private Long productId;
 
     private Customer customer;
-    private List<Customer> customers;
-
     private List<Customer> cacheCustomers;
 
     @Override
@@ -60,21 +58,5 @@ public class CustomersProductModel extends LazyDataModel<Customer> {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public List<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
-    }
-
-    public List<Customer> getCacheCustomers() {
-        return cacheCustomers;
-    }
-
-    public void setCacheCustomers(List<Customer> cacheCustomers) {
-        this.cacheCustomers = cacheCustomers;
     }
 }

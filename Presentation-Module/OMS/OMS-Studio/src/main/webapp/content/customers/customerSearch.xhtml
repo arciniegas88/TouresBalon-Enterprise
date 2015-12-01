@@ -45,7 +45,7 @@
                 </p:tabView>
 
                 <p:dialog header="Detalle del Cliente" widgetVar="customerDialog" modal="true"
-                          resizable="false" width="700">
+                          resizable="false" width="600">
 
                     <p:outputPanel id="customerDetail">
 
@@ -53,7 +53,7 @@
 
                             <div class="Container100">
                                 <div class="ContainerIndent">
-                                    <h:panelGrid columns="2" rendered="#{not empty customersModel.customer}">
+                                    <h:panelGrid columns="4" rendered="#{not empty customersModel.customer}">
 
                                         <h:outputText value="Tipo Documento" style="font-weight: bold"/>
                                         <h:outputText value="#{customersModel.customer.docType}"/>
@@ -66,6 +66,9 @@
 
                                         <h:outputText value="Apellido" style="font-weight: bold"/>
                                         <h:outputText value="#{customersModel.customer.lastName}"/>
+
+                                        <h:outputText value="Email" style="font-weight: bold"/>
+                                        <h:outputText value="#{customersModel.customer.email}"/>
 
                                         <h:outputText value="Tipo" style="font-weight: bold"/>
                                         <h:outputText value="#{customersModel.customer.type}"/>

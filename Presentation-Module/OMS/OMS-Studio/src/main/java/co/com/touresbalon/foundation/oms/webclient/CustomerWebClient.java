@@ -34,12 +34,13 @@ public interface CustomerWebClient {
     @GET
     @Path("/customerByEmail/{email}")
     @Consumes(MediaType.APPLICATION_XML)
-    CustomerResponseType getCustomerByEmail(@PathParam("email")String email);
+    CustomerResponseType getCustomerByEmail(@PathParam("email") String email);
 
     @GET
-    @Path("/customers/pag={pag}/regPag={regPag}")
+    @Path("/customers")
     @Consumes(MediaType.APPLICATION_XML)
-    CustomersResponseType getCustomers(@PathParam("pag")int pag, @PathParam("regPag")int regPag);
+    CustomersResponseType getCustomers(@QueryParam("pag") int pag, @QueryParam("regPag") int regPag,
+                                       @QueryParam("id") String id, @QueryParam("email") String email);
 
     @POST
     @Path("/customer/update")

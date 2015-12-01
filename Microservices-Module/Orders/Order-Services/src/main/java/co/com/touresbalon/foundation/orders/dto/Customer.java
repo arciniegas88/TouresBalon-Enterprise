@@ -2,6 +2,7 @@ package co.com.touresbalon.foundation.orders.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by harcalejo on 21/11/15.
@@ -12,15 +13,24 @@ public class Customer implements Serializable{
 
     private String customerDocType;
 
+    private String productName;
+
+    private long price;
+
+    private Date orderDate;
+
     private long invoicedTotal;
 
     public Customer(){
         super();
     }
 
-    public Customer(String customerId, String customerDocType){
+    public Customer(String customerId, String customerDocType, String productName, long price, Date orderDate){
         this.customerId = customerId;
         this.customerDocType = customerDocType;
+        this.productName = productName;
+        this.price = price;
+        this.orderDate = orderDate;
     }
 
     public Customer(String customerId, String customerDocType, long invoicedTotal){
@@ -51,6 +61,30 @@ public class Customer implements Serializable{
 
     public void setInvoicedTotal(long invoicedTotal) {
         this.invoicedTotal = invoicedTotal;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     @Override

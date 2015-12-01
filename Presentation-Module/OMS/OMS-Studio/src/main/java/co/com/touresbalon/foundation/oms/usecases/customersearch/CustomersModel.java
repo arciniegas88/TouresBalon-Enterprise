@@ -17,17 +17,18 @@ import java.util.Map;
  */
 @Named
 @SessionScoped
-public class CustomersModel extends LazyDataModel<CustomerType> implements Serializable{
+public class CustomersModel extends LazyDataModel<CustomerType>{
 
     private String id;
     private String email;
 
-    private String productId;
-
     private CustomerType customer;
-    private List<CustomerType> customers;
-
     private List<CustomerType> cacheCustomers;
+
+    public CustomersModel(){
+        id="";
+        email="";
+    }
 
     @Override
     public  List<CustomerType> load(int firts, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
@@ -45,7 +46,6 @@ public class CustomersModel extends LazyDataModel<CustomerType> implements Seria
             if (c.getId().toString().equals(rowKey))
                 return c;
         }
-
         return null;
     }
 
@@ -71,29 +71,5 @@ public class CustomersModel extends LazyDataModel<CustomerType> implements Seria
 
     public void setCustomer(CustomerType customer) {
         this.customer = customer;
-    }
-
-    public List<CustomerType> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(List<CustomerType> customers) {
-        this.customers = customers;
-    }
-
-    public List<CustomerType> getCacheCustomers() {
-        return cacheCustomers;
-    }
-
-    public void setCacheCustomers(List<CustomerType> cacheCustomers) {
-        this.cacheCustomers = cacheCustomers;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 }

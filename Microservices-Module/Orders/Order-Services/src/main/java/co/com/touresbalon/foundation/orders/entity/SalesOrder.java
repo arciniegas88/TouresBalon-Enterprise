@@ -91,7 +91,8 @@ import javax.xml.bind.annotation.XmlRootElement;
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 
         @NamedQuery(name = "SalesOrder.findCustomersByProduct",
-                query = "SELECT DISTINCT NEW co.com.touresbalon.foundation.orders.dto.Customer( s.custDocumentNumber, s.custDocumentType ) " +
+                query = "SELECT DISTINCT NEW co.com.touresbalon.foundation.orders.dto.Customer( s.custDocumentNumber, s.custDocumentType, " +
+                        "o.productName, o.price, s.orderDate) " +
                         "FROM SalesOrder s LEFT JOIN s.orderItemList o WHERE o.productId = :PRODUCTID",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 
@@ -100,7 +101,8 @@ import javax.xml.bind.annotation.XmlRootElement;
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 
         @NamedQuery(name = "SalesOrder.findAllCustomersByProduct",
-                query = "SELECT DISTINCT NEW co.com.touresbalon.foundation.orders.dto.Customer( s.custDocumentNumber, s.custDocumentType ) " +
+                query = "SELECT DISTINCT NEW co.com.touresbalon.foundation.orders.dto.Customer( s.custDocumentNumber, s.custDocumentType, " +
+                        "o.productName, o.price, s.orderDate) " +
                         "FROM SalesOrder s LEFT JOIN s.orderItemList o",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 

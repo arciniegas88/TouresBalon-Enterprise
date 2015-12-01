@@ -393,7 +393,6 @@ public class SalesOrdersBoundary {
                         .setFirstResult(pageIndex)
                         .getResultList();
             } else {
-
                 return em.createNamedQuery("SalesOrder.findCustomersByProduct", Customer.class)
                         .setParameter("PRODUCTID", productId)
                         .setMaxResults(pageSize)

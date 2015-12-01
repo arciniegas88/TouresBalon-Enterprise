@@ -16,7 +16,7 @@
                                          icon="fa fa-check-square-o"/>
                         <p:commandButton value="limpiar" styleClass="OrangeButton"
                                          update="form:TVCustomers:txtId, form:TVCustomers:txtEmail"
-                                         action="#{customersModel.cleanFormAction()}"
+                                         action="#{customersController.cleanFormCustomer}"
                                          icon="fa fa-ban"/>
                     </f:facet>
                 </p:toolbar>
@@ -52,10 +52,6 @@
                                 <h:outputText value="#{c.firstName}"/>
                             </p:column>
 
-                            <p:column headerText="Apellido" footerText="Apellido" style="text-align: center;">
-                                <h:outputText value="#{c.lastName}"/>
-                            </p:column>
-
                             <p:column headerText="Email" footerText="Email" style="text-align: center;">
                                 <h:outputText value="#{c.email}"/>
                             </p:column>
@@ -71,7 +67,7 @@
                             <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
                                                  title="Detalles" update="form:customerDetail"
-                                                 action="#{customersController.showCustomerDetail(c)}"/>
+                                                 action="#{customersController.showCustomerDetail(c.id)}"/>
                                 <p:spacer width="2"/>
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
                                                  title="Editar" update="@form"

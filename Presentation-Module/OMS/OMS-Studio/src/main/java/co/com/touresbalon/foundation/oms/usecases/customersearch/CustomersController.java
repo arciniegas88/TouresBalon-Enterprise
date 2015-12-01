@@ -1,5 +1,6 @@
 package co.com.touresbalon.foundation.oms.usecases.customersearch;
 
+import co.com.touresbalon.foundation.oms.domain.customers.Customer;
 import co.com.touresbalon.foundation.oms.domain.customers.CustomerType;
 import co.com.touresbalon.foundation.oms.facades.CustomerFacade;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
@@ -9,6 +10,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by harcalejo on 4/11/15.
@@ -18,17 +21,20 @@ import java.io.Serializable;
 public class CustomersController implements Serializable{
 
     @Inject
-    private CustomersModel model;
+    private CustomersModel customerModel;
+    @Inject
+    private CustomersProductModel productModel;
+    @Inject
+    private CustomersRankingModel rankingModel;
     @Inject
     private FacesUtil util;
     @Inject
     private CustomerFacade facade;
 
-    public void showCustomerDetail(CustomerType customer){
-        model.setCustomer(facade.getCustomerById(customer.getId()).getGetCustomerResult());
+    public void showCustomerDetail(String customerId){
+        customerModel.setCustomer(facade.getCustomerById(customerId).getGetCustomerResult());
         RequestContext.getCurrentInstance().execute("PF('customerDialog').show()");
     }
-
 
     public void updateCustomerDetail(CustomerType customer){
 
@@ -40,14 +46,16 @@ public class CustomersController implements Serializable{
     }
 
     public void cleanFormCustomersProduct(){
-
+        productModel.setProductId(new Long(0));
     }
 
     public void cleanFormCustomerRanking(){
-
+        rankingModel.setEndDate(new Date());
+        rankingModel.setEndDate(new Date());
     }
 
     public void cleanFormCustomer(){
-
+        customerModel.setId("");
+        customerModel.setEmail("");
     }
 }

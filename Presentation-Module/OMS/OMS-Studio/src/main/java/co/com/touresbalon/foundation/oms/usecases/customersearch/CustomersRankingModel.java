@@ -24,8 +24,6 @@ public class CustomersRankingModel extends LazyDataModel<Customer> {
     private Date endDate;
 
     private Customer customer;
-    private List<Customer> customers;
-
     private List<Customer> customersCache;
 
     public CustomersRankingModel(){
@@ -86,14 +84,6 @@ public class CustomersRankingModel extends LazyDataModel<Customer> {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public List<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
     }
 
     public List<Customer> getCustomersCache() {

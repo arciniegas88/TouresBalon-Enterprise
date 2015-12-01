@@ -16,7 +16,7 @@
                                          icon="fa fa-check-square-o"/>
                         <p:commandButton value="limpiar" styleClass="OrangeButton"
                                          update="form:TVCustomers:txtId, form:TVCustomers:txtEmail"
-                                         action="#{customersController.cleanFormCustomer}"
+                                         action="#{customersController.cleanFormCustomersProduct}"
                                          icon="fa fa-ban"/>
                     </f:facet>
                 </p:toolbar>
@@ -24,7 +24,7 @@
 
                 <div class="Container70 Responsive70">
                     <div class="ContainerIndent">
-                            <p:inputText styleClass="Wid90" placeholder="ProductoID"
+                            <p:inputText styleClass="Wid90" placeholder="ProductoID" size="30"
                                          value="#{customersProductModel.productId}" id="txtProductId"/>
                         <br/>
                     </div>
@@ -46,18 +46,24 @@
                                 <h:outputText value="#{c.customerId}"/>
                             </p:column>
 
+                            <p:column headerText="Producto" footerText="Producto" style="text-align: center;">
+                                <h:outputText value="#{c.productName}"/>
+                            </p:column>
+
+                            <p:column headerText="Precio" footerText="Precio" style="text-align: center;">
+                                <h:outputText value="#{c.price}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha" footerText="Fecha" style="text-align: center;">
+                                <h:outputText value="#{c.orderDate}"/>
+                            </p:column>
+
+
                             <p:column headerText="Acciones" footerText="Acciones" style="text-align: center;">
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
                                                  title="Detalles" update="form:customerDetail"
-                                                 action="#{customersController.showCustomerDetail(c)}"/>
+                                                 action="#{customersController.showCustomerDetail(c.customerId)}"/>
                                 <p:spacer width="2"/>
-                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-pencil"
-                                                 title="Editar" update="@form"
-                                                 action="#{customersController.updateCustomerDetail(c)}"/>
-                                <p:spacer width="2"/>
-                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
-                                                 title="Eliminar" update="@form"
-                                                 action="#{customersController.deleteCustomer(c)}"/>
                             </p:column>
 
                         </p:dataTable>
