@@ -59,23 +59,15 @@
         <!-- Count Customers -->
         <camel:route>
             <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customer/count?restletMethod=GET"/>
-            <camel:removeHeaders pattern="*"/>
-            <camel:to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/count?restletMethod=GET" />
+            <camel:removeHeaders pattern="org.restlet.http.headers"/>
+            <to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customer/count?restletMethod=GET"></to>
         </camel:route>
 
         <!-- All Customers -->
         <camel:route>
-            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customers/pag={pag}/regPag={regPag}?restletMethod=GET"/>
-            <camel:setProperty propertyName="pag">
-                <simple>${header.pag}</simple>
-            </camel:setProperty>
-            <camel:setProperty propertyName="regPag">
-                <simple>${header.regPag}</simple>
-            </camel:setProperty>
-            <camel:removeHeaders pattern="*" />
-            <camel:recipientList>
-                <camel:simple>restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customers/pag=${property.pag};regPag=${property.regPag}?restletMethod=GET&amp;throwExceptionOnFailure=false"</camel:simple>
-            </camel:recipientList>
+            <camel:from uri="restlet:http://localhost:{{http.esb.customer.service.port}}/esb/services/web-api/customers?restletMethod=GET"/>
+            <camel:removeHeaders pattern="org.restlet.http.headers"/>
+            <to uri="restlet:http://{{target.iis.location}}/CustomerService/microsoft/co/com/touresbalon/foundation/customer/rest/CustomerService.svc/customers?restletMethod=GET" />
         </camel:route>
 
         <!-- Delete Customer -->
