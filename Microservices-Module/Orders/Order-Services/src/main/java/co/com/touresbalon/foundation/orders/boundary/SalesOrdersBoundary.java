@@ -369,7 +369,7 @@ public class SalesOrdersBoundary {
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public int countCustomersByProductsSold(Long productId) throws SystemException{
         try{
-            if (null == productId ) {
+            if (null == productId || productId == 0) {
                 return em.createNamedQuery("SalesOrder.countAllCustomersByProduct", Long.class)
                         .getSingleResult().intValue();
             }else{

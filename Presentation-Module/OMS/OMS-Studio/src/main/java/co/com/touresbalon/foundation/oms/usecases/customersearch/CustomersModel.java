@@ -8,7 +8,10 @@ import org.primefaces.model.SortOrder;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.ws.rs.WebApplicationException;
+import javax.xml.ws.WebServiceException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,9 +36,16 @@ public class CustomersModel extends LazyDataModel<CustomerType>{
     @Override
     public  List<CustomerType> load(int firts, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
         CustomerFacade facade = BeanLocator.getBean(CustomerFacade.class);
-        setRowCount(facade.getTotalPagesByCustomers(id, email));
-        cacheCustomers = facade.getCustomers(id, email, firts, pageSize);
 
+        try {
+            setRowCount(facade.getTotalPagesByCustomers(id, email));
+            cacheCustomers = facade.getCustomers(id, email, firts, pageSize);
+        }catch(WebApplicationException e){
+            setRowCount(0);
+            cacheCustomers = new ArrayList<>();
+
+
+        }
         return cacheCustomers;
     }
 

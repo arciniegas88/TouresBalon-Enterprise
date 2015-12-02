@@ -8,7 +8,9 @@ import org.primefaces.model.SortOrder;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.ws.rs.WebApplicationException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +45,15 @@ public class CustomersRankingModel extends LazyDataModel<Customer> {
             endD = sdf.format(endDate);
         }
 
-        OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
-        setRowCount(facade.countCustomersRanking(startD, endD));
+        try {
+            OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
+            setRowCount(facade.countCustomersRanking(startD, endD));
+            customersCache = facade.getCustomersRanking(startD, endD, firts, pageSize);
+        }catch(WebApplicationException e){
+            setRowCount(0);
+            customersCache = new ArrayList<>();
+        }
 
-        customersCache = facade.getCustomersRanking(startD, endD, firts, pageSize);
         return customersCache;
 
     }

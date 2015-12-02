@@ -246,11 +246,19 @@
                                 <p:toolbar>
                                     <f:facet name="right">
                                         <p:commandButton
-                                                value="#{adminCustomerModel.creationFlow ? 'crear':'actualizar'}"
+                                                value="Crear"
                                                 styleClass="OrangeButton"
-                                                action="#{adminCustomerContoller.createCustomer()}"
+                                                action="#{adminCustomerContoller.createCustomer}"
                                                 update="@form"
                                                 icon="fa fa-check-square-o"/>
+
+                                        <p:commandButton
+                                                value="Actualizar"
+                                                styleClass="OrangeButton"
+                                                action="#{adminCustomerContoller.updateCustomer}"
+                                                update="@form" rendered="#{not adminCustomerModel.creationFlow}"
+                                                icon="fa fa-check-square-o"/>
+
                                         <p:commandButton value="limpiar" styleClass="OrangeButton"
                                                          action="#{adminCustomerContoller.cleanForm}"
                                                          update="@form" rendered="#{adminCustomerModel.creationFlow}"

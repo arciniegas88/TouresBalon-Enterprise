@@ -46,22 +46,8 @@ public class OrdersController {
     public void showSalesOrderDetail(SalesOrder salesOrder) {
         try {
 
-            System.out.println("no esta ingresando a la busqueda de ordenes");
-
             ordersModel.setSalesOrder(ordersFacade.getSalesOrderDetail(salesOrder.getId()).get(0));
-
-            System.out.println("que esta llegando a este ejb" + salesOrder.getId());
-
-
-            System.out.println("que esta llegando a este ejb" + ordersModel.getSalesOrder().getId());
-
             ordersModel.setCacheOrderItem(ordersFacade.getOrderItems(salesOrder.getId()));
-
-            for (OrderItem o : ordersModel.getCacheOrderItem()){
-                System.out.println(" esto tiene la lista " + o.getProductId());
-            }
-
-
         } catch (Exception e) {
             e.printStackTrace();
             util.addErrorMessage( "Ha ocurrido un error interno en la aplicación" );
@@ -75,12 +61,10 @@ public class OrdersController {
     }
 
     public void updateValueTotalPrice(){
-        System.out.println("la fecha type Date  seleccionada es :" + orderInvoiceModel.getDateOrder());
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM");
         String dateString = "";
         if(orderInvoiceModel.getDateOrder()!=null) {
             dateString = formateador.format(orderInvoiceModel.getDateOrder());
-            System.out.println("la fecha type String  seleccionada es :" + dateString);
         }
         DecimalFormat df = new DecimalFormat("###,###,###");
         String total = ordersFacade.searchOrderSalesTotalInvoice(dateString);

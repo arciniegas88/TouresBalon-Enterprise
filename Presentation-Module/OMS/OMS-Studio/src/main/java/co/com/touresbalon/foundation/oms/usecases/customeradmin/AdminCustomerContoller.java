@@ -156,6 +156,10 @@ public class AdminCustomerContoller implements Serializable {
         RequestContext.getCurrentInstance().execute("PF('directionDialog').hide()");
     }
 
+    public void updateCustomer() {
+
+    }
+
     public void cleanForm() {
         model.setAddress(new AddressType());
         model.setCustomer(new CustomerType());

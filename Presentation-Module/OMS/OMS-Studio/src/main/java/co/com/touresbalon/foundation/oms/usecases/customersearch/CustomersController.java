@@ -3,6 +3,8 @@ package co.com.touresbalon.foundation.oms.usecases.customersearch;
 import co.com.touresbalon.foundation.oms.domain.customers.Customer;
 import co.com.touresbalon.foundation.oms.domain.customers.CustomerType;
 import co.com.touresbalon.foundation.oms.facades.CustomerFacade;
+import co.com.touresbalon.foundation.oms.usecases.customeradmin.AdminCustomerModel;
+import co.com.touresbalon.foundation.oms.usecases.portal.PortalController;
 import co.com.touresbalon.foundation.oms.util.FacesUtil;
 import org.primefaces.context.RequestContext;
 
@@ -21,6 +23,8 @@ import java.util.Date;
 public class CustomersController implements Serializable{
 
     @Inject
+    private AdminCustomerModel adminCustomerModel;
+    @Inject
     private CustomersModel customerModel;
     @Inject
     private CustomersProductModel productModel;
@@ -37,7 +41,11 @@ public class CustomersController implements Serializable{
     }
 
     public void updateCustomerDetail(CustomerType customer){
+        adminCustomerModel.setCreationFlow(false);
+        adminCustomerModel.cleanModel();
+        adminCustomerModel.setCustomer(facade.getCustomerById(customer.getId()).getGetCustomerResult());
 
+        RequestContext.getCurrentInstance().execute( "window.location.href='"+ PortalController.CUSTOMER_ADMIN_PAGE+"';" );
     }
 
     public void deleteCustomer(CustomerType customer){
