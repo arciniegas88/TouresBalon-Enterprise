@@ -31,7 +31,6 @@ public class OrderRankingPriceModel extends LazyDataModel<SalesOrder> implements
     private List<SalesOrder> listSalesOrder;
 
     public OrderRankingPriceModel() {
-        System.out.println("ingreso primero al constructor");
     }
 
     @Override
@@ -39,8 +38,6 @@ public class OrderRankingPriceModel extends LazyDataModel<SalesOrder> implements
         OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
 
 
-        System.out.println("la fecha type Date start seleccionada es :" + dateStart);
-        System.out.println("la fecha type Date final  seleccionada es :" + dateFinal);
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
         String dateStartString = "";
         String dateFinalString = "";
@@ -48,7 +45,6 @@ public class OrderRankingPriceModel extends LazyDataModel<SalesOrder> implements
         if(dateStart!=null && dateFinal!=null) {
             dateStartString = formateador.format(dateStart);
             dateFinalString = formateador.format(dateFinal);
-            System.out.println("la fecha incial type String  seleccionada es :" + dateStartString + " y la fecha final es: "+dateFinalString);
         }
 
         setRowCount(facade.searchOrderSalesCountRankingPrice(dateStartString, dateFinalString, status));

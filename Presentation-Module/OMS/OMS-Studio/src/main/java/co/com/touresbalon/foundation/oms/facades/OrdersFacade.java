@@ -67,6 +67,8 @@ public class OrdersFacade {
         return Integer.parseInt(total.replaceAll("<total>", "").replaceAll("</total>", ""));
     }
 
+
+
     public List<OrderItem> getOrderItems(Long idSalesOrder){
         return ordersWC.getOrderItems(idSalesOrder);
     }

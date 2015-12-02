@@ -61,6 +61,9 @@
                                                  action="#{ordersController.showSalesOrderDetail(order)}"
                                                  immediate="true">
                                 </p:commandButton>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                 title="Eliminar" update="@form"
+                                                 action="#{ordersController.deleteOrder(order)}"/>
                                 <p:spacer width="2"/>
                             </p:column>
                         </p:dataTable>

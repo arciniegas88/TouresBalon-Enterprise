@@ -113,7 +113,6 @@ public class AdminCampaingnController {
 
         if(campaignOk== true){
             try {
-                System.out.println("hola-----------");
                 model.getCampaign().setProduct(model.getProduct());
                 facade.createCampaingn(model.getCampaign());
                 util.addInfoMessage("La campaña se ha creado con éxito");

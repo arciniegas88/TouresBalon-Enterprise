@@ -182,7 +182,6 @@ public class OrdersResource {
     @Produces({MediaType.APPLICATION_XML})
     public Response searchOrderSalesCountRankingStatus(@QueryParam("status") String status)throws SystemException  {
         int totalPages = boundary.searchOrderSalesCountRankingStatus(status);
-        System.out.println("%%%%%%% esto es el retorno de cantidad de registros:" +totalPages);
         String content = RESTUtil.getNegotiatedContent(headers, totalPages,"total");
         return Response.status(200).entity(content).type( RESTUtil.getAcceptedMediaType(headers) ).build();
     }

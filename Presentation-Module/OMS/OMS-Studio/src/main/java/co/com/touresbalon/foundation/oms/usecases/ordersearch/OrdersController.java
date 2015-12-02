@@ -1,5 +1,6 @@
 package co.com.touresbalon.foundation.oms.usecases.ordersearch;
 
+import co.com.touresbalon.foundation.oms.domain.orderprocessing.CancelOrdersBPELRequest;
 import co.com.touresbalon.foundation.oms.domain.orders.OrderItem;
 import co.com.touresbalon.foundation.oms.domain.orders.SalesOrder;
 import co.com.touresbalon.foundation.oms.facades.OrdersFacade;
@@ -45,7 +46,6 @@ public class OrdersController {
     //[action] ------------------
     public void showSalesOrderDetail(SalesOrder salesOrder) {
         try {
-
             ordersModel.setSalesOrder(ordersFacade.getSalesOrderDetail(salesOrder.getId()).get(0));
             ordersModel.setCacheOrderItem(ordersFacade.getOrderItems(salesOrder.getId()));
         } catch (Exception e) {
@@ -60,7 +60,9 @@ public class OrdersController {
         ordersStatusModel.setTotalRegister(ordersFacade.getTotalOrderStatus(ordersStatusModel.getStatus()));
     }
 
+    //[action] ------------------
     public void updateValueTotalPrice(){
+
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM");
         String dateString = "";
         if(orderInvoiceModel.getDateOrder()!=null) {
@@ -69,6 +71,18 @@ public class OrdersController {
         DecimalFormat df = new DecimalFormat("###,###,###");
         String total = ordersFacade.searchOrderSalesTotalInvoice(dateString);
         orderInvoiceModel.setTotalFacturado(df.format(new BigDecimal(total)));
+    }
+
+    //[action] ------------------
+    public void deleteOrder(SalesOrder salesOrder){
+        try {
+            ordersFacade.cancelOrder(new CancelOrdersBPELRequest(salesOrder.getId()));
+            util.addInfoMessage("La orden ha sido cancelado con éxito");
+        }catch (Exception e){
+            util.addErrorMessage("Ha ocurrido un error interno en el sistema");
+            e.printStackTrace();
+        }
+
     }
 
 
