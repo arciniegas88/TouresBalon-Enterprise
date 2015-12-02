@@ -132,11 +132,11 @@
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>7.7.Final</version>
                 <configuration>
-                    <hostname>localhost</hostname>
+                    <hostname>192.168.1.35</hostname>
                     <port>9999</port>
                     <name>BusinessRule-Services.war</name>
-                    <username>admin</username>
-                    <password>gust@v0-88</password>
+                    <username>aes</username>
+                    <password>Colombi@2015</password>
                 </configuration>
             </plugin>
         </plugins>

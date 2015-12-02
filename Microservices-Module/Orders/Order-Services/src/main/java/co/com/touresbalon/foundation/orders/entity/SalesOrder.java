@@ -105,8 +105,8 @@ import javax.xml.bind.annotation.XmlRootElement;
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 
         @NamedQuery(name = "SalesOrder.countCustomersRanking",
-                query = "SELECT COUNT( s.custDocumentNumber ) FROM SalesOrder s " +
-                        "WHERE s.orderDate BETWEEN :STARTDATE AND :ENDDATE GROUP BY s.custDocumentNumber, s.custDocumentType",
+                query = "SELECT COUNT(DISTINCT s.custDocumentNumber ) FROM SalesOrder s " +
+                        "WHERE s.orderDate BETWEEN :STARTDATE AND :ENDDATE",
                 hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
 
         @NamedQuery(name = "SalesOrder.findCustomersRanking",

@@ -8,16 +8,16 @@ import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each
- * Java content interface and Java element interface
- * generated in the co.com.touresbalon.foundation.microservices.soap package.
- * <p>An ObjectFactory allows you to programatically
- * construct new instances of the Java representation
- * for XML content. The Java representation of XML
- * content can consist of schema derived interfaces
- * and classes representing the binding of schema
- * type definitions, element declarations and model
- * groups.  Factory methods for each of these are
+ * This object contains factory methods for each 
+ * Java content interface and Java element interface 
+ * generated in the co.com.touresbalon.foundation.microservices.soap package. 
+ * <p>An ObjectFactory allows you to programatically 
+ * construct new instances of the Java representation 
+ * for XML content. The Java representation of XML 
+ * content can consist of schema derived interfaces 
+ * and classes representing the binding of schema 
+ * type definitions, element declarations and model 
+ * groups.  Factory methods for each of these are 
  * provided in this class.
  *
  */
@@ -27,13 +27,15 @@ public class ObjectFactory {
     private final static QName _GetCustomerResponse_QNAME = new QName("", "getCustomerResponse");
     private final static QName _CountCustomersResponse_QNAME = new QName("", "countCustomersResponse");
     private final static QName _GetCustomersResponse_QNAME = new QName("", "getCustomersResponse");
+    private final static QName _CreateCustomer_QNAME = new QName("", "createCustomer");
     private final static QName _UpdateCustomerResponse_QNAME = new QName("", "updateCustomerResponse");
     private final static QName _DeleteCustomerResponse_QNAME = new QName("", "deleteCustomerResponse");
     private final static QName _UpdateCustomer_QNAME = new QName("", "updateCustomer");
     private final static QName _GetCustomerByEmailResponse_QNAME = new QName("", "getCustomerByEmailResponse");
+    private final static QName _CreateCustomerResponse_QNAME = new QName("", "createCustomerResponse");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package:
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: co.com.touresbalon.foundation.microservices.soap
      *
      */
     public ObjectFactory() {
@@ -61,6 +63,14 @@ public class ObjectFactory {
      */
     public CountCustomersResponseType createCountCustomersResponseType() {
         return new CountCustomersResponseType();
+    }
+
+    /**
+     * Create an instance of {@link CreateCustomerType }
+     *
+     */
+    public CreateCustomerType createCreateCustomerType() {
+        return new CreateCustomerType();
     }
 
     /**
@@ -96,11 +106,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GeneralResponseType }
+     * Create an instance of {@link CreateCustomerResponseType }
      *
      */
-    public GeneralResponseType createGeneralResponseType() {
-        return new GeneralResponseType();
+    public CreateCustomerResponseType createCreateCustomerResponseType() {
+        return new CreateCustomerResponseType();
+    }
+
+    /**
+     * Create an instance of {@link CreateCustomerResultType }
+     *
+     */
+    public CreateCustomerResultType createCreateCustomerResultType() {
+        return new CreateCustomerResultType();
     }
 
     /**
@@ -120,19 +138,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AddressArrayType }
-     *
-     */
-    public AddressArrayType createAddressArrayType() {
-        return new AddressArrayType();
-    }
-
-    /**
      * Create an instance of {@link CustomersResultType }
      *
      */
     public CustomersResultType createCustomersResultType() {
         return new CustomersResultType();
+    }
+
+    /**
+     * Create an instance of {@link GeneralResponseType }
+     *
+     */
+    public GeneralResponseType createGeneralResponseType() {
+        return new GeneralResponseType();
+    }
+
+    /**
+     * Create an instance of {@link AddressArrayType }
+     *
+     */
+    public AddressArrayType createAddressArrayType() {
+        return new AddressArrayType();
     }
 
     /**
@@ -160,6 +186,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "getCustomersResponse")
     public JAXBElement<CustomersResponseType> createGetCustomersResponse(CustomersResponseType value) {
         return new JAXBElement<CustomersResponseType>(_GetCustomersResponse_QNAME, CustomersResponseType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateCustomerType }{@code >}}
+     *
+     */
+    @XmlElementDecl(namespace = "", name = "createCustomer")
+    public JAXBElement<CreateCustomerType> createCreateCustomer(CreateCustomerType value) {
+        return new JAXBElement<CreateCustomerType>(_CreateCustomer_QNAME, CreateCustomerType.class, null, value);
     }
 
     /**
@@ -196,6 +231,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "getCustomerByEmailResponse")
     public JAXBElement<CustomerByEmailResponseType> createGetCustomerByEmailResponse(CustomerByEmailResponseType value) {
         return new JAXBElement<CustomerByEmailResponseType>(_GetCustomerByEmailResponse_QNAME, CustomerByEmailResponseType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateCustomerResponseType }{@code >}}
+     *
+     */
+    @XmlElementDecl(namespace = "", name = "createCustomerResponse")
+    public JAXBElement<CreateCustomerResponseType> createCreateCustomerResponse(CreateCustomerResponseType value) {
+        return new JAXBElement<CreateCustomerResponseType>(_CreateCustomerResponse_QNAME, CreateCustomerResponseType.class, null, value);
     }
 
 }

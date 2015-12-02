@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by harcalejo on 23/09/15.
  */
 @Entity
-@Table(name = "TOURESBALON_RESERVATIONS", schema = "DANN_CARLTON", catalog = "")
+@Table(name = "TOURESBALON_RESERVATIONS")
 @XmlRootElement
 public class TouresbalonReservations {
     private Long reservationId;

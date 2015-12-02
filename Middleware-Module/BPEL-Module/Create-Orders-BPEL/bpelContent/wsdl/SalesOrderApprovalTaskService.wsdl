@@ -101,14 +101,14 @@
 	<wsdl:service name="ClaimService">
 		<wsdl:port name="ClaimPort" binding="tns:ClaimSoapBinding">
 			<soap:address
-				location="https://localhost:9443/services/ClaimService.ClaimServicehttpsClaimSoapBindingEndpoint/" />
+				location="https://localhost:9446/services/ClaimService.ClaimServicehttpsClaimSoapBindingEndpoint/" />
 		</wsdl:port>
 	</wsdl:service>
 
 	<wsdl:service name="ClaimServiceCB">
 		<wsdl:port name="ClaimPortCB" binding="tns:ClaimSoapBindingCB">
 			<soap:address
-				location="http://localhost:9763/services/ClaimService.ClaimServicehttpClaimSoapBindingEndpoint/" />
+				location="http://localhost:9766/services/ClaimService.ClaimServicehttpClaimSoapBindingEndpoint/" />
 		</wsdl:port>
 	</wsdl:service>
 

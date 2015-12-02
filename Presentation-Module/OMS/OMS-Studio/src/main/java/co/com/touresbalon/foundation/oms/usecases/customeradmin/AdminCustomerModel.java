@@ -4,6 +4,7 @@ import co.com.touresbalon.foundation.oms.domain.customers.AddressType;
 import co.com.touresbalon.foundation.oms.domain.customers.CustomerType;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,39 +18,51 @@ import java.util.List;
 public class AdminCustomerModel implements Serializable{
 
     private boolean creationFlow;
+    private boolean createDirection;
     private CustomerType customer;
     private AddressType address;
     private String cardType;
     private String newPassword;
 
-    private List<String> cardTypes;
-    private List<String> docTypes;
-    private List<String> customerTypes;
-    private List<String> customerStatus;
+    private List<SelectItem> cardTypes;
+    private List<SelectItem> docTypes;
+    private List<SelectItem> customerTypes;
+    private List<SelectItem> customerStatus;
+    private List<SelectItem> addressTypes;
 
     public AdminCustomerModel(){
         cleanModel();
         creationFlow = true;
+        createDirection = false;
         address = new AddressType();
         customer = new CustomerType();
 
         cardTypes = new ArrayList<>();
-        cardTypes.add("MASTER");
-        cardTypes.add("VISA");
+        cardTypes.add(new SelectItem("0","--SELECT--"));
+        cardTypes.add(new SelectItem("MAST","MASTER"));
+        cardTypes.add(new SelectItem("VISA","VISA"));
 
         docTypes = new ArrayList<>();
-        docTypes.add("CC");
-        docTypes.add("NIT");
-        docTypes.add("PP");
+        docTypes.add(new SelectItem("0","--SELECT--"));
+        docTypes.add(new SelectItem("CC", "CC"));
+        docTypes.add(new SelectItem("NIT","NIT"));
+        docTypes.add(new SelectItem("PP","PP"));
 
         customerTypes = new ArrayList<>();
-        customerTypes.add("PLATEADO");
-        customerTypes.add("DORADO");
-        customerTypes.add("PLATINO");
+        customerTypes.add(new SelectItem("0","--SELECT--"));
+        customerTypes.add(new SelectItem("SILVER","SILVER"));
+        customerTypes.add(new SelectItem("GOLD","GOLD"));
+        customerTypes.add(new SelectItem("PLATINUM","PLATINUM"));
 
         customerStatus = new ArrayList<>();
-        customerStatus.add("ACTIVO");
-        customerStatus.add("INACTIVO");
+        customerStatus.add(new SelectItem("0","--SELECT--"));
+        customerStatus.add(new SelectItem("1","ACTIVO"));
+        customerStatus.add(new SelectItem("0","INACTIVO"));
+
+        addressTypes = new ArrayList<>();
+        addressTypes.add(new SelectItem("0", "--SELECT--"));
+        addressTypes.add(new SelectItem("CASA", "CASA"));
+        addressTypes.add(new SelectItem("APTO", "APARTAMENTO"));
     }
 
     public void cleanModel(){
@@ -80,35 +93,35 @@ public class AdminCustomerModel implements Serializable{
         this.cardType = cardType;
     }
 
-    public List<String> getCardTypes() {
+    public List<SelectItem> getCardTypes() {
         return cardTypes;
     }
 
-    public void setCardTypes(List<String> cardTypes) {
+    public void setCardTypes(List<SelectItem> cardTypes) {
         this.cardTypes = cardTypes;
     }
 
-    public List<String> getDocTypes() {
+    public List<SelectItem> getDocTypes() {
         return docTypes;
     }
 
-    public void setDocTypes(List<String> docTypes) {
+    public void setDocTypes(List<SelectItem> docTypes) {
         this.docTypes = docTypes;
     }
 
-    public List<String> getCustomerTypes() {
+    public List<SelectItem> getCustomerTypes() {
         return customerTypes;
     }
 
-    public void setCustomerTypes(List<String> customerTypes) {
+    public void setCustomerTypes(List<SelectItem> customerTypes) {
         this.customerTypes = customerTypes;
     }
 
-    public List<String> getCustomerStatus() {
+    public List<SelectItem> getCustomerStatus() {
         return customerStatus;
     }
 
-    public void setCustomerStatus(List<String> customerStatus) {
+    public void setCustomerStatus(List<SelectItem> customerStatus) {
         this.customerStatus = customerStatus;
     }
 
@@ -126,5 +139,21 @@ public class AdminCustomerModel implements Serializable{
 
     public void setAddress(AddressType address) {
         this.address = address;
+    }
+
+    public boolean isCreateDirection() {
+        return createDirection;
+    }
+
+    public void setCreateDirection(boolean createDirection) {
+        this.createDirection = createDirection;
+    }
+
+    public List<SelectItem> getAddressTypes() {
+        return addressTypes;
+    }
+
+    public void setAddressTypes(List<SelectItem> addressTypes) {
+        this.addressTypes = addressTypes;
     }
 }

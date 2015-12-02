@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <serviceAgents>
-      <serviceAgent name="login" location="http://localhost:9499/esb/services/web-api/security/login/">
+      <serviceAgent name="login" location="http://esbhost:9499/esb/services/web-api/security/login/">
       </serviceAgent>
-      <serviceAgent name="register" location="http://localhost:9497/esb/services/web-api/customer/create">
+      <serviceAgent name="register" location="http://esbhost:9497/esb/services/web-api/customer/create">
       </serviceAgent>
-      <serviceAgent name="proccessOrder" location="tcp://localhost:61616">
+      <serviceAgent name="proccessOrder" location="tcp://esbhost:61616">
       </serviceAgent>
-      <serviceAgent name="getOrder" location="http://localhost:9495/esb/services/web-api/orders/orderItems/">
+      <serviceAgent name="getOrder" location="http://esbhost:9495/esb/services/web-api/orders/orderItems/">
       </serviceAgent>
-      <serviceAgent name="getOrdersCustomer" location="http://localhost:9495/esb/services/web-api/orders/customerOrders?">
+      <serviceAgent name="getOrdersCustomer" location="http://esbhost:9495/esb/services/web-api/orders/customerOrders?">
       </serviceAgent>
-      <serviceAgent name="getProduct" location="http://localhost:9496/esb/services/web-api/products/">
+      <serviceAgent name="getProduct" location="http://esbhost:9496/esb/services/web-api/products/">
       </serviceAgent>
-      <serviceAgent name="getProducts" location="http://localhost:9496/esb/services/web-api/products?">
+      <serviceAgent name="getProducts" location="http://esbhost:9496/esb/services/web-api/products?">
       </serviceAgent>
-      <serviceAgent name="getTotalProducts" location="http://localhost:9496/esb/services/web-api/products/count?">
+      <serviceAgent name="getTotalProducts" location="http://esbhost:9496/esb/services/web-api/products/count?">
       </serviceAgent>
-      <serviceAgent name="getCampigns" location="http://localhost:9496/esb/services/web-api/campaigns">
+      <serviceAgent name="getCampigns" location="http://esbhost:9496/esb/services/web-api/campaigns">
       </serviceAgent>
-      <serviceAgent name="getTopFive" location="http://localhost:9495/esb/services/web-api/orders/topItems/">
+      <serviceAgent name="getTopFive" location="http://esbhost:9495/esb/services/web-api/orders/topItems/">
       </serviceAgent>
       <serviceAgent name="queueProcessingOrder" location="MQ-ProcessOrderRequest">
       </serviceAgent>

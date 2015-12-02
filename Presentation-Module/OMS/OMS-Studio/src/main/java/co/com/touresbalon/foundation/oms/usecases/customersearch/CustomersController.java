@@ -38,4 +38,16 @@ public class CustomersController implements Serializable{
         facade.deleteCustomer(customer.getId());
         util.addInfoMessage("El cliente se ha desactivado de forma exitosa");
     }
+
+    public void cleanFormCustomersProduct(){
+
+    }
+
+    public void cleanFormCustomerRanking(){
+
+    }
+
+    public void cleanFormCustomer(){
+
+    }
 }

@@ -342,7 +342,7 @@ public class CustomerType {
      *     
      */
     public void setStatus(String value) {
-        this.status = value;
+        status = value;
     }
 
     /**

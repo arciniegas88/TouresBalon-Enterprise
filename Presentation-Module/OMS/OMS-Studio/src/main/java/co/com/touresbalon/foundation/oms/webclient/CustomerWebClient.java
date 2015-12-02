@@ -11,6 +11,12 @@ import javax.ws.rs.core.MediaType;
 
 public interface CustomerWebClient {
 
+
+    @POST
+    @Path("/customer/create")
+    @Consumes(MediaType.APPLICATION_XML)
+    CreateCustomerResponseType createCustomer(CreateCustomerType customer);
+
     @GET
     @Path("/customerById/{id}")
     CustomerResponseType getCustomerById(@PathParam("id") String customerId);
@@ -37,5 +43,6 @@ public interface CustomerWebClient {
 
     @POST
     @Path("/customer/update")
+    @Consumes(MediaType.APPLICATION_XML)
     UpdateCustomerResponseType updateCustomer(UpdateCustomerType customer);
 }

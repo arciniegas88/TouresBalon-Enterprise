@@ -341,7 +341,7 @@
 		<wsdl:port binding="tns:LodgingServiceServiceSoapBinding"
 			name="LodgingPortPort">
 			<soap:address
-				location="http://localhost:9090/Lodging-Services-1.0-SNAPSHOT/LodgingService" />
+				location="http://jboss-business-tier:9090/Lodging-Services-1.0-SNAPSHOT/LodgingService" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

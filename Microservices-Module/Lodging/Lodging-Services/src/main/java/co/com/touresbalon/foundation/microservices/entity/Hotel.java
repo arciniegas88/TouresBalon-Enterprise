@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by harcalejo on 23/09/15.
  */
-@Entity
+@Entity()
 @XmlRootElement
 public class Hotel {
     private Long hotelId;

@@ -1,8 +1,6 @@
 package co.com.touresbalon.foundation.oms.facades;
 
-import co.com.touresbalon.foundation.oms.domain.customers.CountCustomersResponseType;
-import co.com.touresbalon.foundation.oms.domain.customers.CustomerResponseType;
-import co.com.touresbalon.foundation.oms.domain.customers.CustomerType;
+import co.com.touresbalon.foundation.oms.domain.customers.*;
 import co.com.touresbalon.foundation.oms.webclient.CustomerWebClient;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -29,6 +27,11 @@ public class CustomerFacade implements Serializable{
         List<CustomerType> customers = customerWC.getCustomers(pageIndex + 1, pageSize).getGetCustomersResult().getCustomer();
         return customers;
     }
+
+    public CreateCustomerResponseType createCustomer(CreateCustomerType customer){
+        return customerWC.createCustomer(customer);
+    }
+
 
     public CustomerResponseType getCustomerById(String id){
         return customerWC.getCustomerById(id);

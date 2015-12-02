@@ -50,11 +50,10 @@ public class OrdersResource {
 
     @GET
     @Path("/generateOrderId")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces("text/plain")
     public Response generateSalesOrderId() throws SystemException {
         Long idSalesOrder =boundary.generateSalesOrderId();
-        return Response.status(200).entity("{idOrder: "+ idSalesOrder +"}").build();
-
+        return Response.status(200).entity( idSalesOrder ).build();
     }
 
 
@@ -211,16 +210,16 @@ public class OrdersResource {
     }
 
     @GET
-    @Path("/salesOrder/customersProduct/count")
+    @Path("/sales/customersProduct/count")
     @Produces(MediaType.APPLICATION_XML)
-    public Response countCustomersByProductSold(@QueryParam("productId") String productId) throws SystemException {
+    public Response countCustomersByProductSold(@QueryParam("productId") Long productId) throws SystemException {
 
         int count = boundary.countCustomersByProductsSold(productId);
         return Response.status(200).entity("<response><occurrences>" + count + "</occurrences></response>").build();
     }
 
     @GET
-    @Path("/salesOrder/customersProduct")
+    @Path("/sales/customersProduct")
     @Produces(MediaType.APPLICATION_XML)
     public List<Customer> getCustomersByProductSold(@QueryParam("productId") Long productId,
                                                     @QueryParam("pageIndex") int pageIndex,
@@ -230,7 +229,7 @@ public class OrdersResource {
     }
 
     @GET
-    @Path("/salesOrder/customerRanking/count")
+    @Path("/sales/customerRanking/count")
     @Produces(MediaType.APPLICATION_XML)
     public Response countCustomerRanking(@QueryParam("startDate") String startDate,
                                          @QueryParam("endDate") String endDate) throws SystemException{
@@ -239,7 +238,7 @@ public class OrdersResource {
     }
 
     @GET
-    @Path("/salesOrder/customerRanking")
+    @Path("/sales/customerRanking")
     @Produces(MediaType.APPLICATION_XML)
     public List<Customer> getCustomerRanking(@QueryParam("startDate") String startDate,
                                              @QueryParam("endDate") String endDate,
