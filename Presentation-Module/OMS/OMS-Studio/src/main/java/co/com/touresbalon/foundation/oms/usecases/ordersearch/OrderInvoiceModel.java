@@ -39,17 +39,14 @@ public class OrderInvoiceModel extends LazyDataModel<SalesOrder> implements Seri
     @Override
     public List<SalesOrder> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
         OrdersFacade facade = BeanLocator.getBean(OrdersFacade.class);
-        System.out.println("la fecha type Date  seleccionada es :" + dateOrder);
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM");
         String dateString = "";
         if(dateOrder!=null) {
             dateString = formateador.format(dateOrder);
-            System.out.println("la fecha type String  seleccionada es :" + dateString);
         }
         setRowCount(facade.searchOrderSalesCountInvoice(dateString));
 
         totalFacturado = facade.searchOrderSalesTotalInvoice(dateString);
-        System.out.println("total facturado: " + totalFacturado);
         listSalesOrderInvoice = facade.searchSalesOrdersInvoice(dateString,first,pageSize);
         return listSalesOrderInvoice;
     }

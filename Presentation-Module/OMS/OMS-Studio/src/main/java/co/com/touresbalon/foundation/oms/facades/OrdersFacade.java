@@ -91,8 +91,6 @@ public class OrdersFacade {
 
     public int searchOrderSalesCountRankingStatus(String status){
         String total = ordersWC.searchOrderSalesCountRankingStatus(status);
-
-        System.out.println("esto es lo que esta retornando en base de datos facade "+total);
         total = total.replaceAll("<total>", "").replaceAll("</total>", "");
         //total = total.replaceAll("{total}", "").replaceAll("</total>", "");
         return Integer.parseInt(total);

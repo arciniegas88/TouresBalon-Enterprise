@@ -541,7 +541,7 @@ public class SalesOrdersBoundary {
 
                 String sql = "select * from SALES_ORDER S where S.STATUS IN("+status+")  ORDER BY S.ORDER_DATE";
 
-            System.out.println(" la consulta de rank status es: " + sql);
+
 
             List<SalesOrder> listSales = em.createNativeQuery(sql, SalesOrder.class).setMaxResults(pageSize)
                         .setFirstResult(pageIndex).getResultList();
@@ -575,14 +575,11 @@ public class SalesOrdersBoundary {
 
             String sql = "select count(*) from SALES_ORDER S where S.STATUS in("+status+")";
 
-            System.out.println(" la consulta de rank count status es: "+sql);
 
             BigDecimal value  = (BigDecimal)  em.createNativeQuery(sql).getSingleResult();
             if(value!=null) {
-                System.out.println(" el resultado: " + value);
                 return value.intValue();
             }else{
-                System.out.println(" no trajo resultados: " + value);
                 return 0;
             }
 
@@ -617,7 +614,7 @@ public class SalesOrdersBoundary {
                     +" ORDER BY S.PRICE DESC ";
 
 
-            System.out.println(" el sql de ranking price " + sql);
+
             List<SalesOrder> listSales = em.createNativeQuery(sql, SalesOrder.class).setMaxResults(pageSize)
                     .setFirstResult(pageIndex).getResultList();
             if(!listSales.isEmpty()) {

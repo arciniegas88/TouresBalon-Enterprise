@@ -30,8 +30,5 @@ public class CancelOrdersBPELRequest {
         return content;
     }
 
-    public static void main( String... args )
-    {
-        System.out.println( new CancelOrdersBPELRequest(1L) );
-    }
+
 }

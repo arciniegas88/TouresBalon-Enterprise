@@ -63,7 +63,11 @@
                                 <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-search"
                                                  title="Detalles" update="formOrders:orderDetail"
                                                  action="#{ordersController.showSalesOrderDetail(oRankinPrice)}"/>
+                                <p:commandButton styleClass="BlueTextButton RaisedButton" icon="fa fa-ban"
+                                                 title="Eliminar" update="@form"
+                                                 action="#{ordersController.deleteOrder(oRankinPrice)}"/>
                                 <p:spacer width="2"/>
+
                             </p:column>
                         </p:dataTable>
 
